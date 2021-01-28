@@ -46,6 +46,7 @@
     "axios": "0.19.2",
     "expo": "38.0.8",
     "expo-asset": "8.1.7",
+    "expo-camera": "^10.0.0",
     "expo-constants": "9.1.1",
     "expo-font": "8.2.1",
     "expo-linking": "1.0.1",

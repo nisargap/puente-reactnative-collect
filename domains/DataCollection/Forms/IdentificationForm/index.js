@@ -49,7 +49,7 @@ const IdentificationForm = ({
         <Formik
           initialValues={{}}
           onSubmit={async (values, actions) => {
-            setPhotoFile('Submitted Photo String');
+            setPhotoFile(values.picture);
 
             const formObject = values;
             formObject.surveyingOrganization = surveyingOrganization;
@@ -61,7 +61,9 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
+            const photo = { values }
+
+            const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photo'];
             valuesToPrune.forEach((value) => {
               delete formObject[value];
             });
@@ -76,7 +78,7 @@ const IdentificationForm = ({
             const postParams = {
               parseClass: 'SurveyData',
               signature: 'Sample Signature',
-              photoFile,
+              photoFile: photo,
               localObject: formObject
             };
 
@@ -113,14 +115,14 @@ const IdentificationForm = ({
               {formikProps.isSubmitting ? (
                 <ActivityIndicator />
               ) : (
-                <PaperButton
-                  onPressEvent={formikProps.handleSubmit}
-                  buttonText={I18n.t('global.submit')}
-                />
-              // <Button icon="human" onPress={formikProps.handleSubmit}>
-              //   <Text>Submit</Text>
-              // </Button>
-              )}
+                  <PaperButton
+                    onPressEvent={formikProps.handleSubmit}
+                    buttonText={I18n.t('global.submit')}
+                  />
+                  // <Button icon="human" onPress={formikProps.handleSubmit}>
+                  //   <Text>Submit</Text>
+                  // </Button>
+                )}
             </View>
           )}
         </Formik>

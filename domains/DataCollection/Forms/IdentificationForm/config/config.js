@@ -252,6 +252,11 @@ const configArray = [
     formikKey: 'householdId',
     value: '',
     fieldType: 'household'
+  },
+  {
+    fieldType: 'photo',
+    formikKey: 'picture',
+    value: {}
   }
 ];
 
