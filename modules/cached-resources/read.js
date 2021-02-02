@@ -10,6 +10,13 @@ async function residentQuery(queryParams) {
   return records;
 }
 
+async function cacheResidentData(queryParams) {
+  const records = await residentQuery(queryParams);
+  if (records !== null && records !== undefined && records !== '') {
+    storeData(records, 'residentData');
+  }
+}
+
 async function cacheAutofillData(parameter) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
@@ -34,8 +41,16 @@ function customFormsQuery(surveyingOrganization) {
     checkOnlineStatus().then((online) => {
       if (online) {
         customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', surveyingOrganization).then(async (forms) => {
-          await storeData(forms, 'customForms');
-          resolve(JSON.parse(JSON.stringify(forms)));
+          if (forms !== null && forms !== undefined && forms !== '') {
+            await storeData(forms, 'customForms');
+            resolve(JSON.parse(JSON.stringify(forms)));
+          } else {
+            getData('customForms').then((customForms) => {
+              resolve(customForms);
+            }, (error) => {
+              reject(error);
+            });
+          }
         }, (error) => {
           reject(error);
         });
@@ -77,6 +92,7 @@ function getTasksAsync() {
 
 export {
   residentQuery,
+  cacheResidentData,
   cacheAutofillData,
   customFormsQuery,
   getTasksAsync

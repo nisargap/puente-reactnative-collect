@@ -1,5 +1,6 @@
 import {
   residentQuery,
+  cacheResidentData,
   cacheAutofillData,
   customFormsQuery,
   getTasksAsync
@@ -15,6 +16,7 @@ import populateCache from './populate-cache';
 
 export {
   residentQuery,
+  cacheResidentData,
   cacheAutofillData,
   customFormsQuery,
   getTasksAsync,
