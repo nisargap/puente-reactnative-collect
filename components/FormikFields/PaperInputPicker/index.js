@@ -15,6 +15,7 @@ import PaperButton from '../../Button';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
 import UseCamera from '../../Multimedia/UseCamera';
+import UseCameraRoll from '../../Multimedia/CameraRoll';
 
 import { stylesDefault, stylesPaper, styleX } from './index.style';
 
@@ -58,6 +59,7 @@ const PaperInputPicker = ({
 
   const [cameraVisible, setCameraVisible] = React.useState(false);
   const [pictureUris, setPictureUris] = React.useState({})
+  const [image, setImage] = React.useState(null)
 
   return (
     <>
@@ -448,27 +450,48 @@ const PaperInputPicker = ({
       {
         fieldType === 'photo' && (
           <View style={stylesDefault.container}>
-            {!cameraVisible && pictureUris[formikKey] === undefined && (
-              <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
+            {!cameraVisible && image === null && (
+              <View>
+                <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
+                <UseCameraRoll
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
             )}
-            {!cameraVisible && pictureUris[formikKey] !== undefined && (
-              <>
-                <Image source={{ uri: pictureUris[formikKey] }} style={{ width: 'auto', height: 400 }} />
+            {!cameraVisible && image !== null && (
+              <View>
+                <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
                 <Button onPress={() => {
                   setCameraVisible(true)
-                  console.log("formikKey[value]:", values[formikKey])
-                }}>Retake Picture</Button>
-              </>
+                }}>Take Picture</Button>
+                <UseCameraRoll
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
             )}
             {cameraVisible && (
-              <UseCamera
-                cameraVisible={cameraVisible}
-                setCameraVisible={setCameraVisible}
-                pictureUris={pictureUris}
-                setPictureUris={setPictureUris}
-                formikProps={formikProps}
-                formikKey={formikKey}
-              />
+              <View>
+                <UseCamera
+                  cameraVisible={cameraVisible}
+                  setCameraVisible={setCameraVisible}
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
             )}
           </View>
         )

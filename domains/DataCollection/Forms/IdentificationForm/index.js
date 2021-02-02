@@ -36,7 +36,7 @@ const IdentificationForm = ({
   }, [clearInterval]);
 
   const [inputs, setInputs] = useState({});
-  const [photoFile, setPhotoFile] = useState('State Photo String');
+  // const [photoFile, setPhotoFile] = useState('State Photo String');
   const [validationSchema, setValidationSchema] = useState();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const IdentificationForm = ({
         <Formik
           initialValues={{}}
           onSubmit={async (values, actions) => {
-            setPhotoFile(values.picture);
+            // setPhotoFile(values.picture);
 
             const formObject = values;
             formObject.surveyingOrganization = surveyingOrganization;
@@ -61,7 +61,7 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            const photo = { values }
+            let photo = values.picture
 
             const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photo'];
             valuesToPrune.forEach((value) => {
@@ -127,7 +127,7 @@ const IdentificationForm = ({
           )}
         </Formik>
       </TouchableWithoutFeedback>
-    </View>
+    </View >
   );
 };
 

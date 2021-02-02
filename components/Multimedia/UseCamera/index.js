@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import {
-  Modal, Text, Portal, Headline, Button
+  Modal, Text, Portal, Button
 } from 'react-native-paper';
 
 import { Camera } from 'expo-camera';
@@ -11,11 +10,11 @@ import { Camera } from 'expo-camera';
 import { theme } from '../../../modules/theme';
 
 export default function UseCamera(
-  { cameraVisible, setCameraVisible, pictureUris, setPictureUris, formikProps, formikKey }
+  { cameraVisible, setCameraVisible, formikProps, formikKey, setImage }
 ) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [image, setImage] = useState(null);
+  const [cameraImage, setCameraImage] = useState(null);
   const [zoom, setZoom] = useState(0);
 
   useEffect(() => {
@@ -27,24 +26,24 @@ export default function UseCamera(
 
   const takePicture = async () => {
     if (camera) {
-      const photo = await camera.takePictureAsync({ base64: true });
+      const photo = await camera.takePictureAsync({
+        base64: true,
+        aspect: [4, 3],
+        quality: 1
+      });
+
+      setCameraImage(photo.uri)
       setImage(photo.uri)
-      formikProps.setFieldValue(formikKey, photo.base64);
-      let picUris = pictureUris;
-      picUris[formikKey] = photo.uri
-      setPictureUris(picUris);
-      console.log(pictureUris)
+      formikProps.setFieldValue(formikKey, photo.base64)
     }
   }
 
   const resetPicture = () => {
-    setImage(null);
+    setCameraImage(null);
     formikProps.setFieldValue(formikKey, null);
   }
 
   let camera = useRef(null)
-  const width = Dimensions.get('window').width; //full width
-  const height = Dimensions.get('window').height; //full height
 
   if (hasPermission === null) {
     return <View></View>;
@@ -53,7 +52,7 @@ export default function UseCamera(
     return <Text>No access to camera</Text>;
   }
   return (
-    <Portal theme={theme} style={{ width: width, height: height }}>
+    <Portal theme={theme}>
       <Modal
         visible={cameraVisible}
         theme={theme}
@@ -61,9 +60,9 @@ export default function UseCamera(
         dismissable={false}
       >
         <View style={{ width: 'auto', height: 500, padding: 10 }}>
-          {image ? (
+          {cameraImage ? (
             <>
-              <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
+              <Image source={{ uri: cameraImage }} style={{ width: 'auto', height: 400 }} />
               <Button onPress={resetPicture}>Retake Picture</Button>
             </>
           ) : (
