@@ -37,7 +37,7 @@ export default function populateCache(user) {
       const queryParams = {
         skip: 0,
         offset: 0,
-        limit: 100000,
+        limit: 2000,
         parseColumn: 'surveyingOrganization',
         parseParam: user.get('organization'),
       };
