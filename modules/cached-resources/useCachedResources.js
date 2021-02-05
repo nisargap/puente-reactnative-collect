@@ -1,22 +1,6 @@
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 
-import { residentIDQuery } from '../../services/parse/crud';
-import { getData, storeData } from '../async-storage';
-
-const fetchResidentData = async (surveyingOrganization) => {
-  const queryParams = {
-    skip: 0,
-    offset: 0,
-    limit: 100000,
-    parseColumn: 'surveyingOrganization',
-    parseParam: surveyingOrganization,
-  };
-  let records = await residentIDQuery(queryParams);
-  records = JSON.parse(JSON.stringify(records));
-  return records;
-};
-
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
 
@@ -25,13 +9,6 @@ export default function useCachedResources() {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHideAsync();
-
-        await getData('organization').then(async (org) => {
-          if (org) {
-            const residentData = await fetchResidentData(org);
-            storeData(residentData || [], 'residentData');
-          }
-        });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         // console.warn(e);

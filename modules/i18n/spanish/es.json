@@ -9,7 +9,8 @@
     "lName": "Apellido",
     "city": "Ciudad",
     "commName": "Nombre de comunidad",
-    "notes": "Notas"
+    "notes": "Notas",
+    "refresh": "Actualiza"
   },
   "signUp": {
     "firstName": "Nombre de verdadero",

@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {
   Button, Card,
+  IconButton,
   Paragraph, Text, Title
 } from 'react-native-paper';
 
@@ -15,7 +16,7 @@ import { layout, theme } from '../../../modules/theme';
 
 const FormGallery = (props) => {
   const {
-    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms
+    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms, refreshCustomForms
   } = props;
   return (
     <View>
@@ -28,7 +29,16 @@ const FormGallery = (props) => {
         />
       </View>
       <View style={layout.screenRow}>
-        <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
+          <IconButton
+            style={{ bottom: 7 }}
+            color={theme.colors.primary}
+            size={20}
+            icon="refresh"
+            onPress={refreshCustomForms}
+          />
+        </View>
         <ScrollView horizontal>
           {customForms && customForms.map((form) => (
             <Card
