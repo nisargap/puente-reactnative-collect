@@ -1,26 +1,29 @@
-import { Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
+  ActivityIndicator,
   StyleSheet,
-  View
+  View,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import {
-  Button, Checkbox, Text
+  Checkbox, Button, Text
 } from 'react-native-paper';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Formik } from 'formik';
 import * as yup from 'yup';
+import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 import FormInput from '../../../components/FormikFields/FormInput';
 import TermsModal from '../../../components/TermsModal';
-import { populateCache } from '../../../modules/cached-resources';
-import I18n from '../../../modules/i18n';
 // STYLING
 import { theme } from '../../../modules/theme';
-import { retrieveSignUpFunction } from '../../../services/parse/auth';
+
+import { populateCache, cacheAutofillData } from '../../../modules/cached-resources';
+import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
+
+import I18n from '../../../modules/i18n';
 
 const validationSchema = yup.object().shape({
   firstname: yup
@@ -41,7 +44,7 @@ const validationSchema = yup.object().shape({
     .min(10, 'Seems a bit short..'),
   organization: yup
     .string()
-    .label('Username')
+    .label('Organization')
     .required(),
   password: yup
     .string()
@@ -59,10 +62,17 @@ const validationSchema = yup.object().shape({
 export default function SignUp({ navigation }) {
   const [checked, setChecked] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
-
+  const [scrollViewScroll, setScrollViewScroll] = React.useState();
   const handleLogIn = () => {
     navigation.navigate('Sign In');
   };
+
+  useEffect(() => {
+    cacheAutofillData('organization').then((result) => {
+      console.log(result)
+    })
+  }, [])
+  
   return (
     <KeyboardAvoidingView
       enabled
@@ -73,7 +83,10 @@ export default function SignUp({ navigation }) {
         <Button icon="arrow-left" width={100} style={{ paddingTop: 40 }} onPress={handleLogIn}>
           Back
         </Button>
-        <ScrollView style={{ backgroundColor: theme.colors.accent }}>
+        <ScrollView style={{ backgroundColor: theme.colors.accent }}
+          keyboardShouldPersistTaps="never"
+          scrollEnabled={scrollViewScroll}
+        >
           <SafeAreaView style={{ marginTop: 10 }}>
             <Formik
               initialValues={{
@@ -143,11 +156,14 @@ export default function SignUp({ navigation }) {
                     placeholder="Password Here"
                     secureTextEntry
                   />
-                  <FormInput
-                    label={I18n.t('signUp.organization')}
+                  <Autofill
+                    parameter={"organization"}
                     formikProps={formikProps}
-                    formikKey="organization"
-                    placeholder="Puente"
+                    formikKey={"organization"}
+                    label={'signUp.organization'}
+                    translatedLabel={"Organization"}
+                    scrollViewScroll={scrollViewScroll}
+                    setScrollViewScroll={setScrollViewScroll}
                   />
                   <Button mode="text" theme={theme} color="#3E81FD" style={styles.serviceButton} onPress={() => setVisible(true)}>{I18n.t('signUp.termsOfService.view')}</Button>
                   <View style={styles.container}>
@@ -168,8 +184,8 @@ export default function SignUp({ navigation }) {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
-                  )}
+                      <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
+                    )}
 
                   <TermsModal visible={visible} setVisible={setVisible} />
                 </>
