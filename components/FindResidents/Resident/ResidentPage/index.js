@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, Image
+  Image,
+  StyleSheet, View
 } from 'react-native';
 import {
-  Text, Button
+  Button,
+  Text
 } from 'react-native-paper';
 
+import I18n from '../../../../modules/i18n';
+import { theme } from '../../../../modules/theme';
 import Demographics from './Demographics';
 import Forms from './Forms';
 import Household from './Housheold';
-import { theme } from '../../../../modules/theme';
-
-import I18n from '../../../../modules/i18n';
 
 const ResidentPage = ({
   fname, lname, nickname, city, picture, selectPerson, setSelectPerson,

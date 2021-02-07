@@ -1,15 +1,15 @@
 import { postObjectsToClass, postObjectsToClassWithRelation } from '../../../services/parse/crud';
-import checkOnlineStatus from '../../offline';
-import { generateRandomID } from '../../utils';
 import {
   getData,
   storeData
 } from '../../async-storage';
+import checkOnlineStatus from '../../offline';
+import { generateRandomID } from '../../utils';
 import {
   postForms,
-  postSupForms,
+  postHouseholdRelations,
   postHouseholds,
-  postHouseholdRelations
+  postSupForms
 } from './Offline';
 
 function postIdentificationForm(postParams) {
@@ -166,9 +166,9 @@ function postHouseholdWithRelation(postParams) {
 }
 
 export {
-  postIdentificationForm,
-  postSupplementaryForm,
-  postOfflineForms,
   postHousehold,
-  postHouseholdWithRelation
+  postHouseholdWithRelation,
+  postIdentificationForm,
+  postOfflineForms,
+  postSupplementaryForm
 };

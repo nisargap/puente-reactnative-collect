@@ -1,29 +1,28 @@
+import { Formik } from 'formik';
 import React from 'react';
 import {
-  SafeAreaView,
   ActivityIndicator,
-  StyleSheet,
-  View,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  View
 } from 'react-native';
-import {
-  Checkbox, Button, Text
-} from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Formik } from 'formik';
+import {
+  Button, Checkbox, Text
+} from 'react-native-paper';
 import * as yup from 'yup';
-import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 import FormInput from '../../../components/FormikFields/FormInput';
 import TermsModal from '../../../components/TermsModal';
-// STYLING
-import { theme } from '../../../modules/theme';
-
 import { populateCache } from '../../../modules/cached-resources';
 import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
 
 import I18n from '../../../modules/i18n';
+// STYLING
+import { theme } from '../../../modules/theme';
+import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 const validationSchema = yup.object().shape({
   firstname: yup

@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react';
-
-import { View, FlatList } from 'react-native';
-import { Headline, Searchbar, Button } from 'react-native-paper';
-
 import { Spinner } from 'native-base';
-
-import { residentQuery } from '../../modules/cached-resources';
+import React, { useEffect, useState } from 'react';
+import { FlatList, View } from 'react-native';
+import { Button, Headline, Searchbar } from 'react-native-paper';
 
 import { getData, storeData } from '../../modules/async-storage';
+import { residentQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
-
+import styles from './index.styles';
 import ResidentCard from './Resident/ResidentCard';
 import ResidentPage from './Resident/ResidentPage';
-
-import styles from './index.styles';
 
 const FindResidents = ({
   selectPerson, setSelectPerson, organization, puenteForms, navigateToNewRecord,

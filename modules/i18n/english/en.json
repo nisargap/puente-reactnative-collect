@@ -9,7 +9,8 @@
     "lName": "Last Name",
     "city": "City",
     "commName": "Community Name",
-    "notes": "Notes"
+    "notes": "Notes",
+    "refresh": "Refresh"
   },
   "signUp": {
     "firstName": "First Name",
@@ -285,6 +286,9 @@
   "supplementaryForms": {
     "attachResident": "Attach a Community Resident"
   },
+  "assetForms": {
+    "attachForm": "Attach a Form to the Asset"
+  },
   "forms": {
     "successfullySubmitted": "Form successfully submitted",
     "grabCoffee": "Great job, grab yourself a coffee",
@@ -302,8 +306,10 @@
   },
   "dataCollection": {
     "newRecord": "New Record",
+    "newAsset": "New Asset",
     "findRecord": "Find Record",
     "viewAll": "View All Forms",
+    "viewAssets": "View All Assets",
     "back": "Back"
   },
   "home": {

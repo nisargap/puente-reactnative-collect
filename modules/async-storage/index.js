@@ -38,5 +38,6 @@ const getAllData = async () => {
 };
 
 export {
-  storeData, getData, deleteData, getAllData
+  deleteData, getAllData,
+  getData, storeData
 };

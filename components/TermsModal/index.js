@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
-  Modal, Text, Portal, Headline, Button
+  Button,
+  Headline, Modal, Portal, Text
 } from 'react-native-paper';
 
 import I18n from '../../modules/i18n';

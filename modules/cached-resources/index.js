@@ -1,29 +1,31 @@
-import {
-  residentQuery,
-  cacheResidentData,
-  cacheAutofillData,
-  customFormsQuery,
-  getTasksAsync
-} from './read';
-import {
-  postIdentificationForm,
-  postSupplementaryForm,
-  postOfflineForms,
-  postHousehold,
-  postHouseholdWithRelation
-} from './Post/post';
 import populateCache from './populate-cache';
-
-export {
-  residentQuery,
-  cacheResidentData,
-  cacheAutofillData,
-  customFormsQuery,
-  getTasksAsync,
-  postIdentificationForm,
-  postSupplementaryForm,
-  postOfflineForms,
+import {
   postHousehold,
   postHouseholdWithRelation,
-  populateCache
+  postIdentificationForm,
+  postOfflineForms,
+  postSupplementaryForm,
+} from './Post/post';
+import {
+  assetFormsQuery,
+  cacheAutofillData,
+  cacheResidentData,
+  customFormsQuery,
+  getTasksAsync,
+  residentQuery,
+} from './read';
+
+export {
+  assetFormsQuery,
+  cacheAutofillData,
+  cacheResidentData,
+  customFormsQuery,
+  getTasksAsync,
+  populateCache,
+  postHousehold,
+  postHouseholdWithRelation,
+  postIdentificationForm,
+  postOfflineForms,
+  postSupplementaryForm,
+  residentQuery
 };

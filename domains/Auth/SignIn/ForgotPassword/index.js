@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import {
-  Text, Button
-} from 'react-native-paper';
 import { Formik } from 'formik';
-import { theme } from '../../../../modules/theme';
-import { retrieveForgotPasswordFunction } from '../../../../services/parse/auth';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import {
+  Button,
+  Text
+} from 'react-native-paper';
+
 import FormInput from '../../../../components/FormikFields/FormInput';
 import I18n from '../../../../modules/i18n';
+import { theme } from '../../../../modules/theme';
+import { retrieveForgotPasswordFunction } from '../../../../services/parse/auth';
 
 export default function ForgotPassword({ navigation, setForgotPassword }) {
   const handleSignUp = () => {

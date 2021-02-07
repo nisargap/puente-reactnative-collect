@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  View, StyleSheet, ScrollView
+  ScrollView,
+  StyleSheet, View
 } from 'react-native';
 import {
   Card, Text
 } from 'react-native-paper';
 
+import MedEvalSVG from '../../../assets/icons/Heart-Icon.svg';
+import EnvSVG from '../../../assets/icons/Home-icon.svg';
+import NewRecordSVG from '../../../assets/icons/New-Record-icon.svg';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
-
-import NewRecordSVG from '../../../assets/icons/New-Record-icon.svg';
-import EnvSVG from '../../../assets/icons/Home-icon.svg';
-import MedEvalSVG from '../../../assets/icons/Heart-Icon.svg';
 
 /**
  * Carousel of Forms that are used for Form Navigation

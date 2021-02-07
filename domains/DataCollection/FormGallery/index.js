@@ -1,21 +1,22 @@
 import React from 'react';
 import {
-  View, ScrollView, StyleSheet
+  ScrollView, StyleSheet,
+  View
 } from 'react-native';
 import {
-  Text, Button, Title, Paragraph, Card
+  Button, Card,
+  IconButton,
+  Paragraph, Text, Title
 } from 'react-native-paper';
 
-import { theme, layout } from '../../../modules/theme';
-import I18n from '../../../modules/i18n';
-
-import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
-
 import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
+import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import I18n from '../../../modules/i18n';
+import { layout, theme } from '../../../modules/theme';
 
 const FormGallery = (props) => {
   const {
-    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms
+    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms, refreshCustomForms
   } = props;
   return (
     <View>
@@ -28,7 +29,16 @@ const FormGallery = (props) => {
         />
       </View>
       <View style={layout.screenRow}>
-        <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
+          <IconButton
+            style={{ bottom: 7 }}
+            color={theme.colors.primary}
+            size={20}
+            icon="refresh"
+            onPress={refreshCustomForms}
+          />
+        </View>
         <ScrollView horizontal>
           {customForms && customForms.map((form) => (
             <Card

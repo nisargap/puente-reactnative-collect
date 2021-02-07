@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
-  Modal, Portal, Text, Button
+  Button,
+  Modal, Portal, Text
 } from 'react-native-paper';
 
+import I18n from '../../../../modules/i18n';
 // STYLING
 import { theme } from '../../../../modules/theme';
-import I18n from '../../../../modules/i18n';
 
 export default function CredentialsModal(props) {
   const {

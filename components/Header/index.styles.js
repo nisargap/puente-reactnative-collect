@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
 import { theme } from '../../modules/theme';
 
 const borderRadius = 20;

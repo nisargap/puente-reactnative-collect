@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as Network from 'expo-network';
 import NetInfo from '@react-native-community/netinfo';
+import * as Network from 'expo-network';
+import { Platform } from 'react-native';
 
 // checks whether user is connected to internet, return true if connected, false otherwise
 const checkOnlineStatus = () => new Promise((resolve, reject) => {

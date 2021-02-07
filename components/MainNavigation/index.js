@@ -1,19 +1,16 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import {
   Platform, StatusBar, StyleSheet, View
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import SignIn from '../../domains/Auth/SignIn';
-import SignUp from '../../domains/Auth/SignUp';
 import GetPinCode from '../../domains/Auth/PinCode/GetPinCode';
 import StorePinCode from '../../domains/Auth/PinCode/StorePinCode';
-
-import { initialize } from '../../services/parse/auth';
-
+import SignIn from '../../domains/Auth/SignIn';
+import SignUp from '../../domains/Auth/SignUp';
 import { theme } from '../../modules/theme';
-
+import { initialize } from '../../services/parse/auth';
 import BottomTabNavigator from './BottomTabNavigator.';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -38,7 +35,7 @@ const MainNavigation = () => {
           <Stack.Screen
             name="Root"
             component={BottomTabNavigator}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

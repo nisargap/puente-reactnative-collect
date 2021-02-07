@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-
-import { layout, theme } from '../../../modules/theme';
-import I18n from '../../../modules/i18n';
-
-import IdentificationForm from './IdentificationForm';
-import SupplementaryForm from './SupplementaryForm';
-import GdprCompliance from '../GdprCompliance';
-
-import ResidentIdSearchbar from '../../../components/ResidentIdSearchbar';
-import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 import PostSubmissionSVG from '../../../assets/graphics/static/Submission-Page-Icon.svg';
+import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import ResidentIdSearchbar from '../../../components/ResidentIdSearchbar';
+import I18n from '../../../modules/i18n';
+import { layout, theme } from '../../../modules/theme';
+import GdprCompliance from '../GdprCompliance';
+import IdentificationForm from './IdentificationForm';
+import SupplementaryForm from './SupplementaryForm';
 
 const Forms = (props) => {
   const {

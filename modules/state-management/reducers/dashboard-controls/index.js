@@ -35,4 +35,4 @@ const reducer = handleActions(
 const getFiltersInfo = (state) => state.login.filters;
 
 export default reducer;
-export { setModel, setFilters, getFiltersInfo };
+export { getFiltersInfo, setFilters, setModel };

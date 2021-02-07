@@ -1,4 +1,5 @@
 import { Parse } from 'parse/react-native';
+
 import customQueryService from './custom-queries';
 
 function retrieveHelloFunction() {
@@ -45,10 +46,10 @@ function getObjectsByGeolocation(params) {
 }
 
 export {
-  retrieveHelloFunction,
-  residentIDQuery,
   customQueryService,
+  getObjectsByGeolocation,
   postObjectsToClass,
   postObjectsToClassWithRelation,
-  getObjectsByGeolocation
+  residentIDQuery,
+  retrieveHelloFunction
 };

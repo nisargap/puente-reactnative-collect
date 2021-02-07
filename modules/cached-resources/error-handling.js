@@ -1,4 +1,5 @@
 import { Parse } from 'parse/react-native';
+
 import { retrieveSignInFunction } from '../../services/parse/auth';
 import { getData } from '../async-storage';
 

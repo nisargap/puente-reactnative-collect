@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Snackbar } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
 import {
-  View, Text
+  Text,
+  View
 } from 'react-native';
+import { Snackbar } from 'react-native-paper';
+
 import I18n from '../../../modules/i18n';
 
 /**

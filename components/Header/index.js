@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import {
-  Headline, Text, IconButton, Button,
-} from 'react-native-paper';
 import Emoji from 'react-native-emoji';
-
-import countService from '../../services/parse/calculate';
+import {
+  Button,
+  Headline, IconButton, Text,
+} from 'react-native-paper';
 
 import { deleteData, getData } from '../../modules/async-storage';
 import { postOfflineForms } from '../../modules/cached-resources';
-
-import styles from './index.styles';
-
-import I18n from '../../modules/i18n';
-
 import handleParseError from '../../modules/cached-resources/error-handling';
+import I18n from '../../modules/i18n';
+import countService from '../../services/parse/calculate';
+import styles from './index.styles';
 
 const Header = ({ logOut }) => {
   const { header, headerText, headerIcon } = styles;

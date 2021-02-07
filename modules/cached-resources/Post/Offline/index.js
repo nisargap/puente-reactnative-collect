@@ -4,7 +4,7 @@ import postHouseholds from './households';
 
 export {
   postForms,
-  postSupForms,
+  postHouseholdRelations,
   postHouseholds,
-  postHouseholdRelations
+  postSupForms
 };

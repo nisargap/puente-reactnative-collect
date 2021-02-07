@@ -1,5 +1,6 @@
-import React from 'react';
 import { Picker } from 'native-base';
+import React from 'react';
+
 import I18n from '../../modules/i18n';
 
 const languages = [

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, Image
+  Image,
+  StyleSheet, View
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Text, Title
 } from 'react-native-paper';
 
-import { theme } from '../../../../modules/theme';
-
 import I18n from '../../../../modules/i18n';
+import { theme } from '../../../../modules/theme';
 
 const ResidentCard = ({
   resident, onSelectPerson

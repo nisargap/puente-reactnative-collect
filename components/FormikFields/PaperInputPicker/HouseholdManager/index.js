@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import {
-  View, Modal
+  Modal,
+  View
 } from 'react-native';
 import {
-  Button, RadioButton, Appbar, Text, TextInput
+  Appbar, Button, RadioButton, Text, TextInput
 } from 'react-native-paper';
-
-import ResidentIdSearchbar from '../../../ResidentIdSearchbar';
-
-import { theme, layout } from '../../../../modules/theme';
-import I18n from '../../../../modules/i18n';
 
 import {
   postHousehold,
   postHouseholdWithRelation
 } from '../../../../modules/cached-resources';
-
+import I18n from '../../../../modules/i18n';
+import { layout, theme } from '../../../../modules/theme';
+import ResidentIdSearchbar from '../../../ResidentIdSearchbar';
 import styles from './index.style';
 
 const HouseholdManager = (props) => {

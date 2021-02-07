@@ -1,8 +1,8 @@
-import { residentIDQuery, customQueryService } from '../../services/parse/crud';
 import retrievePuenteAutofillData from '../../services/aws';
-import checkOnlineStatus from '../offline';
-import { getData, storeData } from '../async-storage';
+import { customQueryService, residentIDQuery } from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
+import { getData, storeData } from '../async-storage';
+import checkOnlineStatus from '../offline';
 
 async function residentQuery(queryParams) {
   let records = await residentIDQuery(queryParams);
@@ -88,6 +88,29 @@ function customFormsQuery(surveyingOrganization) {
   });
 }
 
+function assetFormsQuery() {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((online) => {
+      if (online) {
+        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
+          await storeData(forms, 'assetForms');
+          resolve(JSON.parse(JSON.stringify(forms)));
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('assetForms').then((forms) => {
+          resolve(forms);
+        }, (error) => {
+          reject(error);
+        });
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 function getTasksAsync() {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then(async (online) => {
@@ -112,9 +135,10 @@ function getTasksAsync() {
 }
 
 export {
-  residentQuery,
-  cacheResidentData,
+  assetFormsQuery,
   cacheAutofillData,
+  cacheResidentData,
   customFormsQuery,
-  getTasksAsync
+  getTasksAsync,
+  residentQuery
 };

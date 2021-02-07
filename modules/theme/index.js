@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'react-native-paper';
+
 import layout from './layout';
 
 const theme = {
@@ -14,4 +15,4 @@ const theme = {
   },
 };
 
-export { theme, layout };
+export { layout, theme };

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  View, StyleSheet
+  StyleSheet,
+  View
 } from 'react-native';
 import {
   Text,

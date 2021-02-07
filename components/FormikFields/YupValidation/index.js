@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+
 import I18n from '../../../modules/i18n';
 
 export default function yupValidationPicker(fields) {

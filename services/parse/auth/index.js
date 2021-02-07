@@ -1,5 +1,6 @@
-import { Parse } from 'parse/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Parse } from 'parse/react-native';
+
 import selectedENV from '../../../environment';
 
 function initialize() {
@@ -98,8 +99,9 @@ function retrieveDeleteUserFunction(params) {
 
 export {
   initialize,
-  retrieveSignUpFunction, retrieveSignInFunction, retrieveSignOutFunction,
+  retrieveCurrentUserAsyncFunction,
+  retrieveCurrentUserFunction, retrieveDeleteUserFunction,
   retrieveForgotPasswordFunction,
-  retrieveCurrentUserFunction, retrieveCurrentUserAsyncFunction,
-  retrieveDeleteUserFunction
+  retrieveSignInFunction, retrieveSignOutFunction,
+  retrieveSignUpFunction
 };

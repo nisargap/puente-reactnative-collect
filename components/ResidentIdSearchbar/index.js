@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text } from 'react-native';
-import { Headline, Button, Searchbar } from 'react-native-paper';
 import { Spinner } from 'native-base';
-
-import { residentQuery } from '../../modules/cached-resources';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
+import { Button, Headline, Searchbar } from 'react-native-paper';
 
 import { getData } from '../../modules/async-storage';
+import { residentQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
-
+import checkOnlineStatus from '../../modules/offline';
 import ResidentCard from '../FindResidents/Resident/ResidentCard';
-
 import styles from './index.styles';
 
 const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) => {
@@ -45,27 +43,30 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
 
   const fetchData = async () => {
     setLoading(true);
-    const queryParams = {
-      skip: 0,
-      offset: 0,
-      limit: 100000,
-      parseColumn: 'surveyingOrganization',
-      parseParam: surveyingOrganization,
-    };
-    const records = await residentQuery(queryParams);
-    let offlineData = [];
-    await getData('offlineIDForms').then((offlineResidentData) => {
-      if (offlineResidentData !== null) {
-        Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
-          offlineData = offlineData.concat(value.localObject);
+    checkOnlineStatus().then(async (connected) => {
+      if (connected) {
+        const queryParams = {
+          skip: 0,
+          offset: 0,
+          limit: 100000,
+          parseColumn: 'surveyingOrganization',
+          parseParam: surveyingOrganization,
+        };
+        const records = await residentQuery(queryParams);
+        let offlineData = [];
+        await getData('offlineIDForms').then((offlineResidentData) => {
+          if (offlineResidentData !== null) {
+            Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
+              offlineData = offlineData.concat(value.localObject);
+            });
+          }
         });
+        const allData = records.concat(offlineData);
+        setData(allData);
+        setResidents(allData.slice());
       }
+      setLoading(false);
     });
-    // console.log(allData)
-    const allData = records.concat(offlineData);
-    setData(allData);
-    setResidents(allData.slice());
-    setLoading(false);
   };
 
   const filterList = () => data.filter(
@@ -123,7 +124,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         onChangeText={onChangeSearch}
         value={query}
       />
-      <Button onPress={fetchData}>Refresh</Button>
+      <Button onPress={fetchData}>{I18n.t('global.refresh')}</Button>
       {loading
         && <Spinner color="blue" />}
 

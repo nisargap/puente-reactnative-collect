@@ -1,40 +1,38 @@
 /* eslint no-param-reassign: ["error",
 { "props": true, "ignorePropertyModificationsFor": ["formikProps"] }] */
+import { Formik } from 'formik';
 import React, {
-  useState, useEffect
+  useEffect,
+  useState
 } from 'react';
 import {
-  SafeAreaView,
   ActivityIndicator,
-  View,
-  StyleSheet,
   Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  ScrollView
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View
 } from 'react-native';
 import {
-  Checkbox, Button, Text
+  Button, Checkbox, Text
 } from 'react-native-paper';
-
-import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { retrieveSignInFunction } from '../../../services/parse/auth';
-
-import { storeData, getData, deleteData } from '../../../modules/async-storage';
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
-
+import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
-import CredentialsModal from './CredentialsModal';
 import TermsModal from '../../../components/TermsModal';
-import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
-import ForgotPassword from './ForgotPassword';
-import checkOnlineStatus from '../../../modules/offline';
+import { deleteData, getData, storeData } from '../../../modules/async-storage';
 import { populateCache } from '../../../modules/cached-resources';
+import I18n from '../../../modules/i18n';
+import checkOnlineStatus from '../../../modules/offline';
+import { theme } from '../../../modules/theme';
+import { retrieveSignInFunction } from '../../../services/parse/auth';
+import CredentialsModal from './CredentialsModal';
+import ForgotPassword from './ForgotPassword';
 
 // components/FormikFields/PaperInputPicker';
 const validationSchema = yup.object().shape({
@@ -63,7 +61,7 @@ const SignIn = ({ navigation }) => {
   useEffect(() => {
     getData('credentials').then((values) => {
       setUser(values);
-      if (values.store === 'Yes') {
+      if (values?.store === 'Yes') {
         setModalVisible(true);
       }
     });

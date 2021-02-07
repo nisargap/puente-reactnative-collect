@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+
 import { storeData } from '../../../async-storage';
 
 const defaultState = {
@@ -44,4 +45,4 @@ const reducer = handleActions(
 const getAuthInfo = (state) => state.login;
 
 export default reducer;
-export { saveUser, getAuthInfo };
+export { getAuthInfo, saveUser };

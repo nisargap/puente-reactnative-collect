@@ -1,5 +1,5 @@
+import { deleteData, getAllData, getData } from '../../../../../modules/async-storage';
 import checkOnlineStatus from '../../../../../modules/offline';
-import { getAllData, getData, deleteData } from '../../../../../modules/async-storage';
 import { postObjectsToClass } from '../../../../../services/parse/crud';
 
 // similar to componentDidMount and componenetWillUnmount

@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  View,
-  StyleSheet
+  StyleSheet,
+  View
 } from 'react-native';
 import {
-  Text, Button, Title, Checkbox
+  Button, Checkbox,
+  Text, Title
 } from 'react-native-paper';
-import { theme } from '../../../modules/theme';
 
 import TermsModal from '../../../components/TermsModal';
 import I18n from '../../../modules/i18n';
+import { theme } from '../../../modules/theme';
 
 const GdprCompliance = ({
   setConsent

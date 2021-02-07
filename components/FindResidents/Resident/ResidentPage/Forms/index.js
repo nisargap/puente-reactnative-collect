@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  View, StyleSheet
+  StyleSheet,
+  View
 } from 'react-native';
 import {
   Text, Title
 } from 'react-native-paper';
 
-import { theme } from '../../../../../modules/theme';
 import ComingSoonSVG from '../../../../../assets/graphics/static/Adventurer.svg';
-import SmallCardsCarousel from '../../../../Cards/SmallCardsCarousel';
-
 import I18n from '../../../../../modules/i18n';
+import { theme } from '../../../../../modules/theme';
+import SmallCardsCarousel from '../../../../Cards/SmallCardsCarousel';
 
 const Forms = ({
   puenteForms, navigateToNewRecord, surveyee, setView

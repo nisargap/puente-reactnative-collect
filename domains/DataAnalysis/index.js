@@ -3,9 +3,8 @@ import {
   Text, View
 } from 'react-native';
 
-import { layout } from '../../modules/theme';
-
 import Header from '../../components/Header';
+import { layout } from '../../modules/theme';
 
 export default function DataAnalysis() {
   return (

@@ -1,7 +1,8 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { Formik } from 'formik';
+import { Button, Text } from 'react-native-paper';
+
 import FormInput from '../../../../components/FormikFields/FormInput';
 import { storeData } from '../../../../modules/async-storage';
 import I18n from '../../../../modules/i18n';

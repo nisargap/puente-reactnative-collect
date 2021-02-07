@@ -1,28 +1,24 @@
 // Make this render but switch between forms
-import React, { useState, useEffect } from 'react';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   View
 } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { Formik } from 'formik';
+import { Button, Text } from 'react-native-paper';
 
-import { postSupplementaryForm } from '../../../../modules/cached-resources';
-
-import { layout, theme } from '../../../../modules/theme';
-import I18n from '../../../../modules/i18n';
-import { isEmpty } from '../../../../modules/utils';
-
+import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
-
+import { postSupplementaryForm } from '../../../../modules/cached-resources';
+import I18n from '../../../../modules/i18n';
+import { layout, theme } from '../../../../modules/theme';
+import { isEmpty } from '../../../../modules/utils';
+import surveyingUserFailsafe from '../utils';
 import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
-
-import surveyingUserFailsafe from '../utils';
 import { addSelectTextInputs, vitalsBloodPressue } from './utils';
-import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -138,14 +134,14 @@ const SupplementaryForm = ({
               color={theme.colors.primary}
             />
           ) : (
-              <Button
-                disabled={!surveyee.objectId}
-                onPress={formikProps.handleSubmit}
-              >
-                {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
-                {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
-              </Button>
-            )}
+            <Button
+              disabled={!surveyee.objectId}
+              onPress={formikProps.handleSubmit}
+            >
+              {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
+              {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
+            </Button>
+          )}
         </View>
       )}
     </Formik>

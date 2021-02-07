@@ -2,21 +2,18 @@ import React, { useState } from 'react';
 import {
   Text, View
 } from 'react-native';
-import {
-  Card, Button, Paragraph, Title
-} from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
+import {
+  Button, Card, Paragraph, Title
+} from 'react-native-paper';
 
-import { getTasksAsync } from '../../modules/cached-resources';
-import { retrieveSignOutFunction } from '../../services/parse/auth';
-
-import { deleteData } from '../../modules/async-storage';
-import { layout } from '../../modules/theme';
-
-import Header from '../../components/Header';
 import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-
+import Header from '../../components/Header';
+import { deleteData } from '../../modules/async-storage';
+import { getTasksAsync } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
+import { layout } from '../../modules/theme';
+import { retrieveSignOutFunction } from '../../services/parse/auth';
 
 const HomeScreen = (props) => {
   const [tasks, setTasks] = useState(null);

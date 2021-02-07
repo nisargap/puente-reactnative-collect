@@ -6,11 +6,9 @@ import {
 import Autocomplete from 'react-native-autocomplete-input';
 import { TextInput } from 'react-native-paper';
 
-import { cacheAutofillData } from '../../../../modules/cached-resources';
-
-import I18n from '../../../../modules/i18n';
 import { getData } from '../../../../modules/async-storage';
-
+import { cacheAutofillData } from '../../../../modules/cached-resources';
+import I18n from '../../../../modules/i18n';
 import { stylesDefault, stylesPaper } from '../index.style';
 
 YellowBox.ignoreWarnings(['VirtualizedLists should never be nested']);
