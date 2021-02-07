@@ -6,9 +6,6 @@ export default function populateCache(user) {
   // communities called since we need a paramter, all data would be cached in the
   // cacheAutofillData function
   cacheAutofillData('Communities')
-    .then(() => {
-
-    })
     .then(async () => {
       const currentUserAsync = await getData('currentUser');
       const currentOrgAsync = await getData('organization');
@@ -46,7 +43,7 @@ export default function populateCache(user) {
       };
       cacheResidentData(queryParams);
     })
-    .then(() => {
-      customFormsQuery(user.get('organization'));
+    .then(async () => {
+      await customFormsQuery(user.get('organization'));
     });
 }

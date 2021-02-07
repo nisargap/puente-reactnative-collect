@@ -7,6 +7,7 @@ import FormInput from '../../../../components/FormikFields/FormInput';
 import { deleteData, getData } from '../../../../modules/async-storage';
 import { populateCache } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
+import checkOnlineStatus from '../../../../modules/offline';
 import { retrieveSignInFunction } from '../../../../services/parse/auth';
 
 const GetPinCode = ({ navigation }) => {
@@ -19,16 +20,22 @@ const GetPinCode = ({ navigation }) => {
         getData('pincode').then((pincode) => {
           if (values.pincode === pincode) {
             // IF ONLINE, otherwise just log in
-            getData('credentials')
-              .then((userCreds) => {
-                retrieveSignInFunction(userCreds.username, userCreds.password)
-                  .then((currentUser) => {
-                    populateCache(currentUser);
+            checkOnlineStatus().then((connected) => {
+              if (connected) {
+                getData('credentials')
+                  .then((userCreds) => {
+                    retrieveSignInFunction(userCreds.username, userCreds.password)
+                      .then((currentUser) => {
+                        populateCache(currentUser);
+                      });
+                    navigation.navigate('Root');
+                  }, () => {
+                    // error with stored credentials
                   });
+              } else {
                 navigation.navigate('Root');
-              }, () => {
-                // error with stored credentials
-              });
+              }
+            });
           } else {
             setFailedAttempts(failedAttempts + 1);
             // go back to sign in on 3rd attempt

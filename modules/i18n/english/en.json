@@ -9,7 +9,8 @@
     "lName": "Last Name",
     "city": "City",
     "commName": "Community Name",
-    "notes": "Notes"
+    "notes": "Notes",
+    "refresh": "Refresh"
   },
   "signUp": {
     "firstName": "First Name",

@@ -61,7 +61,7 @@ const SignIn = ({ navigation }) => {
   useEffect(() => {
     getData('credentials').then((values) => {
       setUser(values);
-      if (values.store === 'Yes') {
+      if (values?.store === 'Yes') {
         setModalVisible(true);
       }
     });
