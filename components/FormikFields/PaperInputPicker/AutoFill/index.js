@@ -72,51 +72,51 @@ export default class AutoFill extends Component {
             style={stylesDefault.label}
           />
         ) : (
-            <View>
-              <Autocomplete
-                autoCapitalize="none"
-                autoCorrect={false}
-                containerStyle={styles.autocompleteContainer}
-                inputContainerStyle={styles.textInputContainer}
+          <View>
+            <Autocomplete
+              autoCapitalize="none"
+              autoCorrect={false}
+              containerStyle={styles.autocompleteContainer}
+              inputContainerStyle={styles.textInputContainer}
                 // data to show in suggestion
-                data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
+              data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
                 // default value if you want to set something in input
-                defaultValue={query}
+              defaultValue={query}
                 /* onchange of the text changing the state of the query which will trigger
                 the findFilm method to show the suggestions */
-                onChangeText={(text) => {
-                  this.setState({ query: text });
-                  formikProps.setFieldValue(formikKey, text);
-                }}
-                placeholder={placeholder}
-                listStyle={styles.listContainer}
-                keyExtractor={(item,) => item.key}
-                onStartShouldSetResponderCapture={() => {
-                  // this allows for us to scroll within the result list when the user is toouching it
-                  // and on the screen when they are not
-                  setScrollViewScroll(false);
-                  if (fields.length === 0
+              onChangeText={(text) => {
+                this.setState({ query: text });
+                formikProps.setFieldValue(formikKey, text);
+              }}
+              placeholder={placeholder}
+              listStyle={styles.listContainer}
+              keyExtractor={(item,) => item.key}
+              onStartShouldSetResponderCapture={() => {
+                // this allows for us to scroll within the result list when the user is toouching it
+                // and on the screen when they are not
+                setScrollViewScroll(false);
+                if (fields.length === 0
                     && scrollViewScroll === false) {
-                    setScrollViewScroll(true);
-                  }
-                }}
-                renderItem={({ item }) => (
-                  // you can change the view you want to show in suggestion from here
-                  <TouchableOpacity
-                    key={`${item}`}
-                    onPress={() => {
-                      this.setState({ query: item });
-                      formikProps.setFieldValue(formikKey, item);
-                    }}
-                  >
-                    <Text style={styles.itemText} key={item}>
-                      {item}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          )}
+                  setScrollViewScroll(true);
+                }
+              }}
+              renderItem={({ item }) => (
+                // you can change the view you want to show in suggestion from here
+                <TouchableOpacity
+                  key={`${item}`}
+                  onPress={() => {
+                    this.setState({ query: item });
+                    formikProps.setFieldValue(formikKey, item);
+                  }}
+                >
+                  <Text style={styles.itemText} key={item}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
       </View>
     );
   }

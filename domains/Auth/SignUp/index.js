@@ -1,29 +1,27 @@
-import React, { useEffect } from 'react';
-import {
-  SafeAreaView,
-  ActivityIndicator,
-  StyleSheet,
-  View,
-  KeyboardAvoidingView,
-  Platform
-} from 'react-native';
-import {
-  Checkbox, Button, Text
-} from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
 import { Formik } from 'formik';
+import React from 'react';
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  View
+} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import {
+  Button, Checkbox, Text
+} from 'react-native-paper';
 import * as yup from 'yup';
-import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 import FormInput from '../../../components/FormikFields/FormInput';
+import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
 import TermsModal from '../../../components/TermsModal';
+import { populateCache } from '../../../modules/cached-resources';
+import I18n from '../../../modules/i18n';
 // STYLING
 import { theme } from '../../../modules/theme';
-
-import { populateCache, cacheAutofillData } from '../../../modules/cached-resources';
-import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
-
-import I18n from '../../../modules/i18n';
+import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 const validationSchema = yup.object().shape({
   firstname: yup
@@ -77,7 +75,8 @@ export default function SignUp({ navigation }) {
         <Button icon="arrow-left" width={100} style={{ paddingTop: 40 }} onPress={handleLogIn}>
           Back
         </Button>
-        <ScrollView style={{ backgroundColor: theme.colors.accent }}
+        <ScrollView
+          style={{ backgroundColor: theme.colors.accent }}
           keyboardShouldPersistTaps="never"
           scrollEnabled={scrollViewScroll}
         >
@@ -151,11 +150,11 @@ export default function SignUp({ navigation }) {
                     secureTextEntry
                   />
                   <Autofill
-                    parameter={"organization"}
+                    parameter="organization"
                     formikProps={formikProps}
-                    formikKey={"organization"}
-                    label={'signUp.organization'}
-                    translatedLabel={"Organization"}
+                    formikKey="organization"
+                    label="signUp.organization"
+                    translatedLabel="Organization"
                     scrollViewScroll={scrollViewScroll}
                     setScrollViewScroll={setScrollViewScroll}
                   />
@@ -178,8 +177,8 @@ export default function SignUp({ navigation }) {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                      <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
-                    )}
+                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
+                  )}
 
                   <TermsModal visible={visible} setVisible={setVisible} />
                 </>

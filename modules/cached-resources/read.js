@@ -1,8 +1,8 @@
-import { residentIDQuery, customQueryService } from '../../services/parse/crud';
 import retrievePuenteAutofillData from '../../services/aws';
-import checkOnlineStatus from '../offline';
-import { getData, storeData } from '../async-storage';
+import { customQueryService, residentIDQuery } from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
+import { getData, storeData } from '../async-storage';
+import checkOnlineStatus from '../offline';
 
 async function residentQuery(queryParams) {
   let records = await residentIDQuery(queryParams);
@@ -27,8 +27,7 @@ async function cacheAutofillData(parameter) {
             const orgsCapitalized = [];
             const orgResults = [];
             users.forEach((user) => {
-              console.log(user.get("organization"))
-              const org = user.get("organization")
+              const org = user.get('organization');
               if (org !== null && org !== undefined && org !== '') {
                 const orgCapitalized = org.toUpperCase().trim() || '';
                 if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
@@ -38,13 +37,13 @@ async function cacheAutofillData(parameter) {
               }
             });
             const autofillData = result;
-            autofillData["organization"] = orgResults;
-            storeData(autofillData, 'autofill_information')
+            autofillData.organization = orgResults;
+            storeData(autofillData, 'autofill_information');
             resolve(autofillData[parameter]);
           }, () => {
             storeData(result, 'autofill_information');
             resolve(result[parameter]);
-          })
+          });
         }, (error) => {
           reject(error);
         });
@@ -112,9 +111,9 @@ function getTasksAsync() {
 }
 
 export {
-  residentQuery,
-  cacheResidentData,
   cacheAutofillData,
+  cacheResidentData,
   customFormsQuery,
-  getTasksAsync
+  getTasksAsync,
+  residentQuery
 };
