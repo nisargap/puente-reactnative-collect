@@ -67,12 +67,6 @@ export default function SignUp({ navigation }) {
     navigation.navigate('Sign In');
   };
 
-  useEffect(() => {
-    cacheAutofillData('organization').then((result) => {
-      console.log(result)
-    })
-  }, [])
-  
   return (
     <KeyboardAvoidingView
       enabled

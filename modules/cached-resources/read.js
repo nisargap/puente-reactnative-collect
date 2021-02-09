@@ -23,7 +23,7 @@ async function cacheAutofillData(parameter) {
       if (connected) {
         retrievePuenteAutofillData('all').then((result) => {
           // cache organizations tied to all users
-          customQueryService(0, 500, 'User', 'adminVerified', "true").then((users) => {
+          customQueryService(0, 500, 'User', 'adminVerified', true).then((users) => {
             const orgsCapitalized = [];
             const orgResults = [];
             users.forEach((user) => {
