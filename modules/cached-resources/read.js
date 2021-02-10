@@ -22,29 +22,8 @@ async function cacheAutofillData(parameter) {
     checkOnlineStatus().then((connected) => {
       if (connected) {
         retrievePuenteAutofillData('all').then((result) => {
-          // cache organizations tied to all users
-          customQueryService(0, 500, 'User', 'adminVerified', "true").then((users) => {
-            const orgsCapitalized = [];
-            const orgResults = [];
-            users.forEach((user) => {
-              console.log(user.get("organization"))
-              const org = user.get("organization")
-              if (org !== null && org !== undefined && org !== '') {
-                const orgCapitalized = org.toUpperCase().trim() || '';
-                if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
-                  orgsCapitalized.push(orgCapitalized);
-                  orgResults.push(org);
-                }
-              }
-            });
-            const autofillData = result;
-            autofillData["organization"] = orgResults;
-            storeData(autofillData, 'autofill_information')
-            resolve(autofillData[parameter]);
-          }, () => {
-            storeData(result, 'autofill_information');
-            resolve(result[parameter]);
-          })
+          storeData(result, 'autofill_information');
+          resolve(result[parameter]);
         }, (error) => {
           reject(error);
         });
