@@ -53,9 +53,10 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            let photo = values.picture
+            // const photo = values.picture
+            // need to prune 'picture' key if using photofile
 
-            const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photo'];
+            const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
             valuesToPrune.forEach((value) => {
               delete formObject[value];
             });
@@ -66,11 +67,10 @@ const IdentificationForm = ({
                 setSubmitting(false);
               }, 1000);
             };
-
             const postParams = {
               parseClass: 'SurveyData',
-              signature: 'Sample Signature',
-              photoFile: photo,
+              // signature: 'Sample Signature',
+              photoFile,
               localObject: formObject
             };
 
@@ -111,14 +111,14 @@ const IdentificationForm = ({
                   color={theme.colors.primary}
                 />
               ) : (
-                <PaperButton
-                  onPressEvent={formikProps.handleSubmit}
-                  buttonText={I18n.t('global.submit')}
-                />
-              // <Button icon="human" onPress={formikProps.handleSubmit}>
-              //   <Text>Submit</Text>
-              // </Button>
-              )}
+                  <PaperButton
+                    onPressEvent={formikProps.handleSubmit}
+                    buttonText={I18n.t('global.submit')}
+                  />
+                  // <Button icon="human" onPress={formikProps.handleSubmit}>
+                  //   <Text>Submit</Text>
+                  // </Button>
+                )}
             </View>
           )}
         </Formik>

@@ -452,6 +452,7 @@ const PaperInputPicker = ({
           <View style={stylesDefault.container}>
             {!cameraVisible && image === null && (
               <View>
+                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
                 <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
                 <UseCameraRoll
                   pictureUris={pictureUris}
@@ -465,6 +466,7 @@ const PaperInputPicker = ({
             )}
             {!cameraVisible && image !== null && (
               <View>
+                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
                 <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
                 <Button onPress={() => {
                   setCameraVisible(true)
@@ -481,6 +483,7 @@ const PaperInputPicker = ({
             )}
             {cameraVisible && (
               <View>
+                <Text style={stylesDefault.labelImage}>{label}</Text>
                 <UseCamera
                   cameraVisible={cameraVisible}
                   setCameraVisible={setCameraVisible}

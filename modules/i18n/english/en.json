@@ -281,7 +281,8 @@
     "hemoglobinLevels": "Hemoglobin Levels (Hb)",
     "hemoglobinA1c": "Hemoglobin A1c (HbA1c)",
     "gdL": "g/dL",
-    "pain": "Pain"
+    "pain": "Pain",
+    "photoAssessment": "Photo Assessment"
   },
   "supplementaryForms": {
     "attachResident": "Attach a Community Resident"

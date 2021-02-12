@@ -34,7 +34,7 @@ export default function UseCamera(
 
       setCameraImage(photo.uri)
       setImage(photo.uri)
-      formikProps.setFieldValue(formikKey, photo.base64)
+      formikProps.setFieldValue(formikKey, "data:image/jpg;base64," + photo.base64)
     }
   }
 
