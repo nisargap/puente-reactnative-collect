@@ -118,7 +118,7 @@ const configArray = {
       label: 'vitals.photoAssessment',
       fieldType: 'photo',
       formikKey: 'envPhoto',
-      value: ""
+      value: ''
     }
   ]
 };

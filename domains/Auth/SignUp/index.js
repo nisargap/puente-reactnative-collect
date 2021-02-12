@@ -17,7 +17,6 @@ import * as yup from 'yup';
 import FormInput from '../../../components/FormikFields/FormInput';
 import TermsModal from '../../../components/TermsModal';
 import { populateCache } from '../../../modules/cached-resources';
-
 import I18n from '../../../modules/i18n';
 // STYLING
 import { theme } from '../../../modules/theme';
@@ -168,8 +167,8 @@ export default function SignUp({ navigation }) {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                      <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
-                    )}
+                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
+                  )}
 
                   <TermsModal visible={visible} setVisible={setVisible} />
                 </>

@@ -1,7 +1,8 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
-  View, Text, Image
+  Image,
+  Text, View
 } from 'react-native';
 import {
   Button, Headline,
@@ -12,11 +13,10 @@ import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
 import PaperButton from '../../Button';
+import UseCameraRoll from '../../Multimedia/CameraRoll';
+import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import UseCamera from '../../Multimedia/UseCamera';
-import UseCameraRoll from '../../Multimedia/CameraRoll';
-
 import { stylesDefault, stylesPaper, styleX } from './index.style';
 
 const PaperInputPicker = ({
@@ -58,8 +58,8 @@ const PaperInputPicker = ({
   };
 
   const [cameraVisible, setCameraVisible] = React.useState(false);
-  const [pictureUris, setPictureUris] = React.useState({})
-  const [image, setImage] = React.useState(null)
+  const [pictureUris, setPictureUris] = React.useState({});
+  const [image, setImage] = React.useState(null);
 
   return (
     <>
@@ -314,7 +314,7 @@ const PaperInputPicker = ({
                       {errors[result.textKey]}
                     </Text>
                   </View>
-                )}
+              )}
             </View>
           ))}
           <Text style={{ color: 'red' }}>
@@ -400,20 +400,20 @@ const PaperInputPicker = ({
                 <Text style={styleX.textSplit}>{result.label}</Text>
               </View>
             ) : (
-                <View key={result.value} style={stylesDefault.inputItem}>
-                  <TextInput
-                    label={customForm ? result.label : I18n.t(result.label)}
-                    onChangeText={handleChange(customForm ? result.label : I18n.t(result.label))}
-                    onBlur={handleBlur(customForm ? result.label : I18n.t(result.label))}
+              <View key={result.value} style={stylesDefault.inputItem}>
+                <TextInput
+                  label={customForm ? result.label : I18n.t(result.label)}
+                  onChangeText={handleChange(customForm ? result.label : I18n.t(result.label))}
+                  onBlur={handleBlur(customForm ? result.label : I18n.t(result.label))}
                     {...rest} //eslint-disable-line
-                    mode="outlined"
-                    theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
-                  />
-                  <Text style={{ color: 'red' }}>
-                    {errors[customForm ? result.label : I18n.t(result.label)]}
-                  </Text>
-                </View>
-              )))}
+                  mode="outlined"
+                  theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+                />
+                <Text style={{ color: 'red' }}>
+                  {errors[customForm ? result.label : I18n.t(result.label)]}
+                </Text>
+              </View>
+            )))}
           </View>
         </View>
       )}
@@ -427,22 +427,22 @@ const PaperInputPicker = ({
                   <Text style={styleX.textSplit}>{result.label}</Text>
                 </View>
               ) : (
-                  <View key={result.value} style={stylesDefault.inputItem}>
-                    <TextInput
-                      label={customForm ? result.label : I18n.t(result.label)}
-                      onChangeText={handleChange(result.value)}
-                      onBlur={handleBlur(result.value)}
+                <View key={result.value} style={stylesDefault.inputItem}>
+                  <TextInput
+                    label={customForm ? result.label : I18n.t(result.label)}
+                    onChangeText={handleChange(result.value)}
+                    onBlur={handleBlur(result.value)}
                       {...rest} //eslint-disable-line
-                      mode="outlined"
-                      keyboardType="numeric"
-                      maxLength={result.maxLength ? result.maxLength : null}
-                      theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
-                    />
-                    <Text style={{ color: 'red' }}>
-                      {errors[result.value]}
-                    </Text>
-                  </View>
-                )))}
+                    mode="outlined"
+                    keyboardType="numeric"
+                    maxLength={result.maxLength ? result.maxLength : null}
+                    theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+                  />
+                  <Text style={{ color: 'red' }}>
+                    {errors[result.value]}
+                  </Text>
+                </View>
+              )))}
             </View>
           </View>
         )
@@ -469,8 +469,11 @@ const PaperInputPicker = ({
                 <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
                 <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
                 <Button onPress={() => {
-                  setCameraVisible(true)
-                }}>Take Picture</Button>
+                  setCameraVisible(true);
+                }}
+                >
+                  Take Picture
+                </Button>
                 <UseCameraRoll
                   pictureUris={pictureUris}
                   setPictureUris={setPictureUris}
