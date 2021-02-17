@@ -188,7 +188,7 @@ const SignIn = ({ navigation }) => {
                         handleSignIn(values, actions.resetForm());
                       } else {
                         // incorrect usernmae/password offline
-                        handleFailedAttempt()
+                        handleFailedAttempt();
                       }
                     });
                   }
