@@ -53,6 +53,9 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
+            // const photo = values.picture
+            // need to prune 'picture' key if using photofile
+
             const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
             valuesToPrune.forEach((value) => {
               delete formObject[value];
@@ -64,10 +67,9 @@ const IdentificationForm = ({
                 setSubmitting(false);
               }, 1000);
             };
-
             const postParams = {
               parseClass: 'SurveyData',
-              signature: 'Sample Signature',
+              // signature: 'Sample Signature',
               photoFile,
               localObject: formObject
             };
