@@ -187,8 +187,7 @@ const SignIn = ({ navigation }) => {
                         // need some pincode verification
                         handleSignIn(values, actions.resetForm());
                       } else {
-                        // incorrect usernmae/password offline
-                        handleFailedAttempt();
+                        // cannot log in offline without saved credentials, connect to internet
                       }
                     });
                   }
