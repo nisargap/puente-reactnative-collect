@@ -1,7 +1,8 @@
+import Constants from 'expo-constants';
+
 import { retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
 import { cacheAutofillData, cacheResidentData, customFormsQuery } from './read';
-import Constants from 'expo-constants';
 
 export default function populateCache(user) {
   // communities called since we need a paramter, all data would be cached in the
@@ -52,9 +53,8 @@ export default function populateCache(user) {
       const appVersion = Constants.manifest.version;
       await getData('appVersion').then(async (currentAppVersion) => {
         if (appVersion !== currentAppVersion && appVersion !== null && appVersion !== undefined) {
-          await storeData(appVersion, 'appVersion')
+          await storeData(appVersion, 'appVersion');
         }
-      })
-
+      });
     });
 }

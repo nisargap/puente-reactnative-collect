@@ -10,6 +10,7 @@ import { Button, Text } from 'react-native-paper';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -19,7 +20,6 @@ import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
 import { addSelectTextInputs, vitalsBloodPressue } from './utils';
-import { getData } from '../../../../modules/async-storage'
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -136,14 +136,14 @@ const SupplementaryForm = ({
               color={theme.colors.primary}
             />
           ) : (
-              <Button
-                disabled={!surveyee.objectId}
-                onPress={formikProps.handleSubmit}
-              >
-                {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
-                {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
-              </Button>
-            )}
+            <Button
+              disabled={!surveyee.objectId}
+              onPress={formikProps.handleSubmit}
+            >
+              {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
+              {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
+            </Button>
+          )}
         </View>
       )}
     </Formik>
