@@ -19,6 +19,7 @@ import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
 import { addSelectTextInputs, vitalsBloodPressue } from './utils';
+import { getData } from '../../../../modules/async-storage'
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -59,6 +60,7 @@ const SupplementaryForm = ({
         const formObject = values;
         formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
         formObject.surveyingOrganization = surveyingOrganization;
+        formObject.appVersion = await getData('appVersion');
 
         let formObjectUpdated = addSelectTextInputs(values, formObject);
         if (selectedForm === 'vitals') {
@@ -134,14 +136,14 @@ const SupplementaryForm = ({
               color={theme.colors.primary}
             />
           ) : (
-            <Button
-              disabled={!surveyee.objectId}
-              onPress={formikProps.handleSubmit}
-            >
-              {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
-              {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
-            </Button>
-          )}
+              <Button
+                disabled={!surveyee.objectId}
+                onPress={formikProps.handleSubmit}
+              >
+                {surveyee.objectId && <Text>{I18n.t('global.submit')}</Text>}
+                {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
+              </Button>
+            )}
         </View>
       )}
     </Formik>
