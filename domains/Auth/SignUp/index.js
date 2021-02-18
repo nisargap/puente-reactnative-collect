@@ -41,7 +41,7 @@ const validationSchema = yup.object().shape({
     .min(10, 'Seems a bit short..'),
   organization: yup
     .string()
-    .label('Username')
+    .label('Organization')
     .required(),
   password: yup
     .string()
@@ -59,7 +59,6 @@ const validationSchema = yup.object().shape({
 export default function SignUp({ navigation }) {
   const [checked, setChecked] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
-
   const handleLogIn = () => {
     navigation.navigate('Sign In');
   };

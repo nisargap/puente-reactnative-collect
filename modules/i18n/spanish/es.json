@@ -283,7 +283,8 @@
     "hemoglobinLevels": "Niveles de hemoglobina",
     "hemoglobinA1c": "Hemoglobina de A1c",
     "gdL": "g/dL",
-    "pain": "Nivel de dolor"
+    "pain": "Nivel de dolor",
+    "photoAssessment": "Evaluación de fotos"
   },
   "supplementaryForms": {
     "attachResident": "Adjuntar una residente de la comunidad"
