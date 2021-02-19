@@ -10,6 +10,7 @@ import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -46,6 +47,7 @@ const IdentificationForm = ({
             const formObject = values;
             formObject.surveyingOrganization = surveyingOrganization;
             formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+            formObject.appVersion = await getData('appVersion');
 
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
