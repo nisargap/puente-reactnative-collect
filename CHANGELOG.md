@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.0...v10.6.1) (2021-02-19)
+
+
+### New Features
+
+* appVersion stored in async and added to all frm submissions ([649b58f](https://github.com/hopetambala/puente-reactnative-collect/commit/649b58ff135f9b024dffb99ced2bdb52672df3be))
+
+
+### Bug fixes
+
+* double submitting sup forms + move check index for resolve ([6557bc8](https://github.com/hopetambala/puente-reactnative-collect/commit/6557bc8547daa460988eb36d38496478b256ba43))
+* limite resident surveys ([37701ec](https://github.com/hopetambala/puente-reactnative-collect/commit/37701ec8ff7d191827f7564631033afa4fe69eb1))
+
 ## [10.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.5.5...v10.6.0) (2021-02-17)
 
 
