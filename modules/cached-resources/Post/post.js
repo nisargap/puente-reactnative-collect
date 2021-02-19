@@ -12,6 +12,8 @@ import {
   postSupForms
 } from './Offline';
 
+import _ from "lodash"
+
 function postIdentificationForm(postParams) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
@@ -79,10 +81,18 @@ function postOfflineForms() {
         const householdsRelation = await getData('offlineHouseholdsRelation');
 
         // post all offline data
+        // Deep copies needed to ensure no double submission when Parent objects' objectID 
+        // changes from offline object ID like 'PatientId-xxxxxx' to Parse object ID
         postHouseholds(households, householdsRelation, idForms, supForms).then(() => {
-          postHouseholdRelations(householdsRelation, idForms, supForms).then(async () => {
-            postForms(idForms, supForms).then(() => {
-              postSupForms(supForms).then(() => {
+          const householdsRelationCopy1 = _.cloneDeep(householdsRelation)
+          const idFormsCopy1 = _.cloneDeep(idForms)
+          const supFormsCopy1 = _.cloneDeep(supForms)
+          postHouseholdRelations(householdsRelationCopy1, idFormsCopy1, supFormsCopy1).then(async () => {
+            const idFormsCopy2 = _.cloneDeep(idForms)
+            const supFormsCopy2 = _.cloneDeep(supForms)
+            postForms(idFormsCopy2, supFormsCopy2).then(() => {
+              const supFormsCopy3 = _.cloneDeep(supForms)
+              postSupForms(supFormsCopy3).then(() => {
                 resolve(true);
               }, (error) => {
                 reject(error);
