@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.0...v10.6.1) (2021-02-19)
+
+
+### New Features
+
+* appVersion stored in async and added to all frm submissions ([649b58f](https://github.com/hopetambala/puente-reactnative-collect/commit/649b58ff135f9b024dffb99ced2bdb52672df3be))
+
+
+### Bug fixes
+
+* double submitting sup forms + move check index for resolve ([6557bc8](https://github.com/hopetambala/puente-reactnative-collect/commit/6557bc8547daa460988eb36d38496478b256ba43))
+* limite resident surveys ([37701ec](https://github.com/hopetambala/puente-reactnative-collect/commit/37701ec8ff7d191827f7564631033afa4fe69eb1))
+
+## [10.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.5.5...v10.6.0) (2021-02-17)
+
+
+### New Features
+
+* autofill for sign up organization ([ec22084](https://github.com/hopetambala/puente-reactnative-collect/commit/ec22084ae75454cbfcbac04282a23c0a740bd31f))
+* initial image capture component ([8df0e94](https://github.com/hopetambala/puente-reactnative-collect/commit/8df0e94bb616c749c4aafc49a2a81d304d772f2f))
+* photo works on all forms 🎉 ([d8b55ba](https://github.com/hopetambala/puente-reactnative-collect/commit/d8b55bab447f22a4a42a1ec089a860b0e69bb0d2))
+
+
+### Bug fixes
+
+* modal for incorrect username/password offline ([4556d6e](https://github.com/hopetambala/puente-reactnative-collect/commit/4556d6e5c7777f295966e3803c146b2df933a140))
+
 ### [10.5.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.5.3...v10.5.4) (2021-02-04)
 
 ### Bug fixes
