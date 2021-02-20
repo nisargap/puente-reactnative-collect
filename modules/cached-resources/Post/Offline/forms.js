@@ -34,13 +34,11 @@ function postForms(idForms, supForms) {
                 }
               });
             }
-            if (index === array.length - 1) {
-              resolve();
-            }
           }, (error) => {
             reject(error);
           });
         }
+        if (index === array.length - 1) resolve();
       });
     } else {
       resolve(true);
@@ -64,11 +62,11 @@ function postSupForms(supForms) {
         // supplementary forms not tied to an offline ID form
         if (!supForm.parseParentClassID.includes('PatientID-')) {
           postObjectsToClassWithRelation(supForm).then(() => {
-            if (index === array.length - 1) resolve();
           }, (error) => {
             reject(error);
           });
         }
+        if (index === array.length - 1) resolve();
       });
     } else {
       resolve(true);
