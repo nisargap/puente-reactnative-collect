@@ -2,13 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [10.6.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.1...v10.6.2) (2021-02-24)
-
-
-### Bug fixes
-
-* **deps:** pin dependencies ([0c98500](https://github.com/hopetambala/puente-reactnative-collect/commit/0c98500dbe52e165b8a03f7dc7477856c6b49fa5))
-
 ### [10.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.0...v10.6.1) (2021-02-19)
 
 
