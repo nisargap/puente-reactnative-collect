@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Platform,
   StyleSheet, Text, TouchableOpacity, View,
   YellowBox
 } from 'react-native';
@@ -62,7 +63,7 @@ export default class AutoFill extends Component {
     return (
       <View style={styles.container}>
         {/* handle issues where autofil does not populate any data */}
-        {!values ? (
+        {!values && (
           <TextInput
             label={translatedLabel.length > 40 ? '' : translatedLabel}
             onChangeText={formikProps.handleChange(formikKey)}
@@ -71,19 +72,20 @@ export default class AutoFill extends Component {
             theme={stylesPaper}
             style={stylesDefault.label}
           />
-        ) : (
+        )}
+        {values && Platform.OS === 'ios' && (
           <View>
             <Autocomplete
               autoCapitalize="none"
               autoCorrect={false}
               containerStyle={styles.autocompleteContainer}
               inputContainerStyle={styles.textInputContainer}
-                // data to show in suggestion
+              // data to show in suggestion
               data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
-                // default value if you want to set something in input
+              // default value if you want to set something in input
               defaultValue={query}
-                /* onchange of the text changing the state of the query which will trigger
-                the findFilm method to show the suggestions */
+              /* onchange of the text changing the state of the query which will trigger
+              the findFilm method to show the suggestions */
               onChangeText={(text) => {
                 this.setState({ query: text });
                 formikProps.setFieldValue(formikKey, text);
@@ -96,10 +98,47 @@ export default class AutoFill extends Component {
                 // and on the screen when they are not
                 setScrollViewScroll(false);
                 if (fields.length === 0
-                    && scrollViewScroll === false) {
+                  && scrollViewScroll === false) {
                   setScrollViewScroll(true);
                 }
               }}
+              renderItem={({ item }) => (
+                // you can change the view you want to show in suggestion from here
+                <TouchableOpacity
+                  key={`${item}`}
+                  onPress={() => {
+                    this.setState({ query: item });
+                    formikProps.setFieldValue(formikKey, item);
+                  }}
+                >
+                  <Text style={styles.itemText} key={item}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
+        {values && Platform.OS === 'android' && (
+          <View>
+            <Autocomplete
+              autoCapitalize="none"
+              autoCorrect={false}
+              containerStyle={styles.autocompleteContainer}
+              inputContainerStyle={styles.textInputContainer}
+              // data to show in suggestion
+              data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
+              // default value if you want to set something in input
+              defaultValue={query}
+              /* onchange of the text changing the state of the query which will trigger
+              the findFilm method to show the suggestions */
+              onChangeText={(text) => {
+                this.setState({ query: text });
+                formikProps.setFieldValue(formikKey, text);
+              }}
+              placeholder={placeholder}
+              listStyle={styles.listContainer}
+              keyExtractor={(item,) => item.key}
               renderItem={({ item }) => (
                 // you can change the view you want to show in suggestion from here
                 <TouchableOpacity
