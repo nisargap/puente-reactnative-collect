@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.6.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.2...v10.6.3) (2021-02-25)
+
+
+### New Features
+
+* autofill for organization ([3a8d7ee](https://github.com/hopetambala/puente-reactnative-collect/commit/3a8d7ee5af4147cb9d824134b7a99841987bd725))
+* ui update for autofill ([46e37fc](https://github.com/hopetambala/puente-reactnative-collect/commit/46e37fcd0212784c6609212e33ffa342d03740cc))
+
+
+### Bug fixes
+
+* adding assets back to cachedResourcecs ([eb25c1d](https://github.com/hopetambala/puente-reactnative-collect/commit/eb25c1dc04426a307452b299370bf7f4db573efd))
+* android autofill respond to user ([f96c306](https://github.com/hopetambala/puente-reactnative-collect/commit/f96c3061a3c5594b4e0e4a33ff40f7daf47b0147))
+
 ### [10.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.0...v10.6.1) (2021-02-19)
 
 
