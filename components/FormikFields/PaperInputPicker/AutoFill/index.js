@@ -9,6 +9,7 @@ import { TextInput } from 'react-native-paper';
 import { getData } from '../../../../modules/async-storage';
 import { cacheAutofillData } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
+import { theme } from '../../../../modules/theme';
 import { stylesDefault, stylesPaper } from '../index.style';
 
 YellowBox.ignoreWarnings(['VirtualizedLists should never be nested']);
@@ -56,7 +57,7 @@ export default class AutoFill extends Component {
       label, translatedLabel, formikProps, formikKey, scrollViewScroll, setScrollViewScroll
     } = this.props;
 
-    const placeholder = `${I18n.t('components.autofill.placeholder')} ${I18n.t(label)} ${I18n.t('components.autofill.placeholder_end')}`;
+    const placeholder = I18n.t(label);
 
     return (
       <View style={styles.container}>
@@ -76,6 +77,7 @@ export default class AutoFill extends Component {
               autoCapitalize="none"
               autoCorrect={false}
               containerStyle={styles.autocompleteContainer}
+              inputContainerStyle={styles.textInputContainer}
                 // data to show in suggestion
               data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
                 // default value if you want to set something in input
@@ -113,13 +115,6 @@ export default class AutoFill extends Component {
                 </TouchableOpacity>
               )}
             />
-            <View style={styles.descriptionContainer}>
-              {fields.length > 0 ? (
-                <Text style={styles.infoText}>{query}</Text>
-              ) : (
-                <Text style={styles.infoText}>{placeholder}</Text>
-              )}
-            </View>
           </View>
         )}
       </View>
@@ -129,30 +124,23 @@ export default class AutoFill extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#F5FCFF',
     flex: 1,
-    padding: 16,
-    // marginTop: 40,
-    marginBottom: 40,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    marginBottom: 75,
   },
-  autocompleteContainer: {
-    backgroundColor: '#ffffff',
-    borderWidth: 0
-  },
-  descriptionContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    borderRadius: 20
+  textInputContainer: {
+    borderColor: theme.colors.primary,
+    borderWidth: 1,
+    color: 'red'
   },
   itemText: {
     fontSize: 15,
     paddingTop: 5,
     paddingBottom: 5,
     margin: 2,
-  },
-  infoText: {
-    textAlign: 'center',
-    fontSize: 16,
+    flex: 1
   },
   listContainer: {
     height: 80,

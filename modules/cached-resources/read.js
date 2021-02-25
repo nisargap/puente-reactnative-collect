@@ -22,8 +22,28 @@ async function cacheAutofillData(parameter) {
     checkOnlineStatus().then((connected) => {
       if (connected) {
         retrievePuenteAutofillData('all').then((result) => {
-          storeData(result, 'autofill_information');
-          resolve(result[parameter]);
+          // cache organizations tied to all users
+          customQueryService(0, 500, 'User', 'adminVerified', true).then((users) => {
+            const orgsCapitalized = [];
+            const orgResults = [];
+            users.forEach((user) => {
+              const org = user.get('organization');
+              if (org !== null && org !== undefined && org !== '') {
+                const orgCapitalized = org.toUpperCase().trim() || '';
+                if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
+                  orgsCapitalized.push(orgCapitalized);
+                  orgResults.push(org);
+                }
+              }
+            });
+            const autofillData = result;
+            autofillData.organization = orgResults;
+            storeData(autofillData, 'autofill_information');
+            resolve(autofillData[parameter]);
+          }, () => {
+            storeData(result, 'autofill_information');
+            resolve(result[parameter]);
+          });
         }, (error) => {
           reject(error);
         });
@@ -67,29 +87,6 @@ function customFormsQuery(surveyingOrganization) {
   });
 }
 
-function assetFormsQuery() {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((online) => {
-      if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
-          await storeData(forms, 'assetForms');
-          resolve(JSON.parse(JSON.stringify(forms)));
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('assetForms').then((forms) => {
-          resolve(forms);
-        }, (error) => {
-          reject(error);
-        });
-      }
-    }, (error) => {
-      reject(error);
-    });
-  });
-}
-
 function getTasksAsync() {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then(async (online) => {
@@ -103,6 +100,29 @@ function getTasksAsync() {
       } else {
         getData('tasks').then((tasks) => {
           resolve(tasks);
+        }, (error) => {
+          reject(error);
+        });
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
+function assetFormsQuery() {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((online) => {
+      if (online) {
+        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
+          await storeData(forms, 'assetForms');
+          resolve(JSON.parse(JSON.stringify(forms)));
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('assetForms').then((forms) => {
+          resolve(forms);
         }, (error) => {
           reject(error);
         });
