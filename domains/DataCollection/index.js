@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   KeyboardAvoidingView, Platform,
-  ScrollView, Text, View
+  ScrollView, Settings, Text, View
 } from 'react-native';
 import {
   Button, Card
@@ -15,6 +15,7 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
+import SettingsView from '../Settings';
 import { getData } from '../../modules/async-storage';
 import { customFormsQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
@@ -35,6 +36,7 @@ const puenteForms = [
 const DataCollection = ({ navigation }) => {
   const [scrollViewScroll, setScrollViewScroll] = useState();
   const [view, setView] = useState('Root');
+  const [prevView, setPrevView] = useState('Root')
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -134,6 +136,9 @@ const DataCollection = ({ navigation }) => {
     >
       <Header
         logOut={logOut}
+        view={view}
+        setView={setView}
+        setPrevView={setPrevView}
       />
       <KeyboardAvoidingView
         enabled
@@ -249,6 +254,13 @@ const DataCollection = ({ navigation }) => {
                 />
               </View>
             )}
+          {view === 'Settings' && (
+            <SettingsView
+              prevView={prevView}
+              setView={setView}
+              logOut={logOut}
+            />
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

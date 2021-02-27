@@ -13,7 +13,7 @@ import I18n from '../../modules/i18n';
 import countService from '../../services/parse/calculate';
 import styles from './index.styles';
 
-const Header = ({ logOut }) => {
+const Header = ({ logOut, view, setView, setPrevView }) => {
   const { header, headerText, headerIcon } = styles;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -104,10 +104,13 @@ const Header = ({ logOut }) => {
         setSubmission(false);
       });
     });
-    // .catch(() => {
-    //   setSubmission(false);
-    // });
   };
+
+  const navToSettings = () => {
+    setDrawerOpen(false);
+    setPrevView(view)
+    setView('Settings');
+  }
 
   return (
     <View style={styles.container}>
@@ -120,14 +123,12 @@ const Header = ({ logOut }) => {
           />
         </View>
         <View style={headerIcon}>
-          {logOut && (
-            <IconButton
-              icon="logout"
-              color={headerIcon.color}
-              size={30}
-              onPress={logOut}
-            />
-          )}
+          <IconButton
+            icon="settings"
+            color={headerIcon.color}
+            size={30}
+            onPress={navToSettings}
+          />
         </View>
       </View>
       {drawerOpen === true
@@ -146,8 +147,8 @@ const Header = ({ logOut }) => {
                 {I18n.t('header.submitOffline')}
               </Button>
             ) : (
-              <Button disabled>{I18n.t('header.submitOffline')}</Button>
-            )}
+                <Button disabled>{I18n.t('header.submitOffline')}</Button>
+              )}
             {submission === false && (
               <View>
                 <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>
@@ -171,6 +172,7 @@ const Header = ({ logOut }) => {
                 <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
               </View>
             )}
+            <Button onPress={navToSettings}>Settings Page</Button>
           </View>
         )}
       <IconButton
