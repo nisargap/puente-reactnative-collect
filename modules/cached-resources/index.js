@@ -7,6 +7,7 @@ import {
   postSupplementaryForm,
 } from './Post/post';
 import {
+  assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
   cacheResidentData,
@@ -16,6 +17,7 @@ import {
 } from './read';
 
 export {
+  assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
   cacheResidentData,
