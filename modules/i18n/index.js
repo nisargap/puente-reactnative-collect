@@ -3,10 +3,13 @@ import I18n from 'i18n-js';
 
 import english from './english/en.json';
 import spanish from './spanish/es.json';
+import haitian from './kreyol/hk.json';
+
 
 I18n.translations = {
   en: english,
   es: spanish,
+  hk: haitian
 };
 
 I18n.locale = Localization.locale;
