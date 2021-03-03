@@ -22,19 +22,15 @@ import {
 import * as yup from 'yup';
 
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
-
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
 import TermsModal from '../../../components/TermsModal';
-
 import { deleteData, getData, storeData } from '../../../modules/async-storage';
 import { populateCache } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
-
 import { retrieveSignInFunction } from '../../../services/parse/auth';
-
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
@@ -74,8 +70,8 @@ const SignIn = ({ navigation }) => {
     Alert.alert(
       I18n.t('signIn.unableLogin'),
       I18n.t('signIn.usernamePasswordIncorrect'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -246,8 +242,8 @@ const SignIn = ({ navigation }) => {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                      <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
-                    )}
+                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
+                  )}
                   <CredentialsModal
                     modalVisible={modalVisible}
                     formikProps={formikProps}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 
-
 import NewAssets from './NewAssets';
 import ViewAssets from './ViewAssets';
 
