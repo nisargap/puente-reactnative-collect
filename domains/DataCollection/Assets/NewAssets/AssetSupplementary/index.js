@@ -9,7 +9,8 @@ import { postSupplementaryForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
 import { layout } from '../../../../../modules/theme';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
-import AssetSelect from './AssetSelect';
+import AssetFormSelect from './AssetFormSelect';
+import styles from './index.styles';
 
 const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
   const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
@@ -67,20 +68,20 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
         }}
       >
         {(formikProps) => (
-          <View>
+          <View style={styles.assetContainer}>
             <View>
               <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
               {viewSupplementaryForms === true
                 && (
-                  <AssetSelect
+                  <AssetFormSelect
                     setViewSupplementaryForms={setViewSupplementaryForms}
                     setSelectedForm={setSelectedForm}
                   />
                 )}
             </View>
             <View>
-              {Object.keys(selectedAsset).length !== 0 && selectedAsset.constructor !== Object
-                && <Headline>{selectedAsset.get('Name')}</Headline>}
+              {selectedAsset
+                && <Headline>{selectedAsset.Name}</Headline>}
             </View>
             <View>
               <View style={layout.formContainer}>

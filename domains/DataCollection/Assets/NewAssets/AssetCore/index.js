@@ -1,23 +1,36 @@
 import { Formik } from 'formik';
+import _ from 'lodash';
 import React, { useState } from 'react';
 import {
-  ActivityIndicator, ScrollView, View
+  ActivityIndicator, Modal,
+  ScrollView, View
 } from 'react-native';
 import {
-  Modal, Portal, Provider, TextInput
+  Provider, Text,
+  TextInput
 } from 'react-native-paper';
 
 import PaperButton from '../../../../../components/Button';
 import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
 import { postObjectsToClass } from '../../../../../services/parse/crud';
 import styles from './index.styles';
+import PeopleModal from './PeopleModal';
 
 const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
-  const [visible, setVisible] = React.useState(false);
+  const [location, setLocation] = useState();
+  const [visible, setVisible] = useState(false);
 
   const toggleModal = () => setVisible(!visible);
+
+  const handleFormikPropsLocation = async (formikProps) => {
+    const currentLocation = await getLocation().then().catch((e) => e);
+    const { latitude, longitude } = currentLocation.coords;
+    formikProps.setFieldValue('location', { latitude, longitude });
+    setLocation(currentLocation.coords);
+  };
 
   // handle input change
   const handleInputChange = (text, index, name) => {
@@ -37,13 +50,13 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
   const handleAddClick = () => {
     setPeople([...people, { firstName: '', lastName: '' }]);
   };
-  return (
-    <View style={styles.assetContainer}>
-      <Provider>
 
+  return (
+    <View>
+      <Provider>
         <Formik
           initialValues={{}}
-          onSubmit={async (values,) => {
+          onSubmit={async (values, { resetForm }) => {
             const formObject = values;
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
@@ -56,16 +69,21 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
             };
 
             postObjectsToClass(postParams)
-              .then((e) => setSelectedAsset(e))
+              .then((e) => {
+                const asset = JSON.parse(JSON.stringify(e));
+                setSelectedAsset(asset);
+              })
+              .then(() => resetForm())
               .catch((e) => console.log(e)); //eslint-disable-line
           }}
         >
 
           {(formikProps) => (
-            <View>
+            <View style={styles.assetContainer}>
               <View id="top">
                 <TextInput
                   label="Name of Assets"
+                  value={formikProps.values.Name || ''}
                   onChangeText={formikProps.handleChange('Name')}
                   onBlur={formikProps.handleBlur('Name')}
                   mode="outlined"
@@ -73,101 +91,85 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                   style={stylesDefault.label}
                 />
               </View>
-              <View id="middle" style={{ flexDirection: 'row' }}>
-                <View>
-                  <PaperButton
-                    buttonText='Show "Add People"'
-                    onPressEvent={toggleModal}
+              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <PaperButton
+                  buttonText="Add People"
+                  onPressEvent={toggleModal}
+                  icon="chevron-up"
+                  compact
+                  style={{ margin: 2 }}
+
+                />
+                <PaperButton
+                  // onPressEvent={() => formikProps.setFieldValue('location', handleLocation())}
+                  onPressEvent={() => handleFormikPropsLocation(formikProps)}
+                  buttonText="Get Location"
+                  icon="crosshairs-gps"
+                  compact
+                  style={{ margin: 2 }}
+                />
+              </View>
+              <Modal
+                visible={visible}
+                animationType="slide"
+              >
+                <ScrollView>
+                  <PeopleModal
+                    people={people}
+                    handleInputChange={handleInputChange}
+                    handleAddClick={handleAddClick}
+                    handleRemoveClick={handleRemoveClick}
+                    toggleModal={toggleModal}
+                    stylesPaper={stylesPaper}
+                    stylesDefault={stylesDefault}
                   />
-                </View>
-                <Portal>
-                  <Modal visible={visible} onDismiss={toggleModal}>
-                    <PaperButton
-                      buttonText='Hide "Add People"'
-                      onPressEvent={toggleModal}
-                    />
-                    <ScrollView>
-                      {people.map((x, i) => (
-                        <View>
-                          <TextInput
-                            label="First Name"
-                            placeholder="Enter First Name"
-                            onChangeText={(text) => handleInputChange(text, i, 'firstName')}
-                            mode="outlined"
-                            theme={stylesPaper}
-                            style={stylesDefault.label}
-                          />
-                          <TextInput
-                            label="Last Name"
-                            placeholder="Enter Last Name"
-                            onChangeText={(text) => handleInputChange(text, i, 'lastName')}
-                            mode="outlined"
-                            theme={stylesPaper}
-                            style={stylesDefault.label}
-                          />
-                          <TextInput
-                            label="Relationship"
-                            onChangeText={(text) => handleInputChange(text, i, 'relationship')}
-                            mode="outlined"
-                            theme={stylesPaper}
-                            style={stylesDefault.label}
-                          />
-                          <View>
-                            {people.length !== 1 && (
-                              <PaperButton
-                                buttonText="Remove"
-                                onPressEvent={() => handleRemoveClick(i)}
-                              />
-                            )}
-                            {people.length - 1 === i && (
-                              <PaperButton
-                                buttonText="Add"
-                                onPressEvent={handleAddClick}
-                              />
-                            )}
-                          </View>
-                        </View>
-                      ))}
-                    </ScrollView>
-
-                  </Modal>
-                </Portal>
-
-              </View>
-              <View id="botom">
-                <TextInput
-                  label="Community Name"
-                  onChangeText={formikProps.handleChange('Community Name')}
-                  onBlur={formikProps.handleBlur('Community Name')}
-                  mode="outlined"
-                  theme={stylesPaper}
-                  style={stylesDefault.label}
-                />
-                <TextInput
-                  label="City"
-                  onChangeText={formikProps.handleChange('City')}
-                  onBlur={formikProps.handleBlur('City')}
-                  mode="outlined"
-                  theme={stylesPaper}
-                  style={stylesDefault.label}
-                />
-                <TextInput
-                  label="Province"
-                  onChangeText={formikProps.handleChange('Province')}
-                  onBlur={formikProps.handleBlur('Province')}
-                  mode="outlined"
-                  theme={stylesPaper}
-                  style={stylesDefault.label}
-                />
-              </View>
+                </ScrollView>
+              </Modal>
+              {location !== undefined
+                && <Text>{`${location.latitude},${location.longitude}`}</Text>}
+              <TextInput
+                label="Community Name"
+                value={formikProps.values['Community Name'] || ''}
+                onChangeText={formikProps.handleChange('Community Name')}
+                onBlur={formikProps.handleBlur('Community Name')}
+                mode="outlined"
+                theme={stylesPaper}
+                style={stylesDefault.label}
+              />
+              <TextInput
+                label="City"
+                value={formikProps.values.City || ''}
+                onChangeText={formikProps.handleChange('City')}
+                onBlur={formikProps.handleBlur('City')}
+                mode="outlined"
+                theme={stylesPaper}
+                style={stylesDefault.label}
+              />
+              <TextInput
+                label="Province"
+                value={formikProps.values.Province || ''}
+                onChangeText={formikProps.handleChange('Province')}
+                onBlur={formikProps.handleBlur('Province')}
+                mode="outlined"
+                theme={stylesPaper}
+                style={stylesDefault.label}
+              />
               {formikProps.isSubmitting ? (
                 <ActivityIndicator />
               ) : (
                 <PaperButton
                   onPressEvent={() => formikProps.handleSubmit()}
-                  buttonText={I18n.t('global.submit')}
+                  disabled={!!_.isEmpty(formikProps.values)}
+                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
+                  icon={_.isEmpty(formikProps.values) ? '' : 'plus'}
+                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
+              <PaperButton
+                icon="gesture-swipe"
+                mode="text"
+                buttonText="Swipe to Attach Form"
+              />
             </View>
           )}
         </Formik>
