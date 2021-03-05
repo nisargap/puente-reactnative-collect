@@ -12,9 +12,9 @@ import {
 
 import PaperButton from '../../../../../components/Button';
 import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import { postAssetForm } from '../../../../../modules/cached-resources';
 import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
-import { postObjectsToClass } from '../../../../../services/parse/crud';
 import styles from './index.styles';
 import PeopleModal from './PeopleModal';
 
@@ -60,6 +60,9 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
             const formObject = values;
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
+            formObject.latitude = values.location?.latitude || 0;
+            formObject.longitude = values.location?.longitude || 0;
+            formObject.altitude = values.location?.altitude || 0;
 
             const postParams = {
               parseClass: 'Assets',
@@ -68,7 +71,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
               localObject: formObject
             };
 
-            postObjectsToClass(postParams)
+            postAssetForm(postParams)
               .then((e) => {
                 const asset = JSON.parse(JSON.stringify(e));
                 setSelectedAsset(asset);

@@ -1,9 +1,11 @@
 import populateCache from './populate-cache';
 import {
+  postAssetForm,
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
   postOfflineForms,
+  postSupplementaryAssetForm,
   postSupplementaryForm,
 } from './Post/post';
 import {
@@ -24,10 +26,12 @@ export {
   customFormsQuery,
   getTasksAsync,
   populateCache,
+  postAssetForm,
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
   postOfflineForms,
+  postSupplementaryAssetForm,
   postSupplementaryForm,
   residentQuery
 };
