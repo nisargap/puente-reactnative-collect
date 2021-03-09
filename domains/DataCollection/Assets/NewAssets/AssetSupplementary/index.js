@@ -2,13 +2,14 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Button, Headline, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
 import { layout } from '../../../../../modules/theme';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
+import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
@@ -24,9 +25,6 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
           setPhotoFile('Submitted Photo String');
 
           const formObject = values;
-          // formObject.latitude = values.location?.latitude || 0;
-          // formObject.longitude = values.location?.longitude || 0;
-          // formObject.altitude = values.location?.altitude || 0;
 
           const formObjectUpdated = addSelectTextInputs(values, formObject);
 
@@ -81,7 +79,11 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
             </View>
             <View>
               {selectedAsset
-                && <Headline>{selectedAsset.Name}</Headline>}
+                && (
+                  <SelectedAsset
+                    selectedMarker={selectedAsset}
+                  />
+                )}
             </View>
             <View>
               <View style={layout.formContainer}>

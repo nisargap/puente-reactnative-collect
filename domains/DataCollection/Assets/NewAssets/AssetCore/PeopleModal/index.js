@@ -19,12 +19,11 @@ const PeopleModal = ({
   <>
     <Appbar.Header style={{ backgroundColor: theme.colors.accent }}>
       <Appbar.Action icon="chevron-down" onPress={toggleModal} />
-      <Appbar.Content title={"I18n.t('assets.peopleManager')"} subtitle="" titleStyle={{ fontSize: 20, fontWeight: 'bold' }} />
+      <Appbar.Content title="People Manager" subtitle="" titleStyle={{ fontSize: 20, fontWeight: 'bold' }} />
     </Appbar.Header>
     {people.map((x, i) => (
       <ScrollView key={`${x}_`} style={{ margin: 20 }}>
         <KeyboardAvoidingView>
-
           <TextInput
             label="First Name"
             placeholder="Enter First Name"

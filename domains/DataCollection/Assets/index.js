@@ -19,6 +19,7 @@ const Assets = ({
       {selectedAsset === null && (
         <ViewAssets
           organization={surveyingOrganization}
+          setSelectedAsset={setSelectedAsset}
         />
       )}
     </View>

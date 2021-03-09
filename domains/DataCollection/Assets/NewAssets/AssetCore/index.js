@@ -86,9 +86,9 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
               <View id="top">
                 <TextInput
                   label="Name of Assets"
-                  value={formikProps.values.Name || ''}
-                  onChangeText={formikProps.handleChange('Name')}
-                  onBlur={formikProps.handleBlur('Name')}
+                  value={formikProps.values.name || ''}
+                  onChangeText={formikProps.handleChange('name')}
+                  onBlur={formikProps.handleBlur('name')}
                   mode="outlined"
                   theme={stylesPaper}
                   style={stylesDefault.label}
@@ -104,7 +104,6 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
 
                 />
                 <PaperButton
-                  // onPressEvent={() => formikProps.setFieldValue('location', handleLocation())}
                   onPressEvent={() => handleFormikPropsLocation(formikProps)}
                   buttonText="Get Location"
                   icon="crosshairs-gps"
@@ -128,31 +127,40 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                   />
                 </ScrollView>
               </Modal>
-              {location !== undefined
-                && <Text>{`${location.latitude},${location.longitude}`}</Text>}
+              <View>
+                <Text style={{ fontWeight: 'bold' }}>Coordinates</Text>
+                {location !== undefined
+                  && <Text>{`${location.latitude},${location.longitude}`}</Text>}
+              </View>
+              <View>
+                <Text style={{ fontWeight: 'bold' }}>Related People</Text>
+                {people.map((person) => (
+                  <Text>{`${person.firstName} ${person.lastName}`}</Text>
+                ))}
+              </View>
               <TextInput
                 label="Community Name"
-                value={formikProps.values['Community Name'] || ''}
-                onChangeText={formikProps.handleChange('Community Name')}
-                onBlur={formikProps.handleBlur('Community Name')}
+                value={formikProps.values.communityName || ''}
+                onChangeText={formikProps.handleChange('communityName')}
+                onBlur={formikProps.handleBlur('communityName')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
               />
               <TextInput
                 label="City"
-                value={formikProps.values.City || ''}
-                onChangeText={formikProps.handleChange('City')}
-                onBlur={formikProps.handleBlur('City')}
+                value={formikProps.values.city || ''}
+                onChangeText={formikProps.handleChange('city')}
+                onBlur={formikProps.handleBlur('city')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
               />
               <TextInput
                 label="Province"
-                value={formikProps.values.Province || ''}
-                onChangeText={formikProps.handleChange('Province')}
-                onBlur={formikProps.handleBlur('Province')}
+                value={formikProps.values.province || ''}
+                onChangeText={formikProps.handleChange('province')}
+                onBlur={formikProps.handleBlur('province')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
