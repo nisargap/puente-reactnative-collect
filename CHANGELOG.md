@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.0.0...v11.1.0) (2021-03-09)
+
+
+### New Features
+
+* add UX-related features to improve usability of asset data collection ([40bcdec](https://github.com/hopetambala/puente-reactnative-collect/commit/40bcdec0fe5478e8517b1e47df390bad18bd5639))
+
 ## [11.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.3...v11.0.0) (2021-03-05)
 
 
