@@ -11,19 +11,18 @@ const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (
   >
     <Text style={styles.text}>{selectedMarker.name || selectedMarker.Name}</Text>
     <Text style={styles.text}>{selectedMarker.communityName || ''}</Text>
-    {selectedMarker?.relatedPeople[0]?.firstName !== ''
-      && selectedMarker.relatedPeople.map((person) => (
-        <View>
-          <Text>Related People</Text>
-          <Text>
-            {person.firstName}
-            ,
-            {' '}
-            {person.lastName}
-            {' '}
-          </Text>
-        </View>
-      ))}
+    {selectedMarker.relatedPeople && selectedMarker.relatedPeople.map((person) => (
+      <View>
+        <Text>Related People</Text>
+        <Text>
+          {person.firstName}
+          ,
+          {' '}
+          {person.lastName}
+          {' '}
+        </Text>
+      </View>
+    ))}
   </TouchableWithoutFeedback>
 );
 
