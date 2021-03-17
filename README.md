@@ -16,6 +16,7 @@ Here are some quick npm commands to get started:
 
 | Name of Value  | Description of Data                                                               |
 |----------------|-----------------------------------------------------------------------------------|
+| `assetMapRegion` | Region location numbers of asset map                                            |
 | `organization` | Name of the surveying users surveyingOrganization                                 |
 | `residentData` | All `SurveyData` parse model data stored based on the users surveyingOrganization |
 | `offlineIDForms`| All `SurveyData` forms collected when user is offline                            |
