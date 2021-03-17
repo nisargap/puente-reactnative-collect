@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.0...v11.1.1) (2021-03-10)
+
+
+### Bug fixes
+
+* set related people ([7b6fa4c](https://github.com/hopetambala/puente-reactnative-collect/commit/7b6fa4c0c724d8c8186087a882b5348ade7f81e1))
+
+## [11.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.0.0...v11.1.0) (2021-03-09)
+
+
+### New Features
+
+* add UX-related features to improve usability of asset data collection ([40bcdec](https://github.com/hopetambala/puente-reactnative-collect/commit/40bcdec0fe5478e8517b1e47df390bad18bd5639))
+
+## [11.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.3...v11.0.0) (2021-03-05)
+
+
+### Bug fixes
+
+* **deps:** update dependency @react-native-community/viewpager to v3.3.1 ([15b4af7](https://github.com/hopetambala/puente-reactnative-collect/commit/15b4af7b4cf7220bf754c22506e1394435cfdc2c))
+* **deps:** update dependency @react-native-community/viewpager to v4 ([b2598ff](https://github.com/hopetambala/puente-reactnative-collect/commit/b2598ffaa198969b7a14f8db7d72fd6049abed2c))
+* **deps:** update dependency lodash to v4.17.21 ([fac9414](https://github.com/hopetambala/puente-reactnative-collect/commit/fac94143e8f3018da1501abdb5cf0928f7f77a08))
+
+
+### New Features
+
+* added Haitian Creole translation :tada: ([9a2479e](https://github.com/hopetambala/puente-reactnative-collect/commit/9a2479ede38ede42c6317b48b0f2793f6c717917))
+* asset forms offline ([d5dfef8](https://github.com/hopetambala/puente-reactnative-collect/commit/d5dfef80e8e353fd55eba1cbdbcc21fb00e441e6))
+
 ### [10.6.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.2...v10.6.3) (2021-02-25)
 
 

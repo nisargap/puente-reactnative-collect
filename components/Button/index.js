@@ -3,13 +3,20 @@ import { Button } from 'react-native-paper';
 
 import { layout, theme } from '../../modules/theme';
 
-export default function PaperButton({ onPressEvent, buttonText }) {
+export default function PaperButton({
+  onPressEvent, buttonText,
+  mode, compact, icon, disabled,
+  style
+}) {
   return (
     <Button
-      mode="contained"
+      icon={icon || ''}
+      mode={mode || 'contained'}
+      disabled={!!disabled}
       theme={theme}
-      style={layout.button}
+      style={[layout.button, style]}
       onPress={onPressEvent}
+      compact={!!compact}
     >
       {buttonText}
     </Button>

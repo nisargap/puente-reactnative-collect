@@ -2,55 +2,54 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Button, Headline, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import { postSupplementaryForm } from '../../../../../modules/cached-resources';
+import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
 import { layout } from '../../../../../modules/theme';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
-import AssetSelect from './AssetSelect';
+import SelectedAsset from '../../ViewAssets/SelectedAsset';
+import AssetFormSelect from './AssetFormSelect';
+import styles from './index.styles';
 
 const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
   const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
   return (
-    <ScrollView>
+    <ScrollView vertical>
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {
           setPhotoFile('Submitted Photo String');
 
           const formObject = values;
-          // formObject.latitude = values.location?.latitude || 0;
-          // formObject.longitude = values.location?.longitude || 0;
-          // formObject.altitude = values.location?.altitude || 0;
 
-          let formObjectUpdated = addSelectTextInputs(values, formObject);
+          const formObjectUpdated = addSelectTextInputs(values, formObject);
+
+          const postParams = {
+            parseParentClassID: selectedAsset.objectId,
+            parseParentClass: 'Assets',
+            parseClass: 'FormAssetResults',
+            photoFile,
+            localObject: formObjectUpdated,
+            typeOfForm: 'Asset'
+          };
 
           const fieldsArray = Object.entries(formObject).map((obj) => ({
             title: obj[0],
             answer: obj[1]
           }));
 
-          formObjectUpdated = {
+          postParams.localObject = {
             title: selectedForm.name || '',
             description: selectedForm.description || '',
             formSpecificationsId: selectedForm.objectId,
             fields: fieldsArray,
-            // surveyingUser: formObject.surveyingUser,
             surveyingOrganization,
           };
 
-          const postParams = {
-            parseParentClass: 'FormResults',
-            parseClass: selectedForm.class,
-            photoFile,
-            localObject: formObjectUpdated,
-            typeOfForm: 'Asset'
-
-          };
           const submitAction = () => {
             setTimeout(() => {
               actions.setSubmitting(false);
@@ -58,7 +57,7 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
             setSelectedForm('');
           };
 
-          postSupplementaryForm(postParams)
+          postSupplementaryAssetForm(postParams)
             .then(() => {
               submitAction();
               setSelectedForm({});
@@ -67,24 +66,28 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
         }}
       >
         {(formikProps) => (
-          <View>
+          <View style={styles.assetContainer}>
             <View>
               <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
               {viewSupplementaryForms === true
                 && (
-                  <AssetSelect
+                  <AssetFormSelect
                     setViewSupplementaryForms={setViewSupplementaryForms}
                     setSelectedForm={setSelectedForm}
                   />
                 )}
             </View>
             <View>
-              {Object.keys(selectedAsset).length !== 0 && selectedAsset.constructor !== Object
-                && <Headline>{selectedAsset.get('Name')}</Headline>}
+              {selectedAsset
+                && (
+                  <SelectedAsset
+                    selectedMarker={selectedAsset}
+                  />
+                )}
             </View>
             <View>
               <View style={layout.formContainer}>
-                {selectedForm?.fields.length && selectedForm.fields.map((result) => (
+                {selectedForm?.fields?.length && selectedForm.fields.map((result) => (
                   <View key={result.formikKey}>
                     <PaperInputPicker
                       data={result}
@@ -97,11 +100,11 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
                   <ActivityIndicator />
                 ) : (
                   <Button
-                    disabled={!selectedAsset?.id}
+                    disabled={!selectedAsset?.objectId}
                     onPress={formikProps.handleSubmit}
                   >
-                    {selectedAsset?.id && <Text>{I18n.t('global.submit')}</Text>}
-                    {!selectedAsset?.id && <Text>{I18n.t('assetForms.attachForm')}</Text>}
+                    {selectedAsset?.objectId && <Text>{I18n.t('global.submit')}</Text>}
+                    {!selectedAsset?.objectId && <Text>{I18n.t('assetForms.attachForm')}</Text>}
                   </Button>
                 )}
               </View>

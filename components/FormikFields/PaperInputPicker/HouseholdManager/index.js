@@ -28,7 +28,6 @@ const HouseholdManager = (props) => {
   ]);
   const [relationship, setRelationship] = useState('');
   const [selectPerson, setSelectPerson] = useState();
-  // const [, setHouseholdRelationship] = useState();
   const [modalView, setModalView] = useState('unset');
   const [householdSet, setHouseholdSet] = useState(false);
 

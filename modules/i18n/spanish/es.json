@@ -10,7 +10,8 @@
     "city": "Ciudad",
     "commName": "Nombre de comunidad",
     "notes": "Notas",
-    "refresh": "Actualiza"
+    "refresh": "Actualiza",
+    "emptyForm": "Empty Form"
   },
   "signUp": {
     "firstName": "Nombre de verdadero",
@@ -290,7 +291,9 @@
     "attachResident": "Adjuntar una residente de la comunidad"
   },
   "assetForms": {
-    "attachForm": "Adjuntar una forma al activo"
+    "noForm": "No values in form",
+    "attachForm": "Adjuntar una forma al activo",
+    "createAsset": "Create an Asset"
   },
   "forms": {
     "successfullySubmitted": "Formulario entregado satisfactoriamente",
@@ -401,7 +404,8 @@
   },
   "languagePicker": {
     "english": "Ingles",
-    "spanish": "Español"
+    "spanish": "Español",
+    "creole": "Kreyòl"
   },
   "residentIdSearchbar": {
     "searchIndividual": "Buscar individuo"

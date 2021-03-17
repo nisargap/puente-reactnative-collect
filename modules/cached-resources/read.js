@@ -133,7 +133,31 @@ function assetFormsQuery() {
   });
 }
 
+function assetDataQuery(surveyingOrganization) {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((online) => {
+      if (online) {
+        customQueryService(0, 10000, 'Assets', 'surveyingOrganization', surveyingOrganization).then(async (forms) => {
+          await storeData(forms, 'assetData');
+          resolve(JSON.parse(JSON.stringify(forms)));
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('assetData').then((forms) => {
+          resolve(forms);
+        }, (error) => {
+          reject(error);
+        });
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
+  assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
   cacheResidentData,
