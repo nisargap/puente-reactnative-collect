@@ -4,6 +4,9 @@ import { Button, Headline, IconButton, Text } from 'react-native-paper';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import { theme } from '../../modules/theme'
 
+import SettingsHome from './SettingsHome';
+import AccountSettings from './SettingsHome/AccountSettings'
+
 export default SettingsView = ({ setView, prevView, logOut }) => {
 
   const [settingsView, setSettingsView] = useState('Settings')
@@ -11,117 +14,31 @@ export default SettingsView = ({ setView, prevView, logOut }) => {
     <View>
       <View style={{ paddingTop: '7%' }}>
         {settingsView === 'Settings' && (
+          <SettingsHome
+            setView={setView}
+            prevView={prevView}
+            logOut={logOut}
+            settingsView={settingsView}
+            setSettingsView={setSettingsView}
+          />
+        )}
+        {settingsView === 'Support' && (
           <View>
             <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
               <View style={{ paddingRight: '5%' }}>
-                <Button mode="contained">Settings</Button>
+                <Button onPress={() => setSettingsView('Settings')}>Settings</Button>
               </View>
               <View style={{ paddingLeft: '5%' }}>
-                <Button onPress={() => setSettingsView('Support')}>Support</Button>
+                <Button mode="contained">Support</Button>
               </View>
             </View>
-            <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
-              <Headline style={{ fontWeight: 'bold' }}>Account Settings</Headline>
-              <View
-                style={{
-                  borderBottomColor: '#D0D0D0',
-                  borderBottomWidth: 1,
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              />
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.text}>Name, Phone, Email</Text>
-                <IconButton
-                  icon='chevron-right'
-                  size='30'
-                  color={theme.colors.primary}
-                  style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                />
-              </View>
-              <View
-                style={{
-                  borderBottomColor: '#D0D0D0',
-                  borderBottomWidth: 1,
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              />
-              <View style={{flexDirection: 'row'}}>
-                <Text style={styles.text}>Change Password</Text>
-                <IconButton
-                  icon='chevron-right'
-                  size='30'
-                  color={theme.colors.primary}
-                  style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                />
-              </View>
-              <View
-                style={{
-                  borderBottomColor: '#D0D0D0',
-                  borderBottomWidth: 1,
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              />
-              <View style={{flexDirection: 'row'}}>
-                <Text style={styles.text}>Find Records</Text>
-                <IconButton
-                  icon='chevron-right'
-                  size='30'
-                  color={theme.colors.primary}
-                  style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                />
-              </View>
-              <View
-                style={{
-                  borderBottomColor: '#D0D0D0',
-                  borderBottomWidth: 1,
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              />
-              <View style={{flexDirection: 'row'}}>
-                <Text style={styles.text}>Language</Text>
-                <IconButton
-                  icon='chevron-right'
-                  size='30'
-                  color={theme.colors.primary}
-                  style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                />
-              </View>
-              <View
-                style={{
-                  borderBottomColor: '#D0D0D0',
-                  borderBottomWidth: 1,
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              />
-            </View>
-          </View>
-        )}
-        {settingsView === 'Support' && (
-          <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
-            <View style={{ paddingRight: '5%' }}>
-              <Button onPress={() => setSettingsView('Settings')}>Settings</Button>
-            </View>
-            <View style={{ paddingLeft: '5%' }}>
-              <Button mode="contained">Support</Button>
-            </View>
-
+            <Button onPress={() => {
+              setView(prsevView)
+            }}>Back</Button>
+            <Button onPress={logOut}>Logout</Button>
           </View>
         )}
       </View>
-
-
-
-
-
-      <Button onPress={() => {
-        setView(prevView)
-      }}>Back</Button>
-      <Button onPress={logOut}>Logout</Button>
     </View >
   );
 }
