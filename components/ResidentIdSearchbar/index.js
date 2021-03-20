@@ -69,8 +69,8 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   };
 
   const fetchData = () => {
-    if (offline === true) fetchOfflineData();
-    if (offline === false) fetchOnlineData();
+    if (offline) fetchOfflineData();
+    if (!offline) fetchOnlineData();
   };
 
   const filterList = () => residentsData.filter(
@@ -92,6 +92,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     if (offline) {
       setQuery(input);
     } else {
+      fetchData();
       setQuery(input);
     }
   };
