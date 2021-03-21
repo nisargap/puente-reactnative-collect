@@ -52,7 +52,7 @@ const Header = ({ logOut }) => {
         ParseClass: 'SurveyData',
         parseColumn: 'surveyingUser',
         parseParam: userName
-      }
+      };
       countService(postParams).then((counts) => {
         setSurveyCount(counts);
       });
@@ -151,8 +151,8 @@ const Header = ({ logOut }) => {
                 {I18n.t('header.submitOffline')}
               </Button>
             ) : (
-                <Button disabled>{I18n.t('header.submitOffline')}</Button>
-              )}
+              <Button disabled>{I18n.t('header.submitOffline')}</Button>
+            )}
             {submission === false && (
               <View>
                 <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>

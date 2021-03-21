@@ -17,12 +17,12 @@ function residentIDQuery(params) {
 
 function countService(params) {
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('countService',params).then((result) => {
+    Parse.Cloud.run('countService', params).then((result) => {
       resolve(result);
     }, (error) => {
       reject(error);
-    })
-  })
+    });
+  });
 }
 
 function postObjectsToClass(params) {
@@ -56,8 +56,8 @@ function getObjectsByGeolocation(params) {
 }
 
 export {
-  customQueryService,
   countService,
+  customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
   postObjectsToClassWithRelation,
