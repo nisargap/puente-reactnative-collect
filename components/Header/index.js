@@ -10,7 +10,7 @@ import { deleteData, getData } from '../../modules/async-storage';
 import { postOfflineForms } from '../../modules/cached-resources';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
-import countService from '../../services/parse/calculate';
+import { countService } from '../../services/parse/crud';
 import styles from './index.styles';
 
 const Header = ({ logOut }) => {
@@ -48,7 +48,12 @@ const Header = ({ logOut }) => {
       const userName = `${user.firstname || ''} ${user.lastname || ''}`;
       calculateTime(user.firstname);
       setVolunteerDate(volunteerLength(user));
-      countService('SurveyData', 'surveyingUser', userName).then((counts) => {
+      const postParams = {
+        ParseClass: 'SurveyData',
+        parseColumn: 'surveyingUser',
+        parseParam: userName
+      }
+      countService(postParams).then((counts) => {
         setSurveyCount(counts);
       });
     });
@@ -146,8 +151,8 @@ const Header = ({ logOut }) => {
                 {I18n.t('header.submitOffline')}
               </Button>
             ) : (
-              <Button disabled>{I18n.t('header.submitOffline')}</Button>
-            )}
+                <Button disabled>{I18n.t('header.submitOffline')}</Button>
+              )}
             {submission === false && (
               <View>
                 <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>
