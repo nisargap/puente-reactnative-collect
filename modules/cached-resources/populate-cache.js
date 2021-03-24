@@ -34,12 +34,16 @@ export default function populateCache(user) {
           });
       }
     })
-    .then(() => {
+    .then(async () => {
+      const localLimit = await getData('findRecordsLimit')
+      const limit = localLimit === null || localLimit === undefined ? 2000 : localLimit;
+
+      console.log(limit);
       // store ID forms
       const queryParams = {
         skip: 0,
         offset: 0,
-        limit: 2000,
+        limit: limit,
         parseColumn: 'surveyingOrganization',
         parseParam: user.get('organization'),
       };
@@ -56,5 +60,15 @@ export default function populateCache(user) {
           await storeData(appVersion, 'appVersion');
         }
       });
-    });
+    })
+  // .then(async () => {
+  //   await getData('locale').then(async (locale) => {
+  //     if (locale !== null && locale !== undefined) {
+  //       await storeData(locale, 'locale');
+
+  //     }
+  //   })
+
+
+  // })
 }

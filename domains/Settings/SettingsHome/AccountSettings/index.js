@@ -8,10 +8,23 @@ import { Parse } from 'parse/react-native';
 
 import NamePhoneEmail from './NamePhoneEmail';
 import Password from './Password';
+import FindRecords from './FindRecords';
+import Language from './Language';
+
+import I18n from '../../../../modules/i18n';
+import * as Localization from 'expo-localization';
 
 export default AccountSettings = ({
   settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
 }) => {
+
+  const [language, setLanguage] = useState('en');
+
+  const handleLanguage = (lang) => {
+    setLanguage(lang);
+    Localization.locale = lang;
+    // I18n.locale = lang;
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -27,12 +40,12 @@ export default AccountSettings = ({
       }
       {
         accountSettingsView === 'FindRecords' && (
-          <Text>Find records</Text>
+          <FindRecords />
         )
       }
       {
         accountSettingsView === 'Language' && (
-          <Text>Language</Text>
+          <Language />
         )
       }
       <Button onPress={() => {

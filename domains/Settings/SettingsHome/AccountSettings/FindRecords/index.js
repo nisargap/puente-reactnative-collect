@@ -4,76 +4,50 @@ import { Button, Headline, IconButton, Text, TextInput } from 'react-native-pape
 import { getData, storeData } from '../../../../../modules/async-storage';
 import { theme } from '../../../../../modules/theme'
 
-import { Parse } from 'parse/react-native';
 import I18n from '../../../../../modules/i18n';
 
-export default NamePhoneEmail = ({
+export default FindRecords = ({
   settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
 }) => {
-
   useEffect(() => {
     async function setUserInformation() {
-      const currentUser = await getData('currentUser');
-      console.log(currentUser);
-      setObjectId(currentUser['objectId']);
-      const fname = currentUser['firstname']
-      const lname = currentUser['lastname']
-      const phoneNumber = currentUser['phonenumber'];
-      const email = currentUser['email'];
+      const storedLimit = await getData('findRecordsLimit');
+      const currentLimit = storedLimit === null || storedLimit === undefined ? 2000 : storedLimit;
+      const residentData = await getData('residentData');
+      const residentDataCount = residentData.length;
 
-      setUserObject({
-        firstName: fname,
-        lastName: lname,
-        phoneNumber: phoneNumber,
-        email: email
+
+      console.log(currentLimit, residentData, residentDataCount);
+
+      setCurrentData({
+        currentLimit: currentLimit,
+        residentDataCount: residentDataCount
       })
     }
     setUserInformation().then(() => {
       setInputs([
         {
-          label: I18n.t('namePhoneEmailSettings.userInformation.fname'),
-          value: userObject.firstName,
-          key: 'firstName'
+          label: I18n.t('findRecordSettings.currentReccordsStored'),
+          value: currentData.residentDataCount,
+          key: 'residentDataCount',
+          edit: false
         },
         {
-          label: I18n.t('namePhoneEmailSettings.userInformation.lname'),
-          value: userObject.lastName,
-          key: 'lastName'
-        },
-        {
-          label: I18n.t('namePhoneEmailSettings.userInformation.phoneNumber'),
-          value: userObject.phoneNumber,
-          key: 'phoneNumber'
-        },
-        {
-          label: I18n.t('namePhoneEmailSettings.userInformation.email'),
-          value: userObject.email,
-          key: 'email'
+          label: I18n.t('findRecordSettings.recordStorageLimit'),
+          value: currentData.currentLimit,
+          key: 'currentLimit',
+          edit: true
         }
       ]);
       setUpdated(false);
     })
   }, [updated])
 
-  const [userObject, setUserObject] = useState({});
-  const [edit, setEdit] = useState('');
-  const [inputs, setInputs] = useState([]);
-  const [objectId, setObjectId] = useState('');
-  const [updated, setUpdated] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-
-  const updateUserObject = (key, text) => {
-    const copyUserObject = userObject;
-    copyUserObject[key] = text
-    setUserObject(copyUserObject)
-  }
-
   const handleFailedAttempt = () => {
     Alert.alert(
       I18n.t('global.error'),
-      I18n.t('namePhoneEmailSettings.errorMessage'), [
-      { text: 'OK' }
+      I18n.t('findRecordSettings.errorMessage'), [
+      { text: I18n.t('global.ok') }
     ],
       { cancelable: true }
     );
@@ -82,8 +56,8 @@ export default NamePhoneEmail = ({
   const handleSucccessfullAttempt = () => {
     Alert.alert(
       I18n.t('global.success'),
-      I18n.t('namePhoneEmailSettings.successMessage'), [
-      { text: 'OK' }
+      I18n.t('findRecordSettings.successMessage'), [
+      { text: I18n.t('global.ok') }
     ],
       { cancelable: true }
     );
@@ -91,19 +65,8 @@ export default NamePhoneEmail = ({
 
   const updateUser = async () => {
     setSubmitting(true);
-    const postParams = {
-      'objectId': objectId,
-      'firstname': userObject.firstName,
-      'lastname': userObject.lastName,
-      'email': userObject.email,
-      'phonenumber': userObject.phoneNumber
-    }
-    const credentials = await getData('credentials');
 
-    const user = await Parse.User.logIn(credentials.username, credentials.password);
-    for (const key in postParams) {
-      user.set(String(key), postParams[key]);
-    }
+    const newLimit = currentData.currentLimit;
 
     const submitAction = () => {
       setTimeout(() => {
@@ -112,15 +75,9 @@ export default NamePhoneEmail = ({
       }, 1000);
     };
 
-    await user.save().then(async (updatedUser) => {
-      await storeData(updatedUser, 'currentUser').then(() => {
-        setUpdated(true);
-        submitAction();
-      }, (error) => {
-        console.log(error);
-        setSubmitting(false);
-        handleFailedAttempt();
-      })
+    await storeData(newLimit, 'findRecordsLimit').then(() => {
+      setUpdated(true);
+      submitAction();
     }, (error) => {
       console.log(error);
       setSubmitting(false);
@@ -128,9 +85,21 @@ export default NamePhoneEmail = ({
     })
   }
 
+  const updateCurrentData = (key, text) => {
+    const copyUserObject = currentData;
+    copyUserObject[key] = text
+    setCurrentData(copyUserObject)
+  }
+
+  const [currentData, setCurrentData] = useState({});
+  const [edit, setEdit] = useState('');
+  const [inputs, setInputs] = useState([]);
+  const [updated, setUpdated] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
   return (
     <View>
-      <Headline>{I18n.t('namePhoneEmailSettings.namePhoneEmail')}</Headline>
+      <Headline>{I18n.t('findRecordSettings.findRecords')}</Headline>
       <View style={styles.horizontalLinePrimary} />
       {inputs.length > 0 && inputs.map((result) => (
         <View key={result.key}>
@@ -138,10 +107,12 @@ export default NamePhoneEmail = ({
           <View>
             {edit !== result.key && (
               <View style={styles.textContainer}>
-                <Text style={styles.text}>{userObject[result.key]}</Text>
-                <Button style={{ marginLeft: 'auto' }} onPress={() => {
-                  setEdit(result.key)
-                }}>Edit</Button>
+                <Text style={styles.text}>{currentData[result.key]}</Text>
+                {result.edit === true && (
+                  <Button style={{ marginLeft: 'auto' }} onPress={() => {
+                    setEdit(result.key)
+                  }}>Edit</Button>
+                )}
               </View>
             )}
             {edit === result.key && (
@@ -150,7 +121,7 @@ export default NamePhoneEmail = ({
                   style={{ flex: 3 }}
                   placeholder={result.value}
                   mode='outlined'
-                  onChangeText={text => updateUserObject(result.key, text)}
+                  onChangeText={text => updateCurrentData(result.key, text)}
                 ></TextInput>
                 <View style={styles.buttonContainer}>
                   <IconButton

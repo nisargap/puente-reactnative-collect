@@ -5,6 +5,7 @@ import { getData, storeData } from '../../../../../modules/async-storage';
 import { theme } from '../../../../../modules/theme'
 
 import { Parse } from 'parse/react-native';
+import I18n from '../../../../../modules/i18n';
 
 export default Password = ({
   settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
@@ -16,8 +17,8 @@ export default Password = ({
 
   const wrongCredentials = () => {
     Alert.alert(
-      'Error',
-      'Your current password is incorrect. Please try again.', [
+      I18n.t('global.error'),
+      I18n.t('passwordSettings.wrongCreds'), [
       { text: 'OK' }
     ],
       { cancelable: true }
@@ -26,9 +27,8 @@ export default Password = ({
 
   const handleFailedAttempt = () => {
     Alert.alert(
-      'Error',
-      'There was an error processing your request. Common issues include no internet connection' +
-      ' or incorrect password. Please try again and contact your supervisor if the issue persits. ', [
+      I18n.t('global.error'),
+      I18n.t('passwordSettings.errorMessage'), [
       { text: 'OK' }
     ],
       { cancelable: true }
@@ -37,8 +37,8 @@ export default Password = ({
 
   const handleSucccessfullAttempt = () => {
     Alert.alert(
-      'Success!',
-      'You have updated your password.', [
+      I18n.t('global.success'),
+      I18n.t('passwordSettings.successMessage'), [
       { text: 'OK' }
     ],
       { cancelable: true }
@@ -84,14 +84,14 @@ export default Password = ({
 
   return (
     <View>
-      <Headline>Change Password</Headline>
+      <Headline>{I18n.t('passwordSettings.changePassword')}</Headline>
       <View style={styles.horizontalLinePrimary} />
       <View style={styles.lineContainer}>
-        <Text>Current Password</Text>
+        <Text style={styles.text}>{I18n.t('passwordSettings.currentPassword')}</Text>
         <TextInput mode='outlined' onChangeText={text => setCurrentState(text)}></TextInput>
       </View>
       <View style={styles.lineContainer}>
-        <Text>New Password</Text>
+        <Text style={styles.text}>{I18n.t('passwordSettings.newPassword')}</Text>
         <TextInput mode='outlined' onChangeText={text => setNewState(text)}></TextInput>
       </View>
       {submitting ? (
@@ -100,7 +100,7 @@ export default Password = ({
           color={theme.colors.primary}
         />
       ) : (
-          <Button mode='contained' onPress={() => changePassword()}>Change Password</Button>
+          <Button mode='contained' onPress={() => changePassword()}>{I18n.t('passwordSettings.newPassword')}</Button>
         )}
     </View>
   )

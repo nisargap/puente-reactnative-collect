@@ -413,5 +413,45 @@
   },
   "errorPicker": {
     "invalidFields": "Campos inválidos:"
+  },
+  "accountSettings": {
+    "settings": "Ajustes",
+    "support": "Apoyo",
+    "accountSettings": "Configuraciones de la cuenta",
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico",
+    "changePassword": "Cambiar la contraseña",
+    "findRecords": "Buscar registros",
+    "language": "Idioma",
+    "back": "Atrás",
+    "logout":"Cerrar sesión"
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Registros actuales almacenados",
+    "recordStorageLimit": "Límite de almacenamiento de registros",
+    "errorMessage": "Hubo un error al procesar su solicitud. Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
+    "successMessage": "Has actualizado tu límite de almacenamiento. Puede experimentar problemas relacionados con la aplicación si su teléfono no puede manejar el nuevo límite. Si esto ocurre, su experiencia puede mejorar si reduce el límite.",
+    "findRecords": "Buscar registros"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Elige lengua"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "Hubo un error al procesar su solicitud. Los problemas comunes incluyen el formato de correo electrónico incorrecto o la falta de conexión a Internet. Vuelva a intentarlo y comuníquese con su supervisor si el problema persiste.",
+    "successMessage": "Ha actualizado su cuenta.",
+    "userInformation": {
+      "fname": "Nombre de pila",
+      "lname": "Apellido",
+      "phoneNumber": "Número de teléfono",
+      "email": "Correo electrónico"
+    },
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico"
+  },
+  "passwordSettings": {
+    "wrongCreds": "Tu contraseña actual es incorrecta. Inténtalo de nuevo.",
+    "errorMessage": "Hubo un error al procesar su solicitud. Los problemas comunes incluyen la falta de conexión a Internet o la contraseña incorrecta. Vuelva a intentarlo y comuníquese con su supervisor si el problema persiste.",
+    "successMessage": "Ha actualizado su contraseña.",
+    "changePassword": "Cambiar la contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña"
   }
 }

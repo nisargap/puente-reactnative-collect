@@ -5,6 +5,7 @@ import { Header } from 'react-native/Libraries/NewAppScreen';
 import { theme } from '../../../modules/theme'
 
 import AccountSettings from './AccountSettings'
+import I18n from '../../../modules/i18n';
 
 export default SettingsHome = ({
   setView, prevView, logOut, settingsView, setSettingsView
@@ -17,25 +18,18 @@ export default SettingsHome = ({
       {settingsView === 'Settings' && accountSettingsView === '' && (
         <View>
           <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
-            <View style={{ paddingRight: '5%' }}>
-              <Button mode="contained">Settings</Button>
+            <View style={{ paddingRight: '0%' }}>
+              <Button mode="contained">{I18n.t('accountSettings.settings')}</Button>
             </View>
-            <View style={{ paddingLeft: '5%' }}>
-              <Button onPress={() => setSettingsView('Support')}>Support</Button>
-            </View>
+            {/* <View style={{ paddingLeft: '5%' }}>
+              <Button onPress={() => setSettingsView('Support')}>{I18n.t('accountSettings.support')}</Button>
+            </View> */}
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
-            <Headline style={{ fontWeight: 'bold' }}>Account Settings</Headline>
-            <View
-              style={{
-                borderBottomColor: '#D0D0D0',
-                borderBottomWidth: 1,
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            />
+            <Headline style={{ fontWeight: 'bold' }}>{I18n.t('accountSettings.accountSettings')}</Headline>
+            <View style={styles.horizontalLineGray} />
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text}>Name, Phone, Email</Text>
+              <Text style={styles.text}>{I18n.t('accountSettings.namePhoneEmail')}</Text>
               <IconButton
                 icon='chevron-right'
                 size={30}
@@ -46,16 +40,9 @@ export default SettingsHome = ({
                 }}
               />
             </View>
-            <View
-              style={{
-                borderBottomColor: '#D0D0D0',
-                borderBottomWidth: 1,
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            />
+            <View style={styles.horizontalLineGray} />
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text}>Change Password</Text>
+              <Text style={styles.text}>{I18n.t('accountSettings.changePassword')}</Text>
               <IconButton
                 icon='chevron-right'
                 size={30}
@@ -66,16 +53,9 @@ export default SettingsHome = ({
                 }}
               />
             </View>
-            <View
-              style={{
-                borderBottomColor: '#D0D0D0',
-                borderBottomWidth: 1,
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            />
+            <View style={styles.horizontalLineGray} />
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text}>Find Records</Text>
+              <Text style={styles.text}>{I18n.t('accountSettings.findRecords')}</Text>
               <IconButton
                 icon='chevron-right'
                 size={30}
@@ -86,16 +66,9 @@ export default SettingsHome = ({
                 }}
               />
             </View>
-            <View
-              style={{
-                borderBottomColor: '#D0D0D0',
-                borderBottomWidth: 1,
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            />
+            <View style={styles.horizontalLineGray} />
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text}>Language</Text>
+              <Text style={styles.text}>{I18n.t('accountSettings.language')}</Text>
               <IconButton
                 icon='chevron-right'
                 size={30}
@@ -106,28 +79,23 @@ export default SettingsHome = ({
                 }}
               />
             </View>
-            <View
-              style={{
-                borderBottomColor: '#D0D0D0',
-                borderBottomWidth: 1,
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            />
+            <View style={styles.horizontalLineGray} />
           </View>
           <Button onPress={() => {
             setView(prevView)
-          }}>Back</Button>
-          <Button onPress={logOut}>Logout</Button>
+          }}>{I18n.t('accountSettings.back')}</Button>
+          <Button mode="contained" onPress={logOut} style={{ marginTop: 20 }}>{I18n.t('accountSettings.logout')}</Button>
         </View>
       )}
       {accountSettingsView !== '' && (
-        <AccountSettings
-          settingsView={settingsView}
-          setSettingsView={setSettingsView}
-          accountSettingsView={accountSettingsView}
-          setAccountSettingsView={setAccountSettingsView}
-        />
+        <View>
+          <AccountSettings
+            settingsView={settingsView}
+            setSettingsView={setSettingsView}
+            accountSettingsView={accountSettingsView}
+            setAccountSettingsView={setAccountSettingsView}
+          />
+        </View>
       )}
     </View>
   );
@@ -158,5 +126,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
     marginVertical: 7,
-  }
+  },
+  horizontalLineGray: {
+    borderBottomColor: '#D0D0D0',
+    borderBottomWidth: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });

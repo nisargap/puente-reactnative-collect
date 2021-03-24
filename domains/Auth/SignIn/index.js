@@ -51,7 +51,7 @@ const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [user, setUser] = useState(null);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('');
   const [visible, setVisible] = useState(false);
 
   const [forgotPassword, setForgotPassword] = useState(false);
@@ -67,12 +67,23 @@ const SignIn = ({ navigation }) => {
     });
   }, [load]);
 
+  useEffect(() => {
+    async function setLanguage() {
+      const currentLocale = await getData('locale');
+
+      if(currentLocale !== 'en' && currentLocale !== null && currentLocale !== undefined){
+        handleLanguage(currentLocale);
+      }s
+    }
+    setLanguage();
+  }, [])
+
   const handleFailedAttempt = () => {
     Alert.alert(
       I18n.t('signIn.unableLogin'),
       I18n.t('signIn.usernamePasswordIncorrect'), [
-        { text: 'OK' }
-      ],
+      { text: 'OK' }
+    ],
       { cancelable: true }
     );
   };
@@ -243,8 +254,8 @@ const SignIn = ({ navigation }) => {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
-                  )}
+                      <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
+                    )}
                   <CredentialsModal
                     modalVisible={modalVisible}
                     formikProps={formikProps}
