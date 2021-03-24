@@ -146,78 +146,76 @@ const DataCollection = ({ navigation }) => {
         style={{ flex: 1 }}
       >
         <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={scrollViewScroll}>
-          {view === 'Root'
-            && (
-              <View>
-                <MapView organization={surveyingOrganization} />
-                <View style={styles.screenFlexRowWrap}>
-                  <View style={styles.cardContainer}>
-                    <Card style={styles.cardSmallStyle} onPress={() => navigateToNewRecord()}>
-                      <NewRecordSVG height={70} style={styles.svg} />
-                      <Text style={styles.text}>{I18n.t('dataCollection.newRecord')}</Text>
-                    </Card>
-                    <Card style={styles.cardSmallStyle} onPress={navigateToFindRecords}>
-                      <FindRecordSVG height={65} style={styles.svg} />
-                      <Text style={styles.text}>{I18n.t('dataCollection.findRecord')}</Text>
-                    </Card>
-                  </View>
-                  <Card style={styles.cardSmallStyle} onPress={navigateToGallery}>
-                    <ComingSoonSVG height={65} style={styles.svg} />
-                    <Text style={styles.text}>{I18n.t('dataCollection.viewAll')}</Text>
+          {view === 'Root' && (
+            <View>
+              <MapView organization={surveyingOrganization} />
+              <View style={styles.screenFlexRowWrap}>
+                <View style={styles.cardContainer}>
+                  <Card style={styles.cardSmallStyle} onPress={() => navigateToNewRecord()}>
+                    <NewRecordSVG height={70} style={styles.svg} />
+                    <Text style={styles.text}>{I18n.t('dataCollection.newRecord')}</Text>
                   </Card>
-                  <View style={styles.cardContainer}>
-                    <Card style={styles.cardSmallStyle} onPress={navigateToNewAssets}>
-                      <ResearchSVG height={70} width={70} style={styles.svg} />
-                      <Text style={styles.text}>{I18n.t('dataCollection.newAsset')}</Text>
-                    </Card>
-                    <View style={styles.cardSmallStyle} onPress={navigateToViewAllAssets}>
-                      {/* <Text style={styles.text}>{I18n.t('dataCollection.viewAssets')}</Text> */}
-                    </View>
-                  </View>
+                  <Card style={styles.cardSmallStyle} onPress={navigateToFindRecords}>
+                    <FindRecordSVG height={65} style={styles.svg} />
+                    <Text style={styles.text}>{I18n.t('dataCollection.findRecord')}</Text>
+                  </Card>
+                </View>
+                <Card style={styles.cardSmallStyle} onPress={navigateToGallery}>
+                  <ComingSoonSVG height={65} style={styles.svg} />
+                  <Text style={styles.text}>{I18n.t('dataCollection.viewAll')}</Text>
+                </Card>
+                <View style={styles.cardContainer}>
+                  <Card style={styles.cardSmallStyle} onPress={navigateToNewAssets}>
+                    <ResearchSVG height={70} width={70} style={styles.svg} />
+                    <Text style={styles.text}>{I18n.t('dataCollection.newAsset')}</Text>
+                  </Card>
+                  <Card style={styles.cardSmallStyle} onPress={navigateToViewAllAssets}>
+                    <ResearchSVG height={70} width={70} style={styles.svg} />
+                    <Text style={styles.text}>{I18n.t('dataCollection.viewAssets')}</Text>
+                  </Card>
                 </View>
               </View>
-            )}
-          {view === 'Forms'
-            && (
-              <View>
-                <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                  <Text>{I18n.t('dataCollection.back')}</Text>
-                </Button>
-                <Forms
-                  style={layout.line}
-                  navigation={navigation}
-                  scrollViewScroll={scrollViewScroll}
-                  setScrollViewScroll={setScrollViewScroll}
-                  navigateToGallery={navigateToGallery}
-                  navigateToNewRecord={navigateToNewRecord}
-                  navigateToRoot={navigateToRoot}
-                  selectedForm={selectedForm}
-                  setSelectedForm={setSelectedForm}
-                  puenteForms={puenteForms}
-                  surveyingUser={surveyingUser}
-                  surveyingOrganization={surveyingOrganization}
-                  surveyee={surveyee}
-                  setSurveyee={setSurveyee}
-                  customForm={customForm}
-                  setView={setView}
-                />
-              </View>
-            )}
-          {view === 'Assets'
-            && (
-              <View>
-                <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                  <Text>{I18n.t('dataCollection.back')}</Text>
-                </Button>
-                <Assets
-                  surveyingOrganization={surveyingOrganization}
-                  selectedAsset={selectedAsset}
-                  setSelectedAsset={setSelectedAsset}
-                  navigateToNewAssets={navigateToNewAssets}
-                  navigateToViewAllAssets={navigateToViewAllAssets}
-                />
-              </View>
-            )}
+            </View>
+          )}
+          {view === 'Forms' && (
+            <View>
+              <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
+                <Text>{I18n.t('dataCollection.back')}</Text>
+              </Button>
+              <Forms
+                style={layout.line}
+                navigation={navigation}
+                scrollViewScroll={scrollViewScroll}
+                setScrollViewScroll={setScrollViewScroll}
+                navigateToGallery={navigateToGallery}
+                navigateToNewRecord={navigateToNewRecord}
+                navigateToRoot={navigateToRoot}
+                selectedForm={selectedForm}
+                setSelectedForm={setSelectedForm}
+                puenteForms={puenteForms}
+                surveyingUser={surveyingUser}
+                surveyingOrganization={surveyingOrganization}
+                surveyee={surveyee}
+                setSurveyee={setSurveyee}
+                customForm={customForm}
+                setView={setView}
+              />
+            </View>
+          )}
+          {view === 'Assets' && (
+            <View>
+              <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
+                <Text>{I18n.t('dataCollection.back')}</Text>
+              </Button>
+              <Assets
+                surveyingOrganization={surveyingOrganization}
+                selectedAsset={selectedAsset}
+                setSelectedAsset={setSelectedAsset}
+                navigateToNewAssets={navigateToNewAssets}
+                navigateToViewAllAssets={navigateToViewAllAssets}
+              />
+            </View>
+          )}
           {view === 'Gallery' && (
             <View>
               <Button icon="arrow-left" width={100} onPress={navigateToRoot}>

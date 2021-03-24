@@ -1,11 +1,13 @@
 import {
+  Dimensions,
   StyleSheet
 } from 'react-native';
 
 const styles = StyleSheet.create({
   assetContainer: {
-    flex: 1,
-    width: '90%',
+    // flex: 1,
+    width: Dimensions.get('window').width * 0.90,
+    // height: Dimensions.get('window').height * .80,
     margin: 20,
     padding: 10,
     textAlign: 'left',

@@ -154,7 +154,7 @@ export default function SignUp({ navigation }) {
                     formikProps={formikProps}
                     formikKey="organization"
                     label="signUp.organization"
-                    translatedLabel="Organization"
+                    translatedLabel={I18n.t('signUp.organization')}
                     scrollViewScroll={scrollViewScroll}
                     setScrollViewScroll={setScrollViewScroll}
                   />

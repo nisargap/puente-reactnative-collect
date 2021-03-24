@@ -34,7 +34,6 @@ import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
-// components/FormikFields/PaperInputPicker';
 const validationSchema = yup.object().shape({
   username: yup
     .string()

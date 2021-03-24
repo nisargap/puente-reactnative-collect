@@ -13,7 +13,8 @@
     "refresh": "Refresh",
     "error": "Error",
     "succcess": "Success!",
-    "ok": "Ok"
+    "ok": "Ok",
+    "emptyForm": "Empty Form"
   },
   "signUp": {
     "firstName": "First Name",
@@ -291,7 +292,8 @@
     "attachResident": "Attach a Community Resident"
   },
   "assetForms": {
-    "attachForm": "Attach a Form to the Asset"
+    "attachForm": "Attach a Form to the Asset",
+    "createAsset": "Create an Asset"
   },
   "forms": {
     "successfullySubmitted": "Form successfully submitted",
@@ -402,7 +404,8 @@
   },
   "languagePicker": {
     "english": "English",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "creole": "Haitian Creole"
   },
   "residentIdSearchbar": {
     "searchIndividual": "Search Individual"
