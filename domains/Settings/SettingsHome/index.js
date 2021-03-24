@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
-import { Button, Headline, IconButton, Text } from 'react-native-paper';
-import { Header } from 'react-native/Libraries/NewAppScreen';
-import { theme } from '../../../modules/theme'
+import {
+  StyleSheet, View
+} from 'react-native';
+import {
+  Button, Headline, IconButton, Text
+} from 'react-native-paper';
 
-import AccountSettings from './AccountSettings'
 import I18n from '../../../modules/i18n';
+import { theme } from '../../../modules/theme';
+import AccountSettings from './AccountSettings';
 
-export default SettingsHome = ({
+const SettingsHome = ({
   setView, prevView, logOut, settingsView, setSettingsView
 }) => {
-
   const [accountSettingsView, setAccountSettingsView] = useState('');
 
   return (
@@ -22,7 +24,8 @@ export default SettingsHome = ({
               <Button mode="contained">{I18n.t('accountSettings.settings')}</Button>
             </View>
             {/* <View style={{ paddingLeft: '5%' }}>
-              <Button onPress={() => setSettingsView('Support')}>{I18n.t('accountSettings.support')}</Button>
+              <Button onPress={() => setSettingsView('Support')}>
+              {I18n.t('accountSettings.support')}</Button>
             </View> */}
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
@@ -31,12 +34,12 @@ export default SettingsHome = ({
             <View style={{ flexDirection: 'row' }}>
               <Text style={styles.text}>{I18n.t('accountSettings.namePhoneEmail')}</Text>
               <IconButton
-                icon='chevron-right'
+                icon="chevron-right"
                 size={30}
                 color={theme.colors.primary}
                 style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
                 onPress={() => {
-                  setAccountSettingsView('NamePhoneEmail')
+                  setAccountSettingsView('NamePhoneEmail');
                 }}
               />
             </View>
@@ -44,12 +47,12 @@ export default SettingsHome = ({
             <View style={{ flexDirection: 'row' }}>
               <Text style={styles.text}>{I18n.t('accountSettings.changePassword')}</Text>
               <IconButton
-                icon='chevron-right'
+                icon="chevron-right"
                 size={30}
                 color={theme.colors.primary}
                 style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
                 onPress={() => {
-                  setAccountSettingsView('ChangePassword')
+                  setAccountSettingsView('ChangePassword');
                 }}
               />
             </View>
@@ -57,12 +60,12 @@ export default SettingsHome = ({
             <View style={{ flexDirection: 'row' }}>
               <Text style={styles.text}>{I18n.t('accountSettings.findRecords')}</Text>
               <IconButton
-                icon='chevron-right'
+                icon="chevron-right"
                 size={30}
                 color={theme.colors.primary}
                 style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
                 onPress={() => {
-                  setAccountSettingsView('FindRecords')
+                  setAccountSettingsView('FindRecords');
                 }}
               />
             </View>
@@ -70,20 +73,23 @@ export default SettingsHome = ({
             <View style={{ flexDirection: 'row' }}>
               <Text style={styles.text}>{I18n.t('accountSettings.language')}</Text>
               <IconButton
-                icon='chevron-right'
+                icon="chevron-right"
                 size={30}
                 color={theme.colors.primary}
                 style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
                 onPress={() => {
-                  setAccountSettingsView('Language')
+                  setAccountSettingsView('Language');
                 }}
               />
             </View>
             <View style={styles.horizontalLineGray} />
           </View>
           <Button onPress={() => {
-            setView(prevView)
-          }}>{I18n.t('accountSettings.back')}</Button>
+            setView(prevView);
+          }}
+          >
+            {I18n.t('accountSettings.back')}
+          </Button>
           <Button mode="contained" onPress={logOut} style={{ marginTop: 20 }}>{I18n.t('accountSettings.logout')}</Button>
         </View>
       )}
@@ -134,3 +140,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+export default SettingsHome;

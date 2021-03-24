@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   KeyboardAvoidingView, Platform,
-  ScrollView, Settings, Text, View
+  ScrollView, Text, View
 } from 'react-native';
 import {
   Button, Card
@@ -15,12 +15,12 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
-import SettingsView from '../Settings';
 import { getData } from '../../modules/async-storage';
 import { customFormsQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
 import { retrieveSignOutFunction } from '../../services/parse/auth';
+import SettingsView from '../Settings';
 import Assets from './Assets';
 import FormGallery from './FormGallery';
 import Forms from './Forms';
@@ -36,7 +36,7 @@ const puenteForms = [
 const DataCollection = ({ navigation }) => {
   const [scrollViewScroll, setScrollViewScroll] = useState();
   const [view, setView] = useState('Root');
-  const [prevView, setPrevView] = useState('Root')
+  const [prevView, setPrevView] = useState('Root');
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 

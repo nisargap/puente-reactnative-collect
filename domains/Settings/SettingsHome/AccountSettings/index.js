@@ -1,60 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { Button, Headline, IconButton, Text, TextInput } from 'react-native-paper';
-import { getData, storeData } from '../../../../modules/async-storage';
-import { theme } from '../../../../modules/theme'
+import React from 'react';
+import {
+  StyleSheet, View
+} from 'react-native';
+import {
+  Button
+} from 'react-native-paper';
 
-import { Parse } from 'parse/react-native';
-
-import NamePhoneEmail from './NamePhoneEmail';
-import Password from './Password';
 import FindRecords from './FindRecords';
 import Language from './Language';
+import NamePhoneEmail from './NamePhoneEmail';
+import Password from './Password';
 
-import I18n from '../../../../modules/i18n';
-import * as Localization from 'expo-localization';
+const AccountSettings = ({
+  accountSettingsView, setAccountSettingsView
+}) => (
+  <View style={styles.mainContainer}>
+    <View>
+      {accountSettingsView === 'NamePhoneEmail' && (
+        <NamePhoneEmail />
+      )}
+    </View>
+    {
+      accountSettingsView === 'ChangePassword' && (
+        <Password />
+      )
+    }
+    {
+      accountSettingsView === 'FindRecords' && (
+        <FindRecords />
+      )
+    }
+    {
+      accountSettingsView === 'Language' && (
+        <Language />
+      )
+    }
+    <Button onPress={() => {
+      setAccountSettingsView('');
+    }}
+    >
+      Back
+    </Button>
 
-export default AccountSettings = ({
-  settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
-}) => {
-
-  const [language, setLanguage] = useState('en');
-
-  const handleLanguage = (lang) => {
-    setLanguage(lang);
-    Localization.locale = lang;
-    // I18n.locale = lang;
-  };
-
-  return (
-    <View style={styles.mainContainer}>
-      <View>
-        {accountSettingsView === 'NamePhoneEmail' && (
-          <NamePhoneEmail />
-        )}
-      </View>
-      {
-        accountSettingsView === 'ChangePassword' && (
-          <Password />
-        )
-      }
-      {
-        accountSettingsView === 'FindRecords' && (
-          <FindRecords />
-        )
-      }
-      {
-        accountSettingsView === 'Language' && (
-          <Language />
-        )
-      }
-      <Button onPress={() => {
-        setAccountSettingsView('')
-      }}>Back</Button>
-
-    </View >
-  )
-}
+  </View>
+);
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -90,3 +79,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   }
 });
+
+export default AccountSettings;

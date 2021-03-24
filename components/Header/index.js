@@ -13,7 +13,9 @@ import I18n from '../../modules/i18n';
 import countService from '../../services/parse/calculate';
 import styles from './index.styles';
 
-const Header = ({ logOut, view, setView, setPrevView }) => {
+const Header = ({
+  view, setView, setPrevView
+}) => {
   const { header, headerText, headerIcon } = styles;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -108,9 +110,9 @@ const Header = ({ logOut, view, setView, setPrevView }) => {
 
   const navToSettings = () => {
     setDrawerOpen(false);
-    setPrevView(view)
+    setPrevView(view);
     setView('Settings');
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -147,8 +149,8 @@ const Header = ({ logOut, view, setView, setPrevView }) => {
                 {I18n.t('header.submitOffline')}
               </Button>
             ) : (
-                <Button disabled>{I18n.t('header.submitOffline')}</Button>
-              )}
+              <Button disabled>{I18n.t('header.submitOffline')}</Button>
+            )}
             {submission === false && (
               <View>
                 <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>

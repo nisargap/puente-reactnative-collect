@@ -1,6 +1,5 @@
 import * as Localization from 'expo-localization';
 import I18n from 'i18n-js';
-import { getData } from '../async-storage'
 
 import english from './english/en.json';
 import spanish from './spanish/es.json';

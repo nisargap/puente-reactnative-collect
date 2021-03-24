@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { Button, Headline, IconButton, Text, TextInput } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import {
+  ActivityIndicator, Alert, StyleSheet, View
+} from 'react-native';
+import {
+  Button, Headline, IconButton, Text, TextInput
+} from 'react-native-paper';
+
 import { getData, storeData } from '../../../../../modules/async-storage';
-import { theme } from '../../../../../modules/theme'
-
 import I18n from '../../../../../modules/i18n';
+import { theme } from '../../../../../modules/theme';
 
-export default FindRecords = ({
-  settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
-}) => {
+const FindRecords = () => {
   useEffect(() => {
     async function setUserInformation() {
       const storedLimit = await getData('findRecordsLimit');
@@ -16,13 +18,10 @@ export default FindRecords = ({
       const residentData = await getData('residentData');
       const residentDataCount = residentData.length;
 
-
-      console.log(currentLimit, residentData, residentDataCount);
-
       setCurrentData({
-        currentLimit: currentLimit,
-        residentDataCount: residentDataCount
-      })
+        currentLimit,
+        residentDataCount
+      });
     }
     setUserInformation().then(() => {
       setInputs([
@@ -40,15 +39,15 @@ export default FindRecords = ({
         }
       ]);
       setUpdated(false);
-    })
-  }, [updated])
+    });
+  }, [updated]);
 
   const handleFailedAttempt = () => {
     Alert.alert(
       I18n.t('global.error'),
       I18n.t('findRecordSettings.errorMessage'), [
-      { text: I18n.t('global.ok') }
-    ],
+        { text: I18n.t('global.ok') }
+      ],
       { cancelable: true }
     );
   };
@@ -57,8 +56,8 @@ export default FindRecords = ({
     Alert.alert(
       I18n.t('global.success'),
       I18n.t('findRecordSettings.successMessage'), [
-      { text: I18n.t('global.ok') }
-    ],
+        { text: I18n.t('global.ok') }
+      ],
       { cancelable: true }
     );
   };
@@ -79,17 +78,17 @@ export default FindRecords = ({
       setUpdated(true);
       submitAction();
     }, (error) => {
-      console.log(error);
+      console.log(error); //eslint-disable-line
       setSubmitting(false);
       handleFailedAttempt();
-    })
-  }
+    });
+  };
 
   const updateCurrentData = (key, text) => {
     const copyUserObject = currentData;
-    copyUserObject[key] = text
-    setCurrentData(copyUserObject)
-  }
+    copyUserObject[key] = text;
+    setCurrentData(copyUserObject);
+  };
 
   const [currentData, setCurrentData] = useState({});
   const [edit, setEdit] = useState('');
@@ -109,9 +108,14 @@ export default FindRecords = ({
               <View style={styles.textContainer}>
                 <Text style={styles.text}>{currentData[result.key]}</Text>
                 {result.edit === true && (
-                  <Button style={{ marginLeft: 'auto' }} onPress={() => {
-                    setEdit(result.key)
-                  }}>Edit</Button>
+                  <Button
+                    style={{ marginLeft: 'auto' }}
+                    onPress={() => {
+                      setEdit(result.key);
+                    }}
+                  >
+                    Edit
+                  </Button>
                 )}
               </View>
             )}
@@ -120,12 +124,12 @@ export default FindRecords = ({
                 <TextInput
                   style={{ flex: 3 }}
                   placeholder={result.value}
-                  mode='outlined'
-                  onChangeText={text => updateCurrentData(result.key, text)}
-                ></TextInput>
+                  mode="outlined"
+                  onChangeText={(text) => updateCurrentData(result.key, text)}
+                />
                 <View style={styles.buttonContainer}>
                   <IconButton
-                    icon='check'
+                    icon="check"
                     size={25}
                     color={theme.colors.primary}
                     style={styles.svg}
@@ -134,12 +138,12 @@ export default FindRecords = ({
                     }}
                   />
                   <IconButton
-                    icon='window-close'
+                    icon="window-close"
                     size={25}
                     color={theme.colors.primary}
                     style={styles.svg}
                     onPress={() => {
-                      setEdit('')
+                      setEdit('');
                     }}
                   />
                 </View>
@@ -156,11 +160,11 @@ export default FindRecords = ({
           color={theme.colors.primary}
         />
       ) : (
-          <Button onPress={() => updateUser()}>Submit</Button>
-        )}
+        <Button onPress={() => updateUser()}>Submit</Button>
+      )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -202,3 +206,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   }
 });
+
+export default FindRecords;

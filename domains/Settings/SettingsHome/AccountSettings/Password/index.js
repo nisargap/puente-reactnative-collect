@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { Button, Headline, IconButton, Text, TextInput } from 'react-native-paper';
-import { getData, storeData } from '../../../../../modules/async-storage';
-import { theme } from '../../../../../modules/theme'
-
 import { Parse } from 'parse/react-native';
+import React, { useState } from 'react';
+import {
+  ActivityIndicator, Alert, StyleSheet, View
+} from 'react-native';
+import {
+  Button, Headline, Text, TextInput
+} from 'react-native-paper';
+
+import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
+import { theme } from '../../../../../modules/theme';
 
-export default Password = ({
-  settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
-}) => {
-
+const Password = () => {
   const [submitting, setSubmitting] = useState(false);
   const [currentState, setCurrentState] = useState('');
   const [newState, setNewState] = useState('');
@@ -19,8 +20,8 @@ export default Password = ({
     Alert.alert(
       I18n.t('global.error'),
       I18n.t('passwordSettings.wrongCreds'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -29,8 +30,8 @@ export default Password = ({
     Alert.alert(
       I18n.t('global.error'),
       I18n.t('passwordSettings.errorMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -39,22 +40,20 @@ export default Password = ({
     Alert.alert(
       I18n.t('global.success'),
       I18n.t('passwordSettings.successMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
 
   const changePassword = async () => {
-    console.log('1')
     setSubmitting(true);
     const credentials = await getData('credentials');
 
     if (currentState !== credentials.password) {
       setSubmitting(false);
       wrongCredentials();
-    }
-    else {
+    } else {
       const user = await Parse.User.logIn(credentials.username, credentials.password);
       user.set('password', newState);
 
@@ -66,21 +65,21 @@ export default Password = ({
       };
 
       await user.save().then(async () => {
-        credentials['password'] = newState;
+        credentials.password = newState;
         await storeData(credentials, 'credentials').then(() => {
           submitAction();
         }, (error) => {
-          console.log(error);
+          console.log(error); //eslint-disable-line
           setSubmitting(false);
           handleFailedAttempt();
-        })
+        });
       }, (error) => {
-        console.log(error);
+        console.log(error); //eslint-disable-line
         setSubmitting(false);
         handleFailedAttempt();
-      })
+      });
     }
-  }
+  };
 
   return (
     <View>
@@ -88,11 +87,11 @@ export default Password = ({
       <View style={styles.horizontalLinePrimary} />
       <View style={styles.lineContainer}>
         <Text style={styles.text}>{I18n.t('passwordSettings.currentPassword')}</Text>
-        <TextInput mode='outlined' onChangeText={text => setCurrentState(text)}></TextInput>
+        <TextInput mode="outlined" onChangeText={(text) => setCurrentState(text)} />
       </View>
       <View style={styles.lineContainer}>
         <Text style={styles.text}>{I18n.t('passwordSettings.newPassword')}</Text>
-        <TextInput mode='outlined' onChangeText={text => setNewState(text)}></TextInput>
+        <TextInput mode="outlined" onChangeText={(text) => setNewState(text)} />
       </View>
       {submitting ? (
         <ActivityIndicator
@@ -100,11 +99,11 @@ export default Password = ({
           color={theme.colors.primary}
         />
       ) : (
-          <Button mode='contained' onPress={() => changePassword()}>{I18n.t('passwordSettings.newPassword')}</Button>
-        )}
+        <Button mode="contained" onPress={() => changePassword()}>{I18n.t('passwordSettings.newPassword')}</Button>
+      )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -149,3 +148,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   }
 });
+
+export default Password;

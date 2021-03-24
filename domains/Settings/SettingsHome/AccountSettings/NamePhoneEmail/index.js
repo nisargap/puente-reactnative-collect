@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { Button, Headline, IconButton, Text, TextInput } from 'react-native-paper';
-import { getData, storeData } from '../../../../../modules/async-storage';
-import { theme } from '../../../../../modules/theme'
-
 import { Parse } from 'parse/react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  ActivityIndicator, Alert, StyleSheet, View
+} from 'react-native';
+import {
+  Button, Headline, IconButton, Text, TextInput
+} from 'react-native-paper';
+
+import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
+import { theme } from '../../../../../modules/theme';
 
-export default NamePhoneEmail = ({
-  settingsView, setSettingsView, accountSettingsView, setAccountSettingsView
-}) => {
-
+const NamePhoneEmail = () => {
   useEffect(() => {
     async function setUserInformation() {
       const currentUser = await getData('currentUser');
-      console.log(currentUser);
-      setObjectId(currentUser['objectId']);
-      const fname = currentUser['firstname']
-      const lname = currentUser['lastname']
-      const phoneNumber = currentUser['phonenumber'];
-      const email = currentUser['email'];
+      setObjectId(currentUser.objectId);
+      const fname = currentUser.firstname;
+      const lname = currentUser.lastname;
+      const phoneNumber = currentUser.phonenumber;
+      const { email } = currentUser;
 
       setUserObject({
         firstName: fname,
         lastName: lname,
-        phoneNumber: phoneNumber,
-        email: email
-      })
+        phoneNumber,
+        email
+      });
     }
     setUserInformation().then(() => {
       setInputs([
@@ -52,8 +52,8 @@ export default NamePhoneEmail = ({
         }
       ]);
       setUpdated(false);
-    })
-  }, [updated])
+    });
+  }, [updated]);
 
   const [userObject, setUserObject] = useState({});
   const [edit, setEdit] = useState('');
@@ -62,19 +62,18 @@ export default NamePhoneEmail = ({
   const [updated, setUpdated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-
   const updateUserObject = (key, text) => {
     const copyUserObject = userObject;
-    copyUserObject[key] = text
-    setUserObject(copyUserObject)
-  }
+    copyUserObject[key] = text;
+    setUserObject(copyUserObject);
+  };
 
   const handleFailedAttempt = () => {
     Alert.alert(
       I18n.t('global.error'),
       I18n.t('namePhoneEmailSettings.errorMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -83,8 +82,8 @@ export default NamePhoneEmail = ({
     Alert.alert(
       I18n.t('global.success'),
       I18n.t('namePhoneEmailSettings.successMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -92,16 +91,16 @@ export default NamePhoneEmail = ({
   const updateUser = async () => {
     setSubmitting(true);
     const postParams = {
-      'objectId': objectId,
-      'firstname': userObject.firstName,
-      'lastname': userObject.lastName,
-      'email': userObject.email,
-      'phonenumber': userObject.phoneNumber
-    }
+      objectId,
+      firstname: userObject.firstName,
+      lastname: userObject.lastName,
+      email: userObject.email,
+      phonenumber: userObject.phoneNumber
+    };
     const credentials = await getData('credentials');
 
     const user = await Parse.User.logIn(credentials.username, credentials.password);
-    for (const key in postParams) {
+    for (const key in postParams) { //eslint-disable-line
       user.set(String(key), postParams[key]);
     }
 
@@ -117,16 +116,16 @@ export default NamePhoneEmail = ({
         setUpdated(true);
         submitAction();
       }, (error) => {
-        console.log(error);
+        console.log(error); //eslint-disable-line
         setSubmitting(false);
         handleFailedAttempt();
-      })
+      });
     }, (error) => {
-      console.log(error);
+      console.log(error); //eslint-disable-line
       setSubmitting(false);
       handleFailedAttempt();
-    })
-  }
+    });
+  };
 
   return (
     <View>
@@ -139,9 +138,14 @@ export default NamePhoneEmail = ({
             {edit !== result.key && (
               <View style={styles.textContainer}>
                 <Text style={styles.text}>{userObject[result.key]}</Text>
-                <Button style={{ marginLeft: 'auto' }} onPress={() => {
-                  setEdit(result.key)
-                }}>Edit</Button>
+                <Button
+                  style={{ marginLeft: 'auto' }}
+                  onPress={() => {
+                    setEdit(result.key);
+                  }}
+                >
+                  Edit
+                </Button>
               </View>
             )}
             {edit === result.key && (
@@ -149,12 +153,12 @@ export default NamePhoneEmail = ({
                 <TextInput
                   style={{ flex: 3 }}
                   placeholder={result.value}
-                  mode='outlined'
-                  onChangeText={text => updateUserObject(result.key, text)}
-                ></TextInput>
+                  mode="outlined"
+                  onChangeText={(text) => updateUserObject(result.key, text)}
+                />
                 <View style={styles.buttonContainer}>
                   <IconButton
-                    icon='check'
+                    icon="check"
                     size={25}
                     color={theme.colors.primary}
                     style={styles.svg}
@@ -163,12 +167,12 @@ export default NamePhoneEmail = ({
                     }}
                   />
                   <IconButton
-                    icon='window-close'
+                    icon="window-close"
                     size={25}
                     color={theme.colors.primary}
                     style={styles.svg}
                     onPress={() => {
-                      setEdit('')
+                      setEdit('');
                     }}
                   />
                 </View>
@@ -185,11 +189,11 @@ export default NamePhoneEmail = ({
           color={theme.colors.primary}
         />
       ) : (
-          <Button onPress={() => updateUser()}>Submit</Button>
-        )}
+        <Button onPress={() => updateUser()}>Submit</Button>
+      )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -231,3 +235,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   }
 });
+
+export default NamePhoneEmail;
