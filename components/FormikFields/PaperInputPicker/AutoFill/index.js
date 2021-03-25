@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
   textInputContainer: {
     borderColor: theme.colors.primary,
     borderWidth: 1,
-    color: 'red'
   },
   itemText: {
     fontSize: 15,
