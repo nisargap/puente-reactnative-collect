@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.2.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.1...v11.2.0) (2021-03-25)
+
+
+### Bug fixes
+
+* console error for autofill org ([33713f6](https://github.com/hopetambala/puente-reactnative-collect/commit/33713f6b74d4e6354195629046ddca0457c2d096))
+
+
+### New Features
+
+* count service using unique records ([160e3af](https://github.com/hopetambala/puente-reactnative-collect/commit/160e3afdeedd3e6a77ccd5195c618ba2269f7701))
+* online search is enabled ([fc5c715](https://github.com/hopetambala/puente-reactnative-collect/commit/fc5c7157228fbbf7175e2495eb073a6b5ca32c8c))
+
 ### [11.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.0...v11.1.1) (2021-03-10)
 
 
