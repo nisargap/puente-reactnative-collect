@@ -10,6 +10,7 @@ import {
 
 import PaperButton from '../../../../../../components/Button';
 import { theme } from '../../../../../../modules/theme';
+import { generateRandomID } from '../../../../../../modules/utils';
 
 const PeopleModal = ({
   people,
@@ -22,7 +23,7 @@ const PeopleModal = ({
       <Appbar.Content title="People Manager" subtitle="" titleStyle={{ fontSize: 20, fontWeight: 'bold' }} />
     </Appbar.Header>
     {people.map((x, i) => (
-      <ScrollView key={`${x}_`} style={{ margin: 20 }}>
+      <ScrollView key={`${x}_${generateRandomID()}`} style={{ margin: 20 }}>
         <KeyboardAvoidingView>
           <TextInput
             label="First Name"
