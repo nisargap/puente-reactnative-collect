@@ -14,22 +14,29 @@ import SelectedAsset from './SelectedAsset';
 
 const ViewAssets = ({ organization, setSelectedAsset }) => {
   useEffect(() => {
+    let isSubscribed = true;
+
     async function fetchRegion() {
       await getData('assetMapRegion').then((data) => {
-        if (!data) {
-          setRegion({
-            latitude: 18.4861,
-            longitude: -69.9312,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          });
-        } else {
-          setRegion(data);
+        if (isSubscribed) {
+          if (!data) {
+            setRegion({
+              latitude: 18.4861,
+              longitude: -69.9312,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            });
+          } else {
+            setRegion(data);
+          }
         }
       });
     }
+
     fetchRegion();
-  });
+
+    return () => { isSubscribed = false; };
+  }, []);
   const [region, setRegion] = useState();
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(false);

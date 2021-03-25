@@ -15,6 +15,7 @@ import { stylesDefault, stylesPaper } from '../../../../../components/FormikFiel
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
+import { generateRandomID } from '../../../../../modules/utils';
 import styles from './index.styles';
 import PeopleModal from './PeopleModal';
 
@@ -135,7 +136,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
               <View>
                 <Text style={{ fontWeight: 'bold' }}>Related People</Text>
                 {people.map((person) => (
-                  <Text>{`${person.firstName} ${person.lastName}`}</Text>
+                  <Text key={`${generateRandomID()}`}>{`${person.firstName} ${person.lastName}`}</Text>
                 ))}
               </View>
               <TextInput
