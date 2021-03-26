@@ -82,6 +82,9 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         || lname
           .toLowerCase()
           .includes(query.toLowerCase())
+        || `${fname} ${lname}`
+          .toLowerCase()
+          .includes(query.toLowerCase())
         || nickname
           .toLowerCase()
           .includes(query.toLowerCase());
@@ -89,12 +92,8 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    if (offline) {
-      setQuery(input);
-    } else {
-      fetchData();
-      setQuery(input);
-    }
+    fetchData();
+    setQuery(input);
   };
 
   const onSelectSurveyee = (listItem) => {
