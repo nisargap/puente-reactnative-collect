@@ -15,6 +15,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [offline, setOffline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
@@ -92,8 +93,13 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    fetchData();
+    clearTimeout(searchTimeout);
+
     setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
+      fetchData();
+    }, 1000));
   };
 
   const onSelectSurveyee = (listItem) => {
