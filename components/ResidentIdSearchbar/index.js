@@ -15,6 +15,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [offline, setOffline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
@@ -82,6 +83,9 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         || lname
           .toLowerCase()
           .includes(query.toLowerCase())
+        || `${fname} ${lname}`
+          .toLowerCase()
+          .includes(query.toLowerCase())
         || nickname
           .toLowerCase()
           .includes(query.toLowerCase());
@@ -89,12 +93,13 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    if (offline) {
-      setQuery(input);
-    } else {
+    clearTimeout(searchTimeout);
+
+    setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
       fetchData();
-      setQuery(input);
-    }
+    }, 1000));
   };
 
   const onSelectSurveyee = (listItem) => {
