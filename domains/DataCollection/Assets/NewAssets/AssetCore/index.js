@@ -22,15 +22,18 @@ import PeopleModal from './PeopleModal';
 const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
   const [location, setLocation] = useState();
+  const [locationLoading, setLocationLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const toggleModal = () => setVisible(!visible);
 
   const handleFormikPropsLocation = async (formikProps) => {
+    setLocationLoading(true);
     const currentLocation = await getLocation().then().catch((e) => e);
     const { latitude, longitude } = currentLocation.coords;
     formikProps.setFieldValue('location', { latitude, longitude });
     setLocation(currentLocation.coords);
+    setLocationLoading(false);
   };
 
   // handle input change
@@ -132,6 +135,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 <Text style={{ fontWeight: 'bold' }}>Coordinates</Text>
                 {location !== undefined
                   && <Text>{`${location.latitude},${location.longitude}`}</Text>}
+                {locationLoading && <ActivityIndicator />}
               </View>
               <View>
                 <Text style={{ fontWeight: 'bold' }}>Related People</Text>

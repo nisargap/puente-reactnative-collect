@@ -2,8 +2,9 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
+import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -54,13 +55,12 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
             setTimeout(() => {
               actions.setSubmitting(false);
             }, 1000);
-            setSelectedForm('');
+            setSelectedForm({});
           };
 
           postSupplementaryAssetForm(postParams)
             .then(() => {
               submitAction();
-              setSelectedForm({});
             })
             .then(() => actions.resetForm())
             .catch((e) => console.log(e)); //eslint-disable-line
@@ -98,13 +98,13 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
                 {formikProps.isSubmitting ? (
                   <ActivityIndicator />
                 ) : (
-                  <Button
-                    disabled={!selectedAsset?.objectId}
-                    onPress={formikProps.handleSubmit}
-                  >
-                    {selectedAsset?.objectId && <Text>{I18n.t('global.submit')}</Text>}
-                    {!selectedAsset?.objectId && <Text>{I18n.t('assetForms.attachForm')}</Text>}
-                  </Button>
+                  <PaperButton
+                    disabled={!selectedForm?.objectId}
+                    style={{ backgroundColor: selectedForm?.objectId ? 'green' : 'red' }}
+                    onPressEvent={() => formikProps.handleSubmit()}
+                    buttonText={selectedForm?.objectId ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
+                  />
+
                 )}
               </View>
             </View>
