@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Text } from 'react-native-paper';
 
@@ -62,30 +62,29 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
               submitAction();
               setSelectedForm({});
             })
+            .then(() => actions.resetForm())
             .catch((e) => console.log(e)); //eslint-disable-line
         }}
       >
         {(formikProps) => (
-          <View style={styles.assetContainer}>
-            <View>
-              <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
-              {viewSupplementaryForms === true
-                && (
-                  <AssetFormSelect
-                    setViewSupplementaryForms={setViewSupplementaryForms}
-                    setSelectedForm={setSelectedForm}
-                  />
-                )}
-            </View>
-            <View>
+          <TouchableWithoutFeedback>
+            <View style={styles.assetContainer}>
+              <View>
+                <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
+                {viewSupplementaryForms === true
+                  && (
+                    <AssetFormSelect
+                      setViewSupplementaryForms={setViewSupplementaryForms}
+                      setSelectedForm={setSelectedForm}
+                    />
+                  )}
+              </View>
               {selectedAsset
                 && (
                   <SelectedAsset
                     selectedMarker={selectedAsset}
                   />
                 )}
-            </View>
-            <View>
               <View style={layout.formContainer}>
                 {selectedForm?.fields?.length && selectedForm.fields.map((result) => (
                   <View key={result.formikKey}>
@@ -109,7 +108,7 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
                 )}
               </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         )}
       </Formik>
     </ScrollView>

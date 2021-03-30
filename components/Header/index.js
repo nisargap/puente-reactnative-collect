@@ -10,7 +10,7 @@ import { deleteData, getData } from '../../modules/async-storage';
 import { postOfflineForms } from '../../modules/cached-resources';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
-import countService from '../../services/parse/calculate';
+import { countService } from '../../services/parse/crud';
 import styles from './index.styles';
 
 const Header = ({
@@ -50,7 +50,12 @@ const Header = ({
       const userName = `${user.firstname || ''} ${user.lastname || ''}`;
       calculateTime(user.firstname);
       setVolunteerDate(volunteerLength(user));
-      countService('SurveyData', 'surveyingUser', userName).then((counts) => {
+      const postParams = {
+        ParseClass: 'SurveyData',
+        parseColumn: 'surveyingUser',
+        parseParam: userName
+      };
+      countService(postParams).then((counts) => {
         setSurveyCount(counts);
       });
     });
