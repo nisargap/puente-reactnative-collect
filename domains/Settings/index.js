@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import {
   View
 } from 'react-native';
-import {
-  Button
-} from 'react-native-paper';
 
 import SettingsHome from './SettingsHome';
 import SupportHome from './SupportHome';

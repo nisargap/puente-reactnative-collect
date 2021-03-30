@@ -8,9 +8,8 @@ import {
 
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
-import AccountSettings from './AccountSettings';
-
 import styles from '../index.styles';
+import AccountSettings from './AccountSettings';
 
 const SettingsHome = ({
   setView, prevView, logOut, settingsView, setSettingsView

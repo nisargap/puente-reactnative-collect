@@ -8,7 +8,6 @@ import {
 
 import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
-
 import styles from '../../../index.styles';
 
 const Language = () => {

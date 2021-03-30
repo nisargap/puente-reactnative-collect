@@ -10,7 +10,7 @@ import {
 import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
 import { theme } from '../../../../../modules/theme';
-import styles from '../../../index.styles'
+import styles from '../../../index.styles';
 
 const Password = () => {
   const [submitting, setSubmitting] = useState(false);

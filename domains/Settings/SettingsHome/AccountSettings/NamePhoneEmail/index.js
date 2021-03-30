@@ -73,8 +73,8 @@ const NamePhoneEmail = () => {
     Alert.alert(
       I18n.t('global.error'),
       I18n.t('namePhoneEmailSettings.errorMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -83,8 +83,8 @@ const NamePhoneEmail = () => {
     Alert.alert(
       I18n.t('global.success'),
       I18n.t('namePhoneEmailSettings.successMessage'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
@@ -190,8 +190,8 @@ const NamePhoneEmail = () => {
           color={theme.colors.primary}
         />
       ) : (
-          <Button onPress={() => updateUser()}>Submit</Button>
-        )}
+        <Button onPress={() => updateUser()}>Submit</Button>
+      )}
     </View>
   );
 };
