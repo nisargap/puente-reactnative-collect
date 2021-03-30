@@ -7,6 +7,7 @@ import {
 } from 'react-native-paper';
 
 import SettingsHome from './SettingsHome';
+import SupportHome from './SupportHome';
 
 const SettingsView = ({ setView, prevView, logOut }) => {
   const [settingsView, setSettingsView] = useState('Settings');
@@ -23,23 +24,13 @@ const SettingsView = ({ setView, prevView, logOut }) => {
           />
         )}
         {settingsView === 'Support' && (
-          <View>
-            <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
-              <View style={{ paddingRight: '5%' }}>
-                <Button onPress={() => setSettingsView('Settings')}>Settings</Button>
-              </View>
-              <View style={{ paddingLeft: '5%' }}>
-                <Button mode="contained">Support</Button>
-              </View>
-            </View>
-            <Button onPress={() => {
-              setView(prevView);
-            }}
-            >
-              Back
-            </Button>
-            <Button onPress={logOut}>Logout</Button>
-          </View>
+          <SupportHome
+            settingsView={settingsView}
+            setSettingsView={setSettingsView}
+            setView={setView}
+            prevView={prevView}
+            logOut={logOut}
+          />
         )}
       </View>
     </View>

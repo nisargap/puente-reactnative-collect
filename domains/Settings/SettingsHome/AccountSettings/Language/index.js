@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet, View
+  View
 } from 'react-native';
 import {
   Button, Headline
@@ -8,6 +8,8 @@ import {
 
 import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
+
+import styles from '../../../index.styles';
 
 const Language = () => {
   useEffect(() => {
@@ -31,7 +33,7 @@ const Language = () => {
   return (
     <View>
       <Headline>{I18n.t('languageSettings.chooseLanguage')}</Headline>
-      <View style={styles.buttonContainer}>
+      <View style={styles.languageContainer}>
         {language === 'en' && (
           <Button mode="contained">{I18n.t('languagePicker.english')}</Button>
         )}
@@ -39,7 +41,7 @@ const Language = () => {
           <Button mode="outlined" onPress={() => { handleLanguage('en'); }}>{I18n.t('languagePicker.english')}</Button>
         )}
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.languageContainer}>
         {language === 'es' && (
           <Button mode="contained">{I18n.t('languagePicker.spanish')}</Button>
         )}
@@ -50,11 +52,5 @@ const Language = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    paddingTop: 10
-  }
-});
 
 export default Language;
