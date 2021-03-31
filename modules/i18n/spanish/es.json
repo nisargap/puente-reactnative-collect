@@ -11,6 +11,8 @@
     "commName": "Nombre de comunidad",
     "notes": "Notas",
     "refresh": "Actualiza",
+    "success":"¡Éxito!",
+    "ok": "OK",
     "emptyForm": "Empty Form"
   },
   "signUp": {
