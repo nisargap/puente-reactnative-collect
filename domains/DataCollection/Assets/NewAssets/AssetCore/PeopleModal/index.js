@@ -22,7 +22,10 @@ const PeopleModal = ({
       <Appbar.Content title="People Manager" subtitle="" titleStyle={{ fontSize: 20, fontWeight: 'bold' }} />
     </Appbar.Header>
     {people.map((x, i) => (
-      <ScrollView key={`${x}_`} style={{ margin: 20 }}>
+      <ScrollView
+        key={`${x}_${i}`} //eslint-disable-line
+        style={{ margin: 20 }}
+      >
         <KeyboardAvoidingView>
           <TextInput
             label="First Name"
@@ -62,7 +65,6 @@ const PeopleModal = ({
             )}
           </View>
         </KeyboardAvoidingView>
-
       </ScrollView>
     ))}
   </>
