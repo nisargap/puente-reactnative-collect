@@ -6,63 +6,71 @@ import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
+import SupportSettings from './SupportSettings';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
-import styles from '../index.styles';
-import AccountSettings from './AccountSettings';
 
-const SettingsHome = ({
+import styles from '../index.styles'
+
+const SupportHome = ({
   setView, prevView, logOut, settingsView, setSettingsView
 }) => {
-  const [accountSettingsView, setAccountSettingsView] = useState('');
+  const [supportView, setSupportView] = useState('');
+
   const inputs = [
     {
-      key: 'NamePhoneEmail',
-      label: I18n.t('accountSettings.namePhoneEmail')
+      key: 'whatsNew',
+      label: 'What\'s New?',
+      button: true
     },
     {
-      key: 'ChangePassword',
-      label: I18n.t('accountSettings.changePassword')
+      key: 'aboutUs',
+      label: 'About us',
+      button: true
     },
     {
-      key: 'FindRecords',
-      label: I18n.t('accountSettings.findRecords')
+      key: 'feedback',
+      label: 'Contact us / Feedback?',
+      button: true
     },
     {
-      key: 'Language',
-      label: I18n.t('accountSettings.language')
+      key: 'rateApp',
+      label: 'Rate our app',
+      button: false
     }
   ];
-
   return (
     <View>
-      {settingsView === 'Settings' && accountSettingsView === '' && (
+      {settingsView === 'Support' && supportView === '' && (
         <View>
           <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
             <View style={{ paddingRight: '5%' }}>
-              <Button mode="contained">{I18n.t('accountSettings.settings')}</Button>
+              <Button onPress={() => setSettingsView('Settings')}>{I18n.t('accountSettings.settings')}</Button>
             </View>
             <View style={{ paddingLeft: '5%' }}>
-              <Button onPress={() => setSettingsView('Support')}>
-                {I18n.t('accountSettings.support')}</Button>
+              <Button mode="contained">
+                {I18n.t('accountSettings.support')}
+              </Button>
             </View>
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
-            <Headline style={{ fontWeight: 'bold' }}>{I18n.t('accountSettings.accountSettings')}</Headline>
+            <Headline style={{ fontWeight: 'bold' }}>Help Center</Headline>
             <View style={styles.horizontalLineGray} />
-            {inputs.length && inputs.map((input) => (
-              <View key={input.key}>
+            {inputs.length > 0 && inputs.map((input) => (
+              <View>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.text}>{input.label}</Text>
-                  <IconButton
-                    icon="chevron-right"
-                    size={30}
-                    color={theme.colors.primary}
-                    style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                    onPress={() => {
-                      setAccountSettingsView(input.key);
-                    }}
-                  />
+                  {input.button && (
+                    <IconButton
+                      icon="chevron-right"
+                      size={30}
+                      color={theme.colors.primary}
+                      style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
+                      onPress={() => {
+                        setSupportView(input.key);
+                      }}
+                    />
+                  )}
                 </View>
                 <View style={styles.horizontalLineGray} />
               </View>
@@ -77,13 +85,13 @@ const SettingsHome = ({
           <Button mode="contained" onPress={logOut} style={{ marginTop: 20, marginLeft: '5%', marginRight: '5%' }}>{I18n.t('accountSettings.logout')}</Button>
         </View>
       )}
-      {accountSettingsView !== '' && (
+      {supportView !== '' && (
         <View>
-          <AccountSettings
+          <SupportSettings
             settingsView={settingsView}
             setSettingsView={setSettingsView}
-            accountSettingsView={accountSettingsView}
-            setAccountSettingsView={setAccountSettingsView}
+            supportView={supportView}
+            setSupportView={setSupportView}
           />
         </View>
       )}
@@ -91,4 +99,4 @@ const SettingsHome = ({
   );
 };
 
-export default SettingsHome;
+export default SupportHome;
