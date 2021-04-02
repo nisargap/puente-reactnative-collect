@@ -44,7 +44,8 @@ const SettingsHome = ({
             </View>
             <View style={{ paddingLeft: '5%' }}>
               <Button onPress={() => setSettingsView('Support')}>
-                {I18n.t('accountSettings.support')}</Button>
+                {I18n.t('accountSettings.support')}
+              </Button>
             </View>
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
@@ -80,8 +81,6 @@ const SettingsHome = ({
       {accountSettingsView !== '' && (
         <View>
           <AccountSettings
-            settingsView={settingsView}
-            setSettingsView={setSettingsView}
             accountSettingsView={accountSettingsView}
             setAccountSettingsView={setAccountSettingsView}
           />

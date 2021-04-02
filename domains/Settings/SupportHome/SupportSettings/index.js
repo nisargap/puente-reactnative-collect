@@ -1,39 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View
 } from 'react-native';
 import {
-  Button, Headline, IconButton, Text
+  Button
 } from 'react-native-paper';
 
+import I18n from '../../../../modules/i18n';
+import styles from '../../index.styles';
 import Feedback from './Feedback';
 
-import styles from '../../index.styles';
-import I18n from '../../../../modules/i18n';
-
 const SupportSettings = ({
-  settingsView, setSettingsView, supportView, setSupportView
+  supportView, setSupportView
 }) => (
-    <View style={styles.mainContainer}>
-      {supportView === 'aboutUs' && (
-        <AboutUs
-        />
-      )}
-      {supportView === 'feedback' && (
-        <Feedback />
-      )}
-      {supportView === 'rateApp' && (
-        <RateOurApp />
-      )}
-      {supportView === 'whatsNew' && (
-        <WhatsNew />
-      )}
-      <Button onPress={() => {
-        setSupportView('');
-      }}
-      >{I18n.t('supportHome.back')}</Button>
+  <View style={styles.mainContainer}>
 
-    </View>
-  );
+    {supportView === 'feedback' && (
+    <Feedback />
+    )}
+    <Button onPress={() => {
+      setSupportView('');
+    }}
+    >
+      {I18n.t('supportHome.back')}
+    </Button>
+
+  </View>
+);
 
 export default SupportSettings;

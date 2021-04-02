@@ -1,17 +1,17 @@
+import * as StoreReview from 'expo-store-review';
 import React, { useState } from 'react';
 import {
-  View, TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
-import SupportSettings from './SupportSettings';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
-
-import styles from '../index.styles'
-import * as StoreReview from 'expo-store-review';
+import styles from '../index.styles';
+import SupportSettings from './SupportSettings';
 
 const SupportHome = ({
   setView, prevView, logOut, settingsView, setSettingsView
@@ -22,7 +22,7 @@ const SupportHome = ({
     if (await StoreReview.isAvailableAsync()) {
       StoreReview.requestReview();
     }
-  }
+  };
   const inputs = [
     {
       key: 'feedback',
@@ -74,21 +74,21 @@ const SupportHome = ({
                     )}
                   </TouchableOpacity>
                 ) : (
-                    <View style={{ flexDirection: 'row' }}>
-                      <Text style={styles.text}>{input.label}</Text>
-                      {input.button && (
-                        <IconButton
-                          icon="chevron-right"
-                          size={30}
-                          color={theme.colors.primary}
-                          style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                          onPress={() => {
-                            setSupportView(input.key);
-                          }}
-                        />
-                      )}
-                    </View>
-                  )}
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.text}>{input.label}</Text>
+                    {input.button && (
+                    <IconButton
+                      icon="chevron-right"
+                      size={30}
+                      color={theme.colors.primary}
+                      style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
+                      onPress={() => {
+                        setSupportView(input.key);
+                      }}
+                    />
+                    )}
+                  </View>
+                )}
                 <View style={styles.horizontalLineGray} />
               </View>
             ))}
@@ -105,8 +105,6 @@ const SupportHome = ({
       {supportView !== '' && (
         <View>
           <SupportSettings
-            // settingsView={settingsView}
-            // setSettingsView={setSettingsView}
             supportView={supportView}
             setSupportView={setSupportView}
           />
