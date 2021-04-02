@@ -145,7 +145,7 @@ const NamePhoneEmail = () => {
                     setEdit(result.key);
                   }}
                 >
-                  Edit
+                  {I18n.t('findRecordSettings.edit')}
                 </Button>
               </View>
             )}
@@ -190,7 +190,7 @@ const NamePhoneEmail = () => {
           color={theme.colors.primary}
         />
       ) : (
-        <Button onPress={() => updateUser()}>Submit</Button>
+        <Button onPress={() => updateUser()}>{I18n.t('global.submit')}</Button>
       )}
     </View>
   );

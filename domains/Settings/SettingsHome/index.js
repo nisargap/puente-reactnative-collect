@@ -39,19 +39,20 @@ const SettingsHome = ({
       {settingsView === 'Settings' && accountSettingsView === '' && (
         <View>
           <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto' }}>
-            <View style={{ paddingRight: '0%' }}>
+            <View style={{ paddingRight: '5%' }}>
               <Button mode="contained">{I18n.t('accountSettings.settings')}</Button>
             </View>
-            {/* <View style={{ paddingLeft: '5%' }}>
+            <View style={{ paddingLeft: '5%' }}>
               <Button onPress={() => setSettingsView('Support')}>
-                {I18n.t('accountSettings.support')}</Button>
-            </View> */}
+                {I18n.t('accountSettings.support')}
+              </Button>
+            </View>
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
             <Headline style={{ fontWeight: 'bold' }}>{I18n.t('accountSettings.accountSettings')}</Headline>
             <View style={styles.horizontalLineGray} />
             {inputs.length && inputs.map((input) => (
-              <View>
+              <View key={input.key}>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.text}>{input.label}</Text>
                   <IconButton
@@ -80,8 +81,6 @@ const SettingsHome = ({
       {accountSettingsView !== '' && (
         <View>
           <AccountSettings
-            settingsView={settingsView}
-            setSettingsView={setSettingsView}
             accountSettingsView={accountSettingsView}
             setAccountSettingsView={setAccountSettingsView}
           />
