@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View
+  View, TouchableOpacity
 } from 'react-native';
 import {
   Button, Headline, IconButton, Text
@@ -11,32 +11,32 @@ import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
 
 import styles from '../index.styles'
+import * as StoreReview from 'expo-store-review';
 
 const SupportHome = ({
   setView, prevView, logOut, settingsView, setSettingsView
 }) => {
   const [supportView, setSupportView] = useState('');
 
+  const rateApp = async () => {
+    if (await StoreReview.isAvailableAsync()) {
+      StoreReview.requestReview();
+    }
+  }
   const inputs = [
     {
-      key: 'whatsNew',
-      label: 'What\'s New?',
-      button: true
-    },
-    {
-      key: 'aboutUs',
-      label: 'About us',
-      button: true
-    },
-    {
       key: 'feedback',
-      label: 'Contact us / Feedback?',
-      button: true
+      label: I18n.t('supportHome.feedback'),
+      button: true,
+      touchable: false,
+      action: null
     },
     {
       key: 'rateApp',
-      label: 'Rate our app',
-      button: false
+      label: I18n.t('supportHome.rateApp'),
+      button: false,
+      touchable: true,
+      action: rateApp
     }
   ];
   return (
@@ -54,24 +54,41 @@ const SupportHome = ({
             </View>
           </View>
           <View style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: 20 }}>
-            <Headline style={{ fontWeight: 'bold' }}>Help Center</Headline>
+            <Headline style={{ fontWeight: 'bold' }}>{I18n.t('supportHome.helpCenter')}</Headline>
             <View style={styles.horizontalLineGray} />
             {inputs.length > 0 && inputs.map((input) => (
-              <View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={styles.text}>{input.label}</Text>
-                  {input.button && (
-                    <IconButton
-                      icon="chevron-right"
-                      size={30}
-                      color={theme.colors.primary}
-                      style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                      onPress={() => {
-                        setSupportView(input.key);
-                      }}
-                    />
+              <View key={input.key}>
+                {input.touchable ? (
+                  <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => input.action()}>
+                    <Text style={styles.text}>{input.label}</Text>
+                    {input.button && (
+                      <IconButton
+                        icon="chevron-right"
+                        size={30}
+                        color={theme.colors.primary}
+                        style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
+                        onPress={() => {
+                          setSupportView(input.key);
+                        }}
+                      />
+                    )}
+                  </TouchableOpacity>
+                ) : (
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.text}>{input.label}</Text>
+                      {input.button && (
+                        <IconButton
+                          icon="chevron-right"
+                          size={30}
+                          color={theme.colors.primary}
+                          style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
+                          onPress={() => {
+                            setSupportView(input.key);
+                          }}
+                        />
+                      )}
+                    </View>
                   )}
-                </View>
                 <View style={styles.horizontalLineGray} />
               </View>
             ))}
@@ -88,8 +105,8 @@ const SupportHome = ({
       {supportView !== '' && (
         <View>
           <SupportSettings
-            settingsView={settingsView}
-            setSettingsView={setSettingsView}
+            // settingsView={settingsView}
+            // setSettingsView={setSettingsView}
             supportView={supportView}
             setSupportView={setSupportView}
           />

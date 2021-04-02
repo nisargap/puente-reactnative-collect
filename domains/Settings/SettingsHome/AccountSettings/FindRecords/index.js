@@ -115,7 +115,7 @@ const FindRecords = () => {
                       setEdit(result.key);
                     }}
                   >
-                    Edit
+                    {I18n.t('findRecordSettings.edit')}
                   </Button>
                 )}
               </View>
@@ -161,7 +161,7 @@ const FindRecords = () => {
           color={theme.colors.primary}
         />
       ) : (
-        <Button onPress={() => updateUser()}>Submit</Button>
+        <Button onPress={() => updateUser()}>{I18n.t('global.submit')}</Button>
       )}
     </View>
   );

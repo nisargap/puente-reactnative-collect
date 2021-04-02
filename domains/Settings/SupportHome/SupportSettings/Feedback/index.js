@@ -9,6 +9,7 @@ import {
 import email from 'react-native-email'
 
 import styles from '../../../index.styles';
+import I18n from '../../../../../modules/i18n';
 
 const Feedback = () => {
   const handleEmail = () => {
@@ -26,16 +27,16 @@ const Feedback = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Headline>Feedback</Headline>
+      <Headline>{I18n.t('feedback.feedback')}</Headline>
       <View style={styles.horizontalLinePrimary} />
-      <Text>Please enter your feedback in the input below and press the "Send Feedback" button. This will redirect you to your email where you can send your feedback.</Text>
+      <Text>{I18n.t('feedback.enterFeedback')}</Text>
       <View style={styles.horizontalLinePrimary} />
       <TextInput multiline={true} onChangeText={(text) => setEmailBody(text)}
-        placeholder={"Type your feedback here..."}>
+        placeholder={I18n.t('feedback.typeFeedback')}>
 
       </TextInput>
       <View style={styles.languageContainer}>
-        <Button mode="contained" onPress={() => handleEmail()}>Send Mail</Button>
+        <Button mode="contained" onPress={() => handleEmail()}>{I18n.t('feedback.sendMail')}</Button>
       </View>
     </View>
   )

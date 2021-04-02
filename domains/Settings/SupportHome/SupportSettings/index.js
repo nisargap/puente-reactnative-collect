@@ -6,12 +6,10 @@ import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
-import AboutUs from './AboutUs';
 import Feedback from './Feedback';
-import RateOurApp from './RateOurApp';
-import WhatsNew from './WhatsNew';
 
 import styles from '../../index.styles';
+import I18n from '../../../../modules/i18n';
 
 const SupportSettings = ({
   settingsView, setSettingsView, supportView, setSupportView
@@ -33,7 +31,7 @@ const SupportSettings = ({
       <Button onPress={() => {
         setSupportView('');
       }}
-      >Back</Button>
+      >{I18n.t('supportHome.back')}</Button>
 
     </View>
   );

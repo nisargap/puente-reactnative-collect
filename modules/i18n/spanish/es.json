@@ -434,7 +434,8 @@
     "recordStorageLimit": "Límite de almacenamiento de registros",
     "errorMessage": "Hubo un error al procesar su solicitud. Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
     "successMessage": "Has actualizado tu límite de almacenamiento. Puede experimentar problemas relacionados con la aplicación si su teléfono no puede manejar el nuevo límite. Si esto ocurre, su experiencia puede mejorar si reduce el límite.",
-    "findRecords": "Buscar registros"
+    "findRecords": "Buscar registros",
+    "edit": "Editar"
   },
   "languageSettings": {
     "chooseLanguage": "Elige lengua"
@@ -457,5 +458,17 @@
     "changePassword": "Cambiar la contraseña",
     "currentPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña"
+  },
+  "supportHome": {
+    "feedback": "Contáctenos / Comentarios",
+    "rateApp": "Califica nuestra aplicación",
+    "helpCenter": "Centro de ayuda",
+    "back": "atrás"
+  },
+  "feedback": {
+    "feedback": "Realimentación",
+    "enterFeedback": "Ingrese sus comentarios en la entrada a continuación y presione el botón \"Enviar comentarios\". Esto lo redireccionará a su correo electrónico donde puede enviar sus comentarios.",
+    "sendMail": "Enviar correo",
+    "typeFeedback": "Escriba sus comentarios aquí ..."
   }
 }
