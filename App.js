@@ -2,10 +2,10 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { enableScreens } from 'react-native-screens';
-import useCachedResources from './modules/cached-resources/useCachedResources'
-// import { Provider as StoreProvider } from 'react-redux';
 
+// import { Provider as StoreProvider } from 'react-redux';
 import MainNavigation from './components/MainNavigation';
+import useCachedResources from './modules/cached-resources/useCachedResources';
 // import configureStore from './modules/state-management/configure-store';
 import { theme } from './modules/theme';
 

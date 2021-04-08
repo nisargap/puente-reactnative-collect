@@ -1,6 +1,6 @@
 import ViewPager from '@react-native-community/viewpager';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 import AssetCore from './AssetCore';
 import AssetSupplementary from './AssetSupplementary';
@@ -25,9 +25,8 @@ const NewAsset = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) =>
 
 const styles = StyleSheet.create({
   viewPager: {
-    width: '100%',
-    // height: '100%',
-    height: 450,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 0.80,
   },
   page: {
     justifyContent: 'center',

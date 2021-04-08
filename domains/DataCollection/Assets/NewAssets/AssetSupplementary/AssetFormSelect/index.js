@@ -6,7 +6,7 @@ import { assetFormsQuery } from '../../../../../../modules/cached-resources';
 import { layout } from '../../../../../../modules/theme';
 import styles from './index.style';
 
-const AssetSelect = ({ setViewSupplementaryForms, setSelectedForm }) => {
+const AssetFormSelect = ({ setViewSupplementaryForms, setSelectedForm }) => {
   const [assetForms, setAssetForms] = useState([]);
   useEffect(() => {
     assetFormsQuery().then((forms) => {
@@ -42,4 +42,4 @@ const AssetSelect = ({ setViewSupplementaryForms, setSelectedForm }) => {
   );
 };
 
-export default AssetSelect;
+export default AssetFormSelect;

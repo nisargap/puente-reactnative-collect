@@ -10,6 +10,7 @@ import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -46,12 +47,16 @@ const IdentificationForm = ({
             const formObject = values;
             formObject.surveyingOrganization = surveyingOrganization;
             formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+            formObject.appVersion = await getData('appVersion');
 
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
             formObject.altitude = values.location?.altitude || 0;
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
+
+            // const photo = values.picture
+            // need to prune 'picture' key if using photofile
 
             const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
             valuesToPrune.forEach((value) => {
@@ -64,10 +69,9 @@ const IdentificationForm = ({
                 setSubmitting(false);
               }, 1000);
             };
-
             const postParams = {
               parseClass: 'SurveyData',
-              signature: 'Sample Signature',
+              // signature: 'Sample Signature',
               photoFile,
               localObject: formObject
             };
