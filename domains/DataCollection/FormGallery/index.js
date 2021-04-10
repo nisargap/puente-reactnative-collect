@@ -21,6 +21,14 @@ const FormGallery = (props) => {
   return (
     <View>
       <View style={layout.screenRow}>
+        <Text style={styles.header}>{I18n.t('formsGallery.pinnedForms')}</Text>
+        {/* <SmallCardsCarousel
+          puenteForms={puenteForms}
+          navigateToNewRecord={navigateToNewRecord}
+          setUser={false}
+        /> */}
+      </View>
+      <View style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.puenteForms')}</Text>
         <SmallCardsCarousel
           puenteForms={puenteForms}
