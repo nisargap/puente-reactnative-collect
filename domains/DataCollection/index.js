@@ -39,6 +39,7 @@ const DataCollection = ({ navigation }) => {
   const [selectedAsset, setSelectedAsset] = useState(null);
 
   const [customForms, setCustomForms] = useState([]);
+  const [pinnedForms, setPinnedForms] = useState([]);
   const [customForm, setCustomForm] = useState();
 
   const [selectPerson, setSelectPerson] = useState();
@@ -58,6 +59,9 @@ const DataCollection = ({ navigation }) => {
     });
     getData('customForms').then((forms) => {
       setCustomForms(forms);
+    });
+    getData('pinnedForms').then((forms) => {
+      if (forms) setPinnedForms(forms);
     });
   }, [surveyingUser, surveyingOrganization]);
 
@@ -222,6 +226,7 @@ const DataCollection = ({ navigation }) => {
                 navigateToCustomForm={navigateToCustomForm}
                 puenteForms={puenteForms}
                 customForms={customForms}
+                pinnedForms={pinnedForms}
                 refreshCustomForms={refreshCustomForms}
               />
             </View>
