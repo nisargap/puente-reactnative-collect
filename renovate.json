@@ -4,5 +4,14 @@
   ],
   "baseBranches": [
     "dev"
+  ],
+  "packageRules": [
+    {
+      "depTypeList": [
+        "devDependencies"
+      ],
+      "schedule": "before 3am on Monday",
+      "groupName": "all devDependencies"
+    }
   ]
 }
