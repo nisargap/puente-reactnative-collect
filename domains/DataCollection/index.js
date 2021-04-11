@@ -15,7 +15,7 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
-import { getData } from '../../modules/async-storage';
+import { getData, storeData } from '../../modules/async-storage';
 import { customFormsQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
@@ -123,6 +123,18 @@ const DataCollection = ({ navigation }) => {
       setCustomForms(forms);
     });
   };
+
+  const pinForm = async (formsPinned, form) => {
+    setPinnedForms([...formsPinned, form]);
+    storeData(formsPinned, 'pinnedForms');
+  };
+
+  const removePinnedForm = async (formsPinned, form) => {
+    const filteredPinnedForms = formsPinned.filter((pinnedForm) => pinnedForm !== form);
+    setPinnedForms(filteredPinnedForms);
+    storeData(filteredPinnedForms, 'pinnedForms');
+  };
+
   const logOut = () => {
     retrieveSignOutFunction().then(() => {
       navigation.navigate('Sign In');
@@ -223,11 +235,13 @@ const DataCollection = ({ navigation }) => {
               <FormGallery
                 navigation={navigation}
                 navigateToNewRecord={navigateToNewRecord}
-                navigateToCustomForm={navigateToCustomForm}
                 puenteForms={puenteForms}
+                navigateToCustomForm={navigateToCustomForm}
                 customForms={customForms}
-                pinnedForms={pinnedForms}
                 refreshCustomForms={refreshCustomForms}
+                pinnedForms={pinnedForms}
+                removePinnedForm={removePinnedForm}
+                pinForm={pinForm}
               />
             </View>
           )}

@@ -16,9 +16,9 @@ import { layout, theme } from '../../../modules/theme';
 
 const FormGallery = (props) => {
   const {
-    navigateToNewRecord, navigateToCustomForm,
-    puenteForms, customForms, pinnedForms,
-    refreshCustomForms
+    navigateToNewRecord, puenteForms,
+    navigateToCustomForm, customForms, refreshCustomForms,
+    pinnedForms, pinForm, removePinnedForm
   } = props;
   return (
     <View>
@@ -29,9 +29,8 @@ const FormGallery = (props) => {
             <Card
               key={form.objectId}
               style={layout.cardSmallStyle}
-              onPress={() => {
-                navigateToCustomForm(form);
-              }}
+              onPress={() => navigateToCustomForm(form)}
+              onLongPress={() => removePinnedForm(pinnedForms, form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>
@@ -78,6 +77,7 @@ const FormGallery = (props) => {
               onPress={() => {
                 navigateToCustomForm(form);
               }}
+              onLongPress={() => pinForm(pinnedForms, form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>

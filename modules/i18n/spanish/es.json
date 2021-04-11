@@ -71,10 +71,12 @@
   "formsGallery": {
     "puenteForms": "Formularios Puente",
     "customForms": "Formularios personalizados",
+    "pinnedForms": "Formularios favoritos",
     "ourMarketPlace": "Nuestro mercado de formularios",
     "discoverForms": "Descubra formularios creados por empresas de confianza",
     "exploreForms": "Explorar formularios",
     "noCustomForms": "No tiene formularios personalizados",
+    "noPinnedForms": "No tiene formularios favoritos",
     "checkOutMarketplace": "Visite nuestro mercado para ver los formularios disponibles",
     "viewMarketplace": "Ver mercado de formularios",
     "marketPlace": "Mercado de formularios"
