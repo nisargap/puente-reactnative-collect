@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.2.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.1...v11.2.2) (2021-03-29)
+
+
+### Bug fixes
+
+* text prop not ([69cca41](https://github.com/hopetambala/puente-reactnative-collect/commit/69cca41c459afd33323eca8bdc94e83aa7e61d8b))
+
+### [11.2.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.0...v11.2.1) (2021-03-28)
+
+
+### Bug fixes
+
+* ability to search first and last name ([8c52608](https://github.com/hopetambala/puente-reactnative-collect/commit/8c526085d7e0c92eb13be93cbd4426d441d35c45))
+* create timer for when the search calls from the database ([489feee](https://github.com/hopetambala/puente-reactnative-collect/commit/489feee5934e6864cebd48752deb95ffa877aa5b))
+* index for people modal ([bb643e7](https://github.com/hopetambala/puente-reactnative-collect/commit/bb643e7962eef3bff425438c719a4c5add76b3c3))
+* **deps:** pin dependencies ([faae398](https://github.com/hopetambala/puente-reactnative-collect/commit/faae3987aa797ab2a308a9df340e3f8f2373382c))
+
 ## [11.2.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.1...v11.2.0) (2021-03-25)
 
 
