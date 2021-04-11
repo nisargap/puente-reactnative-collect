@@ -27,10 +27,13 @@ const FormGallery = (props) => {
         <ScrollView horizontal>
           {pinnedForms && pinnedForms.map((form) => (
             <Card
-              key={form.objectId}
+              key={form.objectId ?? form.tag}
               style={layout.cardSmallStyle}
-              onPress={() => navigateToCustomForm(form)}
-              onLongPress={() => removePinnedForm(pinnedForms, form)}
+              onPress={() => {
+                if (!form.tag) return navigateToCustomForm(form);
+                return navigateToNewRecord(form.tag);
+              }}
+              onLongPress={() => removePinnedForm(form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>
@@ -55,6 +58,7 @@ const FormGallery = (props) => {
         <SmallCardsCarousel
           puenteForms={puenteForms}
           navigateToNewRecord={navigateToNewRecord}
+          pinForm={pinForm}
           setUser={false}
         />
       </View>
@@ -77,7 +81,7 @@ const FormGallery = (props) => {
               onPress={() => {
                 navigateToCustomForm(form);
               }}
-              onLongPress={() => pinForm(pinnedForms, form)}
+              onLongPress={() => pinForm(form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>

@@ -124,13 +124,13 @@ const DataCollection = ({ navigation }) => {
     });
   };
 
-  const pinForm = async (formsPinned, form) => {
-    setPinnedForms([...formsPinned, form]);
-    storeData(formsPinned, 'pinnedForms');
+  const pinForm = async (form) => {
+    setPinnedForms([...pinnedForms, form]);
+    storeData(pinnedForms, 'pinnedForms');
   };
 
-  const removePinnedForm = async (formsPinned, form) => {
-    const filteredPinnedForms = formsPinned.filter((pinnedForm) => pinnedForm !== form);
+  const removePinnedForm = async (form) => {
+    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
     setPinnedForms(filteredPinnedForms);
     storeData(filteredPinnedForms, 'pinnedForms');
   };

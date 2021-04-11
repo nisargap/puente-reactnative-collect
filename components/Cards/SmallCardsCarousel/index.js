@@ -32,7 +32,7 @@ import { theme } from '../../../modules/theme';
  */
 
 const SmallCardsCarousel = ({
-  puenteForms, navigateToNewRecord, setView, surveyee, setUser
+  puenteForms, navigateToNewRecord, setView, surveyee, setUser, pinForm
 }) => (
   <ScrollView horizontal>
     {puenteForms.map((form) => (
@@ -47,47 +47,48 @@ const SmallCardsCarousel = ({
             navigateToNewRecord(form.tag);
           }
         }}
+        onLongPress={() => pinForm(form)}
       >
         {form.tag === 'id' && (
-        <View style={styles.cardContainer}>
-          <NewRecordSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {I18n.t('cards.smallCards.residentID')}
-            </Text>
+          <View style={styles.cardContainer}>
+            <NewRecordSVG height={40} style={styles.svg} />
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                {I18n.t('cards.smallCards.residentID')}
+              </Text>
+            </View>
           </View>
-        </View>
         )}
 
         {form.tag === 'env' && (
-        <View style={styles.cardContainer}>
-          <EnvSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {`${I18n.t('cards.smallCards.environmental')} ${I18n.t('cards.smallCards.history')}`}
-            </Text>
+          <View style={styles.cardContainer}>
+            <EnvSVG height={40} style={styles.svg} />
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                {`${I18n.t('cards.smallCards.environmental')} ${I18n.t('cards.smallCards.history')}`}
+              </Text>
+            </View>
           </View>
-        </View>
         )}
         {form.tag === 'med-eval' && (
-        <View style={styles.cardContainer}>
-          <MedEvalSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {`${I18n.t('cards.smallCards.medical')} ${I18n.t('cards.smallCards.evaluation')}`}
-            </Text>
+          <View style={styles.cardContainer}>
+            <MedEvalSVG height={40} style={styles.svg} />
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                {`${I18n.t('cards.smallCards.medical')} ${I18n.t('cards.smallCards.evaluation')}`}
+              </Text>
+            </View>
           </View>
-        </View>
         )}
         {form.tag === 'vitals' && (
-        <View style={styles.cardContainer}>
-          <NewRecordSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {I18n.t('cards.smallCards.vitals')}
-            </Text>
+          <View style={styles.cardContainer}>
+            <NewRecordSVG height={40} style={styles.svg} />
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                {I18n.t('cards.smallCards.vitals')}
+              </Text>
+            </View>
           </View>
-        </View>
         )}
       </Card>
     ))}
