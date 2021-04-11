@@ -47,7 +47,7 @@ const SmallCardsCarousel = ({
             navigateToNewRecord(form.tag);
           }
         }}
-        onLongPress={() => pinForm(form)}
+        onLongPress={pinForm ? () => pinForm(form) : null}
       >
         {form.tag === 'id' && (
           <View style={styles.cardContainer}>
