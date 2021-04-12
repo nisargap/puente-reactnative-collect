@@ -58,7 +58,9 @@ const SupplementaryForm = ({
         setPhotoFile('Submitted Photo String');
 
         const formObject = values;
-        formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+        const user = await getData('currentUser')
+
+        formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
         formObject.surveyingOrganization = surveyingOrganization;
         formObject.appVersion = await getData('appVersion');
 
@@ -69,6 +71,7 @@ const SupplementaryForm = ({
         const postParams = {
           parseParentClassID: surveyee.objectId,
           parseParentClass: 'SurveyData',
+          parseUser: user.objectId,
           parseClass: config.class,
           photoFile,
           localObject: formObjectUpdated
@@ -89,7 +92,6 @@ const SupplementaryForm = ({
             fields: fieldsArray,
             surveyingUser: formObject.surveyingUser,
             surveyingOrganization: formObject.surveyingOrganization
-
           };
         }
 
