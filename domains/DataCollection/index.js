@@ -15,7 +15,7 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
-import { getData } from '../../modules/async-storage';
+import { getData, storeData } from '../../modules/async-storage';
 import { customFormsQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
@@ -39,6 +39,7 @@ const DataCollection = ({ navigation }) => {
   const [selectedAsset, setSelectedAsset] = useState(null);
 
   const [customForms, setCustomForms] = useState([]);
+  const [pinnedForms, setPinnedForms] = useState([]);
   const [customForm, setCustomForm] = useState();
 
   const [selectPerson, setSelectPerson] = useState();
@@ -58,6 +59,9 @@ const DataCollection = ({ navigation }) => {
     });
     getData('customForms').then((forms) => {
       setCustomForms(forms);
+    });
+    getData('pinnedForms').then((forms) => {
+      if (forms) setPinnedForms(forms);
     });
   }, [surveyingUser, surveyingOrganization]);
 
@@ -119,6 +123,18 @@ const DataCollection = ({ navigation }) => {
       setCustomForms(forms);
     });
   };
+
+  const pinForm = async (form) => {
+    setPinnedForms([...pinnedForms, form]);
+    storeData(pinnedForms, 'pinnedForms');
+  };
+
+  const removePinnedForm = async (form) => {
+    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
+    setPinnedForms(filteredPinnedForms);
+    storeData(filteredPinnedForms, 'pinnedForms');
+  };
+
   const logOut = () => {
     retrieveSignOutFunction().then(() => {
       navigation.navigate('Sign In');
@@ -219,10 +235,13 @@ const DataCollection = ({ navigation }) => {
               <FormGallery
                 navigation={navigation}
                 navigateToNewRecord={navigateToNewRecord}
-                navigateToCustomForm={navigateToCustomForm}
                 puenteForms={puenteForms}
+                navigateToCustomForm={navigateToCustomForm}
                 customForms={customForms}
                 refreshCustomForms={refreshCustomForms}
+                pinnedForms={pinnedForms}
+                removePinnedForm={removePinnedForm}
+                pinForm={pinForm}
               />
             </View>
           )}

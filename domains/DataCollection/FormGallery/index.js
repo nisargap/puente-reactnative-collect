@@ -16,19 +16,53 @@ import { layout, theme } from '../../../modules/theme';
 
 const FormGallery = (props) => {
   const {
-    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms, refreshCustomForms
+    navigateToNewRecord, puenteForms,
+    navigateToCustomForm, customForms, refreshCustomForms,
+    pinnedForms, pinForm, removePinnedForm
   } = props;
   return (
     <View>
-      <View style={layout.screenRow}>
+      <View key="pinnedForms" style={layout.screenRow}>
+        <Text style={styles.header}>{I18n.t('formsGallery.pinnedForms')}</Text>
+        <ScrollView horizontal>
+          {pinnedForms && pinnedForms.map((form) => (
+            <Card
+              key={form.objectId ?? form.tag}
+              style={layout.cardSmallStyle}
+              onPress={() => {
+                if (!form.tag) return navigateToCustomForm(form);
+                return navigateToNewRecord(form.tag);
+              }}
+              onLongPress={() => removePinnedForm(form)}
+            >
+              <View style={styles.cardContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>
+                    {form.name}
+                  </Text>
+                </View>
+              </View>
+            </Card>
+          ))}
+          {pinnedForms.length < 1 && (
+            <View style={layout.screenRow}>
+              <Card>
+                <Card.Title title={I18n.t('formsGallery.noPinnedForms')} />
+              </Card>
+            </View>
+          )}
+        </ScrollView>
+      </View>
+      <View key="puenteForms" style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.puenteForms')}</Text>
         <SmallCardsCarousel
           puenteForms={puenteForms}
           navigateToNewRecord={navigateToNewRecord}
+          pinForm={pinForm}
           setUser={false}
         />
       </View>
-      <View style={layout.screenRow}>
+      <View key="customForms" style={layout.screenRow}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
           <IconButton
@@ -47,6 +81,7 @@ const FormGallery = (props) => {
               onPress={() => {
                 navigateToCustomForm(form);
               }}
+              onLongPress={() => pinForm(form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>
@@ -57,27 +92,24 @@ const FormGallery = (props) => {
               </View>
             </Card>
           ))}
-        </ScrollView>
-      </View>
-      {customForms.length < 1 && (
-        <View style={layout.screenRow}>
-          <Card>
-            <Card.Title title={I18n.t('formsGallery.noCustomForms')} />
-            {/* To be used when marketplace is available */}
-            {/* <Card.Content>
+          {customForms.length < 1 && (
+            <View style={layout.screenRow}>
+              <Card>
+                <Card.Title title={I18n.t('formsGallery.noCustomForms')} />
+                {/* To be used when marketplace is available */}
+                {/* <Card.Content>
               <Text>{I18n.t('formsGallery.checkOutMarketplace')}</Text>
               <Button>{I18n.t('formsGallery.viewMarketplace')}</Button>
             </Card.Content> */}
-          </Card>
-        </View>
-      )}
-      {/* <View style={layout.screenRow}>
-        <Text>Manage My Pinned Forms</Text>
-      </View> */}
+              </Card>
+            </View>
+          )}
+        </ScrollView>
+      </View>
       <View style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.marketPlace')}</Text>
       </View>
-      <View style={layout.screenRow}>
+      <View key="marketplace" style={layout.screenRow}>
         <Card>
           <Card.Content>
             <ComingSoonSVG width={200} height={200} />
