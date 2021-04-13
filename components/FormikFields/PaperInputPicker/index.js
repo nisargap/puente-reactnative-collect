@@ -1,12 +1,12 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
-  Text,
-  View,
   StyleSheet,
-  TouchableWithoutFeedback
+  Text,
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import {
   Button, Headline,
   TextInput,
@@ -61,7 +61,7 @@ const PaperInputPicker = ({
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "center",
+      justifyContent: 'center',
       paddingHorizontal: 10,
     }
   });
@@ -207,39 +207,42 @@ const PaperInputPicker = ({
               <View key={result.value}>
                 {/* selected value */}
                 {result.value === values[formikKey] && (
-                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}><View
-                    style={{
-                      backgroundColor: theme.colors.primary,
-                      borderColor: theme.colors.primary,
-                      borderWidth: 1,
-                      borderRadius: 5,
-                      alignItems: "center",
-                      color: theme.colors.primary,
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      margin: 5
-                    }}>
+                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}>
+                    <View
+                      style={{
+                        backgroundColor: theme.colors.primary,
+                        borderColor: theme.colors.primary,
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        alignItems: 'center',
+                        color: theme.colors.primary,
+                        paddingHorizontal: 15,
+                        paddingVertical: 5,
+                        margin: 5
+                      }}
+                    >
 
-                    <View style={styles.button}>
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      <View style={styles.button}>
+                        <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      </View>
+
                     </View>
-
-                  </View></TouchableWithoutFeedback>
+                  </TouchableWithoutFeedback>
                 )}
                 {/* non-selected value */}
                 {result.value !== values[formikKey] && (
                   <TouchableWithoutFeedback
                     onPress={() => setFieldValue(formikKey, result.value)}
                   >
-                    <View style=
-                      {{
-                        borderWidth: 1,
-                        borderColor: theme.colors.primary,
-                        borderRadius: 5,
-                        paddingHorizontal: 15,
-                        paddingVertical: 5,
-                        margin: 5
-                      }}>
+                    <View style={{
+                      borderWidth: 1,
+                      borderColor: theme.colors.primary,
+                      borderRadius: 5,
+                      paddingHorizontal: 15,
+                      paddingVertical: 5,
+                      margin: 5
+                    }}
+                    >
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
