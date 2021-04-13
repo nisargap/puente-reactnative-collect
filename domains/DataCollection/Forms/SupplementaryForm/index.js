@@ -10,6 +10,7 @@ import { Button, Text } from 'react-native-paper';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -57,8 +58,11 @@ const SupplementaryForm = ({
         setPhotoFile('Submitted Photo String');
 
         const formObject = values;
-        formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+        const user = await getData('currentUser')
+
+        formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
         formObject.surveyingOrganization = surveyingOrganization;
+        formObject.appVersion = await getData('appVersion');
 
         let formObjectUpdated = addSelectTextInputs(values, formObject);
         if (selectedForm === 'vitals') {
@@ -67,6 +71,7 @@ const SupplementaryForm = ({
         const postParams = {
           parseParentClassID: surveyee.objectId,
           parseParentClass: 'SurveyData',
+          parseUser: user.objectId,
           parseClass: config.class,
           photoFile,
           localObject: formObjectUpdated
@@ -87,7 +92,6 @@ const SupplementaryForm = ({
             fields: fieldsArray,
             surveyingUser: formObject.surveyingUser,
             surveyingOrganization: formObject.surveyingOrganization
-
           };
         }
 

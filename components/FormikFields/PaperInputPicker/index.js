@@ -1,10 +1,6 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View
+import { StyleSheet, TouchableWithoutFeedback, Image, Text, View
 } from 'react-native';
 
 import {
@@ -16,6 +12,8 @@ import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
 import PaperButton from '../../Button';
+import UseCameraRoll from '../../Multimedia/CameraRoll';
+import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
 import { stylesDefault, stylesPaper, styleX } from './index.style';
@@ -65,6 +63,9 @@ const PaperInputPicker = ({
       paddingHorizontal: 10,
     }
   });
+  const [cameraVisible, setCameraVisible] = React.useState(false);
+  const [pictureUris, setPictureUris] = React.useState({});
+  const [image, setImage] = React.useState(null);
 
   return (
     <>
@@ -466,6 +467,61 @@ const PaperInputPicker = ({
                 </View>
               )))}
             </View>
+          </View>
+        )
+      }
+      {
+        fieldType === 'photo' && (
+          <View style={stylesDefault.container}>
+            {!cameraVisible && image === null && (
+              <View>
+                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+                <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
+                <UseCameraRoll
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
+            )}
+            {!cameraVisible && image !== null && (
+              <View>
+                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+                <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
+                <Button onPress={() => {
+                  setCameraVisible(true);
+                }}
+                >
+                  Take Picture
+                </Button>
+                <UseCameraRoll
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
+            )}
+            {cameraVisible && (
+              <View>
+                <Text style={stylesDefault.labelImage}>{label}</Text>
+                <UseCamera
+                  cameraVisible={cameraVisible}
+                  setCameraVisible={setCameraVisible}
+                  pictureUris={pictureUris}
+                  setPictureUris={setPictureUris}
+                  formikProps={formikProps}
+                  formikKey={formikKey}
+                  image={image}
+                  setImage={setImage}
+                />
+              </View>
+            )}
           </View>
         )
       }
