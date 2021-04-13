@@ -2,8 +2,11 @@ import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
   Text,
-  View
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback
 } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Button, Headline,
   TextInput,
@@ -54,6 +57,14 @@ const PaperInputPicker = ({
       setFieldValue(formikKey, [result.value]);
     }
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      paddingHorizontal: 10,
+    }
+  });
 
   return (
     <>
@@ -196,31 +207,45 @@ const PaperInputPicker = ({
               <View key={result.value}>
                 {/* selected value */}
                 {result.value === values[formikKey] && (
-                  <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
+                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}><View
+                    style={{
+                      backgroundColor: theme.colors.primary,
+                      borderColor: theme.colors.primary,
+                      borderWidth: 1,
+                      borderRadius: 5,
+                      alignItems: "center",
+                      color: theme.colors.primary,
+                      paddingHorizontal: 15,
+                      paddingVertical: 5,
+                      margin: 5
+                    }}>
+
+                    <View style={styles.button}>
                       <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
-                  </View>
+                    </View>
+
+                  </View></TouchableWithoutFeedback>
                 )}
                 {/* non-selected value */}
                 {result.value !== values[formikKey] && (
-                  <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
+                  <TouchableWithoutFeedback
+                    onPress={() => setFieldValue(formikKey, result.value)}
+                  >
+                    <View style=
+                      {{
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                        borderRadius: 5,
+                        paddingHorizontal: 15,
+                        paddingVertical: 5,
+                        margin: 5
+                      }}>
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
-                    </Button>
-                  </View>
+                    </View>
+
+                  </TouchableWithoutFeedback>
                 )}
               </View>
             ))}
@@ -308,7 +333,7 @@ const PaperInputPicker = ({
                       {errors[result.textKey]}
                     </Text>
                   </View>
-              )}
+                )}
             </View>
           ))}
           <Text style={{ color: 'red' }}>
@@ -399,7 +424,7 @@ const PaperInputPicker = ({
                   label={customForm ? result.label : I18n.t(result.label)}
                   onChangeText={handleChange(customForm ? result.label : I18n.t(result.label))}
                   onBlur={handleBlur(customForm ? result.label : I18n.t(result.label))}
-                    {...rest} //eslint-disable-line
+                  {...rest} //eslint-disable-line
                   mode="outlined"
                   theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
                 />
@@ -426,7 +451,7 @@ const PaperInputPicker = ({
                     label={customForm ? result.label : I18n.t(result.label)}
                     onChangeText={handleChange(result.value)}
                     onBlur={handleBlur(result.value)}
-                      {...rest} //eslint-disable-line
+                    {...rest} //eslint-disable-line
                     mode="outlined"
                     keyboardType="numeric"
                     maxLength={result.maxLength ? result.maxLength : null}

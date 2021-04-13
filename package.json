@@ -40,6 +40,7 @@
     "@react-native-async-storage/async-storage": "1.13.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "5.9.9",
+    "@react-native-community/viewpager": "3.3.0",
     "@react-navigation/bottom-tabs": "5.5.1",
     "@react-navigation/native": "5.5.0",
     "@react-navigation/stack": "5.4.1",
@@ -75,8 +76,7 @@
     "react-redux": "7.2.0",
     "redux": "4.0.5",
     "redux-actions": "2.6.5",
-    "yup": "0.29.3",
-    "@react-native-community/viewpager": "3.3.0"
+    "yup": "0.29.3"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
