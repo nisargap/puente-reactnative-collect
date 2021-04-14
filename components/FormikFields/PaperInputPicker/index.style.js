@@ -43,6 +43,14 @@ const stylesPaper = {
   text: theme.colors.priary,
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 10,
+  }
+});
+
 const styleX = StyleSheet.create({
   sideLabel: {
     flex: 1,
@@ -60,4 +68,26 @@ const styleX = StyleSheet.create({
   }
 });
 
-export { stylesDefault, stylesPaper, styleX };
+const styleButton = StyleSheet.create({
+  selected: {
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: "center",
+    color: theme.colors.primary,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    margin: 5
+  },
+  unselected: {
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    margin: 5
+  }
+});
+
+export { stylesDefault, stylesPaper, styleX, styleButton, styles };

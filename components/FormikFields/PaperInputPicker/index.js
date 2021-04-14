@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Button, Headline,
   TextInput,
@@ -18,7 +17,7 @@ import { layout, theme } from '../../../modules/theme';
 import PaperButton from '../../Button';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import { stylesDefault, stylesPaper, styleX } from './index.style';
+import { stylesDefault, stylesPaper, styleX, styleButton, styles } from './index.style';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -57,14 +56,6 @@ const PaperInputPicker = ({
       setFieldValue(formikKey, [result.value]);
     }
   };
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      paddingHorizontal: 10,
-    }
-  });
 
   return (
     <>
@@ -207,39 +198,22 @@ const PaperInputPicker = ({
               <View key={result.value}>
                 {/* selected value */}
                 {result.value === values[formikKey] && (
-                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}><View
-                    style={{
-                      backgroundColor: theme.colors.primary,
-                      borderColor: theme.colors.primary,
-                      borderWidth: 1,
-                      borderRadius: 5,
-                      alignItems: "center",
-                      color: theme.colors.primary,
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      margin: 5
-                    }}>
+                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}>
+                    <View style={styleButton.selected}>
 
-                    <View style={styles.button}>
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      <View style={styles.button}>
+                        <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      </View>
+
                     </View>
-
-                  </View></TouchableWithoutFeedback>
+                  </TouchableWithoutFeedback>
                 )}
                 {/* non-selected value */}
                 {result.value !== values[formikKey] && (
                   <TouchableWithoutFeedback
                     onPress={() => setFieldValue(formikKey, result.value)}
                   >
-                    <View style=
-                      {{
-                        borderWidth: 1,
-                        borderColor: theme.colors.primary,
-                        borderRadius: 5,
-                        paddingHorizontal: 15,
-                        paddingVertical: 5,
-                        margin: 5
-                      }}>
+                    <View style={styleButton.unselected}>
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
@@ -284,32 +258,32 @@ const PaperInputPicker = ({
                 {/* selected value */}
                 {values[formikKey] && values[formikKey].includes(result.value) && (
                   <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
+                    <TouchableWithoutFeedback
                       onPress={() => {
                         const test = values[formikKey].filter((item) => item !== result.value);
                         setFieldValue(formikKey, test);
                       }}
                     >
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
+                      <View style={styleButton.selected}>
+                        <View style={styles.button}>
+                          <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                        </View>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
                 {/* non-selected value */}
                 {(!values[formikKey] || !(values[formikKey]).includes(result.value)) && (
                   <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
+                    <TouchableWithoutFeedback
                       onPress={() => addArrayVal(result)}
                     >
-                      <Text style={{ color: theme.colors.primary }}>
-                        {customForm ? result.label : I18n.t(result.label)}
-                      </Text>
-                    </Button>
+                      <View style={styleButton.unselected}>
+                        <Text style={{ color: theme.colors.primary }}>
+                          {customForm ? result.label : I18n.t(result.label)}
+                        </Text>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
               </View>
