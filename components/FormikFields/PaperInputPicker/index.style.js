@@ -32,6 +32,12 @@ const stylesDefault = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.black,
     backgroundColor: theme.colors.background
+  },
+  labelImage: {
+    fontWeight: 'bold',
+    color: theme.colors.black,
+    backgroundColor: theme.colors.background,
+    paddingBottom: 10
   }
 
 });

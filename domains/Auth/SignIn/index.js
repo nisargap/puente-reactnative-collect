@@ -34,7 +34,6 @@ import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
-// components/FormikFields/PaperInputPicker';
 const validationSchema = yup.object().shape({
   username: yup
     .string()
@@ -187,7 +186,8 @@ const SignIn = ({ navigation }) => {
                         // need some pincode verification
                         handleSignIn(values, actions.resetForm());
                       } else {
-                        // cannot log in offline without saved credentials, connect to internet
+                        // incorrect usernmae/password offline
+                        handleFailedAttempt();
                       }
                     });
                   }

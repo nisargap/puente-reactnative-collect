@@ -391,14 +391,14 @@ const configArray = {
     formikKey: 'numberofIndividualsLivingintheHouse',
     value: '',
     fieldType: 'numberInput',
-    validation: false
+    validation: true
   },
   {
     label: 'environmentalHealth.numberChildrenUnder5',
     formikKey: 'numberofChildrenLivinginHouseUndertheAgeof5',
     value: '',
     fieldType: 'numberInput',
-    validation: false
+    validation: true
   },
   ]
 };

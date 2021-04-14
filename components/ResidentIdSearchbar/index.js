@@ -11,17 +11,23 @@ import ResidentCard from '../FindResidents/Resident/ResidentCard';
 import styles from './index.styles';
 
 const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) => {
-  const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
-  const [residents, setResidents] = useState([]);
+  const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [offline, setOffline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
-    fetchAsyncData();
+    checkOnlineStatus().then(async (connected) => {
+      if (!connected) {
+        fetchData();
+      }
+    });
   }, [surveyingOrganization]);
 
-  const fetchAsyncData = () => {
+  const fetchOfflineData = async () => {
     setLoading(true);
+    setOffline(true);
     getData('residentData').then((residentData) => {
       if (residentData) {
         let offlineData = [];
@@ -32,50 +38,52 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
             });
           }
           const allData = residentData.concat(offlineData);
-          // console.log(allData)
-          setData(allData || []);
-          setResidents(allData.slice() || [].slice());
+          setResidentsData(allData.slice() || []);
         });
       }
       setLoading(false);
     });
   };
 
-  const fetchData = async () => {
+  const fetchOnlineData = async () => {
     setLoading(true);
-    checkOnlineStatus().then(async (connected) => {
-      if (connected) {
-        const queryParams = {
-          skip: 0,
-          offset: 0,
-          limit: 100000,
-          parseColumn: 'surveyingOrganization',
-          parseParam: surveyingOrganization,
-        };
-        const records = await residentQuery(queryParams);
-        let offlineData = [];
-        await getData('offlineIDForms').then((offlineResidentData) => {
-          if (offlineResidentData !== null) {
-            Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
-              offlineData = offlineData.concat(value.localObject);
-            });
-          }
+    setOffline(false);
+    const queryParams = {
+      skip: 0,
+      offset: 0,
+      limit: 2000,
+      parseColumn: 'surveyingOrganization',
+      parseParam: surveyingOrganization,
+    };
+    const records = await residentQuery(queryParams);
+    let offlineData = [];
+    await getData('offlineIDForms').then((offlineResidentData) => {
+      if (offlineResidentData !== null) {
+        Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
+          offlineData = offlineData.concat(value.localObject);
         });
-        const allData = records.concat(offlineData);
-        setData(allData);
-        setResidents(allData.slice());
       }
-      setLoading(false);
     });
+    const allData = records.concat(offlineData);
+    setResidentsData(allData.slice());
+    setLoading(false);
   };
 
-  const filterList = () => data.filter(
+  const fetchData = () => {
+    if (offline) fetchOfflineData();
+    if (!offline) fetchOnlineData();
+  };
+
+  const filterList = () => residentsData.filter(
     (listItem) => {
       const fname = listItem.fname || ' ';
       const lname = listItem.lname || ' ';
       const nickname = listItem.nickname || ' ';
       return fname.toLowerCase().includes(query.toLowerCase())
         || lname
+          .toLowerCase()
+          .includes(query.toLowerCase())
+        || `${fname} ${lname}`
           .toLowerCase()
           .includes(query.toLowerCase())
         || nickname
@@ -85,12 +93,16 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    setResidents(data.slice());
+    clearTimeout(searchTimeout);
+
     setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
+      fetchData();
+    }, 2000));
   };
 
   const onSelectSurveyee = (listItem) => {
-    // console.log(listItem)
     setSurveyee(listItem);
     setQuery('');
   };
@@ -98,7 +110,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const renderItem = ({ item }) => (
     <View>
       <Button onPress={() => onSelectSurveyee(item)} contentStyle={{ marginRight: 5 }}>
-        <Text style={{ marginRight: 10 }}>{`${item?.fname} ${item?.lname}`}</Text>
+        <Text style={{ marginRight: 10 }}>{`${item?.fname || ''} ${item?.lname || ''}`}</Text>
         {/* offline IDform */}
         {item.objectId.includes('PatientID-') && (
           <View style={{
@@ -128,17 +140,9 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
       {loading
         && <Spinner color="blue" />}
 
-      {/* {query !== '' && filterList(residents).map((listItem,) => (
-        <View key={listItem.objectId}>
-          <Button onPress={() => onSelectSurveyee(listItem)}>
-          {listItem.fname || listItem.lname}
-          </Button>
-        </View>
-      ))} */}
-
       {query !== '' && (
         <FlatList
-          data={filterList(residents)}
+          data={filterList(residentsData)}
           renderItem={renderItem}
           keyExtractor={(item) => item.objectId}
         />
