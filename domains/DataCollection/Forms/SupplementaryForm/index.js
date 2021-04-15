@@ -58,7 +58,7 @@ const SupplementaryForm = ({
         setPhotoFile('Submitted Photo String');
 
         const formObject = values;
-        const user = await getData('currentUser')
+        const user = await getData('currentUser');
 
         formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
         formObject.surveyingOrganization = surveyingOrganization;

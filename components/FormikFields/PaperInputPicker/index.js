@@ -1,7 +1,7 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
-  StyleSheet, TouchableWithoutFeedback, Image, Text, View
+  Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
 import {
   Button, Headline,
@@ -16,7 +16,9 @@ import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import { stylesDefault, stylesPaper, styleX, styleButton, styles } from './index.style';
+import {
+  styleButton, styles, stylesDefault, stylesPaper, styleX
+} from './index.style';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -56,13 +58,6 @@ const PaperInputPicker = ({
     }
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingHorizontal: 10,
-    }
-  });
   const [cameraVisible, setCameraVisible] = React.useState(false);
   const [pictureUris, setPictureUris] = React.useState({});
   const [image, setImage] = React.useState(null);
@@ -317,7 +312,7 @@ const PaperInputPicker = ({
                       {errors[result.textKey]}
                     </Text>
                   </View>
-                )}
+              )}
             </View>
           ))}
           <Text style={{ color: 'red' }}>

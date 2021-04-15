@@ -52,7 +52,7 @@ const stylesPaper = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingHorizontal: 10,
   }
 });
@@ -80,7 +80,7 @@ const styleButton = StyleSheet.create({
     borderColor: theme.colors.primary,
     borderWidth: 1,
     borderRadius: 5,
-    alignItems: "center",
+    alignItems: 'center',
     color: theme.colors.primary,
     paddingHorizontal: 15,
     paddingVertical: 5,
@@ -96,4 +96,6 @@ const styleButton = StyleSheet.create({
   }
 });
 
-export { stylesDefault, stylesPaper, styleX, styleButton, styles };
+export {
+  styleButton, styles, stylesDefault, stylesPaper, styleX
+};
