@@ -69,10 +69,12 @@
   "formsGallery": {
     "puenteForms": "Fòm Puente",
     "customForms": "Fòm Koutim",
+    "pinnedForms": "Pinned Forms",
     "ourMarketPlace": "Fòm Marketplace",
     "discoverForms": "Dekouvri fòm ki te kreye pa konpayi ou fè konfyans",
     "exploreForms": "Eksplore Fòm yo",
     "noCustomForms": "You do not have any custom forms",
+    "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Ou pa gen okenn fòm koutim",
     "viewMarketplace": "VAl gade nan Marketplace",
     "marketPlace": "Marketplace"

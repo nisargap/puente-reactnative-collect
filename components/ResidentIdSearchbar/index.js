@@ -99,7 +99,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
 
     setSearchTimeout(setTimeout(() => {
       fetchData();
-    }, 1000));
+    }, 2000));
   };
 
   const onSelectSurveyee = (listItem) => {

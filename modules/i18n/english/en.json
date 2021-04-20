@@ -71,10 +71,12 @@
   "formsGallery": {
     "puenteForms": "Puente Forms",
     "customForms": "Custom Forms",
+    "pinnedForms": "Pinned Forms",
     "ourMarketPlace": "Our Marketplace",
     "discoverForms": "Discover forms created by trusted companies",
     "exploreForms": "Explore Forms",
     "noCustomForms": "You do not have any custom forms",
+    "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Check out our marketplace to view available forms",
     "viewMarketplace": "View Marketplace",
     "marketPlace": "Marketplace"

@@ -1,6 +1,6 @@
 {
   "name": "puente-reactnative",
-  "version": "11.2.2",
+  "version": "11.3.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -75,7 +75,7 @@
     "react-native-safe-area-context": "3.0.7",
     "react-native-screens": "2.12.0",
     "react-native-svg": "12.1.0",
-    "react-native-web": "0.15.0",
+    "react-native-web": "0.15.6",
     "react-redux": "7.2.0",
     "redux": "4.0.5",
     "redux-actions": "2.6.5",
@@ -87,16 +87,16 @@
     "babel-preset-expo": "8.2.3",
     "deep-merge": "1.0.0",
     "env-cmd": "10.1.0",
-    "eslint": "7.22.0",
+    "eslint": "7.24.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.20.6",
+    "eslint-plugin-react": "7.23.2",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "jest-expo": "37.0.0",
     "react-native-svg-transformer": "0.14.3",
     "react-test-renderer": "16.13.0",
-    "standard-version": "9.1.1",
+    "standard-version": "9.2.0",
     "standard-version-expo": "1.0.3"
   },
   "private": true
