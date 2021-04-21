@@ -1,11 +1,8 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, Image, Text, View
+import {
+  Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
-<<<<<<< HEAD
-=======
-
->>>>>>> ff2a2e07baacbb67a351accc9e33004fa1f59bf5
 import {
   Button, Headline,
   TextInput,
@@ -19,7 +16,9 @@ import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import { stylesDefault, stylesPaper, styleX, styleButton, styles } from './index.style';
+import {
+  styleButton, styles, stylesDefault, stylesPaper, styleX
+} from './index.style';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -59,20 +58,10 @@ const PaperInputPicker = ({
     }
   };
 
-<<<<<<< HEAD
-=======
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingHorizontal: 10,
-    }
-  });
   const [cameraVisible, setCameraVisible] = React.useState(false);
   const [pictureUris, setPictureUris] = React.useState({});
   const [image, setImage] = React.useState(null);
 
->>>>>>> ff2a2e07baacbb67a351accc9e33004fa1f59bf5
   return (
     <>
       {fieldType === 'input' && (
@@ -215,23 +204,7 @@ const PaperInputPicker = ({
                 {/* selected value */}
                 {result.value === values[formikKey] && (
                   <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}>
-<<<<<<< HEAD
                     <View style={styleButton.selected}>
-=======
-                    <View
-                      style={{
-                        backgroundColor: theme.colors.primary,
-                        borderColor: theme.colors.primary,
-                        borderWidth: 1,
-                        borderRadius: 5,
-                        alignItems: 'center',
-                        color: theme.colors.primary,
-                        paddingHorizontal: 15,
-                        paddingVertical: 5,
-                        margin: 5
-                      }}
-                    >
->>>>>>> ff2a2e07baacbb67a351accc9e33004fa1f59bf5
 
                       <View style={styles.button}>
                         <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
@@ -245,19 +218,7 @@ const PaperInputPicker = ({
                   <TouchableWithoutFeedback
                     onPress={() => setFieldValue(formikKey, result.value)}
                   >
-<<<<<<< HEAD
                     <View style={styleButton.unselected}>
-=======
-                    <View style={{
-                      borderWidth: 1,
-                      borderColor: theme.colors.primary,
-                      borderRadius: 5,
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      margin: 5
-                    }}
-                    >
->>>>>>> ff2a2e07baacbb67a351accc9e33004fa1f59bf5
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
@@ -351,7 +312,7 @@ const PaperInputPicker = ({
                       {errors[result.textKey]}
                     </Text>
                   </View>
-                )}
+              )}
             </View>
           ))}
           <Text style={{ color: 'red' }}>

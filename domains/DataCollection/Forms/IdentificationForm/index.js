@@ -45,7 +45,7 @@ const IdentificationForm = ({
             setPhotoFile('Submitted Photo String');
 
             const formObject = values;
-            const user = await getData('currentUser')
+            const user = await getData('currentUser');
 
             formObject.surveyingOrganization = surveyingOrganization;
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
