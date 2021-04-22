@@ -18,8 +18,12 @@ const parseSearch = (surveyingOrganization, qry) => {
   lname.limit(2000);
   lname.startsWith('lname', qry);
 
+  const nname = new Parse.Query('SurveyData');
+  nname.limit(2000);
+  nname.startsWith('nickname', qry);
+
   return new Promise((resolve, reject) => {
-    const query = Parse.Query.or(fname, lname);
+    const query = Parse.Query.or(fname, lname, nname);
 
     query.descending('createdAt');
 
