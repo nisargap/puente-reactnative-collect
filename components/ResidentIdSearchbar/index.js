@@ -90,6 +90,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
+    setLoading(true);
     clearTimeout(searchTimeout);
 
     setQuery(input);
@@ -133,7 +134,9 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         onChangeText={onChangeSearch}
         value={query}
       />
-      <Button onPress={fetchData}>{I18n.t('global.refresh')}</Button>
+      {!online &&
+        <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>
+      }
       {loading
         && <Spinner color="blue" />}
 
