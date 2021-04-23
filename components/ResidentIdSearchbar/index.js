@@ -134,9 +134,8 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         onChangeText={onChangeSearch}
         value={query}
       />
-      {!online &&
-        <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>
-      }
+      {!online
+        && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
       {loading
         && <Spinner color="blue" />}
 
