@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ScrollView, StyleSheet,
+  ScrollView,
   View
 } from 'react-native';
 import {
@@ -13,6 +13,7 @@ import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
 import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
+import styles from './index.styles';
 
 const FormGallery = (props) => {
   const {
@@ -124,26 +125,4 @@ const FormGallery = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
-  },
-  textContainer: {
-    flexDirection: 'row',
-  },
-  text: {
-    flexShrink: 1,
-    textAlign: 'center',
-    color: theme.colors.primary,
-    fontWeight: 'bold',
-    marginVertical: 7,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  }
-});
 export default FormGallery;
