@@ -4,30 +4,30 @@ import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
 
 import { getData } from '../../modules/async-storage';
-import { residentQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
 import ResidentCard from '../FindResidents/Resident/ResidentCard';
 import styles from './index.styles';
+import parseSearch from './utils';
 
 const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) => {
   const [query, setQuery] = useState('');
   const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [offline, setOffline] = useState(true);
+  const [online, setOnline] = useState(true);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
-      if (!connected) {
-        fetchData();
-      }
+      if (connected) fetchData(true, '');
+      if (!connected) fetchData(false, '');
     });
   }, [surveyingOrganization]);
 
   const fetchOfflineData = async () => {
     setLoading(true);
-    setOffline(true);
+    setOnline(false);
+
     getData('residentData').then((residentData) => {
       if (residentData) {
         let offlineData = [];
@@ -45,18 +45,14 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     });
   };
 
-  const fetchOnlineData = async () => {
+  const fetchOnlineData = async (qry) => {
     setLoading(true);
-    setOffline(false);
-    const queryParams = {
-      skip: 0,
-      offset: 0,
-      limit: 2000,
-      parseColumn: 'surveyingOrganization',
-      parseParam: surveyingOrganization,
-    };
-    const records = await residentQuery(queryParams);
+    setOnline(true);
+
+    const records = await parseSearch(surveyingOrganization, qry);
+
     let offlineData = [];
+
     await getData('offlineIDForms').then((offlineResidentData) => {
       if (offlineResidentData !== null) {
         Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
@@ -64,17 +60,18 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         });
       }
     });
+
     const allData = records.concat(offlineData);
     setResidentsData(allData.slice());
     setLoading(false);
   };
 
-  const fetchData = () => {
-    if (offline) fetchOfflineData();
-    if (!offline) fetchOnlineData();
+  const fetchData = (onLine, qry) => {
+    if (!onLine) fetchOfflineData();
+    if (onLine) fetchOnlineData(qry);
   };
 
-  const filterList = () => residentsData.filter(
+  const filterOfflineList = () => residentsData.filter(
     (listItem) => {
       const fname = listItem.fname || ' ';
       const lname = listItem.lname || ' ';
@@ -98,7 +95,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     setQuery(input);
 
     setSearchTimeout(setTimeout(() => {
-      fetchData();
+      fetchData(online, input);
     }, 2000));
   };
 
@@ -142,7 +139,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
 
       {query !== '' && (
         <FlatList
-          data={filterList(residentsData)}
+          data={online ? residentsData : filterOfflineList(residentsData)}
           renderItem={renderItem}
           keyExtractor={(item) => item.objectId}
         />
