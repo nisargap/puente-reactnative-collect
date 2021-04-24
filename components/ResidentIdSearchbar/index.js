@@ -25,7 +25,6 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   }, [surveyingOrganization]);
 
   const fetchOfflineData = async () => {
-    setLoading(true);
     setOnline(false);
 
     getData('residentData').then((residentData) => {
@@ -46,7 +45,6 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   };
 
   const fetchOnlineData = async (qry) => {
-    setLoading(true);
     setOnline(true);
 
     const records = await parseSearch(surveyingOrganization, qry);
@@ -91,6 +89,9 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
 
   const onChangeSearch = (input) => {
     setLoading(true);
+
+    if (input === '') setLoading(false);
+
     clearTimeout(searchTimeout);
 
     setQuery(input);
