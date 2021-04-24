@@ -19,9 +19,9 @@ function postForms(idForms, supForms) {
           const offlineObjectID = postParams.localObject.objectId;
           const idParams = postParams;
           delete idParams.localObject.objectId;
-          postObjectsToClass(idParams).then((surveyee) => {
-            const surveyeeSanitized = JSON.parse(JSON.stringify(surveyee));
-            const parseObjectID = surveyeeSanitized.objectId;
+          postObjectsToClass(idParams).then((object) => {
+            const objectSanitized = JSON.parse(JSON.stringify(object));
+            const parseObjectID = objectSanitized.objectId;
             if (supForms !== null && supForms !== []) {
               supForms.forEach((supForm) => {
                 if (supForm.parseParentClassID === offlineObjectID) {
@@ -34,13 +34,11 @@ function postForms(idForms, supForms) {
                 }
               });
             }
-            if (index === array.length - 1) {
-              resolve();
-            }
           }, (error) => {
             reject(error);
           });
         }
+        if (index === array.length - 1) resolve();
       });
     } else {
       resolve(true);
@@ -55,20 +53,22 @@ function postForms(idForms, supForms) {
  * postForms(supForms);
  *
  * @param {Array} supForms Array of all supplementary forms created offline
+ *  @param {String} offlineUniqueId String of Offline Id
+
  *
  *********************************************** */
-function postSupForms(supForms) {
+function postSupForms(supForms, offlineUniqueId) {
   return new Promise((resolve, reject) => {
     if (supForms !== null && supForms !== []) {
       supForms.forEach((supForm, index, array) => {
         // supplementary forms not tied to an offline ID form
-        if (!supForm.parseParentClassID.includes('PatientID-')) {
+        if (!supForm.parseParentClassID.includes(offlineUniqueId)) {
           postObjectsToClassWithRelation(supForm).then(() => {
-            if (index === array.length - 1) resolve();
           }, (error) => {
             reject(error);
           });
         }
+        if (index === array.length - 1) resolve();
       });
     } else {
       resolve(true);

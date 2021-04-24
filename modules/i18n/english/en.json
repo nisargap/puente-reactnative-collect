@@ -10,7 +10,8 @@
     "city": "City",
     "commName": "Community Name",
     "notes": "Notes",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "emptyForm": "Empty Form"
   },
   "signUp": {
     "firstName": "First Name",
@@ -70,10 +71,12 @@
   "formsGallery": {
     "puenteForms": "Puente Forms",
     "customForms": "Custom Forms",
+    "pinnedForms": "Pinned Forms",
     "ourMarketPlace": "Our Marketplace",
     "discoverForms": "Discover forms created by trusted companies",
     "exploreForms": "Explore Forms",
     "noCustomForms": "You do not have any custom forms",
+    "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Check out our marketplace to view available forms",
     "viewMarketplace": "View Marketplace",
     "marketPlace": "Marketplace"
@@ -281,13 +284,15 @@
     "hemoglobinLevels": "Hemoglobin Levels (Hb)",
     "hemoglobinA1c": "Hemoglobin A1c (HbA1c)",
     "gdL": "g/dL",
-    "pain": "Pain"
+    "pain": "Pain",
+    "photoAssessment": "Photo Assessment"
   },
   "supplementaryForms": {
     "attachResident": "Attach a Community Resident"
   },
   "assetForms": {
-    "attachForm": "Attach a Form to the Asset"
+    "attachForm": "Attach a Form to the Asset",
+    "createAsset": "Create an Asset"
   },
   "forms": {
     "successfullySubmitted": "Form successfully submitted",
@@ -398,7 +403,8 @@
   },
   "languagePicker": {
     "english": "English",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "creole": "Haitian Creole"
   },
   "residentIdSearchbar": {
     "searchIndividual": "Search Individual"

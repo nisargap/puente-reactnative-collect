@@ -1,3 +1,5 @@
+import Constants from 'expo-constants';
+
 import { retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
 import { cacheAutofillData, cacheResidentData, customFormsQuery } from './read';
@@ -37,7 +39,7 @@ export default function populateCache(user) {
       const queryParams = {
         skip: 0,
         offset: 0,
-        limit: 100000,
+        limit: 2000,
         parseColumn: 'surveyingOrganization',
         parseParam: user.get('organization'),
       };
@@ -45,5 +47,14 @@ export default function populateCache(user) {
     })
     .then(async () => {
       await customFormsQuery(user.get('organization'));
+    })
+    .then(async () => {
+      // store current app version
+      const appVersion = Constants.manifest.version;
+      await getData('appVersion').then(async (currentAppVersion) => {
+        if (appVersion !== currentAppVersion && appVersion !== null && appVersion !== undefined) {
+          await storeData(appVersion, 'appVersion');
+        }
+      });
     });
 }

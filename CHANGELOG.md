@@ -2,6 +2,133 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.4.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.3.0...v11.4.0) (2021-04-23)
+
+
+### New Features
+
+* add pinned forms to suggested forms spot ([aa8d720](https://github.com/hopetambala/puente-reactnative-collect/commit/aa8d720f0101e76f29a9f5306148a8b3106bcf5e))
+
+
+### Bug fixes
+
+* add automatic searching for resident searchbar ([69b5518](https://github.com/hopetambala/puente-reactnative-collect/commit/69b5518703dbd373a294ba7cc09d74acd6be8c23))
+* remove refresh button for online ([c83b6df](https://github.com/hopetambala/puente-reactnative-collect/commit/c83b6df06b321ce02ee44bc62d695d0ad2f1d5cb))
+
+## [11.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.2...v11.3.0) (2021-04-15)
+
+
+### New Features
+
+* add deeplinking between user and survey ([1f32da3](https://github.com/hopetambala/puente-reactnative-collect/commit/1f32da3ab8d8735d94ac32de234f8c143b4c86a7))
+* add pinned form logic :tada: ([158e3fa](https://github.com/hopetambala/puente-reactnative-collect/commit/158e3fa97304abdfd2324b3e0438ce71d849601d))
+
+
+### Bug fixes
+
+* increase timeout limit for searching resident id searchbar ([1b86f3a](https://github.com/hopetambala/puente-reactnative-collect/commit/1b86f3a086d4a1de2445dc06a44a51a4a4d9b88e))
+* **deps:** update dependency react-native-web to v0.15.6 ([4b6f0a5](https://github.com/hopetambala/puente-reactnative-collect/commit/4b6f0a58aba44b2a5bea2598b1b35bbd0fe07dfb))
+
+### [11.2.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.1...v11.2.2) (2021-03-29)
+
+
+### Bug fixes
+
+* text prop not ([69cca41](https://github.com/hopetambala/puente-reactnative-collect/commit/69cca41c459afd33323eca8bdc94e83aa7e61d8b))
+
+### [11.2.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.0...v11.2.1) (2021-03-28)
+
+
+### Bug fixes
+
+* ability to search first and last name ([8c52608](https://github.com/hopetambala/puente-reactnative-collect/commit/8c526085d7e0c92eb13be93cbd4426d441d35c45))
+* create timer for when the search calls from the database ([489feee](https://github.com/hopetambala/puente-reactnative-collect/commit/489feee5934e6864cebd48752deb95ffa877aa5b))
+* index for people modal ([bb643e7](https://github.com/hopetambala/puente-reactnative-collect/commit/bb643e7962eef3bff425438c719a4c5add76b3c3))
+* **deps:** pin dependencies ([faae398](https://github.com/hopetambala/puente-reactnative-collect/commit/faae3987aa797ab2a308a9df340e3f8f2373382c))
+
+## [11.2.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.1...v11.2.0) (2021-03-25)
+
+
+### Bug fixes
+
+* console error for autofill org ([33713f6](https://github.com/hopetambala/puente-reactnative-collect/commit/33713f6b74d4e6354195629046ddca0457c2d096))
+
+
+### New Features
+
+* count service using unique records ([160e3af](https://github.com/hopetambala/puente-reactnative-collect/commit/160e3afdeedd3e6a77ccd5195c618ba2269f7701))
+* online search is enabled ([fc5c715](https://github.com/hopetambala/puente-reactnative-collect/commit/fc5c7157228fbbf7175e2495eb073a6b5ca32c8c))
+
+### [11.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.1.0...v11.1.1) (2021-03-10)
+
+
+### Bug fixes
+
+* set related people ([7b6fa4c](https://github.com/hopetambala/puente-reactnative-collect/commit/7b6fa4c0c724d8c8186087a882b5348ade7f81e1))
+
+## [11.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.0.0...v11.1.0) (2021-03-09)
+
+
+### New Features
+
+* add UX-related features to improve usability of asset data collection ([40bcdec](https://github.com/hopetambala/puente-reactnative-collect/commit/40bcdec0fe5478e8517b1e47df390bad18bd5639))
+
+## [11.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.3...v11.0.0) (2021-03-05)
+
+
+### Bug fixes
+
+* **deps:** update dependency @react-native-community/viewpager to v3.3.1 ([15b4af7](https://github.com/hopetambala/puente-reactnative-collect/commit/15b4af7b4cf7220bf754c22506e1394435cfdc2c))
+* **deps:** update dependency @react-native-community/viewpager to v4 ([b2598ff](https://github.com/hopetambala/puente-reactnative-collect/commit/b2598ffaa198969b7a14f8db7d72fd6049abed2c))
+* **deps:** update dependency lodash to v4.17.21 ([fac9414](https://github.com/hopetambala/puente-reactnative-collect/commit/fac94143e8f3018da1501abdb5cf0928f7f77a08))
+
+
+### New Features
+
+* added Haitian Creole translation :tada: ([9a2479e](https://github.com/hopetambala/puente-reactnative-collect/commit/9a2479ede38ede42c6317b48b0f2793f6c717917))
+* asset forms offline ([d5dfef8](https://github.com/hopetambala/puente-reactnative-collect/commit/d5dfef80e8e353fd55eba1cbdbcc21fb00e441e6))
+
+### [10.6.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.2...v10.6.3) (2021-02-25)
+
+
+### New Features
+
+* autofill for organization ([3a8d7ee](https://github.com/hopetambala/puente-reactnative-collect/commit/3a8d7ee5af4147cb9d824134b7a99841987bd725))
+* ui update for autofill ([46e37fc](https://github.com/hopetambala/puente-reactnative-collect/commit/46e37fcd0212784c6609212e33ffa342d03740cc))
+
+
+### Bug fixes
+
+* adding assets back to cachedResourcecs ([eb25c1d](https://github.com/hopetambala/puente-reactnative-collect/commit/eb25c1dc04426a307452b299370bf7f4db573efd))
+* android autofill respond to user ([f96c306](https://github.com/hopetambala/puente-reactnative-collect/commit/f96c3061a3c5594b4e0e4a33ff40f7daf47b0147))
+
+### [10.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.6.0...v10.6.1) (2021-02-19)
+
+
+### New Features
+
+* appVersion stored in async and added to all frm submissions ([649b58f](https://github.com/hopetambala/puente-reactnative-collect/commit/649b58ff135f9b024dffb99ced2bdb52672df3be))
+
+
+### Bug fixes
+
+* double submitting sup forms + move check index for resolve ([6557bc8](https://github.com/hopetambala/puente-reactnative-collect/commit/6557bc8547daa460988eb36d38496478b256ba43))
+* limite resident surveys ([37701ec](https://github.com/hopetambala/puente-reactnative-collect/commit/37701ec8ff7d191827f7564631033afa4fe69eb1))
+
+## [10.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.5.5...v10.6.0) (2021-02-17)
+
+
+### New Features
+
+* autofill for sign up organization ([ec22084](https://github.com/hopetambala/puente-reactnative-collect/commit/ec22084ae75454cbfcbac04282a23c0a740bd31f))
+* initial image capture component ([8df0e94](https://github.com/hopetambala/puente-reactnative-collect/commit/8df0e94bb616c749c4aafc49a2a81d304d772f2f))
+* photo works on all forms 🎉 ([d8b55ba](https://github.com/hopetambala/puente-reactnative-collect/commit/d8b55bab447f22a4a42a1ec089a860b0e69bb0d2))
+
+
+### Bug fixes
+
+* modal for incorrect username/password offline ([4556d6e](https://github.com/hopetambala/puente-reactnative-collect/commit/4556d6e5c7777f295966e3803c146b2df933a140))
+
 ### [10.5.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v10.5.3...v10.5.4) (2021-02-04)
 
 ### Bug fixes

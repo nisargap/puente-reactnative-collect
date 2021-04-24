@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import * as React from 'react';
 
-import DataAnalysis from '../../../domains/DataAnalysis';
+// import DataAnalysis from '../../../domains/DataAnalysis';
 // import HomeScreen from '../../../domains/HomeScreen';
 import DataCollection from '../../../domains/DataCollection';
 import TabBarIcon from '../../TabBarIcon';
@@ -35,21 +36,23 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-folder" />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Data_Analysis"
         component={DataAnalysis}
         options={{
           title: 'Data Analysis',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-analytics" />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
 
   );
 }
 
 function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+  const routeName = getFocusedRouteNameFromRoute(route) ?? INITIAL_ROUTE_NAME;
+
+  // const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
     // case 'Home':
