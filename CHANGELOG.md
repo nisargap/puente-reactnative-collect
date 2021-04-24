@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.4.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.3.0...v11.4.0) (2021-04-23)
+
+
+### New Features
+
+* add pinned forms to suggested forms spot ([aa8d720](https://github.com/hopetambala/puente-reactnative-collect/commit/aa8d720f0101e76f29a9f5306148a8b3106bcf5e))
+
+
+### Bug fixes
+
+* add automatic searching for resident searchbar ([69b5518](https://github.com/hopetambala/puente-reactnative-collect/commit/69b5518703dbd373a294ba7cc09d74acd6be8c23))
+* remove refresh button for online ([c83b6df](https://github.com/hopetambala/puente-reactnative-collect/commit/c83b6df06b321ce02ee44bc62d695d0ad2f1d5cb))
+
+## [11.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.2...v11.3.0) (2021-04-15)
+
+
+### New Features
+
+* add deeplinking between user and survey ([1f32da3](https://github.com/hopetambala/puente-reactnative-collect/commit/1f32da3ab8d8735d94ac32de234f8c143b4c86a7))
+* add pinned form logic :tada: ([158e3fa](https://github.com/hopetambala/puente-reactnative-collect/commit/158e3fa97304abdfd2324b3e0438ce71d849601d))
+
+
+### Bug fixes
+
+* increase timeout limit for searching resident id searchbar ([1b86f3a](https://github.com/hopetambala/puente-reactnative-collect/commit/1b86f3a086d4a1de2445dc06a44a51a4a4d9b88e))
+* **deps:** update dependency react-native-web to v0.15.6 ([4b6f0a5](https://github.com/hopetambala/puente-reactnative-collect/commit/4b6f0a58aba44b2a5bea2598b1b35bbd0fe07dfb))
+
 ### [11.2.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.1...v11.2.2) (2021-03-29)
 
 
