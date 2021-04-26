@@ -1,7 +1,7 @@
 import { Parse } from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, Alert, StyleSheet, View
+  ActivityIndicator, Alert, View
 } from 'react-native';
 import {
   Button, Headline, IconButton, Text, TextInput
@@ -10,6 +10,7 @@ import {
 import { getData, storeData } from '../../../../../modules/async-storage';
 import I18n from '../../../../../modules/i18n';
 import { theme } from '../../../../../modules/theme';
+import styles from '../../../index.styles';
 
 const NamePhoneEmail = () => {
   useEffect(() => {
@@ -144,7 +145,7 @@ const NamePhoneEmail = () => {
                     setEdit(result.key);
                   }}
                 >
-                  Edit
+                  {I18n.t('findRecordSettings.edit')}
                 </Button>
               </View>
             )}
@@ -189,51 +190,10 @@ const NamePhoneEmail = () => {
           color={theme.colors.primary}
         />
       ) : (
-        <Button onPress={() => updateUser()}>Submit</Button>
+        <Button onPress={() => updateUser()}>{I18n.t('global.submit')}</Button>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    paddingLeft: '5%',
-    paddingRight: '5%'
-  },
-  textContainer: {
-    flexDirection: 'row'
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    flex: 1
-  },
-  svg: {
-    marginLeft: 'auto',
-    marginTop: -3,
-    marginBottom: -5
-  },
-  text: {
-    flexShrink: 1,
-    // fontWeight: 'bold',
-    fontSize: 16,
-    color: '#555',
-    marginVertical: 7,
-  },
-  horizontalLineGray: {
-    borderBottomColor: '#D0D0D0',
-    borderBottomWidth: 1,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  horizontalLinePrimary: {
-    borderBottomColor: theme.colors.primary,
-    borderBottomWidth: 1,
-    marginTop: 10,
-    marginBottom: 10,
-  }
-});
 
 export default NamePhoneEmail;
