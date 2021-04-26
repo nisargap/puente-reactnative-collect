@@ -45,8 +45,10 @@ const IdentificationForm = ({
             setPhotoFile('Submitted Photo String');
 
             const formObject = values;
+            const user = await getData('currentUser');
+
             formObject.surveyingOrganization = surveyingOrganization;
-            formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.appVersion = await getData('appVersion');
 
             formObject.latitude = values.location?.latitude || 0;
@@ -71,7 +73,7 @@ const IdentificationForm = ({
             };
             const postParams = {
               parseClass: 'SurveyData',
-              // signature: 'Sample Signature',
+              parseUser: user.objectId,
               photoFile,
               localObject: formObject
             };
@@ -117,9 +119,6 @@ const IdentificationForm = ({
                   onPressEvent={formikProps.handleSubmit}
                   buttonText={I18n.t('global.submit')}
                 />
-              // <Button icon="human" onPress={formikProps.handleSubmit}>
-              //   <Text>Submit</Text>
-              // </Button>
               )}
             </View>
           )}

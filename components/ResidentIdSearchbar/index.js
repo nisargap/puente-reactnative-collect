@@ -4,29 +4,29 @@ import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
 
 import { getData } from '../../modules/async-storage';
-import { residentQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
 import ResidentCard from '../FindResidents/Resident/ResidentCard';
 import styles from './index.styles';
+import parseSearch from './utils';
 
 const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) => {
   const [query, setQuery] = useState('');
   const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [offline, setOffline] = useState(true);
+  const [online, setOnline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
-      if (!connected) {
-        fetchData();
-      }
+      if (connected) fetchData(true, '');
+      if (!connected) fetchData(false, '');
     });
   }, [surveyingOrganization]);
 
   const fetchOfflineData = async () => {
-    setLoading(true);
-    setOffline(true);
+    setOnline(false);
+
     getData('residentData').then((residentData) => {
       if (residentData) {
         let offlineData = [];
@@ -44,18 +44,13 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     });
   };
 
-  const fetchOnlineData = async () => {
-    setLoading(true);
-    setOffline(false);
-    const queryParams = {
-      skip: 0,
-      offset: 0,
-      limit: 2000,
-      parseColumn: 'surveyingOrganization',
-      parseParam: surveyingOrganization,
-    };
-    const records = await residentQuery(queryParams);
+  const fetchOnlineData = async (qry) => {
+    setOnline(true);
+
+    const records = await parseSearch(surveyingOrganization, qry);
+
     let offlineData = [];
+
     await getData('offlineIDForms').then((offlineResidentData) => {
       if (offlineResidentData !== null) {
         Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
@@ -63,23 +58,27 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         });
       }
     });
+
     const allData = records.concat(offlineData);
     setResidentsData(allData.slice());
     setLoading(false);
   };
 
-  const fetchData = () => {
-    if (offline) fetchOfflineData();
-    if (!offline) fetchOnlineData();
+  const fetchData = (onLine, qry) => {
+    if (!onLine) fetchOfflineData();
+    if (onLine) fetchOnlineData(qry);
   };
 
-  const filterList = () => residentsData.filter(
+  const filterOfflineList = () => residentsData.filter(
     (listItem) => {
       const fname = listItem.fname || ' ';
       const lname = listItem.lname || ' ';
       const nickname = listItem.nickname || ' ';
       return fname.toLowerCase().includes(query.toLowerCase())
         || lname
+          .toLowerCase()
+          .includes(query.toLowerCase())
+        || `${fname} ${lname}`
           .toLowerCase()
           .includes(query.toLowerCase())
         || nickname
@@ -89,12 +88,17 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    if (offline) {
-      setQuery(input);
-    } else {
-      fetchData();
-      setQuery(input);
-    }
+    setLoading(true);
+
+    if (input === '') setLoading(false);
+
+    clearTimeout(searchTimeout);
+
+    setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
+      fetchData(online, input);
+    }, 1000));
   };
 
   const onSelectSurveyee = (listItem) => {
@@ -131,13 +135,14 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
         onChangeText={onChangeSearch}
         value={query}
       />
-      <Button onPress={fetchData}>{I18n.t('global.refresh')}</Button>
+      {!online
+        && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
       {loading
         && <Spinner color="blue" />}
 
       {query !== '' && (
         <FlatList
-          data={filterList(residentsData)}
+          data={online ? residentsData : filterOfflineList(residentsData)}
           renderItem={renderItem}
           keyExtractor={(item) => item.objectId}
         />

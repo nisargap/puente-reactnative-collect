@@ -1,8 +1,7 @@
 import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
-  Image,
-  Text, View
+  Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
 import {
   Button, Headline,
@@ -17,7 +16,9 @@ import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import { stylesDefault, stylesPaper, styleX } from './index.style';
+import {
+  styleButton, styles, stylesDefault, stylesPaper, styleX
+} from './index.style';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -202,31 +203,28 @@ const PaperInputPicker = ({
               <View key={result.value}>
                 {/* selected value */}
                 {result.value === values[formikKey] && (
-                  <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
-                  </View>
+                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}>
+                    <View style={styleButton.selected}>
+
+                      <View style={styles.button}>
+                        <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      </View>
+
+                    </View>
+                  </TouchableWithoutFeedback>
                 )}
                 {/* non-selected value */}
                 {result.value !== values[formikKey] && (
-                  <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
+                  <TouchableWithoutFeedback
+                    onPress={() => setFieldValue(formikKey, result.value)}
+                  >
+                    <View style={styleButton.unselected}>
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
-                    </Button>
-                  </View>
+                    </View>
+
+                  </TouchableWithoutFeedback>
                 )}
               </View>
             ))}
@@ -265,32 +263,32 @@ const PaperInputPicker = ({
                 {/* selected value */}
                 {values[formikKey] && values[formikKey].includes(result.value) && (
                   <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
+                    <TouchableWithoutFeedback
                       onPress={() => {
                         const test = values[formikKey].filter((item) => item !== result.value);
                         setFieldValue(formikKey, test);
                       }}
                     >
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
+                      <View style={styleButton.selected}>
+                        <View style={styles.button}>
+                          <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                        </View>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
                 {/* non-selected value */}
                 {(!values[formikKey] || !(values[formikKey]).includes(result.value)) && (
                   <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
+                    <TouchableWithoutFeedback
                       onPress={() => addArrayVal(result)}
                     >
-                      <Text style={{ color: theme.colors.primary }}>
-                        {customForm ? result.label : I18n.t(result.label)}
-                      </Text>
-                    </Button>
+                      <View style={styleButton.unselected}>
+                        <Text style={{ color: theme.colors.primary }}>
+                          {customForm ? result.label : I18n.t(result.label)}
+                        </Text>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
               </View>
@@ -405,7 +403,7 @@ const PaperInputPicker = ({
                   label={customForm ? result.label : I18n.t(result.label)}
                   onChangeText={handleChange(customForm ? result.label : I18n.t(result.label))}
                   onBlur={handleBlur(customForm ? result.label : I18n.t(result.label))}
-                    {...rest} //eslint-disable-line
+                  {...rest} //eslint-disable-line
                   mode="outlined"
                   theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
                 />
@@ -432,7 +430,7 @@ const PaperInputPicker = ({
                     label={customForm ? result.label : I18n.t(result.label)}
                     onChangeText={handleChange(result.value)}
                     onBlur={handleBlur(result.value)}
-                      {...rest} //eslint-disable-line
+                    {...rest} //eslint-disable-line
                     mode="outlined"
                     keyboardType="numeric"
                     maxLength={result.maxLength ? result.maxLength : null}
