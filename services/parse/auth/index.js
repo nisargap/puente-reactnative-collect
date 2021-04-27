@@ -10,13 +10,6 @@ function initialize() {
   Parse.initialize(parseAppId, parseJavascriptKey);
   Parse.serverURL = parseServerUrl;
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line
-  createRoles();
-}
-
-function createRoles() {
-  Parse.Cloud.run('createAdminRole');
-  Parse.Cloud.run('createManagerRole');
-  Parse.Cloud.run('createContributorRole');
 }
 
 function retrieveSignUpFunction(params) {
