@@ -131,7 +131,7 @@ const Header = ({
         </View>
         <View style={headerIcon}>
           <IconButton
-            icon="settings"
+            icon="tune"
             color={headerIcon.color}
             size={30}
             onPress={navToSettings}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet, Text, TouchableOpacity, View,
-  YellowBox
+  LogBox
 } from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { TextInput } from 'react-native-paper';
@@ -13,7 +13,9 @@ import I18n from '../../../../modules/i18n';
 import { theme } from '../../../../modules/theme';
 import { stylesDefault, stylesPaper } from '../index.style';
 
-YellowBox.ignoreWarnings(['VirtualizedLists should never be nested']);
+// LogBox.ignoreWarnings(['VirtualizedLists should never be nested']);
+LogBox.ignoreAllLogs(true)
+
 
 export default class AutoFill extends Component {
   constructor(props) {
