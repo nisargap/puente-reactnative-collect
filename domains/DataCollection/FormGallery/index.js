@@ -93,7 +93,7 @@ const FormGallery = (props) => {
               </View>
             </Card>
           ))}
-          {customForms.length < 1 && (
+          {customForms?.length < 1 && (
             <View style={layout.screenRow}>
               <Card>
                 <Card.Title title={I18n.t('formsGallery.noCustomForms')} />
