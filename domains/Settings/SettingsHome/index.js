@@ -12,7 +12,7 @@ import styles from '../index.styles';
 import AccountSettings from './AccountSettings';
 
 const SettingsHome = ({
-  setView, prevView, logOut, settingsView, setSettingsView, setSettings
+  logOut, settingsView, setSettingsView, setSettings
 }) => {
   const [accountSettingsView, setAccountSettingsView] = useState('');
   const inputs = [

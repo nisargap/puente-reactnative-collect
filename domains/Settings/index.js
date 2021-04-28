@@ -6,7 +6,9 @@ import {
 import SettingsHome from './SettingsHome';
 import SupportHome from './SupportHome';
 
-const SettingsView = ({ setView, prevView, logOut, setSettings }) => {
+const SettingsView = ({
+  setView, prevView, logOut, setSettings
+}) => {
   const [settingsView, setSettingsView] = useState('Settings');
   return (
     <View>

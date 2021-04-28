@@ -14,7 +14,7 @@ import styles from '../index.styles';
 import SupportSettings from './SupportSettings';
 
 const SupportHome = ({
-  setView, prevView, logOut, settingsView, setSettingsView, setSettings
+  logOut, settingsView, setSettingsView, setSettings
 }) => {
   const [supportView, setSupportView] = useState('');
 
@@ -77,15 +77,15 @@ const SupportHome = ({
                   <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.text}>{input.label}</Text>
                     {input.button && (
-                    <IconButton
-                      icon="chevron-right"
-                      size={30}
-                      color={theme.colors.primary}
-                      style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
-                      onPress={() => {
-                        setSupportView(input.key);
-                      }}
-                    />
+                      <IconButton
+                        icon="chevron-right"
+                        size={30}
+                        color={theme.colors.primary}
+                        style={{ marginLeft: 'auto', marginTop: -5, marginBottom: -10 }}
+                        onPress={() => {
+                          setSupportView(input.key);
+                        }}
+                      />
                     )}
                   </View>
                 )}

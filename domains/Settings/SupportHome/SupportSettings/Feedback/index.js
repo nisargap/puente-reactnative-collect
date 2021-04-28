@@ -1,9 +1,8 @@
+import * as MailComposer from 'expo-mail-composer';
 import React, { useState } from 'react';
 import {
   View
 } from 'react-native';
-import email from 'react-native-email';
-import * as MailComposer from 'expo-mail-composer';
 import {
   Button, Headline, Text, TextInput
 } from 'react-native-paper';
@@ -19,18 +18,9 @@ const Feedback = () => {
           recipients: ['info@puente-dr.org'],
           subject: 'User Feedback',
           body: emailBody
-        })
+        });
       }
-    })
-
-    // const to = ['info@puente-dr.org']; // string or array of email addresses
-    // email(to, {
-    //   // Optional additional arguments
-    //   cc: [], // string or array of email addresses
-    //   bcc: [], // string or array of email addresses
-    //   subject: 'User Feedback',
-    //   body: emailBody
-    // }).catch(console.error); // eslint-disable-line
+    });
   };
 
   const [emailBody, setEmailBody] = useState('');

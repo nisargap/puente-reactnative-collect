@@ -14,7 +14,7 @@ import { countService } from '../../services/parse/crud';
 import styles from './index.styles';
 
 const Header = ({
-  view, setView, setSettings
+  setSettings
 }) => {
   const { header, headerText, headerIcon } = styles;
 
