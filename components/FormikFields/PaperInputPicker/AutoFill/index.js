@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
+  LogBox,
   Platform,
-  StyleSheet, Text, TouchableOpacity, View,
-  LogBox
+  StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { TextInput } from 'react-native-paper';
@@ -14,8 +14,7 @@ import { theme } from '../../../../modules/theme';
 import { stylesDefault, stylesPaper } from '../index.style';
 
 // LogBox.ignoreWarnings(['VirtualizedLists should never be nested']);
-LogBox.ignoreAllLogs(true)
-
+LogBox.ignoreAllLogs(true);
 
 export default class AutoFill extends Component {
   constructor(props) {
