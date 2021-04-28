@@ -7,7 +7,7 @@ import SettingsHome from './SettingsHome';
 import SupportHome from './SupportHome';
 
 const SettingsView = ({
-  setView, prevView, logOut, setSettings
+ logOut, setSettings
 }) => {
   const [settingsView, setSettingsView] = useState('Settings');
   return (
@@ -15,8 +15,6 @@ const SettingsView = ({
       <View style={{ paddingTop: '7%' }}>
         {settingsView === 'Settings' && (
           <SettingsHome
-            setView={setView}
-            prevView={prevView}
             logOut={logOut}
             settingsView={settingsView}
             setSettingsView={setSettingsView}
@@ -27,8 +25,6 @@ const SettingsView = ({
           <SupportHome
             settingsView={settingsView}
             setSettingsView={setSettingsView}
-            setView={setView}
-            prevView={prevView}
             logOut={logOut}
             setSettings={setSettings}
           />
