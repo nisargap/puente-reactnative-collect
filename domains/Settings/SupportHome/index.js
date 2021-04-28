@@ -14,7 +14,7 @@ import styles from '../index.styles';
 import SupportSettings from './SupportSettings';
 
 const SupportHome = ({
-  setView, prevView, logOut, settingsView, setSettingsView
+  setView, prevView, logOut, settingsView, setSettingsView, setSettings
 }) => {
   const [supportView, setSupportView] = useState('');
 
@@ -94,7 +94,7 @@ const SupportHome = ({
             ))}
           </View>
           <Button onPress={() => {
-            setView(prevView);
+            setSettings(false);
           }}
           >
             {I18n.t('accountSettings.back')}
