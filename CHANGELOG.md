@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.5.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.5.0) (2021-04-24)
+
+
+### Bug fixes
+
+* speed up search ([337b0a8](https://github.com/hopetambala/puente-reactnative-collect/commit/337b0a8b6990749fae9cb6b0571ff658b175f95d))
+
+## [11.4.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.3.0...v11.4.0) (2021-04-23)
+
+
+### New Features
+
+* add pinned forms to suggested forms spot ([aa8d720](https://github.com/hopetambala/puente-reactnative-collect/commit/aa8d720f0101e76f29a9f5306148a8b3106bcf5e))
+
+
+### Bug fixes
+
+* add automatic searching for resident searchbar ([69b5518](https://github.com/hopetambala/puente-reactnative-collect/commit/69b5518703dbd373a294ba7cc09d74acd6be8c23))
+* remove refresh button for online ([c83b6df](https://github.com/hopetambala/puente-reactnative-collect/commit/c83b6df06b321ce02ee44bc62d695d0ad2f1d5cb))
+
 ## [11.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.2.2...v11.3.0) (2021-04-15)
 
 

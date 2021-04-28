@@ -201,15 +201,16 @@ const DataCollection = ({ navigation }) => {
                 navigateToGallery={navigateToGallery}
                 navigateToNewRecord={navigateToNewRecord}
                 navigateToRoot={navigateToRoot}
+                navigateToCustomForm={navigateToCustomForm}
                 selectedForm={selectedForm}
                 setSelectedForm={setSelectedForm}
-                puenteForms={puenteForms}
                 surveyingUser={surveyingUser}
                 surveyingOrganization={surveyingOrganization}
                 surveyee={surveyee}
                 setSurveyee={setSurveyee}
                 customForm={customForm}
                 setView={setView}
+                pinnedForms={pinnedForms}
               />
             </View>
           )}
