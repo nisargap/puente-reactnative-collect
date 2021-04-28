@@ -3,6 +3,7 @@ import {
   View
 } from 'react-native';
 import email from 'react-native-email';
+import * as MailComposer from 'expo-mail-composer';
 import {
   Button, Headline, Text, TextInput
 } from 'react-native-paper';
@@ -11,15 +12,25 @@ import I18n from '../../../../../modules/i18n';
 import styles from '../../../index.styles';
 
 const Feedback = () => {
-  const handleEmail = () => {
-    const to = ['info@puente-dr.org']; // string or array of email addresses
-    email(to, {
-      // Optional additional arguments
-      cc: [], // string or array of email addresses
-      bcc: [], // string or array of email addresses
-      subject: 'User Feedback',
-      body: emailBody
-    }).catch(console.error); // eslint-disable-line
+  const handleEmail = async () => {
+    await MailComposer.isAvailableAsync().then((mailAvailable) => {
+      if (mailAvailable) {
+        MailComposer.composeAsync({
+          recipients: ['info@puente-dr.org'],
+          subject: 'User Feedback',
+          body: emailBody
+        })
+      }
+    })
+
+    // const to = ['info@puente-dr.org']; // string or array of email addresses
+    // email(to, {
+    //   // Optional additional arguments
+    //   cc: [], // string or array of email addresses
+    //   bcc: [], // string or array of email addresses
+    //   subject: 'User Feedback',
+    //   body: emailBody
+    // }).catch(console.error); // eslint-disable-line
   };
 
   const [emailBody, setEmailBody] = useState('');
