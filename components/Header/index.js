@@ -14,7 +14,7 @@ import { countService } from '../../services/parse/crud';
 import styles from './index.styles';
 
 const Header = ({
-  view, setView, setPrevView
+  view, setView, setSettings
 }) => {
   const { header, headerText, headerIcon } = styles;
 
@@ -115,8 +115,7 @@ const Header = ({
 
   const navToSettings = () => {
     setDrawerOpen(false);
-    setPrevView(view);
-    setView('Settings');
+    setSettings(true);
   };
 
   return (

@@ -12,7 +12,7 @@ import styles from '../index.styles';
 import AccountSettings from './AccountSettings';
 
 const SettingsHome = ({
-  setView, prevView, logOut, settingsView, setSettingsView
+  setView, prevView, logOut, settingsView, setSettingsView, setSettings
 }) => {
   const [accountSettingsView, setAccountSettingsView] = useState('');
   const inputs = [
@@ -70,7 +70,7 @@ const SettingsHome = ({
             ))}
           </View>
           <Button onPress={() => {
-            setView(prevView);
+            setSettings(false);
           }}
           >
             {I18n.t('accountSettings.back')}

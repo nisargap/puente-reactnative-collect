@@ -36,7 +36,7 @@ const puenteForms = [
 const DataCollection = ({ navigation }) => {
   const [scrollViewScroll, setScrollViewScroll] = useState();
   const [view, setView] = useState('Root');
-  const [prevView, setPrevView] = useState('Root');
+  const [settings, setSettings] = useState(false);
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -154,7 +154,7 @@ const DataCollection = ({ navigation }) => {
         logOut={logOut}
         view={view}
         setView={setView}
-        setPrevView={setPrevView}
+        setSettings={setSettings}
       />
       <KeyboardAvoidingView
         enabled
@@ -162,122 +162,125 @@ const DataCollection = ({ navigation }) => {
         style={{ flex: 1 }}
       >
         <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={scrollViewScroll}>
-          {view === 'Root' && (
+          {settings === true ? (
+            <SettingsView
+              setView={setView}
+              setSettings={setSettings}
+              logOut={logOut}
+            />
+          ) : (
             <View>
-              <MapView organization={surveyingOrganization} />
-              <View style={styles.screenFlexRowWrap}>
-                <View style={styles.cardContainer}>
-                  <Card style={styles.cardSmallStyle} onPress={() => navigateToNewRecord()}>
-                    <NewRecordSVG height={70} style={styles.svg} />
-                    <Text style={styles.text}>{I18n.t('dataCollection.newRecord')}</Text>
-                  </Card>
-                  <Card style={styles.cardSmallStyle} onPress={navigateToFindRecords}>
-                    <FindRecordSVG height={65} style={styles.svg} />
-                    <Text style={styles.text}>{I18n.t('dataCollection.findRecord')}</Text>
-                  </Card>
+              { view === 'Root' && (
+                <View>
+                  <MapView organization={surveyingOrganization} />
+                  <View style={styles.screenFlexRowWrap}>
+                    <View style={styles.cardContainer}>
+                      <Card style={styles.cardSmallStyle} onPress={() => navigateToNewRecord()}>
+                        <NewRecordSVG height={70} style={styles.svg} />
+                        <Text style={styles.text}>{I18n.t('dataCollection.newRecord')}</Text>
+                      </Card>
+                      <Card style={styles.cardSmallStyle} onPress={navigateToFindRecords}>
+                        <FindRecordSVG height={65} style={styles.svg} />
+                        <Text style={styles.text}>{I18n.t('dataCollection.findRecord')}</Text>
+                      </Card>
+                    </View>
+                    <Card style={styles.cardSmallStyle} onPress={navigateToGallery}>
+                      <ComingSoonSVG height={65} style={styles.svg} />
+                      <Text style={styles.text}>{I18n.t('dataCollection.viewAll')}</Text>
+                    </Card>
+                    <View style={styles.cardContainer}>
+                      <Card style={styles.cardSmallStyle} onPress={navigateToNewAssets}>
+                        <ResearchSVG height={70} width={70} style={styles.svg} />
+                        <Text style={styles.text}>{I18n.t('dataCollection.newAsset')}</Text>
+                      </Card>
+                      <Card style={styles.cardSmallStyle} onPress={navigateToViewAllAssets}>
+                        <ResearchSVG height={70} width={70} style={styles.svg} />
+                        <Text style={styles.text}>{I18n.t('dataCollection.viewAssets')}</Text>
+                      </Card>
+                    </View>
+                  </View>
                 </View>
-                <Card style={styles.cardSmallStyle} onPress={navigateToGallery}>
-                  <ComingSoonSVG height={65} style={styles.svg} />
-                  <Text style={styles.text}>{I18n.t('dataCollection.viewAll')}</Text>
-                </Card>
-                <View style={styles.cardContainer}>
-                  <Card style={styles.cardSmallStyle} onPress={navigateToNewAssets}>
-                    <ResearchSVG height={70} width={70} style={styles.svg} />
-                    <Text style={styles.text}>{I18n.t('dataCollection.newAsset')}</Text>
-                  </Card>
-                  <Card style={styles.cardSmallStyle} onPress={navigateToViewAllAssets}>
-                    <ResearchSVG height={70} width={70} style={styles.svg} />
-                    <Text style={styles.text}>{I18n.t('dataCollection.viewAssets')}</Text>
-                  </Card>
-                </View>
-              </View>
-            </View>
-          )}
-          {view === 'Forms' && (
-            <View>
-              <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                <Text>{I18n.t('dataCollection.back')}</Text>
-              </Button>
-              <Forms
-                style={layout.line}
-                navigation={navigation}
-                scrollViewScroll={scrollViewScroll}
-                setScrollViewScroll={setScrollViewScroll}
-                navigateToGallery={navigateToGallery}
-                navigateToNewRecord={navigateToNewRecord}
-                navigateToRoot={navigateToRoot}
-                navigateToCustomForm={navigateToCustomForm}
-                selectedForm={selectedForm}
-                setSelectedForm={setSelectedForm}
-                surveyingUser={surveyingUser}
-                surveyingOrganization={surveyingOrganization}
-                surveyee={surveyee}
-                setSurveyee={setSurveyee}
-                customForm={customForm}
-                setView={setView}
-                pinnedForms={pinnedForms}
-              />
-            </View>
-          )}
-          {view === 'Assets' && (
-            <View>
-              <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                <Text>{I18n.t('dataCollection.back')}</Text>
-              </Button>
-              <Assets
-                surveyingOrganization={surveyingOrganization}
-                selectedAsset={selectedAsset}
-                setSelectedAsset={setSelectedAsset}
-                navigateToNewAssets={navigateToNewAssets}
-                navigateToViewAllAssets={navigateToViewAllAssets}
-              />
-            </View>
-          )}
-          {view === 'Gallery' && (
-            <View>
-              <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                <Text>{I18n.t('dataCollection.back')}</Text>
-              </Button>
-              <FormGallery
-                navigation={navigation}
-                navigateToNewRecord={navigateToNewRecord}
-                puenteForms={puenteForms}
-                navigateToCustomForm={navigateToCustomForm}
-                customForms={customForms}
-                refreshCustomForms={refreshCustomForms}
-                pinnedForms={pinnedForms}
-                removePinnedForm={removePinnedForm}
-                pinForm={pinForm}
-              />
-            </View>
-          )}
-          {view === 'Find Records'
-            && (
-              <View>
-                {!selectPerson && (
+              )}
+              {view === 'Forms' && (
+                <View>
                   <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
                     <Text>{I18n.t('dataCollection.back')}</Text>
                   </Button>
+                  <Forms
+                    style={layout.line}
+                    navigation={navigation}
+                    scrollViewScroll={scrollViewScroll}
+                    setScrollViewScroll={setScrollViewScroll}
+                    navigateToGallery={navigateToGallery}
+                    navigateToNewRecord={navigateToNewRecord}
+                    navigateToRoot={navigateToRoot}
+                    navigateToCustomForm={navigateToCustomForm}
+                    selectedForm={selectedForm}
+                    setSelectedForm={setSelectedForm}
+                    surveyingUser={surveyingUser}
+                    surveyingOrganization={surveyingOrganization}
+                    surveyee={surveyee}
+                    setSurveyee={setSurveyee}
+                    customForm={customForm}
+                    setView={setView}
+                    pinnedForms={pinnedForms}
+                  />
+                </View>
+              )}
+              {view === 'Assets' && (
+                <View>
+                  <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
+                    <Text>{I18n.t('dataCollection.back')}</Text>
+                  </Button>
+                  <Assets
+                    surveyingOrganization={surveyingOrganization}
+                    selectedAsset={selectedAsset}
+                    setSelectedAsset={setSelectedAsset}
+                    navigateToNewAssets={navigateToNewAssets}
+                    navigateToViewAllAssets={navigateToViewAllAssets}
+                  />
+                </View>
+              )}
+              {view === 'Gallery' && (
+                <View>
+                  <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
+                    <Text>{I18n.t('dataCollection.back')}</Text>
+                  </Button>
+                  <FormGallery
+                    navigation={navigation}
+                    navigateToNewRecord={navigateToNewRecord}
+                    puenteForms={puenteForms}
+                    navigateToCustomForm={navigateToCustomForm}
+                    customForms={customForms}
+                    refreshCustomForms={refreshCustomForms}
+                    pinnedForms={pinnedForms}
+                    removePinnedForm={removePinnedForm}
+                    pinForm={pinForm}
+                  />
+                </View>
+              )}
+              {view === 'Find Records'
+                && (
+                  <View>
+                    {!selectPerson && (
+                      <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
+                        <Text>{I18n.t('dataCollection.back')}</Text>
+                      </Button>
+                    )}
+                    <FindResidents
+                      selectPerson={selectPerson}
+                      setSelectPerson={setSelectPerson}
+                      organization={surveyingOrganization}
+                      puenteForms={puenteForms}
+                      navigateToNewRecord={navigateToNewRecord}
+                      surveyee={surveyee}
+                      setSurveyee={setSurveyee}
+                      navigateToRoot={navigateToRoot}
+                      setView={setView}
+                    />
+                  </View>
                 )}
-                <FindResidents
-                  selectPerson={selectPerson}
-                  setSelectPerson={setSelectPerson}
-                  organization={surveyingOrganization}
-                  puenteForms={puenteForms}
-                  navigateToNewRecord={navigateToNewRecord}
-                  surveyee={surveyee}
-                  setSurveyee={setSurveyee}
-                  navigateToRoot={navigateToRoot}
-                  setView={setView}
-                />
-              </View>
-            )}
-          {view === 'Settings' && (
-            <SettingsView
-              prevView={prevView}
-              setView={setView}
-              logOut={logOut}
-            />
+            </View>
           )}
         </ScrollView>
       </KeyboardAvoidingView>
