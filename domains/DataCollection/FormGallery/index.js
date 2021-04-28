@@ -26,7 +26,7 @@ const FormGallery = (props) => {
       <View key="pinnedForms" style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.pinnedForms')}</Text>
         <ScrollView horizontal>
-          {pinnedForms && pinnedForms.map((form) => (
+          {pinnedForms?.map((form) => (
             <Card
               key={form.objectId ?? form.tag}
               style={layout.cardSmallStyle}
@@ -45,7 +45,7 @@ const FormGallery = (props) => {
               </View>
             </Card>
           ))}
-          {pinnedForms.length < 1 && (
+          {pinnedForms?.length < 1 && (
             <View style={layout.screenRow}>
               <Card>
                 <Card.Title title={I18n.t('formsGallery.noPinnedForms')} />
@@ -75,7 +75,7 @@ const FormGallery = (props) => {
           />
         </View>
         <ScrollView horizontal>
-          {customForms && customForms.map((form) => (
+          {customForms?.map((form) => (
             <Card
               key={form.objectId}
               style={layout.cardSmallStyle}
