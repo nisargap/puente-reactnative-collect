@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.6.0) (2021-04-29)
+
+
+### New Features
+
+* adding additional views to settings page and reorganizing file structure ([c1fc815](https://github.com/hopetambala/puente-reactnative-collect/commit/c1fc81548a09f59ed8ccb99f86d20a603a684b8e))
+* change password added and refactor nameEmailPhone ([dba35e9](https://github.com/hopetambala/puente-reactnative-collect/commit/dba35e9bb910e50cb69fb3907ec88f24429ac39d))
+* initial navigation and send feedback tested ([445b2d3](https://github.com/hopetambala/puente-reactnative-collect/commit/445b2d3c71353ff36d7d1ed32c8a9bd89531ca7c))
+* initiial settings page set up ([ff166fe](https://github.com/hopetambala/puente-reactnative-collect/commit/ff166fe2282d7d984cbfdca5ee86ccf4366ed87d))
+* Language, Find Records I18n ([ffcf0f3](https://github.com/hopetambala/puente-reactnative-collect/commit/ffcf0f3b8fadbc08e5565bd145a520e3d8a8cc84))
+* review application and I18n translations ([42cd8cc](https://github.com/hopetambala/puente-reactnative-collect/commit/42cd8cc179bc4f2e5343d222f65d3b084d95748b))
+
+
+### Bug fixes
+
+* capture edge case ([44a8356](https://github.com/hopetambala/puente-reactnative-collect/commit/44a8356a5d32d924908b9dbc6281c7d822f1cad4))
+* capture edge cases ([ff618bc](https://github.com/hopetambala/puente-reactnative-collect/commit/ff618bc79a62e4af6092a1ca56e4e2f94b655a56))
+* **deps:** update dependency react-native-web to v0.16.1 ([b9bf9a8](https://github.com/hopetambala/puente-reactnative-collect/commit/b9bf9a8b27f858ddcca5fbc5fbe8332c7774b6b7))
+* speed up search ([337b0a8](https://github.com/hopetambala/puente-reactnative-collect/commit/337b0a8b6990749fae9cb6b0571ff658b175f95d))
+
 ## [11.5.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.5.0) (2021-04-24)
 
 
