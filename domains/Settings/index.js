@@ -7,7 +7,7 @@ import SettingsHome from './SettingsHome';
 import SupportHome from './SupportHome';
 
 const SettingsView = ({
- logOut, setSettings
+  logOut, setSettings
 }) => {
   const [settingsView, setSettingsView] = useState('Settings');
   return (
