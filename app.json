@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "11.5.0",
+    "version": "11.6.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,22 +23,24 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "11.5.0",
+      "buildNumber": "11.6.0",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately."
-      }
+      },
+      "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 380110500,
+      "versionCode": 410110600,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "INTERNET"
       ],
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348"
     },
     "packagerOpts": {
       "config": "metro.config.js",
