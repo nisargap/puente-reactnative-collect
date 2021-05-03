@@ -22,7 +22,8 @@
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
     "release-minor": "npx standard-version --release-as minor",
-    "release-major": "npx standard-version --release-as major"
+    "release-major": "npx standard-version --release-as major",
+    "post-version": "node scripts/update-version/versionNumber.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -64,6 +65,7 @@
     "lodash": "4.17.21",
     "native-base": "2.13.8",
     "parse": "2.14.0",
+    "prompt": "1.1.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-autocomplete-input": "4.2.0",
