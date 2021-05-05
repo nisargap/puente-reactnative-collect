@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 
 import { retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
-import { cacheAutofillData, cacheResidentData, customFormsQuery } from './read';
+import { cacheAutofillData, cacheResidentData, customFormsQuery, assetDataQuery, assetFormsQuery } from './read';
 
 export default function populateCache(user) {
   // communities called since we need a paramter, all data would be cached in the
@@ -59,5 +59,16 @@ export default function populateCache(user) {
           await storeData(appVersion, 'appVersion');
         }
       });
-    });
+    })
+    .then(() => {
+      // Asset data/Asset forms
+      assetDataQuery(user.get('organization')).then(() => {
+        assetFormsQuery().then(() => {
+        }, () => {
+          // error
+        })
+      }, () => {
+        // error
+      })
+    })
 }
