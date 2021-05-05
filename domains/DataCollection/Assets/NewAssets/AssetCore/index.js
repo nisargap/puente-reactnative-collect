@@ -153,19 +153,19 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 style={stylesDefault.label}
               />
               <TextInput
-                label="City"
-                value={formikProps.values.city || ''}
-                onChangeText={formikProps.handleChange('city')}
-                onBlur={formikProps.handleBlur('city')}
+                label="Province"
+                value={formikProps.values.province || ''}
+                onChangeText={formikProps.handleChange('province')}
+                onBlur={formikProps.handleBlur('province')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
               />
               <TextInput
-                label="Province"
-                value={formikProps.values.province || ''}
-                onChangeText={formikProps.handleChange('province')}
-                onBlur={formikProps.handleBlur('province')}
+                label="Country"
+                value={formikProps.values.country || ''}
+                onChangeText={formikProps.handleChange('country')}
+                onBlur={formikProps.handleBlur('country')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}

@@ -57,7 +57,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
           offlineData = offlineData.concat(value.localObject);
         });
       }
-    });
+    }); 
 
     const allData = records.concat(offlineData);
     setResidentsData(allData.slice());
@@ -65,7 +65,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   };
 
   const fetchData = (onLine, qry) => {
-    if (!onLine) fetchOfflineData();
+    //if (!onLine) fetchOfflineData();
     if (onLine) fetchOnlineData(qry);
   };
 

@@ -4,6 +4,7 @@ import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 
+import AssetSearchbar from '../../../../../components/AssetSearchBar/index'
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
@@ -14,12 +15,15 @@ import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
-const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
+    
+const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
   const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
+
   return (
     <ScrollView vertical>
+       
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {
@@ -69,6 +73,13 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
         {(formikProps) => (
           <TouchableWithoutFeedback>
             <View style={styles.assetContainer}>
+                <View style={layout.container}>
+                  <AssetSearchbar
+                    selectedAsset={selectedAsset}
+                    setSelectedAsset={setSelectedAsset}
+                    surveyingOrganization={surveyingOrganization}
+                  />
+                </View>
               <View>
                 <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
                 {viewSupplementaryForms === true
@@ -99,7 +110,7 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
                   <ActivityIndicator />
                 ) : (
                   <PaperButton
-                    disabled={!selectedForm?.objectId}
+                    disabled={!selectedForm?.objectId} 
                     style={{ backgroundColor: selectedForm?.objectId ? 'green' : 'red' }}
                     onPressEvent={() => formikProps.handleSubmit()}
                     buttonText={selectedForm?.objectId ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}

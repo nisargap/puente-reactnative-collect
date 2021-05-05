@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (
+const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (  
   <TouchableWithoutFeedback
     onPress={setSelectedAsset ? () => setSelectedAsset(selectedMarker) : (e) => e}
     style={styles.view}
