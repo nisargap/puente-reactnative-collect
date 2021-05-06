@@ -13,7 +13,9 @@ import I18n from '../../modules/i18n';
 import { countService } from '../../services/parse/crud';
 import styles from './index.styles';
 
-const Header = ({ logOut }) => {
+const Header = ({
+  setSettings
+}) => {
   const { header, headerText, headerIcon } = styles;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -109,9 +111,11 @@ const Header = ({ logOut }) => {
         setSubmission(false);
       });
     });
-    // .catch(() => {
-    //   setSubmission(false);
-    // });
+  };
+
+  const navToSettings = () => {
+    setDrawerOpen(false);
+    setSettings(true);
   };
 
   return (
@@ -125,14 +129,12 @@ const Header = ({ logOut }) => {
           />
         </View>
         <View style={headerIcon}>
-          {logOut && (
-            <IconButton
-              icon="logout"
-              color={headerIcon.color}
-              size={30}
-              onPress={logOut}
-            />
-          )}
+          <IconButton
+            icon="tune"
+            color={headerIcon.color}
+            size={30}
+            onPress={navToSettings}
+          />
         </View>
       </View>
       {drawerOpen === true
@@ -176,6 +178,7 @@ const Header = ({ logOut }) => {
                 <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
               </View>
             )}
+            <Button onPress={navToSettings}>Settings Page</Button>
           </View>
         )}
       <IconButton

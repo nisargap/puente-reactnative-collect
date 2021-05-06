@@ -34,12 +34,15 @@ export default function populateCache(user) {
           });
       }
     })
-    .then(() => {
+    .then(async () => {
+      const localLimit = await getData('findRecordsLimit');
+      const limit = localLimit === null || localLimit === undefined ? 2000 : localLimit;
+
       // store ID forms
       const queryParams = {
         skip: 0,
         offset: 0,
-        limit: 2000,
+        limit,
         parseColumn: 'surveyingOrganization',
         parseParam: user.get('organization'),
       };
