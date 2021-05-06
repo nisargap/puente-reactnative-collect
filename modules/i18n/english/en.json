@@ -11,6 +11,9 @@
     "commName": "Community Name",
     "notes": "Notes",
     "refresh": "Refresh",
+    "error": "Error",
+    "success": "Success!",
+    "ok": "Ok",
     "emptyForm": "Empty Form"
   },
   "signUp": {
@@ -419,5 +422,58 @@
   },
   "errorPicker": {
     "invalidFields": "Invalid Fields:"
+  },
+  "accountSettings": {
+    "settings": "Settings",
+    "support": "Support",
+    "accountSettings": "Account Settings",
+    "namePhoneEmail": "Name, Phone, Email",
+    "changePassword": "Change Password",
+    "findRecords": "Find Records",
+    "language": "Language",
+    "back": "Back",
+    "logout": "Log out"
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Current records stored",
+    "recordStorageLimit": "Record storage limit",
+    "errorMessage": "There was an error processing your request. Please ensure you are connected to the internet and try again.",
+    "successMessage": "You have updated your storage limit. You may experience app related issues if your phone cannot handle the new limit. If this occurs, your experience may be better if you reduce the limit.",
+    "findRecords": "Find Records",
+    "edit": "Edit"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Choose Language"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "There was an error processing your request. Common issues include incorrect email format or no internet connection. Please try again and contact your supervisor if the issue persits.",
+    "successMessage": "You have updated your account.",
+    "userInformation": {
+      "fname": "First Name",
+      "lname": "Last Name",
+      "phoneNumber": "Phone Number",
+      "email": "Email"
+    },
+    "namePhoneEmail": "Name, Phone, Email"
+  },
+  "passwordSettings": {
+    "wrongCreds": "Your current password is incorrect. Please try again.",
+    "errorMessage": "There was an error processing your request. Common issues include no internet connection or incorrect password. Please try again and contact your supervisor if the issue persits.",
+    "successMessage": "You have updated your password.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password"
+  },
+  "supportHome": {
+    "feedback": "Contact us / Feedback",
+    "rateApp": "Rate our app",
+    "helpCenter": "Help Center",
+    "back": "Back"
+  },
+  "feedback": {
+    "feedback": "Feedback",
+    "enterFeedback": "Please enter your feedback in the input below and press the \"Send Feedback\" button. This will redirect you to your email where you can send your feedback.",
+    "sendMail": "Send Mail",
+    "typeFeedback": "Type your feedback here..."
   }
 }
