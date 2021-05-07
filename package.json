@@ -19,7 +19,7 @@
     "DEPRECATED_publish-staging": "npm run prepublish && expo build:ios --config app.generated.json --release-channel staging && expo build:android --config app.generated.json --release-channel staging",
     "DEPRECATED_publish-prod": "npm run prepublish && expo build:ios --config app.generated.json --release-channel prod && expo build:android --config app.generated.json --release-channel prod",
     "DEPREATED_upload": "expo upload:ios --config app.generated.json --latest && expo upload:android --config app.generated.json --latest && rm -rf app.generated.json",
-    "publish": "eas build --platform all",
+    "publish-prod": "eas build --platform all --profile=release",
     "upload": "eas submit -p ios --latest --apple-id=hopetambala@gmail.com --asc-app-id=1362371696",
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
