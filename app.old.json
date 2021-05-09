@@ -27,8 +27,7 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately."
       },
-      "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696",
-      "bundleIdentifier": "io.ionic.starter1270348"
+      "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -41,13 +40,7 @@
         "INTERNET"
       ],
       "softwareKeyboardLayoutMode": "pan",
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348",
-      "package": "io.ionic.starter1270348",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyD_vRnyXGdu1zFcivOt2VMwhstAqZnxcNw"
-        }
-      }
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348"
     },
     "packagerOpts": {
       "config": "metro.config.js",
