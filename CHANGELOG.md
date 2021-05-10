@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.6.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.1...v11.6.2) (2021-05-10)
+
+
+### Bug fixes
+
+* remove unused values on identification form ([477c59a](https://github.com/hopetambala/puente-reactnative-collect/commit/477c59a1aff7fe75b9158e4df9fb8e3bfa10a6cc))
+
 ### [11.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.0...v11.6.1) (2021-05-06)
 
 ## [11.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.6.0) (2021-04-29)
