@@ -47,14 +47,14 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
   // What is __DEV__ ?
   // This variable is set to true when react-native is running in Dev mode.
   // __DEV__ is true when run locally, but false when published.
-  if (env === null || env === undefined || env === '' || env.indexOf('dev') !== -1) {
-    return ENV.dev;
-  } if (env.indexOf('staging') !== -1) {
-    return ENV.staging;
-  } if (env.indexOf('production') !== -1) {
-    return ENV.production;
-  }
-  return ENV.staging;
+  // if (env === null || env === undefined || env === '' || env.indexOf('dev') !== -1) {
+  //   return ENV.dev;
+  // } if (env.indexOf('staging') !== -1) {
+  //   return ENV.staging;
+  // } if (env.indexOf('production') !== -1) {
+  //   return ENV.production;
+  // }
+  return ENV.production;
 };
 
 const selectedENV = getEnvVars();
