@@ -34,7 +34,7 @@ const ENV = {
     taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
     AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
   },
-  prod: {
+  production: {
     parseAppId: 'vBdTHqQU31IyLW5uYRDIWb8Ew8zCZGBzMqChugjr',
     parseJavascriptKey: 'jFWiqliNRHXiH72J9kiotL8m0EuSdry1yFIiYlad',
     parseServerUrl: 'https://parseapi.back4app.com/',
@@ -51,8 +51,8 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
     return ENV.dev;
   } if (env.indexOf('staging') !== -1) {
     return ENV.staging;
-  } if (env.indexOf('prod') !== -1) {
-    return ENV.prod;
+  } if (env.indexOf('production') !== -1) {
+    return ENV.production;
   }
   return ENV.staging;
 };
