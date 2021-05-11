@@ -1,3 +1,4 @@
+/*
 import * as Notifications from 'expo-notifications';
 
 registerForPushNotificationsAsync = async () => {
@@ -27,4 +28,5 @@ registerForPushNotificationsAsync = async () => {
       lightColor: '#FF231F7C',
     });
   }
-  };
+};
+*/
