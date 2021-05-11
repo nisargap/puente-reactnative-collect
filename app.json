@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "11.6.0",
+    "version": "11.6.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,17 +23,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "11.6.0",
+      "buildNumber": "11.6.3",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately."
       },
-      "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696"
+      "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696",
+      "bundleIdentifier": "io.ionic.starter1270348"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 410110600,
+      "versionCode": 410110603,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -41,7 +42,13 @@
       ],
       "softwareKeyboardLayoutMode": "pan",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "package": "io.ionic.starter1270348",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyD_vRnyXGdu1zFcivOt2VMwhstAqZnxcNw"
+        }
+      }
     },
     "packagerOpts": {
       "config": "metro.config.js",
