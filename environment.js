@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+import * as Updates from 'expo-updates';
 import { Platform } from 'react-native';
 
 const ENV = {
@@ -34,7 +34,7 @@ const ENV = {
     taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
     AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
   },
-  prod: {
+  production: {
     parseAppId: 'vBdTHqQU31IyLW5uYRDIWb8Ew8zCZGBzMqChugjr',
     parseJavascriptKey: 'jFWiqliNRHXiH72J9kiotL8m0EuSdry1yFIiYlad',
     parseServerUrl: 'https://parseapi.back4app.com/',
@@ -43,18 +43,18 @@ const ENV = {
   }
 };
 
-const getEnvVars = (env = Constants.manifest.releaseChannel) => {
+const getEnvVars = (env = Updates.releaseChannel) => {
   // What is __DEV__ ?
   // This variable is set to true when react-native is running in Dev mode.
   // __DEV__ is true when run locally, but false when published.
-  if (env === null || env === undefined || env === '' || env.indexOf('dev') !== -1) {
+  if (env === null || env === undefined || env === 'default' || env.indexOf('dev') !== -1) {
     return ENV.dev;
   } if (env.indexOf('staging') !== -1) {
     return ENV.staging;
-  } if (env.indexOf('prod') !== -1) {
-    return ENV.prod;
+  } if (env.indexOf('production') !== -1) {
+    return ENV.production;
   }
-  return ENV.staging;
+  return ENV.production;
 };
 
 const selectedENV = getEnvVars();

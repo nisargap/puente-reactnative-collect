@@ -1,6 +1,6 @@
 {
   "name": "puente-reactnative",
-  "version": "11.6.1",
+  "version": "11.6.3",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -20,7 +20,7 @@
     "DEPRECATED_publish-prod": "npm run prepublish && expo build:ios --config app.generated.json --release-channel prod && expo build:android --config app.generated.json --release-channel prod",
     "DEPREATED_upload": "expo upload:ios --config app.generated.json --latest && expo upload:android --config app.generated.json --latest && rm -rf app.generated.json",
     "publish-prod": "eas build --platform all --profile=release",
-    "upload": "eas submit -p ios --latest --apple-id=hopetambala@gmail.com --asc-app-id=1362371696",
+    "upload": "eas submit -p ios --latest --apple-id=hopetambala@outlook.com --asc-app-id=1362371696 && eas submit -p android --latest --key='./expo-resources/android/api-6741007454030476273-79684-2bb9749d6828.json'",
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
     "release-minor": "npx standard-version --release-as minor",
@@ -60,6 +60,7 @@
     "expo-network": "~3.1.1",
     "expo-splash-screen": "~0.10.2",
     "expo-store-review": "2.1.2",
+    "expo-updates": "~0.5.4",
     "expo-web-browser": "~9.1.0",
     "formik": "2.1.5",
     "i18n-js": "3.7.1",
