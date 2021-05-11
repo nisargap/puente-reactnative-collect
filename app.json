@@ -40,7 +40,8 @@
         "INTERNET"
       ],
       "softwareKeyboardLayoutMode": "pan",
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348"
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348",
+      "googleServicesFile": "./google-services.json"
     },
     "packagerOpts": {
       "config": "metro.config.js",
