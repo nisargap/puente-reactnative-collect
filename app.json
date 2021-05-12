@@ -42,6 +42,7 @@
       ],
       "softwareKeyboardLayoutMode": "pan",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=io.ionic.starter1270348",
+      "googleServicesFile": "./google-services.json",
       "package": "io.ionic.starter1270348",
       "config": {
         "googleMaps": {

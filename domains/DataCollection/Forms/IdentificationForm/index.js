@@ -57,6 +57,8 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
+            formObject.searchIndex = `${values.fname || ''} ${values.lname || ''}`;
+
             // const photo = values.picture
             // need to prune 'picture' key if using photofile
 
