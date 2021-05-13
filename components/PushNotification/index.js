@@ -2,10 +2,12 @@ import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import { toInteger } from 'lodash';
 import { Platform } from 'react-native';
+
 import selectedENV from '../../environment';
-const axios = require('axios');
-import { getData } from '../../modules/async-storage'
+import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
+
+const axios = require('axios');
 
 const registerForPushNotificationsAsync = async () => {
   let token;
@@ -17,12 +19,12 @@ const registerForPushNotificationsAsync = async () => {
       finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
+      // alert('Failed to get push token for push notification!');
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
   } else {
-    alert('Must use physical device for Push Notifications');
+    // alert('Must use physical device for Push Notifications');
     return;
   }
 
@@ -48,63 +50,66 @@ const registerForPushNotificationsAsync = async () => {
 
 const checkAppVersionAndSendPush = async (token) => {
   await getData('appVersion').then(async (appVersion) => {
-    const [majorCurrent, minorCurrent, patchCurrent] = appVersion.split('.')
-    const majorCurrentInt = toInteger(majorCurrent)
-    const minorCurrentInt = toInteger(minorCurrent)
-    const patchCurrentInt = toInteger(patchCurrent)
+    const [majorCurrent, minorCurrent, patchCurrent] = appVersion.split('.');
+    const majorCurrentInt = toInteger(majorCurrent);
+    const minorCurrentInt = toInteger(minorCurrent);
+    const patchCurrentInt = toInteger(patchCurrent);
     if (Platform.OS === 'android') {
-      await axios.get(selectedENV.awsFlaskApi + 'android').then((latestVersion) => {
-        const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.')
+      await axios.get(`${selectedENV.awsFlaskApi}android`).then((latestVersion) => {
+        const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.');
         const majorLatestInt = toInteger(majorLatest);
         const minorLatestInt = toInteger(minorLatest);
-        const patchLatestInt = toInteger(patchLatest)
-        if (!((majorCurrentInt > majorLatestInt) || (majorCurrentInt === majorLatestInt && minorCurrentInt > minorLatestInt)
-          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt && patchCurrentInt > patchLatestInt)
-          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt && patchCurrentInt === patchLatestInt)
+        const patchLatestInt = toInteger(patchLatest);
+        if (!((majorCurrentInt > majorLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt > minorLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
+            && patchCurrentInt > patchLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
+            && patchCurrentInt === patchLatestInt)
         )) {
           axios.post(selectedENV.expoPushTokenUrl,
             [
               {
-                "to": token,
-                "sound": "default",
-                "body": I18n.t('pushNotifications.updateApp')
+                to: token,
+                sound: 'default',
+                body: I18n.t('pushNotifications.updateApp')
               }
-            ]
-          ).then((response) => {
-            console.log(response) //eslint-disable-line
+            ]).then((response) => {
+              console.log(response) //eslint-disable-line
           }, (error) => {
-            console.log(error) //eslint-disable-line
-          })
+              console.log(error) //eslint-disable-line
+          });
         }
-      })
-    }
-    else if (Platform.OS === 'ios') {
-      await axios.get(selectedENV.awsFlaskApi + 'ios').then((latestVersion) => {
-        const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.')
+      });
+    } else if (Platform.OS === 'ios') {
+      await axios.get(`${selectedENV.awsFlaskApi}ios`).then((latestVersion) => {
+        const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.');
         const majorLatestInt = toInteger(majorLatest);
         const minorLatestInt = toInteger(minorLatest);
-        const patchLatestInt = toInteger(patchLatest)
-        if (!((majorCurrentInt > majorLatestInt) || (majorCurrentInt === majorLatestInt && minorCurrentInt > minorLatestInt)
-          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt && patchCurrentInt > patchLatestInt)
-          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt && patchCurrentInt === patchLatestInt)
+        const patchLatestInt = toInteger(patchLatest);
+        if (!((majorCurrentInt > majorLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt > minorLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
+            && patchCurrentInt > patchLatestInt)
+          || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
+            && patchCurrentInt === patchLatestInt)
         )) {
           axios.post(selectedENV.expoPushTokenUrl,
             [
               {
-                "to": token,
-                "sound": "default",
-                "body": I18n.t('pushNotifications.updateApp')
+                to: token,
+                sound: 'default',
+                body: I18n.t('pushNotifications.updateApp')
               }
-            ]
-          ).then((response) => {
-            console.log(response) //eslint-disable-line
+            ]).then((response) => {
+              console.log(response) //eslint-disable-line
           }, (error) => {
-            console.log(error) //eslint-disable-line
-          })
+              console.log(error) //eslint-disable-line
+          });
         }
-      })
+      });
     }
-  })
-}
+  });
+};
 
 export default registerForPushNotificationsAsync;

@@ -24,6 +24,7 @@ import * as yup from 'yup';
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
+import registerForPushNotificationsAsync from '../../../components/PushNotification';
 import TermsModal from '../../../components/TermsModal';
 import { deleteData, getData, storeData } from '../../../modules/async-storage';
 import { populateCache } from '../../../modules/cached-resources';
@@ -33,7 +34,6 @@ import { theme } from '../../../modules/theme';
 import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
-import registerForPushNotificationsAsync from '../../../components/PushNotification'
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -82,8 +82,8 @@ const SignIn = ({ navigation }) => {
     Alert.alert(
       I18n.t('signIn.unableLogin'),
       I18n.t('signIn.usernamePasswordIncorrect'), [
-      { text: 'OK' }
-    ],
+        { text: 'OK' }
+      ],
       { cancelable: true }
     );
   };
