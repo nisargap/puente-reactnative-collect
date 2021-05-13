@@ -33,6 +33,7 @@ import { theme } from '../../../modules/theme';
 import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
+import registerForPushNotificationsAsync from '../../../components/PushNotification'
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -81,8 +82,8 @@ const SignIn = ({ navigation }) => {
     Alert.alert(
       I18n.t('signIn.unableLogin'),
       I18n.t('signIn.usernamePasswordIncorrect'), [
-        { text: 'OK' }
-      ],
+      { text: 'OK' }
+    ],
       { cancelable: true }
     );
   };
@@ -91,7 +92,7 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Sign Up');
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     Keyboard.dismiss();
     navigation.navigate('Root');
   };
@@ -140,13 +141,15 @@ const SignIn = ({ navigation }) => {
     deleteData('credentials');
   };
 
-  const storeUserInformation = (userData, userCreds) => {
+  const storeUserInformation = async (userData, userCreds) => {
     // store username and password
     if (userCreds) {
       const credentials = userCreds;
       credentials.store = 'No';
       storeData(credentials, 'credentials');
     }
+    // semd push to update app if necessary
+    await registerForPushNotificationsAsync();
     populateCache(userData);
   };
 

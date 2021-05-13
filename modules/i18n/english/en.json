@@ -472,5 +472,8 @@
     "enterFeedback": "Please enter your feedback in the input below and press the \"Send Feedback\" button. This will redirect you to your email where you can send your feedback.",
     "sendMail": "Send Mail",
     "typeFeedback": "Type your feedback here..."
+  },
+  "pushNotifications": {
+    "updateApp": "Please update in the App Store. Your application is out of date."
   }
 }
