@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.6.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.4...v11.6.5) (2021-05-12)
+
+
+### New Features
+
+* add search index to ID form ([2717cd5](https://github.com/hopetambala/puente-reactnative-collect/commit/2717cd5cb3376340650273c59e7a4c4ae7e22eb7))
+
+### [11.6.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.2...v11.6.3) (2021-05-10)
+
+
+### Bug fixes
+
+* production build ([cb3066d](https://github.com/hopetambala/puente-reactnative-collect/commit/cb3066d41f4d25619deb2e8a0d6daa9dbfe504d0))
+
+### [11.6.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.1...v11.6.2) (2021-05-10)
+
+
+### Bug fixes
+
+* remove unused values on identification form ([477c59a](https://github.com/hopetambala/puente-reactnative-collect/commit/477c59a1aff7fe75b9158e4df9fb8e3bfa10a6cc))
+
+### [11.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.0...v11.6.1) (2021-05-06)
+
 ## [11.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.6.0) (2021-04-29)
 
 
