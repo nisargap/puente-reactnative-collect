@@ -131,7 +131,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     <View>
       <Headline style={styles.header}>{I18n.t('residentIdSearchbar.searchIndividual')}</Headline>
       <Searchbar
-        placeholder="Type Here..."
+        placeholder={I18n.t('findResident.typeHere')}
         onChangeText={onChangeSearch}
         value={query}
       />

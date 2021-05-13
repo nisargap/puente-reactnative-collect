@@ -203,39 +203,39 @@ const configArray = [
     parameter: 'Country',
     validation: false
   },
-  {
-    label: 'identificationForm.insurance',
-    fieldType: 'header',
-    formikKey: 'none_insurance',
-  },
-  {
-    label: 'identificationForm.insNumber',
-    formikKey: 'insuranceNumber',
-    value: '',
-    fieldType: 'numberInput',
-    validation: false
-  },
-  {
-    label: 'identificationForm.insProvider',
-    formikKey: 'insuranceProvider',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'identificationForm.clinicProvider',
-    formikKey: 'clinicProvider',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'identificationForm.cedulaNumber',
-    formikKey: 'cedulaNumber',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
+  // {
+  //   label: 'identificationForm.insurance',
+  //   fieldType: 'header',
+  //   formikKey: 'none_insurance',
+  // },
+  // {
+  //   label: 'identificationForm.insNumber',
+  //   formikKey: 'insuranceNumber',
+  //   value: '',
+  //   fieldType: 'numberInput',
+  //   validation: false
+  // },
+  // {
+  //   label: 'identificationForm.insProvider',
+  //   formikKey: 'insuranceProvider',
+  //   value: '',
+  //   fieldType: 'input',
+  //   validation: false
+  // },
+  // {
+  //   label: 'identificationForm.clinicProvider',
+  //   formikKey: 'clinicProvider',
+  //   value: '',
+  //   fieldType: 'input',
+  //   validation: false
+  // },
+  // {
+  //   label: 'identificationForm.cedulaNumber',
+  //   formikKey: 'cedulaNumber',
+  //   value: '',
+  //   fieldType: 'input',
+  //   validation: false
+  // },
   {
     label: 'identificationForm.location',
     formikKey: 'location',
