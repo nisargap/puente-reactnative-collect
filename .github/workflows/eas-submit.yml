@@ -1,0 +1,32 @@
+name: EAS Submit
+on:
+  workflow_run:
+    workflows: ["EAS Build"]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Submit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+          expo-cache: true
+
+      - name: Submit on EAS Submit iOS
+        run: npx EXPO_APPLE_APP_SPECIFIC_PASSWORD=${{ secrets.EXPO_APPLE_APP_SPECIFIC_PASSWORD }} eas submit -p ios --latest --apple-id=${{ secrets.EXPO_APPLE_EMAIL_ADDRESS }} --asc-app-id=${{ secrets.EXPO_APPLE_APP_ID }}
+     
+      - name: Submit on EAS Submit Android
+        run: eas submit -p android --latest --key=""./expo-resources/android/api-6741007454030476273-79684-2bb9749d6828.json"
