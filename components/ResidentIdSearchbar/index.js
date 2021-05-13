@@ -65,7 +65,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   };
 
   const fetchData = (onLine, qry) => {
-    //if (!onLine) fetchOfflineData();
+    if (!onLine) fetchOfflineData();
     if (onLine) fetchOnlineData(qry);
   };
 

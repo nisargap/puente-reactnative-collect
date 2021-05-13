@@ -1,56 +1,48 @@
 import React from 'react';
 import {
-  Dimensions, StyleSheet, Text, View
+  Dimensions, StyleSheet, View
 } from 'react-native';
+import {
+  Text, Title
+} from 'react-native-paper';
+import I18n from '../../../../../modules/i18n';
+import { layout } from '../../../../../modules/theme'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (  
+const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (
   <TouchableWithoutFeedback
     onPress={setSelectedAsset ? () => setSelectedAsset(selectedMarker) : (e) => e}
-    style={styles.view}
+    style={layout.resCardContainer}
   >
-    <Text style={styles.text}>{selectedMarker.name || selectedMarker.Name}</Text>
-    <Text style={styles.text}>{selectedMarker.communityName || ''}</Text>
-    {selectedMarker.relatedPeople && selectedMarker.relatedPeople.map((person) => (
-      <View>
-        <Text>Related People</Text>
-        <Text>
-          {person.firstName}
-          ,
-          {' '}
-          {person.lastName}
-          {' '}
-        </Text>
-      </View>
-    ))}
+    <View 
+    style={layout.resCardNameContainer}
+    >
+      <Title style={layout.resCardName}>{selectedMarker.name || selectedMarker.Name}</Title>
+    </ View>
+    
+    <View style={layout.resCardCityLicenseContainer}>
+          {/* <View style={layout.resCardCityContainer}>
+            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.city')}</Text>
+            <Text style={layout.resCardFont}>{city}</Text>
+          </View> */}
+          <View style={layout.resCardLicenseContainer}>
+            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.community')}</Text>
+            <Text style={layout.resCardLicense}>{selectedMarker.communityName}</Text>
+          </View>
+          {selectedMarker.relatedPeople && selectedMarker.relatedPeople.map((person) => (
+            <View style={layout.resCardLicenseContainer}>
+              <Text style={layout.resCardFont}>Related People</Text>
+              <Text style={layout.resCardFont}>
+                {person.firstName}
+                ,
+                {' '}
+                {person.lastName}
+                {' '}
+              </Text>
+            </View>
+          ))}
+    </View>
   </TouchableWithoutFeedback>
 );
-
-const styles = StyleSheet.create({
-  view: {
-    // flex: 1,
-    borderWidth: 0.3,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    borderStyle: 'solid',
-    shadowColor: '#000000',
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-    shadowOffset: {
-      height: 1,
-      width: 0.5
-    },
-    margin: 5,
-    backgroundColor: 'white',
-    height: 100,
-    padding: 20,
-    width: Dimensions.get('window').width * 0.80,
-  },
-  text: {
-    fontSize: 20,
-    textAlignVertical: 'center',
-    color: '#3d80fc'
-  }
-});
 
 export default SelectedAsset;

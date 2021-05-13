@@ -72,7 +72,8 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
       >
         {(formikProps) => (
           <TouchableWithoutFeedback>
-            <View style={styles.assetContainer}>
+            <View
+             style={styles.assetContainer}>
                 <View style={layout.container}>
                   <AssetSearchbar
                     selectedAsset={selectedAsset}
@@ -90,7 +91,7 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
                     />
                   )}
               </View>
-              {selectedAsset
+              {selectedAsset !== null && selectedAsset !== {}
                 && (
                   <SelectedAsset
                     selectedMarker={selectedAsset}

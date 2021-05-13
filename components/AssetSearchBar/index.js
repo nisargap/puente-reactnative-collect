@@ -1,19 +1,19 @@
 import { Spinner } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, TouchableWithoutFeedback } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
-
-//import { getData } from '../../modules/async-storage';
+import { assetDataQuery } from '../../modules/cached-resources/index.js'
+import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
 
 import styles from './index.styles';
 // import SelectedAsset from '../../domains/DataCollection/Assets/ViewAssets/SelectedAsset';
-import SelectedAsset from '../../domains/DataCollection/Assets/ViewAssets/SelectedAsset';
+// import SelectedAsset from '../../domains/DataCollection/Assets/ViewAssets/SelectedAsset';
 // import AssetFormSelect from '../../domains/DataCollection/Assets/NewAssets/AssetSupplementary/AssetFormSelect'
 import customQueryService from '../../services/parse/crud/custom-queries';
 
-const AssetSearchbar = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
+const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   const [query, setQuery] = useState('');
   const [assetData, setAssetData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,77 +21,67 @@ const AssetSearchbar = ({ selectedAsset, setSelectedAsset, surveyingOrganization
   const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
-    
+
     checkOnlineStatus().then(async (connected) => {
-      if (connected) {
-        
-        fetchData(true, '');
-        
-      }
+      if (connected) fetchData(true, '');
       if (!connected) fetchData(false, '');
     });
   }, [surveyingOrganization]);
 
   // remove this offline portion if he says no offline
-  // const fetchOfflineData = async () => {
-  //   setOnline(false);
+  const fetchOfflineData = async () => {
+    setOnline(false);
 
-  //   getData('assetData').then((assetData) => {
-  //     if (assetData) {
-  //       let offlineData = [];
-  //       getData('offlineIDForms').then((offlineAssetData) => {
-  //         if (offlineAssetData !== null) {
-  //           Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
-  //             offlineData = offlineData.concat(value.localObject);
-  //           });
-  //         }
-  //         const allData = assetData.concat(offlineData);
-  //         setAssetData(allData.slice() || []);
-  //       });
-  //     }
-  //     setLoading(false);
-  //   });
-  // }; 
+    await getData('assetData').then((assetData) => {
+      if (assetData) {
+        let offlineData = [];
+        getData('offlineAssetIDForms').then((offlineAssetData) => {
+          if (offlineAssetData !== null) {
+            Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
+              offlineData = offlineData.concat(value.localObject);
+            });
+          }
+          console.log("offlineData: ", offlineData)
+          const allData = assetData.concat(offlineData);
+          setAssetData(allData.slice() || []);
+        });
+      }
+      setLoading(false);
+    });
+  }; 
 
   const fetchOnlineData = async () => {
     setOnline(true);
     
-    customQueryService(0, 2500, 'Assets', 'surveyingOrganization', surveyingOrganization ).then((records) => {
-      // console.log("ASsets", records);
-      // here and 
-      const allData = records;
-      
+    assetDataQuery(surveyingOrganization).then((records) => {
+    
+      let offlineData = [];
+
+      getData('offlineAssetIDForms').then((offlineAssetData) => {
+        if (offlineAssetData !== null) {
+          Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
+            offlineData = offlineData.concat(value.localObject);
+          });
+        }
+      });
+
+      const allData = records.concat(offlineData);
+      console.log("offlineData: ", offlineData)
       setAssetData(allData.slice());
-      filterOfflineList(assetData);
       setLoading(false);
-    })
-    //console.log("Post query")
-
-    // check with hope to see if we want to store offline assets
-    // if yes, check back with me, ootherwise remove everything but 72/73 Move them inside of your ^^
-    // let offlineData = [];
-
-    // await getData('offlineIDForms').then((offlineAssetData) => {
-    //   if (offlineAssetData !== null) {
-    //     Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
-    //       offlineData = offlineData.concat(value.localObject);
-    //     });
-    //   }
-    // });
-
-    // const allData = assets.concat(offlineData);
-
+    });
   };
 
-  const fetchData = (qry) => {
-    // remove this line if no offline too - 82
-    // if (!onLine) fetchOfflineData();
-    fetchOnlineData(qry);
+  const fetchData = (onLine, qry) => {
+   // remove this line if no offline too - 82
+   if (!onLine) fetchOfflineData();
+   if(onLine) fetchOnlineData(qry);
   };
 
   // probably not needed, this is all specific to the id form
   const filterOfflineList = () => assetData.filter(
     (listItem) => {
+     // const listItemJSON = listItem.toJSON();
       const name = listItem.name || ' ';
       return name.toLowerCase().includes(query.toLowerCase())
     }
@@ -101,8 +91,11 @@ const AssetSearchbar = ({ selectedAsset, setSelectedAsset, surveyingOrganization
     setLoading(true);
 
     if (input === '') setLoading(false);
+
     clearTimeout(searchTimeout);
+    
     setQuery(input);
+    
     setSearchTimeout(setTimeout(() => {
       fetchData(online, input);
     }, 1000));
@@ -111,14 +104,13 @@ const AssetSearchbar = ({ selectedAsset, setSelectedAsset, surveyingOrganization
   const onSelectAsset = (listItem) => {
     setSelectedAsset(listItem);
     setQuery('');
-    console.log("Selected Asset: ", selectedAsset)
   };
 
   const renderItem = ({ item }) => (
     <View>
       <Button onPress={() => onSelectAsset(item)} contentStyle={{ marginRight: 5 }}>
-        <Text style={{ marginRight: 10 }}>{item.get('name')}</Text>
-        
+        <Text style={{ marginRight: 10 }}>{item.name}</Text>
+
         <View style={{
           backgroundColor: '#f8380e',
           width: 1,
@@ -149,20 +141,24 @@ const AssetSearchbar = ({ selectedAsset, setSelectedAsset, surveyingOrganization
 
       {query !== '' && (
         <FlatList
-          data={assetData}
+          data={filterOfflineList(assetData)}
           renderItem={renderItem}
           keyExtractor={(item) => {
-            item.get('name')
+            item.objectId;
           }}
         />
       )}
-      {selectedAsset
-        &&  (
-          <SelectedAsset
-            selectedMarker={selectedAsset}
-          />
-        )}
-        
+      {/* {selectedAsset
+        && (
+          // <SelectedAsset
+          //   selectedMarker={selectedAsset}
+          // />
+          // <View>
+          //   <Text >{selectedAsset.name || selectedAsset.Name}</Text>
+          //   <Text >{selectedAsset.communityName || ''}</Text>
+          // </View>
+        )} */}
+
     </View>
   );
 };
