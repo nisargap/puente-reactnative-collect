@@ -1,11 +1,11 @@
-import selectedENV from '../../environment';
-
+// import selectedENV from '../../environment';
+const override = require('./app.secrets.json');
 const { toUpper } = require('lodash');
 const prompt = require('prompt');
 const axios = require('axios');
 
 prompt.start();
-
+// console.log(override.awsFlaskApi)
 function getVersions(keyword) {
   console.log(`${keyword} the versions for each platform`); //eslint-disable-line
   prompt.get(['ios', 'android', 'expo'], (err, result) => { //eslint-disable-line
@@ -34,10 +34,10 @@ function checkCorrect(versions) {
 }
 
 function postVersion(version, platform) {
-  const { awsFlaskApi } = selectedENV;
+  const { awsFlaskApi } = override;
   axios.post(awsFlaskApi, {
     version_number: version,
-    platform
+    platform: platform
   })
     .then(() => {
       console.log(`${platform} version ${version} posted!`); //eslint-disable-line
