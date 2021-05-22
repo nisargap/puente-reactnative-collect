@@ -22,3 +22,4 @@ app.generated.json
 
 # Virtual Env
 reactenv/
+scripts/update-version/app.secrets.json
