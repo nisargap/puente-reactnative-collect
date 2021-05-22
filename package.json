@@ -24,7 +24,8 @@
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
     "release-minor": "npx standard-version --release-as minor",
-    "release-major": "npx standard-version --release-as major"
+    "release-major": "npx standard-version --release-as major",
+    "post-version": "node scripts/update-version/versionNumber.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -96,6 +97,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "jest-expo": "^41.0.0",
+    "prompt": "1.1.0",
     "react-native-svg-transformer": "0.14.3",
     "standard-version": "9.2.0",
     "standard-version-expo": "1.0.3"
