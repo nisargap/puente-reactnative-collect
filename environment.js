@@ -10,7 +10,7 @@ const ENV = {
     taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
     AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
   },
-  // dev: {
+  // dev: { 
   //   parseAppId: '1A95hsvxDlQta3wQyp4dArRzLcKKf1w3AyfQaqtH',
   //   parseJavascriptKey: 'IDl2eJ5iXHtXp8RgzqNlT2uKQwNSOlSfeSF6yrFO',
   //   parseServerUrl: 'https://parseapi.back4app.com/',
