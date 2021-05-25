@@ -1,8 +1,8 @@
 // import selectedENV from '../../environment';
-const override = require('./app.secrets.json');
 const { toUpper } = require('lodash');
 const prompt = require('prompt');
 const axios = require('axios');
+const override = require('./app.secrets.json');
 
 prompt.start();
 // console.log(override.awsFlaskApi)
@@ -37,7 +37,7 @@ function postVersion(version, platform) {
   const { awsFlaskApi } = override;
   axios.post(awsFlaskApi, {
     version_number: version,
-    platform: platform
+    platform
   })
     .then(() => {
       console.log(`${platform} version ${version} posted!`); //eslint-disable-line
