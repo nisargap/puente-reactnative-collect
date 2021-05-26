@@ -47,17 +47,8 @@ const Header = ({
 
   const count = async () => {
     getData('currentUser').then((user) => {
-      // const userName = `${user.firstname || ''} ${user.lastname || ''}`;
       calculateTime(user.firstname);
       setVolunteerDate(volunteerLength(user));
-      // const postParams = {
-      //   ParseClass: 'SurveyData',
-      //   parseColumn: 'surveyingUser',
-      //   parseParam: userName
-      // };
-      // countService(postParams).then((counts) => {
-      //   setSurveyCount(counts);
-      // });
     });
 
     getData('offlineIDForms').then((idForms) => {
