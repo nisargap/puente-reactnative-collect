@@ -10,7 +10,6 @@ import { deleteData, getData } from '../../modules/async-storage';
 import { postOfflineForms } from '../../modules/cached-resources';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
-import { countService } from '../../services/parse/crud';
 import FormCounts from './FormCounts';
 import styles from './index.styles';
 
@@ -20,7 +19,6 @@ const Header = ({
   const { header, headerText, headerIcon } = styles;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [surveyCount, setSurveyCount] = useState(0);
   const [volunteerDate, setVolunteerDate] = useState('');
   const [volunteerGreeting, setVolunteerGreeting] = useState('');
   const [offlineForms, setOfflineForms] = useState(false);
@@ -122,7 +120,7 @@ const Header = ({
 
   const navToCounts = () => {
     setShowCounts(true);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -189,11 +187,15 @@ const Header = ({
                   <Button
                     style={styles.calculationText}
                     onPress={navToSettings}
-                  >Settings Page</Button>
+                  >
+                    Settings Page
+                  </Button>
                   <Button
                     style={styles.calculationText}
                     onPress={navToCounts}
-                  >{I18n.t('header.surveysCollected')}</Button>
+                  >
+                    {I18n.t('header.surveysCollected')}
+                  </Button>
                 </View>
               </View>
             ) : (

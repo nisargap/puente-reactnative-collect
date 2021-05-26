@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
-import {
-  Keyboard, ScrollView, TouchableWithoutFeedback, View, StyleSheet, Dimensions
-} from 'react-native';
-import { Button, Card, Text } from 'react-native-paper';
 import { useEffect } from 'react/cjs/react.development';
+import {
+  View
+} from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
-import { countService } from '../../../services/parse/crud';
 import { getData } from '../../../modules/async-storage';
+import { countService } from '../../../services/parse/crud';
 import styles from '../index.styles';
 
 const FormCounts = ({ setShowCounts }) => {
-
   const [surveyCount, setSurveyCount] = useState(0);
-  const [envHealthCount, setEnvHealthCount] = useState(0)
-  const [vitalsCount, setVitalsCount] = useState(0)
+  const [envHealthCount, setEnvHealthCount] = useState(0);
+  const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
   const [userName, setUserName] = useState(' ');
 
-
-
   useEffect(() => {
     getData('currentUser').then((user) => {
-      const userName = `${user.firstname || ''} ${user.lastname || ''}`;
-      setUserName(userName);
-    })
-  }, [])
+      const username = `${user.firstname || ''} ${user.lastname || ''}`;
+      setUserName(username);
+    });
+  }, []);
 
   useEffect(() => {
     const postParamsSurvey = {
@@ -32,43 +29,43 @@ const FormCounts = ({ setShowCounts }) => {
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    countService(postParamsSurvey).then((surveyCount) => {
-      setSurveyCount(surveyCount);
-    })
-  }, [userName])
+    countService(postParamsSurvey).then((surveyCounts) => {
+      setSurveyCount(surveyCounts);
+    });
+  }, [userName]);
 
   useEffect(() => {
     const postParamsEnvHealth = {
       ParseClass: 'HistoryEnvironmentalHealth',
       parseColumn: 'surveyingUser',
       parseParam: userName
-    }
-    countService(postParamsEnvHealth).then((envHhealthCount) => {
-      setEnvHealthCount(envHhealthCount);
-    })
-  }, [userName])
+    };
+    countService(postParamsEnvHealth).then((envHealthCounts) => {
+      setEnvHealthCount(envHealthCounts);
+    });
+  }, [userName]);
 
   useEffect(() => {
     const postParamsVitals = {
       ParseClass: 'Vitals',
       parseColumn: 'surveyingUser',
       parseParam: userName
-    }
-    countService(postParamsVitals).then((vitalsCount) => {
-      setVitalsCount(vitalsCount);
-    })
-  }, [userName])
+    };
+    countService(postParamsVitals).then((vitalsCounts) => {
+      setVitalsCount(vitalsCounts);
+    });
+  }, [userName]);
 
   useEffect(() => {
     const postParamsCustomForms = {
       ParseClass: 'FormResults',
       parseColumn: 'surveyingUser',
       parseParam: userName
-    }
-    countService(postParamsCustomForms).then((customCount) => {
-      setCustomCount(customCount);
-    })
-  }, [userName])
+    };
+    countService(postParamsCustomForms).then((customCounts) => {
+      setCustomCount(customCounts);
+    });
+  }, [userName]);
 
   return (
     <View>
@@ -96,7 +93,7 @@ const FormCounts = ({ setShowCounts }) => {
       <View style={styles.horizontalLineGray} />
       <Button onPress={() => setShowCounts(false)}>Back</Button>
     </View>
-  )
-}
+  );
+};
 
 export default FormCounts;

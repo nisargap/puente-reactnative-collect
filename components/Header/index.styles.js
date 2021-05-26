@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     marginLeft: Dimensions.get('window').width / 10,
   },
 
-
 });
 
 export default styles;
