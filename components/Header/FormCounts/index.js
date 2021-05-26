@@ -4,10 +4,12 @@ import {
   View
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
+import { Spinner } from 'native-base';
 
 import { getData } from '../../../modules/async-storage';
 import { countService } from '../../../services/parse/crud';
 import styles from '../index.styles';
+import { theme } from '../../../modules/theme';
 
 const FormCounts = ({ setShowCounts }) => {
   const [surveyCount, setSurveyCount] = useState(0);
@@ -15,6 +17,10 @@ const FormCounts = ({ setShowCounts }) => {
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
   const [userName, setUserName] = useState(' ');
+  const [surveyQueryDone, setSurveyQueryDone] = useState(false)
+  const [envHealthQueryDone, setEnvHealthQueryDone] = useState(false)
+  const [vitalsQueryDone, setVitalsQueryDone] = useState(false)
+  const [customQueryDone, setCustomQueryDone] = useState(false)
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -31,6 +37,7 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsSurvey).then((surveyCounts) => {
       setSurveyCount(surveyCounts);
+      setSurveyQueryDone(true);
     });
   }, [userName]);
 
@@ -42,6 +49,7 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsEnvHealth).then((envHealthCounts) => {
       setEnvHealthCount(envHealthCounts);
+      setEnvHealthQueryDone(true)
     });
   }, [userName]);
 
@@ -53,6 +61,7 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsVitals).then((vitalsCounts) => {
       setVitalsCount(vitalsCounts);
+      setVitalsQueryDone(true)
     });
   }, [userName]);
 
@@ -64,33 +73,40 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsCustomForms).then((customCounts) => {
       setCustomCount(customCounts);
+      setCustomQueryDone(true);
     });
   }, [userName]);
 
   return (
     <View>
-      <Text style={styles.headerFormText}>Survey Collected</Text>
+      <Text style={styles.headerFormText}>Surveys Collected</Text>
       <View style={styles.horizontalLineGray} />
-      <View style={styles.countContainer}>
-        <Text style={styles.label}>ID Forms</Text>
-        <Text style={styles.count}>{surveyCount}</Text>
-      </View>
-      <View style={styles.horizontalLineGray} />
-      <View style={styles.countContainer}>
-        <Text style={styles.label}>Environmental Health</Text>
-        <Text style={styles.count}>{envHealthCount}</Text>
-      </View>
-      <View style={styles.horizontalLineGray} />
-      <View style={styles.countContainer}>
-        <Text style={styles.label}>Vitals</Text>
-        <Text style={styles.count}>{vitalsCount}</Text>
-      </View>
-      <View style={styles.horizontalLineGray} />
-      <View style={styles.countContainer}>
-        <Text style={styles.label}>Custom Forms</Text>
-        <Text style={styles.count}>{customCount}</Text>
-      </View>
-      <View style={styles.horizontalLineGray} />
+      {surveyQueryDone && envHealthQueryDone && vitalsQueryDone && customQueryDone ? (
+        <View>
+          <View style={styles.countContainer}>
+            <Text style={styles.label}>ID Forms</Text>
+            <Text style={styles.count}>{surveyCount}</Text>
+          </View>
+          <View style={styles.horizontalLineGray} />
+          <View style={styles.countContainer}>
+            <Text style={styles.label}>Environmental Health Forms</Text>
+            <Text style={styles.count}>{envHealthCount}</Text>
+          </View>
+          <View style={styles.horizontalLineGray} />
+          <View style={styles.countContainer}>
+            <Text style={styles.label}>Vitals Forms</Text>
+            <Text style={styles.count}>{vitalsCount}</Text>
+          </View>
+          <View style={styles.horizontalLineGray} />
+          <View style={styles.countContainer}>
+            <Text style={styles.label}>Custom Forms</Text>
+            <Text style={styles.count}>{customCount}</Text>
+          </View>
+          <View style={styles.horizontalLineGray} />
+        </View>
+      ) : (
+        <Spinner color={theme.colors.primary} />
+      )}
       <Button onPress={() => setShowCounts(false)}>Back</Button>
     </View>
   );
