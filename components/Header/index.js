@@ -11,6 +11,7 @@ import { postOfflineForms } from '../../modules/cached-resources';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
 import { countService } from '../../services/parse/crud';
+import FormCounts from './FormCounts';
 import styles from './index.styles';
 
 const Header = ({
@@ -25,6 +26,7 @@ const Header = ({
   const [offlineForms, setOfflineForms] = useState(false);
   const [offlineFormCount, setOfflineFormCount] = useState(0);
   const [submission, setSubmission] = useState(null);
+  const [showCounts, setShowCounts] = useState(false);
 
   const volunteerLength = (object) => {
     const date = new Date(object.createdAt);
@@ -47,17 +49,17 @@ const Header = ({
 
   const count = async () => {
     getData('currentUser').then((user) => {
-      const userName = `${user.firstname || ''} ${user.lastname || ''}`;
+      // const userName = `${user.firstname || ''} ${user.lastname || ''}`;
       calculateTime(user.firstname);
       setVolunteerDate(volunteerLength(user));
-      const postParams = {
-        ParseClass: 'SurveyData',
-        parseColumn: 'surveyingUser',
-        parseParam: userName
-      };
-      countService(postParams).then((counts) => {
-        setSurveyCount(counts);
-      });
+      // const postParams = {
+      //   ParseClass: 'SurveyData',
+      //   parseColumn: 'surveyingUser',
+      //   parseParam: userName
+      // };
+      // countService(postParams).then((counts) => {
+      //   setSurveyCount(counts);
+      // });
     });
 
     getData('offlineIDForms').then((idForms) => {
@@ -118,6 +120,10 @@ const Header = ({
     setSettings(true);
   };
 
+  const navToCounts = () => {
+    setShowCounts(true);
+  }
+
   return (
     <View style={styles.container}>
       <View style={header}>
@@ -140,45 +146,62 @@ const Header = ({
       {drawerOpen === true
         && (
           <View>
-            <Headline style={styles.calculationText}>
-              {volunteerGreeting}
-              <Emoji name="coffee" />
-            </Headline>
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <Text style={styles.calculationText}>{`${I18n.t('header.volunteerSince')}\n${volunteerDate}`}</Text>
-              <Text style={styles.calculationText}>{`${I18n.t('header.surveysCollected')}\n${surveyCount}`}</Text>
-            </View>
-            {offlineForms ? (
-              <Button onPress={postOffline}>
-                {I18n.t('header.submitOffline')}
-              </Button>
+            {showCounts === false ? (
+              <View>
+                <Headline style={styles.calculationText}>
+                  {volunteerGreeting}
+                  <Emoji name="coffee" />
+                </Headline>
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                  <Text style={styles.calculationText}>{`${I18n.t('header.volunteerSince')}\n${volunteerDate}`}</Text>
+                </View>
+                {offlineForms ? (
+                  <Button onPress={postOffline}>
+                    {I18n.t('header.submitOffline')}
+                  </Button>
+                ) : (
+                  <Button disabled>{I18n.t('header.submitOffline')}</Button>
+                )}
+                {submission === false && (
+                  <View>
+                    <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>
+                    <Text style={{ alignSelf: 'center' }}>{I18n.t('header.tryAgain')}</Text>
+                    <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
+                  </View>
+                )}
+                {submission === true && (
+                  <View>
+                    <Text style={styles.calculationText}>{I18n.t('header.success')}</Text>
+                    <Text style={{ alignSelf: 'center' }}>
+                      {I18n.t('header.justSubmitted')}
+                      {' '}
+                      {offlineFormCount}
+                      {' '}
+                      {offlineFormCount > 1 && (
+                        <Text>{I18n.t('header.forms')}</Text>)}
+                      {offlineFormCount === 1 && (
+                        <Text>{I18n.t('header.form')}</Text>)}
+                    </Text>
+                    <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
+                  </View>
+                )}
+                <View style={{ flexDirection: 'row' }}>
+                  <Button
+                    style={styles.calculationText}
+                    onPress={navToSettings}
+                  >Settings Page</Button>
+                  <Button
+                    style={styles.calculationText}
+                    onPress={navToCounts}
+                  >{I18n.t('header.surveysCollected')}</Button>
+                </View>
+              </View>
             ) : (
-              <Button disabled>{I18n.t('header.submitOffline')}</Button>
+              <FormCounts
+                setShowCounts={setShowCounts}
+              />
             )}
-            {submission === false && (
-              <View>
-                <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>
-                <Text style={{ alignSelf: 'center' }}>{I18n.t('header.tryAgain')}</Text>
-                <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
-              </View>
-            )}
-            {submission === true && (
-              <View>
-                <Text style={styles.calculationText}>{I18n.t('header.success')}</Text>
-                <Text style={{ alignSelf: 'center' }}>
-                  {I18n.t('header.justSubmitted')}
-                  {' '}
-                  {offlineFormCount}
-                  {' '}
-                  {offlineFormCount > 1 && (
-                    <Text>{I18n.t('header.forms')}</Text>)}
-                  {offlineFormCount === 1 && (
-                    <Text>{I18n.t('header.form')}</Text>)}
-                </Text>
-                <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
-              </View>
-            )}
-            <Button onPress={navToSettings}>Settings Page</Button>
+
           </View>
         )}
       <IconButton
@@ -188,6 +211,7 @@ const Header = ({
         }}
         onPress={count}
       />
+
     </View>
   );
 };
