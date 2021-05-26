@@ -1,15 +1,15 @@
+import { Spinner } from 'native-base';
 import React, { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
 import {
   View
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { Spinner } from 'native-base';
 
 import { getData } from '../../../modules/async-storage';
+import { theme } from '../../../modules/theme';
 import { countService } from '../../../services/parse/crud';
 import styles from '../index.styles';
-import { theme } from '../../../modules/theme';
 
 const FormCounts = ({ setShowCounts }) => {
   const [surveyCount, setSurveyCount] = useState(0);
@@ -17,10 +17,10 @@ const FormCounts = ({ setShowCounts }) => {
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
   const [userName, setUserName] = useState(' ');
-  const [surveyQueryDone, setSurveyQueryDone] = useState(false)
-  const [envHealthQueryDone, setEnvHealthQueryDone] = useState(false)
-  const [vitalsQueryDone, setVitalsQueryDone] = useState(false)
-  const [customQueryDone, setCustomQueryDone] = useState(false)
+  const [surveyQueryDone, setSurveyQueryDone] = useState(false);
+  const [envHealthQueryDone, setEnvHealthQueryDone] = useState(false);
+  const [vitalsQueryDone, setVitalsQueryDone] = useState(false);
+  const [customQueryDone, setCustomQueryDone] = useState(false);
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -49,7 +49,7 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsEnvHealth).then((envHealthCounts) => {
       setEnvHealthCount(envHealthCounts);
-      setEnvHealthQueryDone(true)
+      setEnvHealthQueryDone(true);
     });
   }, [userName]);
 
@@ -61,7 +61,7 @@ const FormCounts = ({ setShowCounts }) => {
     };
     countService(postParamsVitals).then((vitalsCounts) => {
       setVitalsCount(vitalsCounts);
-      setVitalsQueryDone(true)
+      setVitalsQueryDone(true);
     });
   }, [userName]);
 
