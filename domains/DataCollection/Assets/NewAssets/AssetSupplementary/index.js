@@ -20,7 +20,6 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
 
   return (
     <ScrollView vertical>
-
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {
@@ -73,17 +72,16 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
               style={styles.assetContainer}
             >
               <View style={layout.container}>
+                <AssetFormSelect
+                  setSelectedForm={setSelectedForm}
+                />
                 <AssetSearchbar
                   selectedAsset={selectedAsset}
                   setSelectedAsset={setSelectedAsset}
                   surveyingOrganization={surveyingOrganization}
                 />
               </View>
-              <View>
-                <AssetFormSelect
-                  setSelectedForm={setSelectedForm}
-                />
-              </View>
+            
               {selectedAsset !== null && selectedAsset !== {}
                 && (
                   <SelectedAsset
