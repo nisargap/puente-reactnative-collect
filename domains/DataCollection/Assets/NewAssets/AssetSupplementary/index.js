@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Button } from 'react-native-paper';
 
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
@@ -15,13 +14,11 @@ import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
 const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
-  const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
 
   return (
     <ScrollView vertical>
-
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {

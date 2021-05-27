@@ -1,27 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { Card, IconButton, Text } from 'react-native-paper';
 
 import { assetFormsQuery } from '../../../../../../modules/cached-resources';
-import { layout } from '../../../../../../modules/theme';
+import { layout, theme } from '../../../../../../modules/theme';
 import styles from './index.style';
 
-const AssetFormSelect = ({ setViewSupplementaryForms, setSelectedForm }) => {
+const AssetFormSelect = ({ setSelectedForm }) => {
   const [assetForms, setAssetForms] = useState([]);
   useEffect(() => {
     assetFormsQuery().then((forms) => {
       setAssetForms(forms);
     });
-  }, []);
+  });
+
+  const refreshAssetForms = () => {
+    assetFormsQuery().then((forms) => {
+      setAssetForms(forms);
+    });
+  };
 
   const selectForm = (form) => {
-    setViewSupplementaryForms(false);
     setSelectedForm(form);
   };
 
   return (
     <View>
-      <ScrollView horizontal>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={styles.header}>Supplementary Asset Forms</Text>
+        <IconButton
+          style={{ bottom: 7 }}
+          color={theme.colors.primary}
+          size={20}
+          icon="refresh"
+          onPress={refreshAssetForms}
+        />
+      </View>
+      <ScrollView horizontal style={styles.componentContainer}>
         {assetForms && assetForms.map((form) => (
           <Card
             key={form.objectId}
