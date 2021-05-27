@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Button } from 'react-native-paper';
 
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
@@ -15,7 +14,6 @@ import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
 const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
-  const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
   return (
@@ -70,14 +68,9 @@ const AssetSupplementary = ({ selectedAsset, surveyingOrganization }) => {
           <TouchableWithoutFeedback>
             <View style={styles.assetContainer}>
               <View>
-                <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
-                {viewSupplementaryForms === true
-                  && (
-                    <AssetFormSelect
-                      setViewSupplementaryForms={setViewSupplementaryForms}
-                      setSelectedForm={setSelectedForm}
-                    />
-                  )}
+                <AssetFormSelect
+                  setSelectedForm={setSelectedForm}
+                />
               </View>
               {selectedAsset
                 && (
