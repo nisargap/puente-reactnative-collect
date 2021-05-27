@@ -16,6 +16,7 @@ const NewAsset = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) =>
     </View>
     <View key="2" style={styles.page}>
       <AssetSupplementary
+        setSelectedAsset={setSelectedAsset}
         selectedAsset={selectedAsset}
         surveyingOrganization={surveyingOrganization}
       />

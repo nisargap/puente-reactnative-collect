@@ -144,28 +144,30 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 ))}
               </View>
               <TextInput
-                label="Community Name"
+                label="Community Name and Community Name and Community Name"
                 value={formikProps.values.communityName || ''}
                 onChangeText={formikProps.handleChange('communityName')}
                 onBlur={formikProps.handleBlur('communityName')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
-              />
-              <TextInput
-                label="City"
-                value={formikProps.values.city || ''}
-                onChangeText={formikProps.handleChange('city')}
-                onBlur={formikProps.handleBlur('city')}
-                mode="outlined"
-                theme={stylesPaper}
-                style={stylesDefault.label}
+                multiline
+                numberOfLines={4}
               />
               <TextInput
                 label="Province"
                 value={formikProps.values.province || ''}
                 onChangeText={formikProps.handleChange('province')}
                 onBlur={formikProps.handleBlur('province')}
+                mode="outlined"
+                theme={stylesPaper}
+                style={stylesDefault.label}
+              />
+              <TextInput
+                label="Country"
+                value={formikProps.values.country || ''}
+                onChangeText={formikProps.handleChange('country')}
+                onBlur={formikProps.handleBlur('country')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
