@@ -71,21 +71,14 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
               style={styles.assetContainer}
             >
               <View>
+                <AssetFormSelect
+                  setSelectedForm={setSelectedForm}
+                />
                 <AssetSearchbar
                   selectedAsset={selectedAsset}
                   setSelectedAsset={setSelectedAsset}
                   surveyingOrganization={surveyingOrganization}
                 />
-              </View>
-              <View>
-                <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
-                {viewSupplementaryForms === true
-                  && (
-                    <AssetFormSelect
-                      setViewSupplementaryForms={setViewSupplementaryForms}
-                      setSelectedForm={setSelectedForm}
-                    />
-                  )}
               </View>
               {Object.keys(selectedAsset).length !== 0 && (
               <SelectedAsset
