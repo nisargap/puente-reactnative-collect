@@ -57,7 +57,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
           offlineData = offlineData.concat(value.localObject);
         });
       }
-    }); 
+    });
 
     const allData = records.concat(offlineData);
     setResidentsData(allData.slice());

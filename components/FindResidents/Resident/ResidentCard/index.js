@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Image,
-  StyleSheet, View
+  Image, View
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {

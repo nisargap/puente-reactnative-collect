@@ -4,18 +4,16 @@ import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 
-import AssetSearchbar from '../../../../../components/AssetSearchBar/index'
+import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
-import { layout } from '../../../../../modules/theme';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
-    
 const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
   const [viewSupplementaryForms, setViewSupplementaryForms] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
@@ -23,7 +21,7 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
 
   return (
     <ScrollView vertical>
-       
+
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {
@@ -73,14 +71,15 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
         {(formikProps) => (
           <TouchableWithoutFeedback>
             <View
-             style={styles.assetContainer}>
-                <View style={layout.container}>
-                  <AssetSearchbar
-                    selectedAsset={selectedAsset}
-                    setSelectedAsset={setSelectedAsset}
-                    surveyingOrganization={surveyingOrganization}
-                  />
-                </View>
+              style={styles.assetContainer}
+            >
+              <View>
+                <AssetSearchbar
+                  selectedAsset={selectedAsset}
+                  setSelectedAsset={setSelectedAsset}
+                  surveyingOrganization={surveyingOrganization}
+                />
+              </View>
               <View>
                 <Button compact mode="contained" onPress={() => setViewSupplementaryForms(!viewSupplementaryForms)}>Show Available Asset Forms</Button>
                 {viewSupplementaryForms === true
@@ -91,13 +90,12 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
                     />
                   )}
               </View>
-              {selectedAsset !== null && selectedAsset !== {}
-                && (
-                  <SelectedAsset
-                    selectedMarker={selectedAsset}
-                  />
-                )}
-              <View style={layout.formContainer}>
+              {Object.keys(selectedAsset).length !== 0 && (
+              <SelectedAsset
+                selectedMarker={selectedAsset}
+              />
+              )}
+              <View>
                 {selectedForm?.fields?.length && selectedForm.fields.map((result) => (
                   <View key={result.formikKey}>
                     <PaperInputPicker
@@ -111,7 +109,7 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
                   <ActivityIndicator />
                 ) : (
                   <PaperButton
-                    disabled={!selectedForm?.objectId} 
+                    disabled={!selectedForm?.objectId}
                     style={{ backgroundColor: selectedForm?.objectId ? 'green' : 'red' }}
                     onPressEvent={() => formikProps.handleSubmit()}
                     buttonText={selectedForm?.objectId ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}

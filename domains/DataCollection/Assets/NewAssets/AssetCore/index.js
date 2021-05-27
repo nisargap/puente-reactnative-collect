@@ -144,13 +144,15 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 ))}
               </View>
               <TextInput
-                label="Community Name"
+                label="Community Name and Community Name and Community Name"
                 value={formikProps.values.communityName || ''}
                 onChangeText={formikProps.handleChange('communityName')}
                 onBlur={formikProps.handleBlur('communityName')}
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
+                multiline
+                numberOfLines={4}
               />
               <TextInput
                 label="Province"

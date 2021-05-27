@@ -1,15 +1,15 @@
 import * as Updates from 'expo-updates';
-import { Platform } from 'react-native';
+// import { Platform } from 'react-native';
 
 const ENV = {
-  dev: {
-    parseAppId: 'myAppId',
-    parseJavascriptKey: '',
-    parseServerUrl: Platform.OS === 'ios' ? 'http://localhost:1337/parse' : 'http://10.0.2.2:1337/parse',
-    parseMasterKey: '',
-    taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
-    AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
-  },
+  // dev: {
+  //   parseAppId: 'myAppId',
+  //   parseJavascriptKey: '',
+  //   parseServerUrl: Platform.OS === 'ios' ? 'http://localhost:1337/parse' : 'http://10.0.2.2:1337/parse',
+  //   parseMasterKey: '',
+  //   taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
+  //   AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
+  // },
   // dev: {
   //   parseAppId: '1A95hsvxDlQta3wQyp4dArRzLcKKf1w3AyfQaqtH',
   //   parseJavascriptKey: 'IDl2eJ5iXHtXp8RgzqNlT2uKQwNSOlSfeSF6yrFO',
@@ -18,14 +18,14 @@ const ENV = {
   //   taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
   //   AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
   // },
-  // dev: {
-  //   parseAppId: 'ZvGwjA7cemNfr9Qtn6LnwnrcgiM3Xl4N3msObrcg',
-  //   parseJavascriptKey: 'dQW12E6wgKWrqdlNCYMCIzLzWomgjCZlLZrrXlki',
-  //   parseServerUrl: 'https://parseapi.back4app.com/',
-  //   parseMasterKey: 'rkR6dXFB7KTZzl4LLF5138xPgBAG5cG5NxPBcp6l',
-  //   taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
-  //   AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
-  // },
+  dev: {
+    parseAppId: 'ZvGwjA7cemNfr9Qtn6LnwnrcgiM3Xl4N3msObrcg',
+    parseJavascriptKey: 'dQW12E6wgKWrqdlNCYMCIzLzWomgjCZlLZrrXlki',
+    parseServerUrl: 'https://parseapi.back4app.com/',
+    parseMasterKey: 'rkR6dXFB7KTZzl4LLF5138xPgBAG5cG5NxPBcp6l',
+    taskyUrlApi: 'https://puente-tasky-dev.herokuapp.com/',
+    AWS_LAMBDA_URL: 'https://98kngyxax2.execute-api.us-east-1.amazonaws.com/default/s3-json-to-client',
+  },
   staging: {
     parseAppId: 'ZvGwjA7cemNfr9Qtn6LnwnrcgiM3Xl4N3msObrcg',
     parseJavascriptKey: 'dQW12E6wgKWrqdlNCYMCIzLzWomgjCZlLZrrXlki',

@@ -1,17 +1,13 @@
 import { Spinner } from 'native-base';
-import React, { useEffect, useState, TouchableWithoutFeedback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
-import { assetDataQuery } from '../../modules/cached-resources/index.js'
+
 import { getData } from '../../modules/async-storage';
+import { assetDataQuery } from '../../modules/cached-resources/index';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
-
 import styles from './index.styles';
-// import SelectedAsset from '../../domains/DataCollection/Assets/ViewAssets/SelectedAsset';
-// import SelectedAsset from '../../domains/DataCollection/Assets/ViewAssets/SelectedAsset';
-// import AssetFormSelect from '../../domains/DataCollection/Assets/NewAssets/AssetSupplementary/AssetFormSelect'
-import customQueryService from '../../services/parse/crud/custom-queries';
 
 const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   const [query, setQuery] = useState('');
@@ -21,7 +17,6 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
-
     checkOnlineStatus().then(async (connected) => {
       if (connected) fetchData(true, '');
       if (!connected) fetchData(false, '');
@@ -32,7 +27,7 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   const fetchOfflineData = async () => {
     setOnline(false);
 
-    await getData('assetData').then((assetData) => {
+    await getData('assetData').then(() => {
       if (assetData) {
         let offlineData = [];
         getData('offlineAssetIDForms').then((offlineAssetData) => {
@@ -41,20 +36,18 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
               offlineData = offlineData.concat(value.localObject);
             });
           }
-          console.log("offlineData: ", offlineData)
           const allData = assetData.concat(offlineData);
           setAssetData(allData.slice() || []);
         });
       }
       setLoading(false);
     });
-  }; 
+  };
 
   const fetchOnlineData = async () => {
     setOnline(true);
-    
+
     assetDataQuery(surveyingOrganization).then((records) => {
-    
       let offlineData = [];
 
       getData('offlineAssetIDForms').then((offlineAssetData) => {
@@ -66,24 +59,23 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
       });
 
       const allData = records.concat(offlineData);
-      console.log("offlineData: ", offlineData)
       setAssetData(allData.slice());
       setLoading(false);
     });
   };
 
   const fetchData = (onLine, qry) => {
-   // remove this line if no offline too - 82
-   if (!onLine) fetchOfflineData();
-   if(onLine) fetchOnlineData(qry);
+    // remove this line if no offline too - 82
+    if (!onLine) fetchOfflineData();
+    if (onLine) fetchOnlineData(qry);
   };
 
   // probably not needed, this is all specific to the id form
   const filterOfflineList = () => assetData.filter(
     (listItem) => {
-     // const listItemJSON = listItem.toJSON();
+      // const listItemJSON = listItem.toJSON();
       const name = listItem.name || ' ';
-      return name.toLowerCase().includes(query.toLowerCase())
+      return name.toLowerCase().includes(query.toLowerCase());
     }
   );
 
@@ -93,9 +85,9 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
     if (input === '') setLoading(false);
 
     clearTimeout(searchTimeout);
-    
+
     setQuery(input);
-    
+
     setSearchTimeout(setTimeout(() => {
       fetchData(online, input);
     }, 1000));
@@ -121,7 +113,6 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
           borderRadius: 20
         }}
         />
-
       </Button>
     </View>
   );
@@ -138,14 +129,11 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
         && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
       {loading
         && <Spinner color="blue" />}
-
       {query !== '' && (
         <FlatList
           data={filterOfflineList(assetData)}
           renderItem={renderItem}
-          keyExtractor={(item) => {
-            item.objectId;
-          }}
+          keyExtractor={(item) => item.objectId}
         />
       )}
       {/* {selectedAsset
