@@ -114,8 +114,8 @@ function assetFormsQuery() {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((online) => {
       if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
-          await storeData(forms, 'assetForms');
+        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then((forms) => {
+          storeData(forms, 'assetForms');
           resolve(JSON.parse(JSON.stringify(forms)));
         }, (error) => {
           reject(error);

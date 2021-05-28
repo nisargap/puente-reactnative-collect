@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { Card, IconButton, Text } from 'react-native-paper';
 
 import { assetFormsQuery } from '../../../../../../modules/cached-resources';
@@ -8,15 +8,20 @@ import styles from './index.style';
 
 const AssetFormSelect = ({ setSelectedForm }) => {
   const [assetForms, setAssetForms] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     assetFormsQuery().then((forms) => {
+      setLoading(false);
       setAssetForms(forms);
     });
-  });
+  }, []);
 
-  const refreshAssetForms = () => {
-    assetFormsQuery().then((forms) => {
+  const refreshAssetForms = async () => {
+    setLoading(true);
+    await assetFormsQuery().then((forms) => {
       setAssetForms(forms);
+      setLoading(false);
     });
   };
 
@@ -36,6 +41,8 @@ const AssetFormSelect = ({ setSelectedForm }) => {
           onPress={refreshAssetForms}
         />
       </View>
+      {loading
+        && <ActivityIndicator />}
       <ScrollView horizontal style={styles.componentContainer}>
         {assetForms && assetForms.map((form) => (
           <Card

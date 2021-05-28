@@ -1,4 +1,4 @@
- /* eslint-disable */
+/* eslint-disable */
 
 const { toUpper } = require('lodash');
 const prompt = require('prompt');
