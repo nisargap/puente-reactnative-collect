@@ -70,16 +70,15 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
             <View
               style={styles.assetContainer}
             >
-              <View>
                 <AssetFormSelect
                   setSelectedForm={setSelectedForm}
                 />
+                
                 <AssetSearchbar
                   selectedAsset={selectedAsset}
                   setSelectedAsset={setSelectedAsset}
                   surveyingOrganization={surveyingOrganization}
                 />
-              </View>
               {Object.keys(selectedAsset).length !== 0 && (
               <SelectedAsset
                 selectedMarker={selectedAsset}

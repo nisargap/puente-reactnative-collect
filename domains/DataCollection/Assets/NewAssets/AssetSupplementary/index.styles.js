@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.90,
     padding: 10,
     textAlign: 'left',
-    backgroundColor: 'white',
-    borderColor: '#eaeaea',
-    borderRadius: 10,
-    borderWidth: 1,
   }
 });
 
