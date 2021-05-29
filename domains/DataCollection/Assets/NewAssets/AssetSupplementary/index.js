@@ -70,15 +70,15 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
             <View
               style={styles.assetContainer}
             >
-                <AssetFormSelect
-                  setSelectedForm={setSelectedForm}
-                />
-                
-                <AssetSearchbar
-                  selectedAsset={selectedAsset}
-                  setSelectedAsset={setSelectedAsset}
-                  surveyingOrganization={surveyingOrganization}
-                />
+              <AssetFormSelect
+                setSelectedForm={setSelectedForm}
+              />
+
+              <AssetSearchbar
+                selectedAsset={selectedAsset}
+                setSelectedAsset={setSelectedAsset}
+                surveyingOrganization={surveyingOrganization}
+              />
               {Object.keys(selectedAsset).length !== 0 && (
               <SelectedAsset
                 selectedMarker={selectedAsset}
@@ -98,12 +98,11 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
                   <ActivityIndicator />
                 ) : (
                   <PaperButton
-                    disabled={!selectedForm?.objectId}
                     style={{ backgroundColor: selectedForm?.objectId ? 'green' : 'red' }}
                     onPressEvent={() => formikProps.handleSubmit()}
+                    icon={selectedForm?.objectId ? 'plus' : 'alert-octagon'}
                     buttonText={selectedForm?.objectId ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
                   />
-
                 )}
               </View>
             </View>

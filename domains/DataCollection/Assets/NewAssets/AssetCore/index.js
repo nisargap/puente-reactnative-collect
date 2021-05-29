@@ -177,9 +177,8 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
               ) : (
                 <PaperButton
                   onPressEvent={() => formikProps.handleSubmit()}
-                  disabled={!!_.isEmpty(formikProps.values)}
                   buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
-                  icon={_.isEmpty(formikProps.values) ? '' : 'plus'}
+                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
