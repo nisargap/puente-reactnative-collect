@@ -18,7 +18,7 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
   const [photoFile, setPhotoFile] = useState('State Photo String');
 
   return (
-    <ScrollView vertical>
+    <ScrollView>
       <Formik
         initialValues={{}}
         onSubmit={async (values, actions) => {
