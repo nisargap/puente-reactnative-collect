@@ -37,6 +37,7 @@ const ViewAssets = ({ organization, setSelectedAsset }) => {
 
     return () => { isSubscribed = false; };
   }, []);
+
   const [region, setRegion] = useState();
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(false);

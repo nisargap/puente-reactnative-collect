@@ -1,47 +1,67 @@
 import { Spinner } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { IconButton } from 'react-native-paper';
 
-import { getData } from '../../modules/async-storage';
+import { getData, storeData } from '../../modules/async-storage';
 import getLocation from '../../modules/geolocation';
-import checkOnlineStatus from '../../modules/offline';
 import { theme } from '../../modules/theme';
 import { residentIDQuery } from '../../services/parse/crud';
 
 const Maps = ({ organization }) => {
-  const [region, setRegion] = useState({
-    latitude: 18.4861,
-    longitude: -69.9312,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  useEffect(() => {
+    let isSubscribed = true;
 
+    async function fetchRegion() {
+      await getData('assetMapRegion').then((data) => {
+        if (isSubscribed) {
+          if (!data) {
+            setRegion({
+              latitude: 18.4861,
+              longitude: -69.9312,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            });
+          } else {
+            setRegion(data);
+          }
+        }
+      });
+    }
+
+    fetchRegion();
+
+    return () => { isSubscribed = false; };
+  }, []);
+
+  const [region, setRegion] = useState();
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleLocation = async () => {
-    const currentLocation = await getLocation().then().catch((e) => e);
-    const { latitude, longitude } = currentLocation.coords;
-    setRegion({
-      ...region,
-      latitude,
-      longitude,
-    });
-  };
-
-  const retriveAsyncMarkers = () => {
     setLoading(true);
-    getData('residentData').then((residentData) => {
-      if (residentData) {
-        setMarkers(residentData);
-      }
-      setLoading(false);
+    await getLocation().then((location) => {
+      const { latitude, longitude } = location.coords;
+      setRegion({
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        latitude,
+        longitude,
+      });
+      storeData({
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        latitude,
+        longitude,
+      }, 'assetMapRegion');
+    }).catch((e) => {
+      console.log(e) //eslint-disable-line
     });
+    setLoading(false);
   };
 
-  const retrieveOnlineMarkers = () => {
+  const retrieveMarkers = () => {
     setLoading(true);
     const queryParams = {
       skip: 0,
@@ -50,23 +70,42 @@ const Maps = ({ organization }) => {
       parseColumn: 'surveyingOrganization',
       parseParam: organization,
     };
-
-    residentIDQuery(queryParams).then((recs) => {
-      const records = JSON.parse(JSON.stringify(recs));
-      setMarkers(records);
+    residentIDQuery(queryParams).then((records) => {
+      const sanitizedRecords = JSON.parse(JSON.stringify(records));
+      setMarkers(sanitizedRecords);
       setLoading(false);
+    }).catch((e) => {
+      setLoading(false);
+      console.log(e); //eslint-disable-line
     });
   };
 
-  const retrieveMarkers = () => {
-    checkOnlineStatus().then(async (online) => {
-      if (online) {
-        retrieveOnlineMarkers();
-      } else {
-        retriveAsyncMarkers();
-      }
-    });
-  };
+  // const retriveAsyncMarkers = () => {
+  //   setLoading(true);
+  //   getData('residentData').then((residentData) => {
+  //     if (residentData) {
+  //       setMarkers(residentData);
+  //     }
+  //     setLoading(false);
+  //   });
+  // };
+
+  // const retrieveOnlineMarkers = () => {
+  //   setLoading(true);
+  // const queryParams = {
+  //   skip: 0,
+  //   offset: 0,
+  //   limit: 10000,
+  //   parseColumn: 'surveyingOrganization',
+  //   parseParam: organization,
+  // };
+
+  //   residentIDQuery(queryParams).then((recs) => {
+  //     const records = JSON.parse(JSON.stringify(recs));
+  //     setMarkers(records);
+  //     setLoading(false);
+  //   });
+  // };
 
   return (
     <View style={styles.container}>
