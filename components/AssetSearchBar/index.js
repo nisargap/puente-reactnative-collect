@@ -136,17 +136,6 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
           keyExtractor={(item) => item.objectId}
         />
       )}
-      {/* {selectedAsset
-        && (
-          // <SelectedAsset
-          //   selectedMarker={selectedAsset}
-          // />
-          // <View>
-          //   <Text >{selectedAsset.name || selectedAsset.Name}</Text>
-          //   <Text >{selectedAsset.communityName || ''}</Text>
-          // </View>
-        )} */}
-
     </View>
   );
 };
