@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.7.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.2...v11.7.3) (2021-05-30)
+
 ### [11.7.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.1...v11.7.2) (2021-05-30)
 
 
