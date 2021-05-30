@@ -72,6 +72,7 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
             >
               <AssetFormSelect
                 setSelectedForm={setSelectedForm}
+                surveyingOrganization={surveyingOrganization}
               />
 
               <AssetSearchbar

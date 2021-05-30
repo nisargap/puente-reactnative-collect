@@ -6,12 +6,12 @@ import { assetFormsQuery } from '../../../../../../modules/cached-resources';
 import { layout, theme } from '../../../../../../modules/theme';
 import styles from './index.style';
 
-const AssetFormSelect = ({ setSelectedForm }) => {
+const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
   const [assetForms, setAssetForms] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    assetFormsQuery().then((forms) => {
+    assetFormsQuery(surveyingOrganization).then((forms) => {
       setLoading(false);
       setAssetForms(forms);
     });
@@ -19,7 +19,7 @@ const AssetFormSelect = ({ setSelectedForm }) => {
 
   const refreshAssetForms = async () => {
     setLoading(true);
-    await assetFormsQuery().then((forms) => {
+    await assetFormsQuery(surveyingOrganization).then((forms) => {
       setAssetForms(forms);
       setLoading(false);
     });
