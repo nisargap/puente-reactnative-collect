@@ -60,7 +60,11 @@ function customFormsQuery(surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((online) => {
       if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', surveyingOrganization).then(async (forms) => {
+        const parseParams = {
+          typeOfForm: 'Custom',
+          organizations: surveyingOrganization
+        };
+        customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
           if (forms !== null && forms !== undefined && forms !== '') {
             await storeData(forms, 'customForms');
             resolve(JSON.parse(JSON.stringify(forms)));
