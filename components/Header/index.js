@@ -92,11 +92,11 @@ const Header = ({
       return 0;
     });
 
-    const allFormsCount = idFormCount + supplementaryCount + assetIdFormCount + assetSupForms;
+    const allFormOfflineCount = idFormCount + supplementaryCount + assetIdFormCount + assetSupForms;
 
-    setOfflineFormCount(allFormsCount);
+    setOfflineFormCount(allFormOfflineCount);
 
-    setOfflineForms(allFormsCount === 0);
+    setOfflineForms(allFormOfflineCount > 0);
 
     setDrawerOpen(!drawerOpen);
   };
