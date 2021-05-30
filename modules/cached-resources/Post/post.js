@@ -76,7 +76,6 @@ function postAssetForm(postParams) {
             resolve(assetIdParams.localObject);
           } else {
             const idData = [assetIdParams];
-            // idData[id] = postParams;
             await storeData(idData, 'offlineAssetIDForms');
             resolve(assetIdParams.localObject);
           }
