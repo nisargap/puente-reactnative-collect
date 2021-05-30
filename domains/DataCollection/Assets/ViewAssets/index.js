@@ -12,7 +12,7 @@ import getLocation from '../../../../modules/geolocation';
 import { theme } from '../../../../modules/theme';
 import SelectedAsset from './SelectedAsset';
 
-const ViewAssets = ({ organization, setSelectedAsset }) => {
+const ViewAssets = ({ organization, switchAssetPage }) => {
   useEffect(() => {
     let isSubscribed = true;
 
@@ -121,7 +121,7 @@ const ViewAssets = ({ organization, setSelectedAsset }) => {
             <SelectedAsset
               selectedMarker={selectedMarker}
               style={{ position: 'absolute' }}
-              setSelectedAsset={setSelectedAsset}
+              switchAssetPage={switchAssetPage}
             />
           )}
       </View>
@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     position: 'absolute', // use absolute position to show button on top of the map
     bottom: '0%',
-    // alignSelf: 'flex-end', // for align to right,
     right: '0%',
   },
   loading: {

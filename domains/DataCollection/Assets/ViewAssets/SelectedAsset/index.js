@@ -10,9 +10,9 @@ import {
 import I18n from '../../../../../modules/i18n';
 import { layout } from '../../../../../modules/theme';
 
-const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (
+const SelectedAsset = ({ selectedMarker, switchAssetPage }) => (
   <TouchableWithoutFeedback
-    onPress={setSelectedAsset ? () => setSelectedAsset(selectedMarker) : (e) => e}
+    onPress={switchAssetPage ? () => switchAssetPage(1, selectedMarker) : (e) => e}
     style={layout.resCardContainer}
   >
     <View
@@ -22,16 +22,12 @@ const SelectedAsset = ({ selectedMarker, setSelectedAsset }) => (
     </View>
 
     <View style={layout.resCardCityLicenseContainer}>
-      {/* <View style={layout.resCardCityContainer}>
-            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.city')}</Text>
-            <Text style={layout.resCardFont}>{city}</Text>
-          </View> */}
       <View style={layout.resCardLicenseContainer}>
         <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.community')}</Text>
         <Text style={layout.resCardLicense}>{selectedMarker.communityName}</Text>
       </View>
       {selectedMarker.relatedPeople && selectedMarker.relatedPeople.map((person) => (
-        <View style={layout.resCardLicenseContainer}>
+        <View key={`${person.lastName}_${person.firstName}`} style={layout.resCardLicenseContainer}>
           <Text style={layout.resCardFont}>Related People</Text>
           <Text style={layout.resCardFont}>
             {person.firstName}
