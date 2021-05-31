@@ -1,4 +1,4 @@
-# Contributing to Puente Collect
+# Contributing to Puente Collect 
 
 Do you want to help us make awesome open-source software for humanitarian work?
  
