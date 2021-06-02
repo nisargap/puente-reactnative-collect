@@ -65,7 +65,7 @@ export default function populateCache(user) {
     .then(() => {
       // Asset data/Asset forms
       assetDataQuery(user.get('organization')).then(() => {
-        assetFormsQuery().then(() => {
+        assetFormsQuery(user.get('organization')).then(() => {
         }, () => {
           // error
         });

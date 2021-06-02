@@ -1,6 +1,6 @@
 import { Parse } from 'parse/react-native';
 
-import customQueryService from './custom-queries';
+import { customMultiParamQueryService, customQueryService } from './custom-queries';
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
@@ -57,6 +57,7 @@ function getObjectsByGeolocation(params) {
 
 export {
   countService,
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,

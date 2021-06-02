@@ -24,6 +24,7 @@ import * as yup from 'yup';
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
+import registerForPushNotificationsAsync from '../../../components/PushNotification';
 import TermsModal from '../../../components/TermsModal';
 import { deleteData, getData, storeData } from '../../../modules/async-storage';
 import { populateCache } from '../../../modules/cached-resources';
@@ -91,7 +92,7 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Sign Up');
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     Keyboard.dismiss();
     navigation.navigate('Root');
   };
@@ -140,13 +141,15 @@ const SignIn = ({ navigation }) => {
     deleteData('credentials');
   };
 
-  const storeUserInformation = (userData, userCreds) => {
+  const storeUserInformation = async (userData, userCreds) => {
     // store username and password
     if (userCreds) {
       const credentials = userCreds;
       credentials.store = 'No';
       storeData(credentials, 'credentials');
     }
+    // semd push to update app if necessary
+    await registerForPushNotificationsAsync();
     populateCache(userData);
   };
 

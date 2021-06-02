@@ -474,5 +474,8 @@
     "enterFeedback": "Ingrese sus comentarios en la entrada a continuación y presione el botón \"Enviar comentarios\". Esto lo redireccionará a su correo electrónico donde puede enviar sus comentarios.",
     "sendMail": "Enviar correo",
     "typeFeedback": "Escriba sus comentarios aquí ..."
+  },
+  "pushNotifications": {
+    "updateApp": "Actualiza en la App Store. Tu aplicación está desactualizada."
   }
 }

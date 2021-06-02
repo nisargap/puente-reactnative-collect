@@ -1,7 +1,7 @@
 import * as Location from 'expo-location';
 
 export default async function getLocation() {
-  const { status } = await Location.requestPermissionsAsync().catch((err) => console.log(err)); //eslint-disable-line
+  const { status } = await Location.requestForegroundPermissionsAsync().catch((err) => console.log(err)); //eslint-disable-line
   if (status !== 'granted') {
     return 'Permission to access location was denied';
   }

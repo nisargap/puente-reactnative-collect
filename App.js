@@ -1,3 +1,7 @@
+/* eslint-disable-file */
+import 'react-native-gesture-handler'; 
+
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 
@@ -12,8 +16,12 @@ export default function App() {
     return null;
   }
   return (
-    <PaperProvider theme={theme}>
-      <MainNavigation />
-    </PaperProvider>
+    <NavigationContainer independent>
+
+      <PaperProvider theme={theme}>
+        <MainNavigation />
+      </PaperProvider>
+    </NavigationContainer>
+
   );
 }
