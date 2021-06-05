@@ -59,7 +59,7 @@ const SignIn = ({ navigation }) => {
   const load = false;
 
   useEffect(() => {
-    getData('credentials').then((values) => {
+    getData('currentUser').then((values) => {
       setUser(values);
       if (values?.store === 'Yes') {
         setModalVisible(true);
@@ -105,9 +105,9 @@ const SignIn = ({ navigation }) => {
         {
           text: 'Yes',
           onPress: () => {
-            const credentials = values;
-            credentials.store = 'Yes';
-            storeData(credentials, 'credentials');
+            const currentUser = values;
+            currentUser.store = 'Yes';
+            storeData(currentUser, 'currentUser');
             navigation.navigate('StorePincode');
           }
         },
@@ -138,47 +138,47 @@ const SignIn = ({ navigation }) => {
   };
 
   const deleteCreds = () => {
-    deleteData('credentials');
+    deleteData('currentUser');
   };
 
-  const storeUserInformation = async (userData, userCreds) => {
+  const storeUserInformation = async (currentUser, userCreds) => {
     // store username and password
     if (userCreds) {
-      const credentials = userCreds;
-      credentials.store = 'No';
-      storeData(credentials, 'credentials');
+      const usr = userCreds;
+      usr.store = 'No';
+      storeData(usr, 'currentUser');
     }
     // semd push to update app if necessary
     await registerForPushNotificationsAsync();
-    populateCache(userData);
+    populateCache(currentUser);
   };
 
   const signInAndStore = (connected, values, actions) => {
     if (connected) {
       retrieveSignInFunction(values.username, values.password)
-        .then(async (userData) => {
-          await storeUserInformation(userData, values);
-          await getData('credentials').then((userCreds) => {
-          // credentials stored do not match those entered through sign-in, overwrite
+        .then((currentUser) => {
+          storeUserInformation(currentUser, values);
+          getData('currentUser').then((userCreds) => {
+            // credentials stored do not match those entered through sign-in, overwrite
             if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
             || values.password !== userCreds.password) {
-            // Store user organization
+              // Store user organization
+              storeUserInformation(currentUser, values);
               handleSaveCredentials(values);
             } else {
-              storeUserInformation(userData);
+              storeUserInformation(currentUser);
               handleSignIn(values, actions.resetForm());
             }
-          }, (error) => {
-            storeUserInformation(userData, values);
+          }, () => {
+            storeUserInformation(currentUser, values);
             handleSaveCredentials(values);
-            console.log(error); // eslint-disable-oine
           });
         }, (err) => {
           handleFailedAttempt(err);
         });
     } else {
       // offline
-      getData('credentials').then((userCreds) => {
+      getData('currentUser').then((userCreds) => {
         // username and password entered (or saved in creds) match the saved cred
         if (values.username === userCreds.username
           && values.password === userCreds.password) {
