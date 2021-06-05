@@ -56,7 +56,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Provider>
         <Formik
           initialValues={{}}
@@ -144,7 +144,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 ))}
               </View>
               <TextInput
-                label="Community Name and Community Name and Community Name"
+                label="Community Name"
                 value={formikProps.values.communityName || ''}
                 onChangeText={formikProps.handleChange('communityName')}
                 onBlur={formikProps.handleBlur('communityName')}
@@ -192,7 +192,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
         </Formik>
       </Provider>
 
-    </View>
+    </ScrollView>
   );
 };
 
