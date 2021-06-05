@@ -153,6 +153,45 @@ const SignIn = ({ navigation }) => {
     populateCache(userData);
   };
 
+  const signInAndStore = (connected, values, actions) => {
+    if (connected) {
+      retrieveSignInFunction(values.username, values.password)
+        .then(async (userData) => {
+          await storeUserInformation(userData, values);
+          await getData('credentials').then((userCreds) => {
+          // credentials stored do not match those entered through sign-in, overwrite
+            if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
+            || values.password !== userCreds.password) {
+            // Store user organization
+              handleSaveCredentials(values);
+            } else {
+              storeUserInformation(userData);
+              handleSignIn(values, actions.resetForm());
+            }
+          }, (error) => {
+            storeUserInformation(userData, values);
+            handleSaveCredentials(values);
+            console.log(error); // eslint-disable-oine
+          });
+        }, (err) => {
+          handleFailedAttempt(err);
+        });
+    } else {
+      // offline
+      getData('credentials').then((userCreds) => {
+        // username and password entered (or saved in creds) match the saved cred
+        if (values.username === userCreds.username
+          && values.password === userCreds.password) {
+          // need some pincode verification
+          handleSignIn(values, actions.resetForm());
+        } else {
+          // incorrect usernmae/password offline
+          handleFailedAttempt();
+        }
+      });
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       enabled
@@ -165,46 +204,9 @@ const SignIn = ({ navigation }) => {
             <LanguagePicker language={language} onChangeLanguage={handleLanguage} />
             <Formik
               initialValues={{ username: '', password: '' }}
-              onSubmit={(values, actions) => {
-                checkOnlineStatus().then((connected) => {
-                  if (connected) {
-                    retrieveSignInFunction(values.username, values.password).then((userData) => {
-                      getData('credentials').then((userCreds) => {
-                        // credentials saved do not match those entered, overwrite saved
-                        // credentials
-                        if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
-                          || values.password !== userCreds.password) {
-                          // Store user organization
-                          storeUserInformation(userData, values);
-                          handleSaveCredentials(values);
-                        } else {
-                          storeUserInformation(userData);
-                          handleSignIn(values, actions.resetForm());
-                        }
-                      }, () => {
-                        // Store user organization
-                        storeUserInformation(userData, values);
-                        // no credentials saved, give option to save
-                        handleSaveCredentials(values);
-                      });
-                      // handleSignIn(values, actions.resetForm());
-                    }, (err) => {
-                      handleFailedAttempt(err);
-                    });
-                  } else {
-                    // offline
-                    getData('credentials').then((userCreds) => {
-                      // username and password entered (or saved in creds) match the saved cred
-                      if (values.username === userCreds.username
-                        && values.password === userCreds.password) {
-                        // need some pincode verification
-                        handleSignIn(values, actions.resetForm());
-                      } else {
-                        // incorrect usernmae/password offline
-                        handleFailedAttempt();
-                      }
-                    });
-                  }
+              onSubmit={async (values, actions) => {
+                await checkOnlineStatus().then((connected) => {
+                  signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
                   actions.setSubmitting(false);
