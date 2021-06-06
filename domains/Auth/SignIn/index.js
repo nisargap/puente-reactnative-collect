@@ -59,9 +59,9 @@ const SignIn = ({ navigation }) => {
   const load = false;
 
   useEffect(() => {
-    getData('currentUser').then((values) => {
-      setUser(values);
-      if (values?.store === 'Yes') {
+    getData('currentUser').then((currentUser) => {
+      setUser(currentUser);
+      if (currentUser?.credentials?.store === 'Yes') {
         setModalVisible(true);
       }
     });
