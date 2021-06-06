@@ -97,7 +97,7 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Root');
   };
 
-  const handleSaveCredentials = (values) => {
+  const handleSaveCredentials = (currentUser, values) => {
     Alert.alert(
       I18n.t('signIn.credentials'),
       I18n.t('signIn.saveLoginCreds'),
@@ -105,9 +105,13 @@ const SignIn = ({ navigation }) => {
         {
           text: 'Yes',
           onPress: () => {
-            const currentUser = values;
-            currentUser.store = 'Yes';
-            storeData(currentUser, 'currentUser');
+            const usr = currentUser;
+            const credentials = values;
+            usr.set('credentials', {
+              ...credentials,
+              store: 'Yes'
+            });
+            storeData(usr, 'currentUser');
             navigation.navigate('StorePincode');
           }
         },
@@ -143,14 +147,17 @@ const SignIn = ({ navigation }) => {
 
   const storeUserInformation = async (currentUser, userCreds) => {
     // store username and password
+    const usr = currentUser;
     if (userCreds) {
-      const usr = userCreds;
-      usr.store = 'No';
+      usr.set('credentials', {
+        ...userCreds,
+        store: 'No'
+      });
       storeData(usr, 'currentUser');
     }
-    // semd push to update app if necessary
+    // send push to update app if necessary
     await registerForPushNotificationsAsync();
-    populateCache(currentUser);
+    populateCache(usr);
   };
 
   const signInAndStore = (connected, values, actions) => {
@@ -164,14 +171,14 @@ const SignIn = ({ navigation }) => {
             || values.password !== userCreds.password) {
               // Store user organization
               storeUserInformation(currentUser, values);
-              handleSaveCredentials(values);
+              handleSaveCredentials(currentUser, values);
             } else {
               storeUserInformation(currentUser);
               handleSignIn(values, actions.resetForm());
             }
           }, () => {
             storeUserInformation(currentUser, values);
-            handleSaveCredentials(values);
+            handleSaveCredentials(currentUser, values);
           });
         }, (err) => {
           handleFailedAttempt(err);
