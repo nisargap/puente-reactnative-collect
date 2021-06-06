@@ -27,7 +27,6 @@ const HomeScreen = (props) => {
 
   const logOut = () => {
     retrieveSignOutFunction().then(() => {
-      deleteData('credentials');
       deleteData('pincode');
       deleteData('organization');
       deleteData('currentUser');
