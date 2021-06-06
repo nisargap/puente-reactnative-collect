@@ -49,13 +49,13 @@ const Password = () => {
 
   const changePassword = async () => {
     setSubmitting(true);
-    const credentials = await getData('credentials');
+    const currentUser = await getData('currentUser');
 
-    if (currentState !== credentials.password) {
+    if (currentState !== currentUser.password) {
       setSubmitting(false);
       wrongCredentials();
     } else {
-      const user = await Parse.User.logIn(credentials.username, credentials.password);
+      const user = await Parse.User.logIn(currentUser.username, currentUser.password);
       user.set('password', newState);
 
       const submitAction = () => {
@@ -66,8 +66,8 @@ const Password = () => {
       };
 
       await user.save().then(async () => {
-        credentials.password = newState;
-        await storeData(credentials, 'credentials').then(() => {
+        currentUser.password = newState;
+        await storeData(currentUser, 'currentUser').then(() => {
           submitAction();
         }, (error) => {
           console.log(error); //eslint-disable-line
