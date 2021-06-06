@@ -59,9 +59,9 @@ const SignIn = ({ navigation }) => {
   const load = false;
 
   useEffect(() => {
-    getData('credentials').then((values) => {
-      setUser(values);
-      if (values?.store === 'Yes') {
+    getData('currentUser').then((currentUser) => {
+      setUser(currentUser);
+      if (currentUser?.credentials?.store === 'Yes') {
         setModalVisible(true);
       }
     });
@@ -97,7 +97,7 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Root');
   };
 
-  const handleSaveCredentials = (values) => {
+  const handleSaveCredentials = (currentUser, values) => {
     Alert.alert(
       I18n.t('signIn.credentials'),
       I18n.t('signIn.saveLoginCreds'),
@@ -105,9 +105,13 @@ const SignIn = ({ navigation }) => {
         {
           text: 'Yes',
           onPress: () => {
+            const usr = currentUser;
             const credentials = values;
-            credentials.store = 'Yes';
-            storeData(credentials, 'credentials');
+            usr.set('credentials', {
+              ...credentials,
+              store: 'Yes'
+            });
+            storeData(usr, 'currentUser');
             navigation.navigate('StorePincode');
           }
         },
@@ -138,19 +142,61 @@ const SignIn = ({ navigation }) => {
   };
 
   const deleteCreds = () => {
-    deleteData('credentials');
+    deleteData('currentUser');
   };
 
-  const storeUserInformation = async (userData, userCreds) => {
+  const storeUserInformation = async (currentUser, userCreds) => {
     // store username and password
+    const usr = currentUser;
     if (userCreds) {
-      const credentials = userCreds;
-      credentials.store = 'No';
-      storeData(credentials, 'credentials');
+      usr.set('credentials', {
+        ...userCreds,
+        store: 'No'
+      });
+      storeData(usr, 'currentUser');
     }
-    // semd push to update app if necessary
+    // send push to update app if necessary
     await registerForPushNotificationsAsync();
-    populateCache(userData);
+    populateCache(usr);
+  };
+
+  const signInAndStore = (connected, values, actions) => {
+    if (connected) {
+      retrieveSignInFunction(values.username, values.password)
+        .then((currentUser) => {
+          storeUserInformation(currentUser, values);
+          getData('currentUser').then((userCreds) => {
+            // credentials stored do not match those entered through sign-in, overwrite
+            if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
+            || values.password !== userCreds.password) {
+              // Store user organization
+              storeUserInformation(currentUser, values);
+              handleSaveCredentials(currentUser, values);
+            } else {
+              storeUserInformation(currentUser);
+              handleSignIn(values, actions.resetForm());
+            }
+          }, () => {
+            storeUserInformation(currentUser, values);
+            handleSaveCredentials(currentUser, values);
+          });
+        }, (err) => {
+          handleFailedAttempt(err);
+        });
+    } else {
+      // offline
+      getData('currentUser').then((userCreds) => {
+        // username and password entered (or saved in creds) match the saved cred
+        if (values.username === userCreds.username
+          && values.password === userCreds.password) {
+          // need some pincode verification
+          handleSignIn(values, actions.resetForm());
+        } else {
+          // incorrect usernmae/password offline
+          handleFailedAttempt();
+        }
+      });
+    }
   };
 
   return (
@@ -165,46 +211,9 @@ const SignIn = ({ navigation }) => {
             <LanguagePicker language={language} onChangeLanguage={handleLanguage} />
             <Formik
               initialValues={{ username: '', password: '' }}
-              onSubmit={(values, actions) => {
-                checkOnlineStatus().then((connected) => {
-                  if (connected) {
-                    retrieveSignInFunction(values.username, values.password).then((userData) => {
-                      getData('credentials').then((userCreds) => {
-                        // credentials saved do not match those entered, overwrite saved
-                        // credentials
-                        if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
-                          || values.password !== userCreds.password) {
-                          // Store user organization
-                          storeUserInformation(userData, values);
-                          handleSaveCredentials(values);
-                        } else {
-                          storeUserInformation(userData);
-                          handleSignIn(values, actions.resetForm());
-                        }
-                      }, () => {
-                        // Store user organization
-                        storeUserInformation(userData, values);
-                        // no credentials saved, give option to save
-                        handleSaveCredentials(values);
-                      });
-                      // handleSignIn(values, actions.resetForm());
-                    }, (err) => {
-                      handleFailedAttempt(err);
-                    });
-                  } else {
-                    // offline
-                    getData('credentials').then((userCreds) => {
-                      // username and password entered (or saved in creds) match the saved cred
-                      if (values.username === userCreds.username
-                        && values.password === userCreds.password) {
-                        // need some pincode verification
-                        handleSignIn(values, actions.resetForm());
-                      } else {
-                        // incorrect usernmae/password offline
-                        handleFailedAttempt();
-                      }
-                    });
-                  }
+              onSubmit={async (values, actions) => {
+                await checkOnlineStatus().then((connected) => {
+                  signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
                   actions.setSubmitting(false);
