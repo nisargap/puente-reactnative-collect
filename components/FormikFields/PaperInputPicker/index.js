@@ -314,7 +314,7 @@ const PaperInputPicker = ({
                       {errors[result.textKey]}
                     </Text>
                   </View>
-                )}
+              )}
             </View>
           ))}
           <Text style={{ color: 'red' }}>
