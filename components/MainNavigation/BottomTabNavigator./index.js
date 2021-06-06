@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import * as React from 'react';
 
 // import DataAnalysis from '../../../domains/DataAnalysis';
@@ -10,12 +9,7 @@ import TabBarIcon from '../../TabBarIcon';
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Data_Collection';
 
-export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({
-    headerTitle: getHeaderTitle(route),
-    headerLeft: null
-  });
-
+export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName={INITIAL_ROUTE_NAME}
@@ -47,23 +41,4 @@ export default function BottomTabNavigator({ navigation, route }) {
     </BottomTab.Navigator>
 
   );
-}
-
-function getHeaderTitle(route) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? INITIAL_ROUTE_NAME;
-
-  // const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-  switch (routeName) {
-    // case 'Home':
-    //   return 'Home';
-    case 'Data_Collection':
-      return 'Data Collection';
-    case 'Data_Analysis':
-      return 'Data Analysis';
-    // default:
-    //   return 'Home';
-    default:
-      return 'Data Collection';
-  }
 }

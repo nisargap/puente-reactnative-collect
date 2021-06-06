@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Image,
-  StyleSheet, View
+  Image, View
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
@@ -9,7 +8,7 @@ import {
 } from 'react-native-paper';
 
 import I18n from '../../../../modules/i18n';
-import { theme } from '../../../../modules/theme';
+import { layout } from '../../../../modules/theme';
 
 const ResidentCard = ({
   resident, onSelectPerson
@@ -28,105 +27,35 @@ const ResidentCard = ({
   return (
     <View>
       <TouchableOpacity
-        style={styles.container}
+        style={layout.resCardContainer}
         onPress={() => {
           if (onSelectPerson) onSelectPerson(resident);
         }}
       >
-        <View style={styles.nameContainer}>
-          <Title style={styles.name}>{`${fname} ${lname}`}</Title>
+        <View style={layout.resCardNameContainer}>
+          <Title style={layout.resCardName}>{`${fname} ${lname}`}</Title>
           {objectId.includes('PatientID-') && (
-            <View style={styles.redCircle} />
+            <View style={layout.resCardRedCircle} />
           )}
         </View>
-        <Text style={styles.nickname}>{`"${nickname}"`}</Text>
+        <Text style={layout.resCardNickname}>{`"${nickname}"`}</Text>
         <Image
-          style={styles.profPic}
+          style={layout.resCardProfPic}
           source={pictureUrl}
         />
-        <View style={styles.cityLicenseContainer}>
-          <View style={styles.cityContainer}>
-            <Text style={styles.font}>{I18n.t('findResident.residentCard.city')}</Text>
-            <Text style={styles.font}>{city}</Text>
+        <View style={layout.resCardCityLicenseContainer}>
+          <View style={layout.resCardCityContainer}>
+            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.city')}</Text>
+            <Text style={layout.resCardFont}>{city}</Text>
           </View>
-          <View style={styles.licenseContainer}>
-            <Text style={styles.font}>{I18n.t('findResident.residentCard.community')}</Text>
-            <Text style={styles.license}>{communityname}</Text>
+          <View style={layout.resCardLicenseContainer}>
+            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.community')}</Text>
+            <Text style={layout.resCardLicense}>{communityname}</Text>
           </View>
         </View>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 15,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: theme.colors.primary
-  },
-  nameContainer: {
-    backgroundColor: theme.colors.primary,
-    marginTop: 15,
-    height: 30,
-    flexDirection: 'row'
-  },
-  name: {
-    color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: 'bold',
-    marginLeft: 15,
-    marginTop: 'auto',
-    marginBottom: 'auto'
-  },
-  nickname: {
-    marginLeft: 15,
-    marginTop: 5,
-    color: '#606060',
-    fontSize: 15
-  },
-  profPic: {
-    height: 70,
-    width: 70,
-    position: 'absolute',
-    right: 15,
-    top: 20
-  },
-  cityLicenseContainer: {
-    flexDirection: 'row',
-    marginTop: 40,
-    marginBottom: 15
-  },
-  cityContainer: {
-    flexDirection: 'column',
-    marginRight: 'auto',
-    marginLeft: 15,
-  },
-  licenseContainer: {
-    flexDirection: 'column',
-    marginLeft: 'auto',
-    marginRight: 15,
-  },
-  license: {
-    marginLeft: 'auto',
-    color: '#606060',
-    fontSize: 15
-  },
-  font: {
-    color: '#606060',
-    fontSize: 15
-  },
-  redCircle: {
-    backgroundColor: '#f8380e',
-    width: 15,
-    height: 15,
-    marginLeft: 10,
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    borderRadius: 20
-  }
-
-});
 
 export default ResidentCard;

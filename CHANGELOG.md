@@ -2,28 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [11.6.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.4...v11.6.5) (2021-05-12)
+### [11.7.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.4...v11.7.5) (2021-05-31)
+
+
+### Bug fixes
+
+* iOS environment ([57a2e8c](https://github.com/hopetambala/puente-reactnative-collect/commit/57a2e8c05ffcf4ed8e410216465f1a7a526bde0a))
+
+### [11.7.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.3...v11.7.4) (2021-05-30)
+
+
+### Bug fixes
+
+* stabilize release to work cross-platform ([9f451cc](https://github.com/hopetambala/puente-reactnative-collect/commit/9f451ccec1222dad2b7578b11fd8ae9121353ef1))
+
+### [11.7.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.2...v11.7.3) (2021-05-30)
+
+### [11.7.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.1...v11.7.2) (2021-05-30)
+
+
+### Bug fixes
+
+* navigation bug that exited the application ([999d545](https://github.com/hopetambala/puente-reactnative-collect/commit/999d5455b5526c269e790507f99710c8ccf47820))
+
+### [11.7.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.5...v11.7.1) (2021-05-30)
 
 
 ### New Features
 
-* add search index to ID form ([2717cd5](https://github.com/hopetambala/puente-reactnative-collect/commit/2717cd5cb3376340650273c59e7a4c4ae7e22eb7))
-
-### [11.6.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.2...v11.6.3) (2021-05-10)
-
-
-### Bug fixes
-
-* production build ([cb3066d](https://github.com/hopetambala/puente-reactnative-collect/commit/cb3066d41f4d25619deb2e8a0d6daa9dbfe504d0))
-
-### [11.6.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.6.1...v11.6.2) (2021-05-10)
+* notifications set to update application 🎉 ([06d1600](https://github.com/hopetambala/puente-reactnative-collect/commit/06d1600f3ad01756fe73ccd37cca74224c2dc4e1))
+* script to post updated versions ([9e137ed](https://github.com/hopetambala/puente-reactnative-collect/commit/9e137ed61d6bdd70c4c43a17219e03fa6b3de9e0))
 
 
 ### Bug fixes
 
-* remove unused values on identification form ([477c59a](https://github.com/hopetambala/puente-reactnative-collect/commit/477c59a1aff7fe75b9158e4df9fb8e3bfa10a6cc))
-
-### [11.6.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.0...v11.6.1) (2021-05-06)
+*  id form ([6173bf4](https://github.com/hopetambala/puente-reactnative-collect/commit/6173bf470f5458e8a381ee1a111466d7d19894c6))
+* add accessibility options for buttons ([2a12bb4](https://github.com/hopetambala/puente-reactnative-collect/commit/2a12bb4e6198ce7c8892011008460fc625adfef1))
+* Asset forms couldn't be uploaded offline by themselves ([5737c1c](https://github.com/hopetambala/puente-reactnative-collect/commit/5737c1c3d542e41ff6388221760526d06edb5e88))
+* Asset Forms were appearing under ¨Custom Forms¨ for individuals in the form gallery ([63ed12a](https://github.com/hopetambala/puente-reactnative-collect/commit/63ed12a7ae3ed405c72f151d852d484d7eedd69c))
+* env fix.... works 🎉 ([af998c3](https://github.com/hopetambala/puente-reactnative-collect/commit/af998c3ecb2fc38f78e37e8832f5354da9f0c2a9))
+* In the view asset view, when you click the resident card, it takes you to the supplementary form now ([ac5f228](https://github.com/hopetambala/puente-reactnative-collect/commit/ac5f2282972b2a7890602645600816e786c9ee42))
+* map on main page stores users most recent location and doesn't keep refreshing to santo domingo ([abea454](https://github.com/hopetambala/puente-reactnative-collect/commit/abea454920db08a96c4de6bf29149df2e932bd32))
+* Newly created asset forms were showing up under all organizations ([498433b](https://github.com/hopetambala/puente-reactnative-collect/commit/498433b18dd9d11295902b522216a51b6cf54cb4))
+* remove UI problem with asset supplementary form ([e52e1b1](https://github.com/hopetambala/puente-reactnative-collect/commit/e52e1b1be03473e1f251e0cda18139435b4e6da7))
+* text-wrapping on inputs ([8eb0900](https://github.com/hopetambala/puente-reactnative-collect/commit/8eb0900339f797434cd046f93f8a96aee433442d))
+* weird horizontal scrolling in the asset form ([6a9a57f](https://github.com/hopetambala/puente-reactnative-collect/commit/6a9a57f6a0279cdc683734b11958f356fea10017))
 
 ## [11.6.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.4.0...v11.6.0) (2021-04-29)
 

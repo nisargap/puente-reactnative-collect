@@ -213,6 +213,7 @@ const configArray = [
   {
     label: 'identificationForm.household',
     fieldType: 'header',
+    formikKey: 'none_household'
   },
   {
     label: 'identificationForm.household',
