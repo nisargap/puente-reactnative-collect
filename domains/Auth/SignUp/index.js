@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10,
-    marginBottom: 60,
+    marginBottom: 100,
   },
   serviceButton: {
     marginLeft: 20,
@@ -230,6 +230,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 'auto',
     marginBottom: 'auto'
-
   },
 });
