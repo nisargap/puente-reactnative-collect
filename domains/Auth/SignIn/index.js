@@ -31,7 +31,7 @@ import { populateCache } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
-import { retrieveSignInFunction } from '../../../services/parse/auth';
+import { retrieveSignInFunction, retrievAddUserPushToken } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
@@ -156,9 +156,22 @@ const SignIn = ({ navigation }) => {
       storeData(usr, 'currentUser');
     }
     // send push to update app if necessary
-    await registerForPushNotificationsAsync();
+    const expoToken = await registerForPushNotificationsAsync();
+    addPushToken(currentUser.id, expoToken)
     populateCache(usr);
   };
+
+  const addPushToken = (userID, expoToken) => {
+    const postParams = {
+      userId: userID,
+      expoPushToken: expoToken
+    }
+    retrievAddUserPushToken(postParams).then(() => {
+    }, () => {
+      // error adding push token
+    })
+
+  }
 
   const signInAndStore = (connected, values, actions) => {
     if (connected) {

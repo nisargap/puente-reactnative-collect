@@ -90,11 +90,21 @@ function retrieveDeleteUserFunction(params) {
   Parse.Cloud.run('deleteUser', params).then((result) => result);
 }
 
+function retrievAddUserPushToken(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('addUserPushToken', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    })
+  })
+}
+
 export {
   initialize,
   retrieveCurrentUserAsyncFunction,
   retrieveCurrentUserFunction, retrieveDeleteUserFunction,
   retrieveForgotPasswordFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
-  retrieveSignUpFunction
+  retrieveSignUpFunction, retrievAddUserPushToken
 };

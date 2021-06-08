@@ -46,6 +46,7 @@ const registerForPushNotificationsAsync = async () => {
     });
   }
   await checkAppVersionAndSendPush(token);
+  return token;
 };
 
 const checkAppVersionAndSendPush = async (token) => {
