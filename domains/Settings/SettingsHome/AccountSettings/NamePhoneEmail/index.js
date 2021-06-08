@@ -98,9 +98,9 @@ const NamePhoneEmail = () => {
       email: userObject.email,
       phonenumber: userObject.phoneNumber
     };
-    const credentials = await getData('credentials');
+    const currentUser = await getData('currentUser');
 
-    const user = await Parse.User.logIn(credentials.username, credentials.password);
+    const user = await Parse.User.logIn(currentUser.username, currentUser.password);
     for (const key in postParams) { //eslint-disable-line
       user.set(String(key), postParams[key]);
     }
