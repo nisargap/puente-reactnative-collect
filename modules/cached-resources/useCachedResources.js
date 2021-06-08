@@ -8,7 +8,7 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        // SplashScreen.preventAutoHideAsync();
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         // console.warn(e);

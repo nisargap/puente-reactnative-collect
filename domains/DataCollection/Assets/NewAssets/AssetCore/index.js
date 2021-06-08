@@ -56,7 +56,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Provider>
         <Formik
           initialValues={{}}
@@ -151,15 +151,8 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 mode="outlined"
                 theme={stylesPaper}
                 style={stylesDefault.label}
-              />
-              <TextInput
-                label="City"
-                value={formikProps.values.city || ''}
-                onChangeText={formikProps.handleChange('city')}
-                onBlur={formikProps.handleBlur('city')}
-                mode="outlined"
-                theme={stylesPaper}
-                style={stylesDefault.label}
+                multiline
+                numberOfLines={4}
               />
               <TextInput
                 label="Province"
@@ -170,14 +163,22 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
                 theme={stylesPaper}
                 style={stylesDefault.label}
               />
+              <TextInput
+                label="Country"
+                value={formikProps.values.country || ''}
+                onChangeText={formikProps.handleChange('country')}
+                onBlur={formikProps.handleBlur('country')}
+                mode="outlined"
+                theme={stylesPaper}
+                style={stylesDefault.label}
+              />
               {formikProps.isSubmitting ? (
                 <ActivityIndicator />
               ) : (
                 <PaperButton
                   onPressEvent={() => formikProps.handleSubmit()}
-                  disabled={!!_.isEmpty(formikProps.values)}
                   buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
-                  icon={_.isEmpty(formikProps.values) ? '' : 'plus'}
+                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
@@ -191,7 +192,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
         </Formik>
       </Provider>
 
-    </View>
+    </ScrollView>
   );
 };
 

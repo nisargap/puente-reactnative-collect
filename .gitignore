@@ -17,7 +17,10 @@ web-build/
 .env*
 # environment.js
 scripts/dynamic-env/app.secrets.json
+scripts/update-version/app.secrets.json
 app.generated.json
 
 # Virtual Env
 reactenv/
+scripts/update-version/app.secrets.json
+environment.js

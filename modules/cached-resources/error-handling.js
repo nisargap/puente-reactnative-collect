@@ -6,8 +6,8 @@ import { getData } from '../async-storage';
 export default async function handleParseError(err, functionToCall) {
   return new Promise((resolve, reject) => {
     if (err.code === Parse.Error.INVALID_SESSION_TOKEN) {
-      getData('credentials').then((user) => {
-        retrieveSignInFunction(user.username, user.password).then(() => {
+      getData('currentUser').then((currentUser) => {
+        retrieveSignInFunction(currentUser.username, currentUser.password).then(() => {
           functionToCall().then(() => {
             resolve(true);
           });
