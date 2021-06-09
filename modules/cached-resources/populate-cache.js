@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 
-import { retrieveCurrentUserAsyncFunction, retrievAddUserPushToken } from '../../services/parse/auth';
+import { retrievAddUserPushToken, retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
 import {
   assetDataQuery, assetFormsQuery, cacheAutofillData, cacheResidentData, customFormsQuery
@@ -21,16 +21,16 @@ export default function populateCache(user, expoToken) {
         if (user.get('organization') !== currentOrgAsync) {
           await storeData(user.get('organization'), 'organization');
         }
-        if(user.get('expoPushToken') !== expoToken || user.get('expoPushToken') === undefined){
+        if (user.get('expoPushToken') !== expoToken || user.get('expoPushToken') === undefined) {
           // add push token to user object
           const postParams = {
             userId: user.id,
             expoPushToken: expoToken
-          }
+          };
           retrievAddUserPushToken(postParams).then(() => {
           }, () => {
             // error adding push token
-          })
+          });
         }
       } else {
         // fail safe in case no user is passed in for some reason
@@ -43,17 +43,17 @@ export default function populateCache(user, expoToken) {
               if (currentUser.organization !== currentOrgAsync) {
                 await storeData(currentUser.organization, 'organization');
               }
-              if(currentUser.expoPushToken !== expoToken || currentUser.expoPushToken === undefined){
+              if (currentUser.expoPushToken !== expoToken
+                 || currentUser.expoPushToken === undefined) {
                 // add push token to user object
-                console.log("adding push token")
                 const postParams = {
                   userId: user.id,
                   expoPushToken: expoToken
-                }
-                retrievAddUserPushToken(postParams).then((result) => {
+                };
+                retrievAddUserPushToken(postParams).then(() => {
                 }, () => {
                   // error adding push token
-                })
+                });
               }
             }
           });

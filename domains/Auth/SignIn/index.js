@@ -31,7 +31,7 @@ import { populateCache } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
-import { retrieveSignInFunction, retrievAddUserPushToken } from '../../../services/parse/auth';
+import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 

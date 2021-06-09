@@ -96,15 +96,16 @@ function retrievAddUserPushToken(params) {
       resolve(result);
     }, (error) => {
       reject(error);
-    })
-  })
+    });
+  });
 }
 
 export {
   initialize,
+  retrievAddUserPushToken,
   retrieveCurrentUserAsyncFunction,
   retrieveCurrentUserFunction, retrieveDeleteUserFunction,
   retrieveForgotPasswordFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
-  retrieveSignUpFunction, retrievAddUserPushToken
+  retrieveSignUpFunction
 };

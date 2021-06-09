@@ -20,12 +20,12 @@ const registerForPushNotificationsAsync = async () => {
     }
     if (finalStatus !== 'granted') {
       // alert('Failed to get push token for push notification!');
-      return;
+      return '';
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
   } else {
     // alert('Must use physical device for Push Notifications');
-    return;
+    return '';
   }
 
   // handle notifications when app is in the foreground
