@@ -155,23 +155,10 @@ const SignIn = ({ navigation }) => {
       });
       storeData(usr, 'currentUser');
     }
-    // send push to update app if necessary
+    // send push to update app if necessary and retrieve push token
     const expoToken = await registerForPushNotificationsAsync();
-    addPushToken(currentUser.id, expoToken)
-    populateCache(usr);
+    populateCache(usr, expoToken);
   };
-
-  const addPushToken = (userID, expoToken) => {
-    const postParams = {
-      userId: userID,
-      expoPushToken: expoToken
-    }
-    retrievAddUserPushToken(postParams).then(() => {
-    }, () => {
-      // error adding push token
-    })
-
-  }
 
   const signInAndStore = (connected, values, actions) => {
     if (connected) {
