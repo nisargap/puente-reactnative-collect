@@ -5,9 +5,15 @@ function addSelectTextInputs(values, formObject) {
       const keys = key.split('__');
       const formikKey = keys[1];
       const formikOrigVal = keys[2];
-      const index = newFormObject[formikKey].indexOf(formikOrigVal);
-      newFormObject[formikKey][index] = `${formikOrigVal}__${val}`;
-      delete newFormObject[key];
+      if(typeof(formObject[formikKey]) === 'object'){
+        const index = newFormObject[formikKey].indexOf(formikOrigVal);
+        newFormObject[formikKey][index] = `${formikOrigVal}__${val}`;
+        delete newFormObject[key];
+      }
+      else if (typeof(formObject[formikKey]) === 'string') {
+        newFormObject[formikKey] = `${formikOrigVal}__${val}`;
+        delete newFormObject[key];
+      }
     }
   });
   return formObject;
