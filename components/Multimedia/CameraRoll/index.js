@@ -1,4 +1,5 @@
 import * as ImagePicker from 'expo-image-picker';
+import I18n from 'i18n-js';
 import React, { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import {
@@ -41,7 +42,7 @@ export default function UseCameraRoll(
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={pickImage}>Use image from camera roll</Button>
+      <Button onPress={pickImage}>{I18n.t('camera.useImage')}</Button>
     </View>
   );
 }

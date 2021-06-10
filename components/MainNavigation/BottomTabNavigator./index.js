@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import I18n from 'i18n-js';
 import * as React from 'react';
 
 // import DataAnalysis from '../../../domains/DataAnalysis';
@@ -26,7 +27,7 @@ export default function BottomTabNavigator() {
         name="Data_Collection"
         component={DataCollection}
         options={{
-          title: 'Data Collection',
+          title: I18n.t('bottomTab.dataCollection'),
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-folder" />,
         }}
       />
