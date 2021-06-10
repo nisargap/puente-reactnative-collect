@@ -12,8 +12,11 @@ import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
+import { getData } from '../../../../../modules/async-storage';
+import surveyingUserFailsafe from '../../../Forms/utils'
+import { isEmpty } from '../../../../../modules/utils';
 
-const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
+const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser }) => {
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
 
@@ -25,12 +28,17 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
           setPhotoFile('Submitted Photo String');
 
           const formObject = values;
+          const user = await getData('currentUser');
 
+          const surveyingUser_FailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
+          const appVersion = await getData('appVersion');
+  
           const formObjectUpdated = addSelectTextInputs(values, formObject);
 
           const postParams = {
             parseParentClassID: selectedAsset.objectId,
             parseParentClass: 'Assets',
+            parseUser: user.objectId,
             parseClass: 'FormAssetResults',
             photoFile,
             localObject: formObjectUpdated,
@@ -48,6 +56,8 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
             formSpecificationsId: selectedForm.objectId,
             fields: fieldsArray,
             surveyingOrganization,
+            surveyingUser: surveyingUser_FailSafe,
+            appVersion
           };
 
           const submitAction = () => {
@@ -58,7 +68,8 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
           };
 
           postSupplementaryAssetForm(postParams)
-            .then(() => {
+            .then((r) => {
+              console.log(r)
               submitAction();
             })
             .then(() => actions.resetForm())
