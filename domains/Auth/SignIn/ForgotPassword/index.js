@@ -67,7 +67,7 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
         {emailSuccess && (
           <View>
             <Text style={{ marginHorizontal: 15, fontSize: 18, fontWeight: 'bold' }}>
-            {I18n.t('signIn.forgotPassword.resetSuccess')}
+              {I18n.t('signIn.forgotPassword.resetSuccess')}
             </Text>
             <Button mode="text" theme={theme} onPress={handleSignIn}>Back to Sign in</Button>
           </View>
@@ -75,7 +75,7 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
         {emailError && (
           <View>
             <Text style={{ marginHorizontal: 15, fontSize: 18, fontWeight: 'bold' }}>
-            {I18n.t('signIn.forgotPassword.resetError')}
+              {I18n.t('signIn.forgotPassword.resetError')}
             </Text>
             <Button style={{ marginTop: 10 }} mode="contained" onPress={() => setEmailError(false)}>Try Again</Button>
           </View>

@@ -3,9 +3,9 @@ import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { Card, IconButton, Text } from 'react-native-paper';
 
 import { assetFormsQuery } from '../../../../../../modules/cached-resources';
+import I18n from '../../../../../../modules/i18n';
 import { layout, theme } from '../../../../../../modules/theme';
 import styles from './index.style';
-import I18n from '../../../../../../modules/i18n';
 
 const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
   const [assetForms, setAssetForms] = useState([]);

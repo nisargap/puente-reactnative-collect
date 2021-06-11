@@ -9,8 +9,8 @@ import {
 } from 'react-native-paper';
 
 import PaperButton from '../../../../../../components/Button';
+import I18n from '../../../../../../modules/i18n';
 import { theme } from '../../../../../../modules/theme';
-import I18n from '../../../../../../modules/i18n'
 
 const PeopleModal = ({
   people,

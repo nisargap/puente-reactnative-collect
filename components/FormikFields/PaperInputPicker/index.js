@@ -467,7 +467,7 @@ const PaperInputPicker = ({
                 setCameraVisible(true);
               }}
               >
-                {I18n.t(paperButton.takePhoto)}
+                {I18n.t('paperButton.takePhoto')}
               </Button>
               <UseCameraRoll
                 pictureUris={pictureUris}

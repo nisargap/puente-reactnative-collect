@@ -12,15 +12,14 @@ import {
 
 import PaperButton from '../../../../../components/Button';
 import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
 import { generateRandomID, isEmpty } from '../../../../../modules/utils';
+import surveyingUserFailsafe from '../../../Forms/utils';
 import styles from './index.styles';
 import PeopleModal from './PeopleModal';
-import { getData } from '../../../../../modules/async-storage';
-
-import surveyingUserFailsafe from '../../../Forms/utils';
 
 const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) => {
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
@@ -67,7 +66,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
             const formObject = values;
             const user = await getData('currentUser');
 
-            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty)
+            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
             formObject.appVersion = await getData('appVersion');
@@ -87,7 +86,6 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               .then((e) => {
                 const asset = JSON.parse(JSON.stringify(e));
                 setSelectedAsset(asset);
-                console.log(e)
               })
               .then(() => resetForm())
               .catch((e) => console.log(e)); //eslint-disable-line
