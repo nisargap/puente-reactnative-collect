@@ -32,7 +32,7 @@ const AssetSupplementary = ({
           const formObject = values;
           const user = await getData('currentUser');
 
-          const surveyUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
+          const surveyingUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
           const appVersion = await getData('appVersion');
 
           const formObjectUpdated = addSelectTextInputs(values, formObject);
@@ -58,7 +58,7 @@ const AssetSupplementary = ({
             formSpecificationsId: selectedForm.objectId,
             fields: fieldsArray,
             surveyingOrganization,
-            surveyingUser: surveyUserFailSafe,
+            surveyingUser: surveyingUserFailSafe,
             appVersion
           };
 
