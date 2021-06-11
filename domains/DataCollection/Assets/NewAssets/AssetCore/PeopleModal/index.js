@@ -10,6 +10,7 @@ import {
 
 import PaperButton from '../../../../../../components/Button';
 import { theme } from '../../../../../../modules/theme';
+import I18n from '../../../../../../modules/i18n'
 
 const PeopleModal = ({
   people,
@@ -28,23 +29,23 @@ const PeopleModal = ({
       >
         <KeyboardAvoidingView>
           <TextInput
-            label="First Name"
-            placeholder="Enter First Name"
+            label={I18n.t('peopleModal.fname')}
+            placeholder={I18n.t('peopleModal.enterFname')}
             onChangeText={(text) => handleInputChange(text, i, 'firstName')}
             mode="outlined"
             theme={stylesPaper}
             style={stylesDefault.label}
           />
           <TextInput
-            label="Last Name"
-            placeholder="Enter Last Name"
+            label={I18n.t('peopleModal.lname')}
+            placeholder={I18n.t('peopleModal.enterLname')}
             onChangeText={(text) => handleInputChange(text, i, 'lastName')}
             mode="outlined"
             theme={stylesPaper}
             style={stylesDefault.label}
           />
           <TextInput
-            label="Relationship"
+            label={I18n.t('peopleModal.relationship')}
             onChangeText={(text) => handleInputChange(text, i, 'relationship')}
             mode="outlined"
             theme={stylesPaper}
@@ -53,13 +54,13 @@ const PeopleModal = ({
           <View>
             {people.length !== 1 && (
               <PaperButton
-                buttonText="Remove"
+                buttonText={I18n.t('peopleModal.remove')}
                 onPressEvent={() => handleRemoveClick(i)}
               />
             )}
             {people.length - 1 === i && (
               <PaperButton
-                buttonText="Add"
+                buttonText={I18n.t('peopleModal.add')}
                 onPressEvent={handleAddClick}
               />
             )}
