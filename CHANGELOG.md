@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.7.8](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.7...v11.7.8) (2021-06-12)
+
+
+### Bug fixes
+
+* bug where small androids couldn't find submit button ([1eb5bfe](https://github.com/hopetambala/puente-reactnative-collect/commit/1eb5bfe03386c74ec9155ccb8a001030b58ee363))
+
 ### [11.7.7](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.6...v11.7.7) (2021-06-12)
 
 
