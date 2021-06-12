@@ -12,14 +12,16 @@ import {
 
 import PaperButton from '../../../../../components/Button';
 import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
-import { generateRandomID } from '../../../../../modules/utils';
+import { generateRandomID, isEmpty } from '../../../../../modules/utils';
+import surveyingUserFailsafe from '../../../Forms/utils';
 import styles from './index.styles';
 import PeopleModal from './PeopleModal';
 
-const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
+const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) => {
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
   const [location, setLocation] = useState();
   const [locationLoading, setLocationLoading] = useState(false);
@@ -62,14 +64,19 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization }) => {
           initialValues={{}}
           onSubmit={async (values, { resetForm }) => {
             const formObject = values;
+            const user = await getData('currentUser');
+
+            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
+            formObject.appVersion = await getData('appVersion');
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
             formObject.altitude = values.location?.altitude || 0;
 
             const postParams = {
               parseClass: 'Assets',
+              parseUser: user.objectId,
               signature: 'Asset Signature',
               photoFile: 'photo',
               localObject: formObject

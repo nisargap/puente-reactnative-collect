@@ -234,6 +234,7 @@ const DataCollection = ({ navigation }) => {
                   </Button>
                   <Assets
                     surveyingOrganization={surveyingOrganization}
+                    surveyingUser={surveyingUser}
                     selectedAsset={selectedAsset}
                     setSelectedAsset={setSelectedAsset}
                     navigateToNewAssets={navigateToNewAssets}

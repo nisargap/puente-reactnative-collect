@@ -6,7 +6,8 @@ import AssetCore from './AssetCore';
 import AssetSupplementary from './AssetSupplementary';
 
 const NewAsset = ({
-  selectedAsset, setSelectedAsset, surveyingOrganization, assetPageIndex
+  selectedAsset, setSelectedAsset, surveyingOrganization, assetPageIndex,
+  surveyingUser
 }) => (
   <View>
     <PagerView style={styles.viewPager} initialPage={assetPageIndex}>
@@ -15,6 +16,7 @@ const NewAsset = ({
           setSelectedAsset={setSelectedAsset}
           selectedAsset={selectedAsset}
           surveyingOrganization={surveyingOrganization}
+          surveyingUser={surveyingUser}
         />
       </View>
       <View key="2" style={styles.page}>
@@ -22,6 +24,7 @@ const NewAsset = ({
           setSelectedAsset={setSelectedAsset}
           selectedAsset={selectedAsset}
           surveyingOrganization={surveyingOrganization}
+          surveyingUser={surveyingUser}
         />
       </View>
     </PagerView>
