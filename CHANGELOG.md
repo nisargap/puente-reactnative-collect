@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.7.7](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.6...v11.7.7) (2021-06-12)
+
+
+### Bug fixes
+
+* legacy __ select options not appending answer from text question ([a14d39f](https://github.com/hopetambala/puente-reactnative-collect/commit/a14d39f982babb55d22650011da13d8ffad5e16e))
+
+
+### New Features
+
+* adding pushToken to user Object ([4cf3233](https://github.com/hopetambala/puente-reactnative-collect/commit/4cf32332014be2a3054c8e72b02271f0bf8afddd))
+* deep link to user in asset and asset forms 🎉 ([46d42dc](https://github.com/hopetambala/puente-reactnative-collect/commit/46d42dc7509ba3d8157a6ac136a1c5372405b8c1))
+
 ### [11.7.6](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.5...v11.7.6) (2021-06-08)
 
 
