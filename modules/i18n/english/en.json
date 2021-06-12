@@ -51,7 +51,9 @@
       "noAccount": "Don't have an account?",
       "signUp": "Sign Up!",
       "rememberPass": "Remember your Password?",
-      "signIn": "Sign In"
+      "signIn": "Sign In",
+      "resetSuccess": "Your password reset link has been sent to your email. Please Check your email to change your password.",
+      "resetError": "There was an error sending the password reset link. Please ensure that you entered your email correctly. You can try again by clicking the button below. If you believe the email is correct, please contact your manager."
     },
     "credentialsModal": {
       "useCreds": "Would you like to use your saved login credentials?"
@@ -396,6 +398,7 @@
     "volunteerSince": "Volunteer Since",
     "surveysCollected": "Surveys Collected",
     "submitOffline": "Submit Offline Forms",
+    "settingsPage": "Settings Page",
     "failedAttempt": "Failed Attempt Submitting Offline Forms.",
     "tryAgain": "Please ensure that you are connected to the internet and try again.",
     "ok": "Ok",
@@ -413,7 +416,8 @@
     "searchIndividual": "Search Individual"
   },
   "assetSearchbar": {
-    "searchIndividual": "Search Individual"
+    "searchIndividual": "Search Individual",
+    "placeholder": "Type Here..."
   },
   "termsModal": {
     "termsService": "Terms and Service",
@@ -478,5 +482,42 @@
   },
   "pushNotifications": {
     "updateApp": "Please update in the App Store. Your application is out of date."
+  },
+  "paperButton": {
+    "getLocation": "Get Location",
+    "getLocationAgain": "Get Location Again",
+    "takePhoto": "Take Photo"
+  },
+  "bottomTab":{
+    "dataCollection": "Data Collection"
+  },
+  "camera":{
+    "useImage": "Use image from camera roll",
+    "noAccess": "No access to camera",
+    "retake": "Retake Picture",
+    "flip": "Flip",
+    "takePicture": "Take Picture",
+    "done": "Done"
+  },
+  "peopleModal": {
+    "fname": "First Name",
+    "enterFname": "Enter First Name",
+    "lname": "Last Name",
+    "enterLname": "Enter Last Name",
+    "relationship": "Relationship",
+    "remove": "Remove",
+    "add": "Add"
+  },
+  "assetCore": {
+    "nameOfAssets": "Name of Assets",
+    "addPeople": "Add People",
+    "getLocation": "Get Location",
+    "communityName": "Community Name",
+    "province": "Province",
+    "country": "Country",
+    "swipeAttachForm": "Swipe to Attach Form"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Supplementary Asset Forms"
   }
 }

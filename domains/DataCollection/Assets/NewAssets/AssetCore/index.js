@@ -96,7 +96,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
             <View style={styles.assetContainer}>
               <View id="top">
                 <TextInput
-                  label="Name of Assets"
+                  label={I18n.t('assetCore.nameOfAssets')}
                   value={formikProps.values.name || ''}
                   onChangeText={formikProps.handleChange('name')}
                   onBlur={formikProps.handleBlur('name')}
@@ -107,7 +107,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <PaperButton
-                  buttonText="Add People"
+                  buttonText={I18n.t('assetCore.addPeople')}
                   onPressEvent={toggleModal}
                   icon="chevron-up"
                   compact
@@ -116,7 +116,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 />
                 <PaperButton
                   onPressEvent={() => handleFormikPropsLocation(formikProps)}
-                  buttonText="Get Location"
+                  buttonText={I18n.t('assetCore.getLocation')}
                   icon="crosshairs-gps"
                   compact
                   style={{ margin: 2 }}
@@ -151,7 +151,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 ))}
               </View>
               <TextInput
-                label="Community Name"
+                label={I18n.t('assetCore.communityName')}
                 value={formikProps.values.communityName || ''}
                 onChangeText={formikProps.handleChange('communityName')}
                 onBlur={formikProps.handleBlur('communityName')}
@@ -162,7 +162,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 numberOfLines={4}
               />
               <TextInput
-                label="Province"
+                label={I18n.t('assetCore.province')}
                 value={formikProps.values.province || ''}
                 onChangeText={formikProps.handleChange('province')}
                 onBlur={formikProps.handleBlur('province')}
@@ -171,7 +171,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 style={stylesDefault.label}
               />
               <TextInput
-                label="Country"
+                label={I18n.t('assetCore.country')}
                 value={formikProps.values.country || ''}
                 onChangeText={formikProps.handleChange('country')}
                 onBlur={formikProps.handleBlur('country')}
@@ -192,7 +192,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               <PaperButton
                 icon="gesture-swipe"
                 mode="text"
-                buttonText="Swipe to Attach Form"
+                buttonText={I18n.t('assetCore.swipeAttachForm')}
               />
             </View>
           )}
