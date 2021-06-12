@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.7.6](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.5...v11.7.6) (2021-06-08)
+
+
+### New Features
+
+* question for select/multi select options ([7135452](https://github.com/hopetambala/puente-reactnative-collect/commit/713545269a1fa170421c9075e82cc05dac7cd93b))
+
+
+### Bug fixes
+
+* add credentials object ([432e7b1](https://github.com/hopetambala/puente-reactnative-collect/commit/432e7b12f3feee00f4905cbde60bd6cd09250e95))
+* add scrollview to assetcore form ([0e2914a](https://github.com/hopetambala/puente-reactnative-collect/commit/0e2914a1c471be3a4bac26de2fecea0a335d161c))
+* ensure textQuestion handled when not present ([e667d2a](https://github.com/hopetambala/puente-reactnative-collect/commit/e667d2a9a0a84357962c5bf58baef94cbe048f24))
+* make sure the users credentials are used for the modal ([dbd5f8f](https://github.com/hopetambala/puente-reactnative-collect/commit/dbd5f8fe7e1f2c90a682884d944228945e958cab))
+* pincode logs user in correctly ([c0945c9](https://github.com/hopetambala/puente-reactnative-collect/commit/c0945c92eda8f1ba9cf50508c59f97648f5fe43f))
+* renaming all incorrectly named credentials as `currentUser` ([b2e7f19](https://github.com/hopetambala/puente-reactnative-collect/commit/b2e7f19aa832541b4886b09da8746523ab28043c))
+
 ### [11.7.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.4...v11.7.5) (2021-05-31)
 
 
