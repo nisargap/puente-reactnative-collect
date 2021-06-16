@@ -12,15 +12,14 @@ import {
 
 import PaperButton from '../../../../../components/Button';
 import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import getLocation from '../../../../../modules/geolocation';
 import I18n from '../../../../../modules/i18n';
 import { generateRandomID, isEmpty } from '../../../../../modules/utils';
+import surveyingUserFailsafe from '../../../Forms/utils';
 import styles from './index.styles';
 import PeopleModal from './PeopleModal';
-import { getData } from '../../../../../modules/async-storage';
-
-import surveyingUserFailsafe from '../../../Forms/utils';
 
 const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) => {
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
@@ -67,7 +66,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
             const formObject = values;
             const user = await getData('currentUser');
 
-            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty)
+            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
             formObject.appVersion = await getData('appVersion');
@@ -87,7 +86,6 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               .then((e) => {
                 const asset = JSON.parse(JSON.stringify(e));
                 setSelectedAsset(asset);
-                console.log(e)
               })
               .then(() => resetForm())
               .catch((e) => console.log(e)); //eslint-disable-line
@@ -98,7 +96,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
             <View style={styles.assetContainer}>
               <View id="top">
                 <TextInput
-                  label="Name of Assets"
+                  label={I18n.t('assetCore.nameOfAssets')}
                   value={formikProps.values.name || ''}
                   onChangeText={formikProps.handleChange('name')}
                   onBlur={formikProps.handleBlur('name')}
@@ -109,7 +107,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <PaperButton
-                  buttonText="Add People"
+                  buttonText={I18n.t('assetCore.addPeople')}
                   onPressEvent={toggleModal}
                   icon="chevron-up"
                   compact
@@ -118,7 +116,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 />
                 <PaperButton
                   onPressEvent={() => handleFormikPropsLocation(formikProps)}
-                  buttonText="Get Location"
+                  buttonText={I18n.t('assetCore.getLocation')}
                   icon="crosshairs-gps"
                   compact
                   style={{ margin: 2 }}
@@ -153,7 +151,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 ))}
               </View>
               <TextInput
-                label="Community Name"
+                label={I18n.t('assetCore.communityName')}
                 value={formikProps.values.communityName || ''}
                 onChangeText={formikProps.handleChange('communityName')}
                 onBlur={formikProps.handleBlur('communityName')}
@@ -164,7 +162,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 numberOfLines={4}
               />
               <TextInput
-                label="Province"
+                label={I18n.t('assetCore.province')}
                 value={formikProps.values.province || ''}
                 onChangeText={formikProps.handleChange('province')}
                 onBlur={formikProps.handleBlur('province')}
@@ -173,7 +171,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 style={stylesDefault.label}
               />
               <TextInput
-                label="Country"
+                label={I18n.t('assetCore.country')}
                 value={formikProps.values.country || ''}
                 onChangeText={formikProps.handleChange('country')}
                 onBlur={formikProps.handleBlur('country')}
@@ -194,7 +192,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               <PaperButton
                 icon="gesture-swipe"
                 mode="text"
-                buttonText="Swipe to Attach Form"
+                buttonText={I18n.t('assetCore.swipeAttachForm')}
               />
             </View>
           )}

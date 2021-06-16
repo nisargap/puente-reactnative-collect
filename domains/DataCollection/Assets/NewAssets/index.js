@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   viewPager: {
     flex: 1,
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.70
+    height: Dimensions.get('window').height * 0.65,
   },
   page: {
     justifyContent: 'center',

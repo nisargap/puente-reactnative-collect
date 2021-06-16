@@ -121,7 +121,7 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
     <View>
       <Headline style={styles.header}>{I18n.t('assetSearchbar.searchIndividual')}</Headline>
       <Searchbar
-        placeholder="Type Here..."
+        placeholder={I18n.t('assetSearchbar.placeholder')}
         onChangeText={onChangeSearch}
         value={query}
       />

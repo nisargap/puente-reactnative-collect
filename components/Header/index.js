@@ -197,7 +197,7 @@ const Header = ({
                 <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
               </View>
             )}
-            <Button onPress={navToSettings}>Settings Page</Button>
+            <Button onPress={navToSettings}>{I18n.t('header.settingsPage')}</Button>
           </View>
         )}
       <IconButton
