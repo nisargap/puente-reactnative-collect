@@ -234,6 +234,9 @@ const PaperInputPicker = ({
             <View key={result.value}>
               {result.text === true && result.value === values[formikKey] && (
                 <View style={stylesDefault} key={result.textKey}>
+                  {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                    <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                  )}
                   <TextInput
                     label={customForm ? result.label : I18n.t(result.label)}
                     onChangeText={handleChange(result.textKey)}
@@ -300,6 +303,9 @@ const PaperInputPicker = ({
               {result.text === true && values[formikKey]
                 && values[formikKey].includes(result.value) && (
                   <View style={stylesDefault} key={result.textKey}>
+                    {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                      <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                    )}
                     <TextInput
                       label={customForm ? result.label : I18n.t(result.label)}
                       onChangeText={handleChange(result.textKey)}
@@ -341,14 +347,14 @@ const PaperInputPicker = ({
           {location === null && (
             <PaperButton
               onPressEvent={handleLocation}
-              buttonText="Get Location"
+              buttonText={I18n.t('paperButton.getLocation')}
             />
           )}
           {location !== null && (
             <View>
               <PaperButton
                 onPressEvent={handleLocation}
-                buttonText="Get Location Again"
+                buttonText={I18n.t('paperButton.getLocationAgain')}
               />
               <View style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: 'row' }}>
                 {
@@ -448,7 +454,7 @@ const PaperInputPicker = ({
           {!cameraVisible && image === null && (
             <View>
               <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
-              <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
+              <Button onPress={() => setCameraVisible(true)}>{I18n.t('paperButton.takePhoto')}</Button>
               <UseCameraRoll
                 pictureUris={pictureUris}
                 setPictureUris={setPictureUris}
@@ -467,7 +473,7 @@ const PaperInputPicker = ({
                 setCameraVisible(true);
               }}
               >
-                Take Picture
+                {I18n.t('paperButton.takePhoto')}
               </Button>
               <UseCameraRoll
                 pictureUris={pictureUris}

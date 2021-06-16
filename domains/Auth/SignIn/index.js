@@ -155,9 +155,9 @@ const SignIn = ({ navigation }) => {
       });
       storeData(usr, 'currentUser');
     }
-    // send push to update app if necessary
-    await registerForPushNotificationsAsync();
-    populateCache(usr);
+    // send push to update app if necessary and retrieve push token
+    const expoToken = await registerForPushNotificationsAsync();
+    populateCache(usr, expoToken);
   };
 
   const signInAndStore = (connected, values, actions) => {
