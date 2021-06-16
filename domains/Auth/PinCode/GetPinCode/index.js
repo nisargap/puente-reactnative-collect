@@ -24,7 +24,7 @@ const GetPinCode = ({ navigation }) => {
               if (connected) {
                 getData('currentUser')
                   .then((asyncUser) => {
-                    retrieveSignInFunction(asyncUser.username, asyncUser.password)
+                    retrieveSignInFunction(asyncUser.username, asyncUser.credentials.password)
                       .then((signedInUser) => {
                         populateCache(signedInUser);
                       });

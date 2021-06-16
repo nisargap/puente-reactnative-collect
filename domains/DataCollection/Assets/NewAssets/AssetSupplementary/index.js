@@ -6,14 +6,19 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
+import { isEmpty } from '../../../../../modules/utils';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
+import surveyingUserFailsafe from '../../../Forms/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
-const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganization }) => {
+const AssetSupplementary = ({
+  selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser
+}) => {
   const [selectedForm, setSelectedForm] = useState();
   const [photoFile, setPhotoFile] = useState('State Photo String');
 
@@ -25,12 +30,17 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
           setPhotoFile('Submitted Photo String');
 
           const formObject = values;
+          const user = await getData('currentUser');
+
+          const surveyingUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
+          const appVersion = await getData('appVersion');
 
           const formObjectUpdated = addSelectTextInputs(values, formObject);
 
           const postParams = {
             parseParentClassID: selectedAsset.objectId,
             parseParentClass: 'Assets',
+            parseUser: user.objectId,
             parseClass: 'FormAssetResults',
             photoFile,
             localObject: formObjectUpdated,
@@ -48,6 +58,8 @@ const AssetSupplementary = ({ selectedAsset, setSelectedAsset, surveyingOrganiza
             formSpecificationsId: selectedForm.objectId,
             fields: fieldsArray,
             surveyingOrganization,
+            surveyingUser: surveyingUserFailSafe,
+            appVersion
           };
 
           const submitAction = () => {
