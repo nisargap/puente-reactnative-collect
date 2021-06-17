@@ -21,6 +21,7 @@ const FormGallery = (props) => {
     navigateToCustomForm, customForms, refreshCustomForms,
     pinnedForms, pinForm, removePinnedForm
   } = props;
+
   return (
     <View>
       <View key="pinnedForms" style={layout.screenRow}>
@@ -36,10 +37,14 @@ const FormGallery = (props) => {
               }}
               onLongPress={() => removePinnedForm(form)}
             >
+
               <View style={styles.cardContainer}>
+                {form.image !== undefined && (
+                  <form.image height={40} style={styles.svg} />
+                )}
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>
-                    {form.name}
+                    { form.customForm === false ? I18n.t(form.name) : form.name}
                   </Text>
                 </View>
               </View>

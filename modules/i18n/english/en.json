@@ -519,5 +519,11 @@
   },
   "assetFormSelect": {
     "supAssetForms": "Supplementary Asset Forms"
+  },
+  "puenteForms":{
+    "ResidentID": "Resident ID",
+    "EnvironmentalHealth": "Environmental Health",
+    "MedicalEvaluation": "Medical Evaluation",
+    "Vitals": "Vitals"
   }
 }
