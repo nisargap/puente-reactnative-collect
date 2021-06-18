@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -119,7 +120,9 @@ const IdentificationForm = ({
               ) : (
                 <PaperButton
                   onPressEvent={formikProps.handleSubmit}
-                  buttonText={I18n.t('global.submit')}
+                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
+                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
+                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
             </View>

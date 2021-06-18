@@ -11,6 +11,7 @@
     "commName": "Nombre de comunidad",
     "notes": "Notas",
     "refresh": "Actualiza",
+    "error": "Error",
     "success":"¡Éxito!",
     "ok": "OK",
     "emptyForm": "Empty Form"
@@ -31,7 +32,7 @@
     "toEnglish": "Cambiar el idioma al inglés",
     "toSpanish": "Cambiar el idioma al español",
     "errorTerms": "Error, se deben acordar los términos y el servicio",
-    "error Contraseña": "Error, sus contraseñas no coinciden.",
+    "errorPassword": "Error, sus contraseñas no coinciden.",
     "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error."
   },
   "signIn": {
@@ -50,7 +51,9 @@
       "noAccount": "¿No tienes una cuenta?",
       "signUp": "¡Regístrate!",
       "rememberPass": "¿Recuerdas tu contraseña?",
-      "signIn": "Registrarse"
+      "signIn": "Registrarse",
+      "resetSuccess": "Su enlace de restablecimiento de contraseña se ha enviado a su correo electrónico. Por favor revise su correo electrónico para cambiar su contraseña.",
+      "resetError": "Hubo un error al enviar el enlace para restablecer la contraseña. Asegúrese de haber ingresado su correo electrónico correctamente. Puede intentarlo de nuevo haciendo clic en el botón de abajo. Si cree que el correo electrónico es correcto, comuníquese con su gerente."
     },
     "credentialsModal": {
       "useCreds": "¿Le gustaría guardar su usuario y contraseña?"
@@ -112,10 +115,8 @@
       "label": "Nivel de Educación",
       "lessPrim": "No termino la primaria",
       "prim": "Termino la primaria",
-      "lesshs": "No termino la escuela secundaria",
       "hs": "Termino la escuela secundaria",
       "someHS": "Algún instituto",
-      "lesscollege": "Universidad sin terminar",
       "college": "Universidad terminada",
       "someCollege": "Alguna educación superior"
     },
@@ -295,7 +296,6 @@
     "attachResident": "Adjuntar una residente de la comunidad"
   },
   "assetForms": {
-    "noForm": "No values in form",
     "attachForm": "Adjuntar una forma al activo",
     "createAsset": "Create an Asset"
   },
@@ -340,7 +340,8 @@
       "environmental": "Medio ambiente",
       "history": "Historia",
       "medical": "Médica",
-      "evaluation": "Evaluación"
+      "evaluation": "Evaluación",
+      "vitals": "Partes vitales"
     }
   },
   "findResident": {
@@ -352,7 +353,6 @@
     },
     "residentPage": {
       "demographics": {
-        "age": "Edad",
         "dob": "Fecha de nacimiento:",
         "city": "Ciudad:",
         "community": "Comunidad:",
@@ -398,6 +398,7 @@
     "volunteerSince": "Voluntaria desde",
     "surveysCollected": "Encuestas recopiladas",
     "submitOffline": "Enviar formularios sin conexión",
+    "settingsPage": "Página de configuración",
     "failedAttempt": "Intento fallido de envío de formularios sin conexión.",
     "tryAgain": "Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
     "ok": "Okay",
@@ -413,6 +414,10 @@
   },
   "residentIdSearchbar": {
     "searchIndividual": "Buscar individuo"
+  },
+  "assetSearchbar": {
+    "searchIndividual": "Buscar activo",
+    "placeholder": "Escriba Aquí"
   },
   "termsModal": {
     "termsService": "Condiciones y servicio",
@@ -474,5 +479,45 @@
     "enterFeedback": "Ingrese sus comentarios en la entrada a continuación y presione el botón \"Enviar comentarios\". Esto lo redireccionará a su correo electrónico donde puede enviar sus comentarios.",
     "sendMail": "Enviar correo",
     "typeFeedback": "Escriba sus comentarios aquí ..."
+  },
+  "pushNotifications": {
+    "updateApp": "Actualiza en la App Store. Tu aplicación está desactualizada."
+  },
+  "paperButton": {
+    "getLocation": "Obtener ubicación",
+    "getLocationAgain": "Obtener ubicación de nuevo",
+    "takePhoto": "Tomar foto"
+  },
+  "bottomTab":{
+    "dataCollection": "Recopilación de datos"
+  },
+  "camera":{
+    "useImage": "Usar imagen del carrete de la cámara",
+    "noAccess": "Sin acceso a la cámara",
+    "retake": "Volver a tomar la imagen",
+    "flip": "Dar la vuelta",
+    "takePicture": "Tomar la foto",
+    "done": "Hecho"
+  },
+  "peopleModal": {
+    "fname": "Primer nombre",
+    "enterFname": "Ingrese el nombre",
+    "lname": "Apellido",
+    "enterLname": "Introduzca el apellido",
+    "relationship": "Relación",
+    "remove": "Eliminar",
+    "add": "Agregar"
+  },
+  "assetCore": {
+    "nameOfAssets": "Nombre de los activos",
+    "addPeople": "Añadir personas",
+    "getLocation": "Obtener ubicación",
+    "communityName": "Nombre de la comunidad",
+    "province": "Provincia",
+    "country": "País",
+    "swipeAttachForm": "Deslizar para adjuntar formulario"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Formularios de activos suplementarios"
   }
 }

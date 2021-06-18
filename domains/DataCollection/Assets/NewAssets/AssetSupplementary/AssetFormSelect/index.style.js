@@ -21,6 +21,15 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  componentContainer: {
+    borderRadius: 10,
+    backgroundColor: '#ccc',
+    shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5
   }
 });
 

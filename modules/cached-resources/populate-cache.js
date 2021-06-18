@@ -1,12 +1,12 @@
 import Constants from 'expo-constants';
 
-import { retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
+import { retrievAddUserPushToken, retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
 import {
   assetDataQuery, assetFormsQuery, cacheAutofillData, cacheResidentData, customFormsQuery
 } from './read';
 
-export default function populateCache(user) {
+export default function populateCache(user, expoToken) {
   // communities called since we need a paramter, all data would be cached in the
   // cacheAutofillData function
   cacheAutofillData('Communities')
@@ -21,6 +21,17 @@ export default function populateCache(user) {
         if (user.get('organization') !== currentOrgAsync) {
           await storeData(user.get('organization'), 'organization');
         }
+        if (user.get('expoPushToken') !== expoToken || user.get('expoPushToken') === undefined) {
+          // add push token to user object
+          const postParams = {
+            userId: user.id,
+            expoPushToken: expoToken
+          };
+          retrievAddUserPushToken(postParams).then(() => {
+          }, () => {
+            // error adding push token
+          });
+        }
       } else {
         // fail safe in case no user is passed in for some reason
         await retrieveCurrentUserAsyncFunction()
@@ -31,6 +42,18 @@ export default function populateCache(user) {
               }
               if (currentUser.organization !== currentOrgAsync) {
                 await storeData(currentUser.organization, 'organization');
+              }
+              if (currentUser.expoPushToken !== expoToken
+                 || currentUser.expoPushToken === undefined) {
+                // add push token to user object
+                const postParams = {
+                  userId: user.id,
+                  expoPushToken: expoToken
+                };
+                retrievAddUserPushToken(postParams).then(() => {
+                }, () => {
+                  // error adding push token
+                });
               }
             }
           });
@@ -65,7 +88,7 @@ export default function populateCache(user) {
     .then(() => {
       // Asset data/Asset forms
       assetDataQuery(user.get('organization')).then(() => {
-        assetFormsQuery().then(() => {
+        assetFormsQuery(user.get('organization')).then(() => {
         }, () => {
           // error
         });

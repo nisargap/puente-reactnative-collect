@@ -1,27 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
+import { Card, IconButton, Text } from 'react-native-paper';
 
 import { assetFormsQuery } from '../../../../../../modules/cached-resources';
-import { layout } from '../../../../../../modules/theme';
+import I18n from '../../../../../../modules/i18n';
+import { layout, theme } from '../../../../../../modules/theme';
 import styles from './index.style';
 
-const AssetFormSelect = ({ setViewSupplementaryForms, setSelectedForm }) => {
+const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
   const [assetForms, setAssetForms] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    assetFormsQuery().then((forms) => {
+    setLoading(true);
+    assetFormsQuery(surveyingOrganization).then((forms) => {
+      setLoading(false);
       setAssetForms(forms);
     });
   }, []);
 
+  const refreshAssetForms = async () => {
+    setLoading(true);
+    await assetFormsQuery(surveyingOrganization).then((forms) => {
+      setAssetForms(forms);
+      setLoading(false);
+    });
+  };
+
   const selectForm = (form) => {
-    setViewSupplementaryForms(false);
     setSelectedForm(form);
   };
 
   return (
     <View>
-      <ScrollView horizontal>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={styles.header}>{I18n.t('assetFormSelect.supAssetForms')}</Text>
+        <IconButton
+          style={{ bottom: 7 }}
+          color={theme.colors.primary}
+          size={20}
+          icon="refresh"
+          onPress={refreshAssetForms}
+        />
+      </View>
+      {loading
+        && <ActivityIndicator />}
+      <ScrollView horizontal style={styles.componentContainer}>
         {assetForms && assetForms.map((form) => (
           <Card
             key={form.objectId}

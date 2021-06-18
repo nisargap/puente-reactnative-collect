@@ -66,10 +66,10 @@ const PaperInputPicker = ({
     <>
       {fieldType === 'input' && (
         <View style={stylesDefault.container} key={formikKey}>
-          {translatedLabel.length > 40
+          {translatedLabel.length > 30
             && <Text style={stylesDefault.label}>{translatedLabel}</Text>}
           <TextInput
-            label={translatedLabel.length > 40 ? '' : translatedLabel}
+            label={translatedLabel.length > 30 ? '' : translatedLabel}
             onChangeText={handleChange(formikKey)}
             onBlur={handleBlur(formikKey)}
             {...rest} //eslint-disable-line
@@ -84,7 +84,7 @@ const PaperInputPicker = ({
       )}
       {fieldType === 'numberInput' && (
         <View style={stylesDefault.container} key={formikKey}>
-          {translatedLabel.length > 40
+          {translatedLabel.length > 30
             && (
               <Text style={[stylesDefault.label, {
                 bottom: -15, zIndex: 1, left: 5, padding: 5
@@ -94,7 +94,7 @@ const PaperInputPicker = ({
               </Text>
             )}
           <TextInput
-            label={translatedLabel.length > 40 ? '' : translatedLabel}
+            label={translatedLabel.length > 30 ? '' : translatedLabel}
             onChangeText={handleChange(formikKey)}
             onBlur={handleBlur(formikKey)}
             {...rest} //eslint-disable-line
@@ -234,6 +234,9 @@ const PaperInputPicker = ({
             <View key={result.value}>
               {result.text === true && result.value === values[formikKey] && (
                 <View style={stylesDefault} key={result.textKey}>
+                  {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                    <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                  )}
                   <TextInput
                     label={customForm ? result.label : I18n.t(result.label)}
                     onChangeText={handleChange(result.textKey)}
@@ -300,6 +303,9 @@ const PaperInputPicker = ({
               {result.text === true && values[formikKey]
                 && values[formikKey].includes(result.value) && (
                   <View style={stylesDefault} key={result.textKey}>
+                    {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                      <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                    )}
                     <TextInput
                       label={customForm ? result.label : I18n.t(result.label)}
                       onChangeText={handleChange(result.textKey)}
@@ -341,14 +347,14 @@ const PaperInputPicker = ({
           {location === null && (
             <PaperButton
               onPressEvent={handleLocation}
-              buttonText="Get Location"
+              buttonText={I18n.t('paperButton.getLocation')}
             />
           )}
           {location !== null && (
             <View>
               <PaperButton
                 onPressEvent={handleLocation}
-                buttonText="Get Location Again"
+                buttonText={I18n.t('paperButton.getLocationAgain')}
               />
               <View style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: 'row' }}>
                 {
@@ -415,91 +421,87 @@ const PaperInputPicker = ({
           </View>
         </View>
       )}
-      {
-        fieldType === 'multiInputRowNum' && (
-          <View style={stylesDefault.container}>
-            <Text style={stylesDefault.label}>{translatedLabel}</Text>
-            <View style={stylesDefault.multiInputContainer}>
-              {data.options.map((result) => (result.textSplit ? (
-                <View key={`${result}`} style={{ flex: 1 }}>
-                  <Text style={styleX.textSplit}>{result.label}</Text>
-                </View>
-              ) : (
-                <View key={result.value} style={stylesDefault.inputItem}>
-                  <TextInput
-                    label={customForm ? result.label : I18n.t(result.label)}
-                    onChangeText={handleChange(result.value)}
-                    onBlur={handleBlur(result.value)}
-                    {...rest} //eslint-disable-line
-                    mode="outlined"
-                    keyboardType="numeric"
-                    maxLength={result.maxLength ? result.maxLength : null}
-                    theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
-                  />
-                  <Text style={{ color: 'red' }}>
-                    {errors[result.value]}
-                  </Text>
-                </View>
-              )))}
+      {fieldType === 'multiInputRowNum' && (
+      <View style={stylesDefault.container}>
+        <Text style={stylesDefault.label}>{translatedLabel}</Text>
+        <View style={stylesDefault.multiInputContainer}>
+          {data.options.map((result) => (result.textSplit ? (
+            <View key={`${result}`} style={{ flex: 1 }}>
+              <Text style={styleX.textSplit}>{result.label}</Text>
             </View>
-          </View>
-        )
-      }
-      {
-        fieldType === 'photo' && (
-          <View style={stylesDefault.container}>
-            {!cameraVisible && image === null && (
-              <View>
-                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
-                <Button onPress={() => setCameraVisible(true)}>Take Photo</Button>
-                <UseCameraRoll
-                  pictureUris={pictureUris}
-                  setPictureUris={setPictureUris}
-                  formikProps={formikProps}
-                  formikKey={formikKey}
-                  image={image}
-                  setImage={setImage}
-                />
-              </View>
-            )}
-            {!cameraVisible && image !== null && (
-              <View>
-                <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
-                <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
-                <Button onPress={() => {
-                  setCameraVisible(true);
-                }}
-                >
-                  Take Picture
-                </Button>
-                <UseCameraRoll
-                  pictureUris={pictureUris}
-                  setPictureUris={setPictureUris}
-                  formikProps={formikProps}
-                  formikKey={formikKey}
-                  image={image}
-                  setImage={setImage}
-                />
-              </View>
-            )}
-            {cameraVisible && (
-              <View>
-                <Text style={stylesDefault.labelImage}>{label}</Text>
-                <UseCamera
-                  cameraVisible={cameraVisible}
-                  setCameraVisible={setCameraVisible}
-                  pictureUris={pictureUris}
-                  setPictureUris={setPictureUris}
-                  formikProps={formikProps}
-                  formikKey={formikKey}
-                  image={image}
-                  setImage={setImage}
-                />
-              </View>
-            )}
-          </View>
-        )
-      }
+          ) : (
+            <View key={result.value} style={stylesDefault.inputItem}>
+              <TextInput
+                label={customForm ? result.label : I18n.t(result.label)}
+                onChangeText={handleChange(result.value)}
+                onBlur={handleBlur(result.value)}
+                    {...rest} //eslint-disable-line
+                mode="outlined"
+                keyboardType="numeric"
+                maxLength={result.maxLength ? result.maxLength : null}
+                theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+              />
+              <Text style={{ color: 'red' }}>
+                {errors[result.value]}
+              </Text>
+            </View>
+          )))}
+        </View>
+      </View>
+      )}
+      {fieldType === 'photo' && (
+        <View style={stylesDefault.container}>
+          {!cameraVisible && image === null && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+              <Button onPress={() => setCameraVisible(true)}>{I18n.t('paperButton.takePhoto')}</Button>
+              <UseCameraRoll
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+          {!cameraVisible && image !== null && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+              <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
+              <Button onPress={() => {
+                setCameraVisible(true);
+              }}
+              >
+                {I18n.t('paperButton.takePhoto')}
+              </Button>
+              <UseCameraRoll
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+          {cameraVisible && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{label}</Text>
+              <UseCamera
+                cameraVisible={cameraVisible}
+                setCameraVisible={setCameraVisible}
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+        </View>
+      )}
     </>
   );
 };

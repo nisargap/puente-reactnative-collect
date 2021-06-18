@@ -1,4 +1,5 @@
 import { Camera } from 'expo-camera';
+import I18n from 'i18n-js';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions, Image, StyleSheet, TouchableOpacity, View
@@ -53,7 +54,7 @@ export default function UseCamera(
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>{I18n.t('camera.noAccess')}</Text>;
   }
   return (
     <Portal theme={theme}>
@@ -67,7 +68,7 @@ export default function UseCamera(
           {cameraImage ? (
             <>
               <Image source={{ uri: cameraImage }} style={{ width: 'auto', height: 400 }} />
-              <Button onPress={resetPicture}>Retake Picture</Button>
+              <Button onPress={resetPicture}>{I18n.t('camera.retake')}</Button>
             </>
           ) : (
             <>
@@ -94,7 +95,7 @@ export default function UseCamera(
                       );
                     }}
                   >
-                    <Text style={styles.cameraButtonText}> Flip </Text>
+                    <Text style={styles.cameraButtonText}>{I18n.t('camera.flip')}</Text>
                   </TouchableOpacity>
                   <View style={styles.cameraButtonContainer}>
                     <View style={styles.zoomContainer}>
@@ -124,11 +125,11 @@ export default function UseCamera(
                   </View>
                 </View>
               </Camera>
-              <Button onPress={takePicture}>Take Picture</Button>
+              <Button onPress={takePicture}>{I18n.t('camera.takePicture')}</Button>
             </>
           )}
         </View>
-        <Button mode="contained" style={styles.button} onPress={() => setCameraVisible(false)}>Done</Button>
+        <Button mode="contained" style={styles.button} onPress={() => setCameraVisible(false)}>{I18n.t('camera.done')}</Button>
       </Modal>
     </Portal>
   );

@@ -51,28 +51,43 @@ const Header = ({
       setVolunteerDate(volunteerLength(user));
     });
 
-    getData('offlineIDForms').then((idForms) => {
+    const idFormCount = await getData('offlineIDForms').then((idForms) => {
       if (idForms) {
         setOfflineForms(true);
         return idForms.length;
       }
       return 0;
-    })
-      .then((idFormCount) => {
-        getData('offlineSupForms').then((supForms) => {
-          if (supForms) {
-            setOfflineForms(true);
-            setOfflineFormCount(idFormCount + supForms.length);
-          } else {
-            setOfflineFormCount(idFormCount);
-            if (idFormCount === 0) {
-              setOfflineForms(false);
-            } else {
-              setOfflineForms(true);
-            }
-          }
-        });
-      });
+    });
+
+    const supplementaryCount = await getData('offlineSupForms').then((supForms) => {
+      if (supForms) {
+        setOfflineForms(true);
+        return supForms.length;
+      }
+      return 0;
+    });
+
+    const assetIdFormCount = await getData('offlineAssetIDForms').then((assetIdForms) => {
+      if (assetIdForms) {
+        setOfflineForms(true);
+        return assetIdForms.length;
+      }
+      return 0;
+    });
+
+    const assetSupForms = await getData('offlineAssetSupForms').then((assetSuppForms) => {
+      if (assetSuppForms) {
+        setOfflineForms(true);
+        return assetSuppForms.length;
+      }
+      return 0;
+    });
+
+    const allFormOfflineCount = idFormCount + supplementaryCount + assetIdFormCount + assetSupForms;
+
+    setOfflineFormCount(allFormOfflineCount);
+
+    setOfflineForms(allFormOfflineCount > 0);
 
     setDrawerOpen(!drawerOpen);
   };
@@ -82,6 +97,8 @@ const Header = ({
       if (result) {
         await deleteData('offlineIDForms');
         await deleteData('offlineSupForms');
+        await deleteData('offlineAssetIDForms');
+        await deleteData('offlineAssetSupForms');
         await deleteData('offlineHouseholds');
         await deleteData('offlineHouseholdsRelation');
         setOfflineForms(false);
@@ -93,6 +110,8 @@ const Header = ({
         if (result) {
           await deleteData('offlineIDForms');
           await deleteData('offlineSupForms');
+          await deleteData('offlineAssetIDForms');
+          await deleteData('offlineAssetSupForms');
           await deleteData('offlineHouseholds');
           await deleteData('offlineHouseholdsRelation');
           setOfflineForms(false);
@@ -194,7 +213,7 @@ const Header = ({
                 setShowCounts={setShowCounts}
               />
             )}
-
+            <Button onPress={navToSettings}>{I18n.t('header.settingsPage')}</Button>
           </View>
         )}
       <IconButton

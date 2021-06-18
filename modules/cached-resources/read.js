@@ -1,5 +1,5 @@
 import retrievePuenteAutofillData from '../../services/aws';
-import { customQueryService, residentIDQuery } from '../../services/parse/crud';
+import { customMultiParamQueryService, customQueryService, residentIDQuery } from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
 import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
@@ -60,7 +60,11 @@ function customFormsQuery(surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((online) => {
       if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', surveyingOrganization).then(async (forms) => {
+        const parseParams = {
+          typeOfForm: 'Custom',
+          organizations: surveyingOrganization
+        };
+        customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
           if (forms !== null && forms !== undefined && forms !== '') {
             await storeData(forms, 'customForms');
             resolve(JSON.parse(JSON.stringify(forms)));
@@ -110,12 +114,16 @@ function getTasksAsync() {
   });
 }
 
-function assetFormsQuery() {
+function assetFormsQuery(surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((online) => {
       if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
-          await storeData(forms, 'assetForms');
+        const parseParams = {
+          typeOfForm: 'Assets',
+          organizations: surveyingOrganization
+        };
+        customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then((forms) => {
+          storeData(forms, 'assetForms');
           resolve(JSON.parse(JSON.stringify(forms)));
         }, (error) => {
           reject(error);

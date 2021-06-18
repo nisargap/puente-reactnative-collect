@@ -1,18 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   assetContainer: {
-    width: '90%',
-    height: '100%',
-    margin: 20,
-    flex: 1,
-    padding: 10,
+    width: Dimensions.get('window').width * 0.90,
     textAlign: 'left',
-    backgroundColor: 'white',
-    borderColor: '#eaeaea',
-    borderRadius: 10,
-    borderWidth: 1,
-    justifyContent: 'center',
   }
 });
 
