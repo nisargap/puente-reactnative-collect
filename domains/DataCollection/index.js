@@ -65,7 +65,7 @@ const DataCollection = ({ navigation }) => {
     getData('pinnedForms').then((forms) => {
       if (forms) setPinnedForms(forms);
     });
-  }, [surveyingUser, surveyingOrganization]);
+  });
 
   const navigateToRoot = async () => {
     setView('Root');
@@ -137,8 +137,8 @@ const DataCollection = ({ navigation }) => {
     storeData(filteredPinnedForms, 'pinnedForms');
   };
 
-  const logOut = () => {
-    retrieveSignOutFunction().then(() => {
+  const logOut = async () => {
+    await retrieveSignOutFunction().then(() => {
       navigation.navigate('Sign In');
     });
   };
@@ -151,7 +151,6 @@ const DataCollection = ({ navigation }) => {
       }}
     >
       <Header
-        logOut={logOut}
         view={view}
         setView={setView}
         setSettings={setSettings}
