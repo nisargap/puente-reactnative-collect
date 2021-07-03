@@ -1,6 +1,7 @@
 // import * as React from 'react';
 import React, { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   KeyboardAvoidingView, Platform,
   ScrollView, Text, View
 } from 'react-native';
@@ -35,8 +36,11 @@ const puenteForms = [
 
 const DataCollection = ({ navigation }) => {
   const [scrollViewScroll, setScrollViewScroll] = useState();
-  const [view, setView] = useState('Root');
+  const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState(false);
+
+  const [view, setView] = useState('Root');
+
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -65,7 +69,7 @@ const DataCollection = ({ navigation }) => {
     getData('pinnedForms').then((forms) => {
       if (forms) setPinnedForms(forms);
     });
-  });
+  }, [surveyingUser, surveyingOrganization, customForms]);
 
   const navigateToRoot = async () => {
     setView('Root');
@@ -121,8 +125,10 @@ const DataCollection = ({ navigation }) => {
   };
 
   const refreshCustomForms = async () => {
+    setLoading(true);
     customFormsQuery(surveyingOrganization).then((forms) => {
       setCustomForms(forms);
+      setLoading(false);
     });
   };
 
@@ -160,6 +166,8 @@ const DataCollection = ({ navigation }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
       >
+        {loading === true
+        && <ActivityIndicator />}
         <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={scrollViewScroll}>
           {settings === true ? (
             <SettingsView
