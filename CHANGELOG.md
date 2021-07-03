@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.7.12](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.11...v11.7.12) (2021-07-03)
+
+
+### Bug fixes
+
+* logging of session for user and refactor of custom forms function ([b52e7b2](https://github.com/hopetambala/puente-reactnative-collect/commit/b52e7b26c75d1c801349ce72f2f6a5b6eb69a3cd))
+
 ### [11.7.11](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.10...v11.7.11) (2021-07-03)
 
 
