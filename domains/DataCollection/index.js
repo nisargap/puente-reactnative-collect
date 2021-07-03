@@ -124,7 +124,7 @@ const DataCollection = ({ navigation }) => {
     });
   };
 
-  const refreshCustomForms = async () => {
+  const refreshCustomForms = () => {
     setLoading(true);
     customFormsQuery(surveyingOrganization).then((forms) => {
       setCustomForms(forms);
@@ -143,11 +143,7 @@ const DataCollection = ({ navigation }) => {
     storeData(filteredPinnedForms, 'pinnedForms');
   };
 
-  const logOut = async () => {
-    await retrieveSignOutFunction().then(() => {
-      navigation.navigate('Sign In');
-    });
-  };
+  const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));
 
   return (
     <View

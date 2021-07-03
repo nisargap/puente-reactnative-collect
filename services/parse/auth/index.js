@@ -35,14 +35,11 @@ function retrieveSignInFunction(username, password) {
   });
 }
 
-function retrieveSignOutFunction() {
-  return new Promise((resolve, reject) => {
-    Parse.User.logOut().then((result) => {
-      resolve(result);
-    }, (error) => {
-      reject(error);
+async function retrieveSignOutFunction() {
+  return Parse.User.logOut()
+    .catch((error) => {
+      console.log(error.message); //eslint-disable-line
     });
-  });
 }
 
 function retrieveForgotPasswordFunction(params) {
