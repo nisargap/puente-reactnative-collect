@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.8.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.12...v11.8.0) (2021-07-05)
+
+
+### Bug fixes
+
+* keyboard automatically dismissing when entering ([b763f2a](https://github.com/hopetambala/puente-reactnative-collect/commit/b763f2a7ca9ea5d86d0e44ab94af6427cb147fd4))
+* Pinned Form Translation bug fix ([746de57](https://github.com/hopetambala/puente-reactnative-collect/commit/746de577589d315b472b81c3ee04d800d3833127))
+* user not switching when entering data collection epic ([3ba829b](https://github.com/hopetambala/puente-reactnative-collect/commit/3ba829ba1f41e92a74e54c5df646d3656aad1e3b))
+
 ### [11.7.12](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.7.11...v11.7.12) (2021-07-03)
 
 
