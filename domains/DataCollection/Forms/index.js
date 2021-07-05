@@ -43,7 +43,7 @@ const Forms = (props) => {
       )}
       {consent === true && selectedForm !== 'id' && selectedForm !== '' && (
         <View>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss()} accessible={false}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View>
               <View style={layout.container}>
                 <ResidentIdSearchbar
