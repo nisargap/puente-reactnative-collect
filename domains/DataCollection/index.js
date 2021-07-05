@@ -1,5 +1,6 @@
 // import * as React from 'react';
-import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView, Platform,
@@ -16,8 +17,7 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
-import { getData, storeData } from '../../modules/async-storage';
-import { customFormsQuery } from '../../modules/cached-resources';
+import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
 import { retrieveSignOutFunction } from '../../services/parse/auth';
@@ -44,9 +44,8 @@ const DataCollection = ({ navigation }) => {
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 
-  const [customForms, setCustomForms] = useState([]);
-  const [pinnedForms, setPinnedForms] = useState([]);
   const [customForm, setCustomForm] = useState();
+  const [pinnedForms, setPinnedForms] = useState([]);
 
   const [selectPerson, setSelectPerson] = useState();
   const [surveyee, setSurveyee] = useState({});
@@ -54,22 +53,21 @@ const DataCollection = ({ navigation }) => {
   const [surveyingOrganization, setSurveyingOrganization] = useState('');
   const [surveyingUser, setSurveyingUser] = useState();
 
-  useEffect(() => {
-    getData('currentUser').then((user) => {
-      setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
-    });
-    getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization);
-    }).catch(() => {
-      setSurveyingOrganization(surveyingOrganization || '');
-    });
-    getData('customForms').then((forms) => {
-      setCustomForms(forms);
-    });
-    getData('pinnedForms').then((forms) => {
-      if (forms) setPinnedForms(forms);
-    });
-  }, [surveyingUser, surveyingOrganization, customForms, pinnedForms]);
+  useFocusEffect(
+    useCallback(() => {
+      getData('currentUser').then((user) => {
+        setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
+      });
+      getData('organization').then((org) => {
+        setSurveyingOrganization(org || surveyingOrganization);
+      }).catch(() => {
+        setSurveyingOrganization(surveyingOrganization || '');
+      });
+      getData('pinnedForms').then((forms) => {
+        if (forms) setPinnedForms(forms);
+      });
+    }, [surveyingUser, surveyingOrganization])
+  );
 
   const navigateToRoot = async () => {
     setView('Root');
@@ -122,25 +120,6 @@ const DataCollection = ({ navigation }) => {
       setSurveyingOrganization(org || surveyingOrganization || '');
       setView('Find Records');
     });
-  };
-
-  const refreshCustomForms = () => {
-    setLoading(true);
-    customFormsQuery(surveyingOrganization).then((forms) => {
-      setCustomForms(forms);
-      setLoading(false);
-    });
-  };
-
-  const pinForm = async (form) => {
-    setPinnedForms([...pinnedForms, form]);
-    storeData(pinnedForms, 'pinnedForms');
-  };
-
-  const removePinnedForm = async (form) => {
-    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
-    setPinnedForms(filteredPinnedForms);
-    storeData(filteredPinnedForms, 'pinnedForms');
   };
 
   const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));
@@ -255,11 +234,10 @@ const DataCollection = ({ navigation }) => {
                     navigateToNewRecord={navigateToNewRecord}
                     puenteForms={puenteForms}
                     navigateToCustomForm={navigateToCustomForm}
-                    customForms={customForms}
-                    refreshCustomForms={refreshCustomForms}
+                    setLoading={setLoading}
+                    surveyingOrganization={surveyingOrganization}
                     pinnedForms={pinnedForms}
-                    removePinnedForm={removePinnedForm}
-                    pinForm={pinForm}
+                    setPinnedForms={setPinnedForms}
                   />
                 </View>
               )}
