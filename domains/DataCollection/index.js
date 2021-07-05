@@ -1,6 +1,8 @@
 // import * as React from 'react';
-import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import {
+  ActivityIndicator,
   KeyboardAvoidingView, Platform,
   ScrollView, Text, View
 } from 'react-native';
@@ -17,8 +19,7 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
-import { getData, storeData } from '../../modules/async-storage';
-import { customFormsQuery } from '../../modules/cached-resources';
+import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
 import { retrieveSignOutFunction } from '../../services/parse/auth';
@@ -45,14 +46,16 @@ const puenteForms = [
 
 const DataCollection = ({ navigation }) => {
   const [scrollViewScroll, setScrollViewScroll] = useState();
-  const [view, setView] = useState('Root');
+  const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState(false);
+
+  const [view, setView] = useState('Root');
+
   const [selectedForm, setSelectedForm] = useState('id');
   const [selectedAsset, setSelectedAsset] = useState(null);
 
-  const [customForms, setCustomForms] = useState([]);
-  const [pinnedForms, setPinnedForms] = useState([]);
   const [customForm, setCustomForm] = useState();
+  const [pinnedForms, setPinnedForms] = useState([]);
 
   const [selectPerson, setSelectPerson] = useState();
   const [surveyee, setSurveyee] = useState({});
@@ -60,22 +63,21 @@ const DataCollection = ({ navigation }) => {
   const [surveyingOrganization, setSurveyingOrganization] = useState('');
   const [surveyingUser, setSurveyingUser] = useState();
 
-  useEffect(() => {
-    getData('currentUser').then((user) => {
-      setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
-    });
-    getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization);
-    }).catch(() => {
-      setSurveyingOrganization(surveyingOrganization || '');
-    });
-    getData('customForms').then((forms) => {
-      setCustomForms(forms);
-    });
-    getData('pinnedForms').then((forms) => {
-      if (forms) setPinnedForms(forms);
-    });
-  }, [surveyingUser, surveyingOrganization]);
+  useFocusEffect(
+    useCallback(() => {
+      getData('currentUser').then((user) => {
+        setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
+      });
+      getData('organization').then((org) => {
+        setSurveyingOrganization(org || surveyingOrganization);
+      }).catch(() => {
+        setSurveyingOrganization(surveyingOrganization || '');
+      });
+      getData('pinnedForms').then((forms) => {
+        if (forms) setPinnedForms(forms);
+      });
+    }, [surveyingUser, surveyingOrganization])
+  );
 
   const navigateToRoot = async () => {
     setView('Root');
@@ -130,28 +132,7 @@ const DataCollection = ({ navigation }) => {
     });
   };
 
-  const refreshCustomForms = async () => {
-    customFormsQuery(surveyingOrganization).then((forms) => {
-      setCustomForms(forms);
-    });
-  };
-
-  const pinForm = async (form) => {
-    setPinnedForms([...pinnedForms, form]);
-    storeData(pinnedForms, 'pinnedForms');
-  };
-
-  const removePinnedForm = async (form) => {
-    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
-    setPinnedForms(filteredPinnedForms);
-    storeData(filteredPinnedForms, 'pinnedForms');
-  };
-
-  const logOut = () => {
-    retrieveSignOutFunction().then(() => {
-      navigation.navigate('Sign In');
-    });
-  };
+  const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));
 
   return (
     <View
@@ -161,7 +142,6 @@ const DataCollection = ({ navigation }) => {
       }}
     >
       <Header
-        logOut={logOut}
         view={view}
         setView={setView}
         setSettings={setSettings}
@@ -171,6 +151,8 @@ const DataCollection = ({ navigation }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
       >
+        {loading === true
+        && <ActivityIndicator />}
         <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={scrollViewScroll}>
           {settings === true ? (
             <SettingsView
@@ -262,11 +244,10 @@ const DataCollection = ({ navigation }) => {
                     navigateToNewRecord={navigateToNewRecord}
                     puenteForms={puenteForms}
                     navigateToCustomForm={navigateToCustomForm}
-                    customForms={customForms}
-                    refreshCustomForms={refreshCustomForms}
+                    setLoading={setLoading}
+                    surveyingOrganization={surveyingOrganization}
                     pinnedForms={pinnedForms}
-                    removePinnedForm={removePinnedForm}
-                    pinForm={pinForm}
+                    setPinnedForms={setPinnedForms}
                   />
                 </View>
               )}

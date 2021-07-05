@@ -57,37 +57,24 @@ async function cacheAutofillData(parameter) {
 }
 
 function customFormsQuery(surveyingOrganization) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((online) => {
-      if (online) {
-        const parseParams = {
-          typeOfForm: 'Custom',
-          organizations: surveyingOrganization
-        };
-        customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
-          if (forms !== null && forms !== undefined && forms !== '') {
-            await storeData(forms, 'customForms');
-            resolve(JSON.parse(JSON.stringify(forms)));
-          } else {
-            getData('customForms').then((customForms) => {
-              resolve(customForms);
-            }, (error) => {
-              reject(error);
-            });
-          }
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('customForms').then((forms) => {
-          resolve(forms);
-        }, (error) => {
-          reject(error);
-        });
-      }
-    }, (error) => {
-      reject(error);
-    });
+  return checkOnlineStatus().then((online) => {
+    if (online) {
+      const parseParams = {
+        typeOfForm: 'Custom',
+        organizations: surveyingOrganization
+      };
+
+      return customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
+        if (forms !== null && forms !== undefined && forms !== '') {
+          await storeData(forms, 'customForms');
+          return JSON.parse(JSON.stringify(forms));
+        }
+        return getData('customForms').then((customForms) => customForms);
+      }, (error) => {
+        console.log(error); //eslint-disable-line
+      });
+    }
+    return getData('customForms').then((forms) => forms, (error) => console.log(error)); // eslint-disable-line
   });
 }
 

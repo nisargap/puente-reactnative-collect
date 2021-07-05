@@ -38,7 +38,7 @@ const IdentificationForm = ({
 
   return (
     <View>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss()} accessible={false}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Formik
           initialValues={{}}
           onSubmit={async (values,) => {
