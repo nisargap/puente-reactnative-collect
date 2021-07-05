@@ -69,7 +69,7 @@ const DataCollection = ({ navigation }) => {
     getData('pinnedForms').then((forms) => {
       if (forms) setPinnedForms(forms);
     });
-  }, [surveyingUser, surveyingOrganization, customForms]);
+  }, [surveyingUser, surveyingOrganization, customForms, pinnedForms]);
 
   const navigateToRoot = async () => {
     setView('Root');
