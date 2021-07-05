@@ -65,10 +65,14 @@ const FormGallery = ({
               }}
               onLongPress={() => removePinnedForm(form)}
             >
+
               <View style={styles.cardContainer}>
+                {form.image !== undefined && (
+                  <form.image height={40} style={styles.svg} />
+                )}
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>
-                    {form.name}
+                    { form.customForm === false ? I18n.t(form.name) : form.name}
                   </Text>
                 </View>
               </View>

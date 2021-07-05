@@ -13,6 +13,8 @@ import {
 import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
 import FindRecordSVG from '../../assets/graphics/static/Find-Record-Icon.svg';
 import ResearchSVG from '../../assets/graphics/static/Research.svg';
+import MedEvalSVG from '../../assets/icons/Heart-Icon.svg';
+import EnvSVG from '../../assets/icons/Home-icon.svg';
 import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
@@ -28,10 +30,18 @@ import Forms from './Forms';
 import styles from './index.styles';
 
 const puenteForms = [
-  { tag: 'id', name: 'Resident ID' },
-  { tag: 'env', name: 'Environmental Health' },
-  { tag: 'med-eval', name: 'Medical Evaluation' },
-  { tag: 'vitals', name: 'Vitals' }
+  {
+    tag: 'id', name: 'puenteForms.ResidentID', customForm: false, image: NewRecordSVG
+  },
+  {
+    tag: 'env', name: 'puenteForms.EnvironmentalHealth', customForm: false, image: EnvSVG
+  },
+  {
+    tag: 'med-eval', name: 'puenteForms.MedicalEvaluation', customForm: false, image: MedEvalSVG
+  },
+  {
+    tag: 'vitals', name: 'puenteForms.Vitals', customForm: false, image: NewRecordSVG
+  }
 ];
 
 const DataCollection = ({ navigation }) => {
