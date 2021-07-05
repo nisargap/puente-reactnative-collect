@@ -12,7 +12,7 @@ export default function populateCache(user, expoToken) {
   cacheAutofillData('Communities')
     .then(async () => {
       const currentUserAsync = await getData('currentUser');
-      const currentOrgAsync = await getData('organization');
+      const currentOrgAsync = await getData('currentUser').then((currentUser) => currentUser.organization);
       // store information after sign up/sign in
       if (user) {
         if (user !== currentUserAsync) {

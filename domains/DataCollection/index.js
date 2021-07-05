@@ -65,17 +65,17 @@ const DataCollection = ({ navigation }) => {
 
   useFocusEffect(
     useCallback(() => {
-      getData('currentUser').then((user) => {
-        setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
-      });
-      getData('organization').then((org) => {
-        setSurveyingOrganization(org || surveyingOrganization);
-      }).catch(() => {
-        setSurveyingOrganization(surveyingOrganization || '');
-      });
-      getData('pinnedForms').then((forms) => {
-        if (forms) setPinnedForms(forms);
-      });
+      const fetchData = async () => {
+        getData('currentUser').then((user) => {
+          setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
+          setSurveyingOrganization(user.organization || surveyingOrganization);
+        });
+        getData('pinnedForms').then((forms) => {
+          if (forms) setPinnedForms(forms);
+        });
+      };
+
+      fetchData();
     }, [surveyingUser, surveyingOrganization])
   );
 
@@ -84,52 +84,34 @@ const DataCollection = ({ navigation }) => {
   };
 
   const navigateToNewRecord = async (formTag, surveyeePerson) => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Forms');
-      setSurveyee(surveyeePerson || surveyee);
-      setSelectedForm(formTag || 'id');
-    });
+    setView('Forms');
+    setSurveyee(surveyeePerson || surveyee);
+    setSelectedForm(formTag || 'id');
   };
 
   const navigateToGallery = async () => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Gallery');
-    });
+    setView('Gallery');
   };
 
   const navigateToNewAssets = async () => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Assets');
-      setSelectedAsset({});
-    });
+    setView('Assets');
+    setSelectedAsset({});
   };
 
   const navigateToViewAllAssets = async () => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Assets');
-      setSelectedAsset(null);
-    });
+    setView('Assets');
+    setSelectedAsset(null);
   };
 
   const navigateToCustomForm = async (form, surveyeePerson) => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Forms');
-      setSurveyee(surveyeePerson || surveyee);
-      setSelectedForm('custom');
-      setCustomForm(form || '');
-    });
+    setView('Forms');
+    setSurveyee(surveyeePerson || surveyee);
+    setSelectedForm('custom');
+    setCustomForm(form || '');
   };
 
   const navigateToFindRecords = async () => {
-    await getData('organization').then((org) => {
-      setSurveyingOrganization(org || surveyingOrganization || '');
-      setView('Find Records');
-    });
+    setView('Find Records');
   };
 
   const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));

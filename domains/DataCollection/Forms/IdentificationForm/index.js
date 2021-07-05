@@ -48,7 +48,7 @@ const IdentificationForm = ({
             const formObject = values;
             const user = await getData('currentUser');
 
-            formObject.surveyingOrganization = surveyingOrganization;
+            formObject.surveyingOrganization = surveyingOrganization || user.organization;
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.appVersion = await getData('appVersion');
 
