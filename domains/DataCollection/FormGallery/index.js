@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
   View
@@ -11,16 +11,45 @@ import {
 
 import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
 import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import { getData, storeData } from '../../../modules/async-storage';
+import { customFormsQuery } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
 import styles from './index.styles';
 
-const FormGallery = (props) => {
-  const {
-    navigateToNewRecord, puenteForms,
-    navigateToCustomForm, customForms, refreshCustomForms,
-    pinnedForms, pinForm, removePinnedForm
-  } = props;
+const FormGallery = ({
+  navigateToNewRecord, navigateToCustomForm,
+  puenteForms,
+  pinnedForms, setPinnedForms,
+  setLoading, surveyingOrganization
+}) => {
+  const [customForms, setCustomForms] = useState([]);
+
+  useEffect(() => {
+    getData('customForms').then((forms) => {
+      setCustomForms(forms);
+    });
+  }, [customForms]);
+
+  const refreshCustomForms = () => {
+    setLoading(true);
+    customFormsQuery(surveyingOrganization).then((forms) => {
+      setCustomForms(forms);
+      setLoading(false);
+    });
+  };
+
+  const pinForm = async (form) => {
+    setPinnedForms([...pinnedForms, form]);
+    storeData(pinnedForms, 'pinnedForms');
+  };
+
+  const removePinnedForm = async (form) => {
+    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
+    setPinnedForms(filteredPinnedForms);
+    storeData(filteredPinnedForms, 'pinnedForms');
+  };
+
   return (
     <View>
       <View key="pinnedForms" style={layout.screenRow}>
@@ -36,10 +65,14 @@ const FormGallery = (props) => {
               }}
               onLongPress={() => removePinnedForm(form)}
             >
+
               <View style={styles.cardContainer}>
+                {form.image !== undefined && (
+                  <form.image height={40} style={styles.svg} />
+                )}
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>
-                    {form.name}
+                    { form.customForm === false ? I18n.t(form.name) : form.name}
                   </Text>
                 </View>
               </View>

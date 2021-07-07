@@ -61,7 +61,7 @@ const SupplementaryForm = ({
         const user = await getData('currentUser');
 
         formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-        formObject.surveyingOrganization = surveyingOrganization;
+        formObject.surveyingOrganization = surveyingOrganization || user.organization;
         formObject.appVersion = await getData('appVersion');
 
         let formObjectUpdated = addSelectTextInputs(values, formObject);
