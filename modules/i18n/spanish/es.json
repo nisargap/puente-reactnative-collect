@@ -519,5 +519,11 @@
   },
   "assetFormSelect": {
     "supAssetForms": "Formularios de activos suplementarios"
+  },
+  "puenteForms":{
+    "ResidentID": "Identificación de residente",
+    "EnvironmentalHealth": "Salud Ambiental",
+    "MedicalEvaluation": "Evaluación Médica",
+    "Vitals": "Partes vitales"
   }
 }

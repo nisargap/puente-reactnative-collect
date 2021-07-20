@@ -92,9 +92,10 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Sign Up');
   };
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (values, callback) => {
+    if (callback) callback();
     Keyboard.dismiss();
-    navigation.navigate('Root');
+    navigation.navigate('Root', values);
   };
 
   const handleSaveCredentials = (currentUser, values) => {
@@ -119,7 +120,7 @@ const SignIn = ({ navigation }) => {
           text: 'No',
           style: 'cancel',
           onPress: () => {
-            navigation.navigate('Root');
+            handleSignIn(values);
           }
         },
       ],
@@ -165,19 +166,17 @@ const SignIn = ({ navigation }) => {
       retrieveSignInFunction(values.username, values.password)
         .then((currentUser) => {
           storeUserInformation(currentUser, values);
-          getData('currentUser').then((userCreds) => {
+          getData('currentUser').then(async (userCreds) => {
             // credentials stored do not match those entered through sign-in, overwrite
             if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
             || values.password !== userCreds.password) {
               // Store user organization
-              storeUserInformation(currentUser, values);
               handleSaveCredentials(currentUser, values);
             } else {
               storeUserInformation(currentUser);
-              handleSignIn(values, actions.resetForm());
+              await handleSignIn(values, actions.resetForm);
             }
           }, () => {
-            storeUserInformation(currentUser, values);
             handleSaveCredentials(currentUser, values);
           });
         }, (err) => {
@@ -185,12 +184,12 @@ const SignIn = ({ navigation }) => {
         });
     } else {
       // offline
-      getData('currentUser').then((userCreds) => {
+      getData('currentUser').then(async (userCreds) => {
         // username and password entered (or saved in creds) match the saved cred
         if (values.username === userCreds.username
           && values.password === userCreds.password) {
           // need some pincode verification
-          handleSignIn(values, actions.resetForm());
+          await handleSignIn(values, actions.resetForm);
         } else {
           // incorrect usernmae/password offline
           handleFailedAttempt();
