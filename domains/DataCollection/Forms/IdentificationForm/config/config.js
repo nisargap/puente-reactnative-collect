@@ -211,6 +211,12 @@ const configArray = [
     validation: false
   },
   {
+    label: 'identificationForm.photoAssessment',
+    fieldType: 'photo',
+    formikKey: 'photoFile',
+    value: ''
+  },
+  {
     label: 'identificationForm.household',
     fieldType: 'header',
     formikKey: 'none_household'
