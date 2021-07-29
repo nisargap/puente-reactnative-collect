@@ -13,7 +13,7 @@ export default function UseCameraRoll(
     (async () => {
       if (Platform.OS !== 'web') {
         await ImagePicker.requestMediaLibraryPermissionsAsync().then((status) => {
-          if (status !== 'granted') {
+          if (status.status !== 'granted') {
             // await Permissions.askAsync(Permissions.CAMERA_ROLL)
             alert('Sorry, we need camera roll permissions to make this work!'); // eslint-disable-line
           }
