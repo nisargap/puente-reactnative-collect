@@ -42,7 +42,7 @@ const IdentificationForm = ({
           initialValues={{}}
           onSubmit={async (values,) => {
             setSubmitting(true);
-            const photoFile = values.photoFile;
+            const { photoFile } = values;
 
             const formObject = values;
             const user = await getData('currentUser');
@@ -73,7 +73,7 @@ const IdentificationForm = ({
             const postParams = {
               parseClass: 'SurveyData',
               parseUser: user.objectId,
-              photoFile: photoFile,
+              photoFile,
               localObject: formObject
             };
             postIdentificationForm(postParams).then((surveyee) => {
