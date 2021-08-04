@@ -23,7 +23,7 @@ import { addSelectTextInputs, vitalsBloodPressue } from './utils';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
-  customForm
+  customForm, setCustomForm
 }) => {
   const [config, setConfig] = useState({});
   const [photoFile, setPhotoFile] = useState('State Photo String');
@@ -47,8 +47,21 @@ const SupplementaryForm = ({
     if (selectedForm === 'vitals') {
       setConfig(vitalsConfig);
     }
-    if (selectedForm === 'custom') setConfig(customForm);
+    if (selectedForm === 'custom') {
+      setConfig(customForm);
+    }
+    console.log("config updated")
   }, [selectedForm, config]);
+
+  const updateConfig = (config) => {
+    console.log("updating config")
+    setCustomForm(config)
+    setConfig(config);
+  }
+
+  useEffect(() => {
+    // console.log(config)
+  }, [config])
 
   return (
     <Formik
@@ -122,6 +135,10 @@ const SupplementaryForm = ({
                 data={result}
                 formikProps={formikProps}
                 customForm={config.customForm}
+                config={config}
+                setConfig={setConfig}
+                updateConfig={updateConfig}
+                setCustomForm={setCustomForm}
               />
             </View>
           ))}

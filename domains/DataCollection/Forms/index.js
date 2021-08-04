@@ -21,7 +21,7 @@ const Forms = (props) => {
     pinnedForms,
     surveyingUser, surveyingOrganization,
     surveyee, setSurveyee,
-    customForm, navigateToRoot
+    customForm, setCustomForm, navigateToRoot
   } = props;
 
   const [consent, setConsent] = useState(false);
@@ -60,6 +60,7 @@ const Forms = (props) => {
                 surveyingUser={surveyingUser}
                 surveyingOrganization={surveyingOrganization}
                 customForm={customForm}
+                setCustomForm={setCustomForm}
               />
             </View>
           </TouchableWithoutFeedback>
