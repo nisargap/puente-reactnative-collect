@@ -503,10 +503,10 @@ const configArray = {
         value: '13-18'
       },
       {
-        "label": "global.other",
-        "value": "other",
-        "text": true,
-        "textKey": "__numberofChildrenLivinginHouseUndertheAgeof5__other"
+        label: 'global.other',
+        value: 'other',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5__other'
       }
     ],
     validation: true
