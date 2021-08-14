@@ -42,16 +42,21 @@ const PaperInputPicker = ({
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
 
   useEffect(() => {
-    // number all questions in config (for looping ccapabilities)
+    numberQuestionsInConfig();
+    updateQuestionsToRepeat();
+  }, [numberedQestions]);
+
+  // number all questions in config (for looping ccapabilities)
+  const numberQuestionsInConfig = () => {
     const fieldsNumberedJson = {};
     config.fields.forEach((field, index) => {
       fieldsNumberedJson[index] = field;
     });
     setNumberedQuestions(fieldsNumberedJson);
-  }, []);
+  }
 
-  useEffect(() => {
-    // update the questions that will be repeated if the field type is loop
+  // update the questions that will be repeated if the field type is loop
+  const updateQuestionsToRepeat = () => {
     if (fieldType === 'loop') {
       Object.entries(numberedQestions).forEach(([key, value]) => {
         if (value.formikKey === formikKey) {
@@ -64,8 +69,8 @@ const PaperInputPicker = ({
           setQuestionsToRepeat(repeatQuestions);
         }
       });
-    }
-  }, [numberedQestions]);
+    } 
+  }
 
   // add another loop of questions in correct position in form (additionalQuestions)
   // update number of loops added (+1)
