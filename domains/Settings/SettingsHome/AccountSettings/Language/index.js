@@ -48,6 +48,14 @@ const Language = () => {
           <Button mode="outlined" onPress={() => { handleLanguage('es'); }}>{I18n.t('languagePicker.spanish')}</Button>
         )}
       </View>
+      <View style={styles.languageContainer}>
+        {language === 'hk' && (
+          <Button mode="contained">{I18n.t('languagePicker.creole')}</Button>
+        )}
+        {language !== 'hk' && (
+          <Button mode="outlined" onPress={() => { handleLanguage('hk'); }}>{I18n.t('languagePicker.creole')}</Button>
+        )}
+      </View>
     </View>
   );
 };
