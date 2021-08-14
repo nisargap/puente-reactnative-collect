@@ -23,7 +23,7 @@ import { addSelectTextInputs, vitalsBloodPressue } from './utils';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
-  customForm, setCustomForm
+  customForm
 }) => {
   const [config, setConfig] = useState({});
   const [photoFile, setPhotoFile] = useState('State Photo String');
@@ -78,7 +78,7 @@ const SupplementaryForm = ({
           parseClass: config.class,
           photoFile,
           localObject: formObjectUpdated,
-          loop: loopsAdded === 0 ? false : true
+          loop: loopsAdded !== 0
         };
 
         if (selectedForm === 'custom') {

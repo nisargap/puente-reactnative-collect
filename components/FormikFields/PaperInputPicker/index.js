@@ -1,5 +1,7 @@
+import _ from 'lodash';
 import { Spinner } from 'native-base';
 import * as React from 'react';
+import { useEffect } from 'react/cjs/react.development';
 import {
   Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
@@ -7,8 +9,6 @@ import {
   Button, Headline,
   TextInput,
 } from 'react-native-paper';
-import { useEffect } from 'react/cjs/react.development';
-import _ from 'lodash';
 
 import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';
@@ -37,36 +37,35 @@ const PaperInputPicker = ({
 
   const [location, setLocation] = React.useState({ latitude: 0, longitude: 0, altitude: 0 });
   const [locationLoading, setLocationLoading] = React.useState(false);
-  const [numberedQestions, setNumberedQuestions] = React.useState({})
+  const [numberedQestions, setNumberedQuestions] = React.useState({});
   const [questionsToRepeat, setQuestionsToRepeat] = React.useState([]);
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
 
   useEffect(() => {
     // number all questions in config (for looping ccapabilities)
-    let fieldsNumberedJson = {}
+    const fieldsNumberedJson = {};
     config.fields.forEach((field, index) => {
       fieldsNumberedJson[index] = field;
-    })
-    setNumberedQuestions(fieldsNumberedJson)
-  }, [])
+    });
+    setNumberedQuestions(fieldsNumberedJson);
+  }, []);
 
   useEffect(() => {
     // update the questions that will be repeated if the field type is loop
     if (fieldType === 'loop') {
       Object.entries(numberedQestions).forEach(([key, value]) => {
         if (value.formikKey === formikKey) {
-          let repeatQuestions = []
-          for (let i = key - numberQuestionsToRepeat; i <  key; i++) {
+          let repeatQuestions = [];
+          for (let i = key - numberQuestionsToRepeat; i < key; i += 1) {
             if (i >= 0) {
               repeatQuestions = repeatQuestions.concat(numberedQestions[i]);
             }
           }
           setQuestionsToRepeat(repeatQuestions);
         }
-      })
+      });
     }
-  }, [numberedQestions])
-
+  }, [numberedQestions]);
 
   // add another loop of questions in correct position in form (additionalQuestions)
   // update number of loops added (+1)
@@ -74,14 +73,14 @@ const PaperInputPicker = ({
     // updated formikKey to ensure uniqueness
     let updatedQuestions = [];
     questionsToRepeat.forEach((question) => {
-      let updatedQuestion = _.cloneDeep(question);
-      updatedQuestion['formikKey'] = `${updatedQuestion['formikKey']}__loop${loopsAdded}`;
+      const updatedQuestion = _.cloneDeep(question);
+      updatedQuestion.formikKey = `${updatedQuestion.formikKey}__loop${loopsAdded}`;
       updatedQuestions = updatedQuestions.concat(updatedQuestion);
-    })
+    });
 
     setAdditionalQuestions(additionalQuestions.concat(updatedQuestions));
-    setLoopsAdded(loopsAdded+1)
-  }
+    setLoopsAdded(loopsAdded + 1);
+  };
 
   const handleLocation = async () => {
     setLocationLoading(true);
@@ -552,15 +551,16 @@ const PaperInputPicker = ({
       )}
       {fieldType === 'loop' && (
         <View key={formikKey}>
-        {additionalQuestions !== undefined && additionalQuestions.length !== 0 && additionalQuestions.map((question) => (
-          <PaperInputPicker
-            data={question}
-            formikProps={formikProps}
-            customForm={customForm}
-            config={config}
-          />
-        ))}
-        <Button onPress={() => addLoop()}>Add Loop</Button>
+          {additionalQuestions !== undefined && additionalQuestions.length !== 0
+          && additionalQuestions.map((question) => (
+            <PaperInputPicker
+              data={question}
+              formikProps={formikProps}
+              customForm={customForm}
+              config={config}
+            />
+          ))}
+          <Button onPress={() => addLoop()}>Add Loop</Button>
         </View>
       )}
     </>
