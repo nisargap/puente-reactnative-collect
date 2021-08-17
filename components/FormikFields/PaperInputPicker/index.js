@@ -51,7 +51,7 @@ const PaperInputPicker = ({
     if (fieldType === 'loop') {
       updateQuestionsToRepeat();
     }
-  }, [numberedQestions])
+  }, [numberedQestions]);
 
   // number all questions in config (for looping ccapabilities)
   const numberQuestionsInConfig = () => {
@@ -60,7 +60,7 @@ const PaperInputPicker = ({
       fieldsNumberedJson[index] = field;
     });
     setNumberedQuestions(fieldsNumberedJson);
-  }
+  };
 
   // update the questions that will be repeated if the field type is loop
   const updateQuestionsToRepeat = () => {
@@ -75,7 +75,7 @@ const PaperInputPicker = ({
         setQuestionsToRepeat(repeatQuestions);
       }
     });
-  }
+  };
 
   // add another loop of questions in correct position in form (additionalQuestions)
   // update number of loops added (+1)
