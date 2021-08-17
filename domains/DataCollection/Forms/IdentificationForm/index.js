@@ -60,6 +60,7 @@ const IdentificationForm = ({
             formObject.searchIndex = [
               values.fname,
               values.lname,
+              values.nickname,
               values.communityname
             ].map((result)=>{
               if(result){
