@@ -132,7 +132,8 @@
     "household": "Casa",
     "subcounty": "Sub-condado",
     "region": "Región",
-    "country": "País"
+    "country": "País",
+    "photoAssessment": "Evaluación de fotos"
   },
   "environmentalHealth": {
     "name": "Formulario de salud ambiental",
@@ -289,8 +290,7 @@
     "hemoglobinLevels": "Niveles de hemoglobina",
     "hemoglobinA1c": "Hemoglobina de A1c",
     "gdL": "g/dL",
-    "pain": "Nivel de dolor",
-    "photoAssessment": "Evaluación de fotos"
+    "pain": "Nivel de dolor"
   },
   "supplementaryForms": {
     "attachResident": "Adjuntar una residente de la comunidad"

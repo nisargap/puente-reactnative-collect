@@ -53,6 +53,7 @@ const SignIn = ({ navigation }) => {
   const [user, setUser] = useState(null);
   const [language, setLanguage] = useState('');
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [forgotPassword, setForgotPassword] = useState(false);
 
@@ -165,6 +166,7 @@ const SignIn = ({ navigation }) => {
     if (connected) {
       retrieveSignInFunction(values.username, values.password)
         .then((currentUser) => {
+          setLoading(true);
           storeUserInformation(currentUser, values);
           getData('currentUser').then(async (userCreds) => {
             // credentials stored do not match those entered through sign-in, overwrite
@@ -174,14 +176,17 @@ const SignIn = ({ navigation }) => {
               handleSaveCredentials(currentUser, values);
             } else {
               storeUserInformation(currentUser);
+              
               await handleSignIn(values, actions.resetForm);
             }
           }, () => {
             handleSaveCredentials(currentUser, values);
           });
         }, (err) => {
+          setLoading(false);
           handleFailedAttempt(err);
-        });
+        },
+        setLoading(false));
     } else {
       // offline
       getData('currentUser').then(async (userCreds) => {
@@ -199,6 +204,7 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
+    
     <KeyboardAvoidingView
       enabled
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -211,11 +217,12 @@ const SignIn = ({ navigation }) => {
             <Formik
               initialValues={{ username: '', password: '' }}
               onSubmit={async (values, actions) => {
+                setLoading(true);
                 await checkOnlineStatus().then((connected) => {
                   signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
-                  actions.setSubmitting(false);
+                  setLoading(true);
                 }, 1000);
               }}
               validationSchema={validationSchema}
@@ -242,6 +249,7 @@ const SignIn = ({ navigation }) => {
                     secureTextEntry={!checked}
                     value={formikProps.values.password}
                   />
+                 
                   <View style={{ flexDirection: 'row' }}>
                     <View style={styles.container}>
                       <View style={styles.checkbox}>
@@ -261,8 +269,8 @@ const SignIn = ({ navigation }) => {
                       Forgot password?
                     </Button>
                   </View>
-                  {formikProps.isSubmitting ? (
-                    <ActivityIndicator />
+                  {loading ? (
+                   <ActivityIndicator />
                   ) : (
                     <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
                   )}
@@ -273,7 +281,7 @@ const SignIn = ({ navigation }) => {
                     setModalVisible={setModalVisible}
                     navigation={navigation}
                   />
-
+                  
                 </View>
               )}
             </Formik>
@@ -311,6 +319,7 @@ const SignIn = ({ navigation }) => {
       }
 
     </KeyboardAvoidingView>
+    
   );
 };
 
