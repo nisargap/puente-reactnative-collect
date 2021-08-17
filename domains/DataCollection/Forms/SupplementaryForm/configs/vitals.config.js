@@ -114,12 +114,6 @@ const configArray = {
       fieldType: 'input',
       validation: false
     },
-    {
-      label: 'vitals.photoAssessment',
-      fieldType: 'photo',
-      formikKey: 'envPhoto',
-      value: ''
-    }
   ]
 };
 
