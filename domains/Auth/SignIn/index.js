@@ -176,7 +176,7 @@ const SignIn = ({ navigation }) => {
               handleSaveCredentials(currentUser, values);
             } else {
               storeUserInformation(currentUser);
-              
+
               await handleSignIn(values, actions.resetForm);
             }
           }, () => {
@@ -204,7 +204,7 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
-    
+
     <KeyboardAvoidingView
       enabled
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -249,7 +249,7 @@ const SignIn = ({ navigation }) => {
                     secureTextEntry={!checked}
                     value={formikProps.values.password}
                   />
-                 
+
                   <View style={{ flexDirection: 'row' }}>
                     <View style={styles.container}>
                       <View style={styles.checkbox}>
@@ -270,7 +270,7 @@ const SignIn = ({ navigation }) => {
                     </Button>
                   </View>
                   {loading ? (
-                   <ActivityIndicator />
+                    <ActivityIndicator />
                   ) : (
                     <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
                   )}
@@ -281,7 +281,7 @@ const SignIn = ({ navigation }) => {
                     setModalVisible={setModalVisible}
                     navigation={navigation}
                   />
-                  
+
                 </View>
               )}
             </Formik>
@@ -319,7 +319,7 @@ const SignIn = ({ navigation }) => {
       }
 
     </KeyboardAvoidingView>
-    
+
   );
 };
 
