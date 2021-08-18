@@ -28,7 +28,6 @@ const IdentificationForm = ({
   }, []);
 
   const [inputs, setInputs] = useState({});
-  const [photoFile, setPhotoFile] = useState('State Photo String');
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
 
@@ -43,7 +42,7 @@ const IdentificationForm = ({
           initialValues={{}}
           onSubmit={async (values,) => {
             setSubmitting(true);
-            setPhotoFile('Submitted Photo String');
+            const { photoFile } = values;
 
             const formObject = values;
             const user = await getData('currentUser');
@@ -58,12 +57,17 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            formObject.searchIndex = `${values.fname || ''} ${values.lname || ''}`;
+            formObject.searchIndex = [
+              values.fname,
+              values.lname,
+              values.communityname
+            ].map((result)=>{
+              if(result){
+                return result.toLowerCase().trim()
+              }
+            });
 
-            // const photo = values.picture
-            // need to prune 'picture' key if using photofile
-
-            const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
+            const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
             valuesToPrune.forEach((value) => {
               delete formObject[value];
             });
@@ -80,7 +84,6 @@ const IdentificationForm = ({
               photoFile,
               localObject: formObject
             };
-
             postIdentificationForm(postParams).then((surveyee) => {
               setSurveyee(surveyee);
               submitAction();

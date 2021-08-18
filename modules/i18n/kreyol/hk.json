@@ -132,7 +132,8 @@
     "household": "Kay",
     "subcounty": "Sub-county",
     "region": "Rejyon an",
-    "country": "Peyi"
+    "country": "Peyi",
+    "photoAssessment": "Foto Evalyasyon"
   },
   "environmentalHealth": {
     "name": "Istwa sante anvironmantal",
@@ -325,8 +326,7 @@
     "hemoglobinLevels": "Nivo emoglobin",
     "hemoglobinA1c": "Emoglobin A1c (HbA1c)",
     "gdL": "g/dL",
-    "pain": "Doulè",
-    "photoAssessment": "Foto Evalyasyon"
+    "pain": "Doulè"
   },
   "supplementaryForms": {
     "attachResident": "Tache yon rezidan nan kominote a"
