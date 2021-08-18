@@ -165,7 +165,7 @@ const configArray = {
       },
       {
         label: 'environmentalHealth.bathroomAccess.None',
-        value: 'N'
+        value: 'None'
       },
       {
         label: 'global.other',
@@ -201,7 +201,7 @@ const configArray = {
     options: [
       {
         label: 'environmentalHealth.clinicAccess.Clinic',
-        value: 'Clinic/Medical_Center'
+        value: 'Clinic_Medical_Center'
       },
       {
         label: 'environmentalHealth.clinicAccess.Polyclinic',
@@ -213,7 +213,7 @@ const configArray = {
       },
       {
         label: 'environmentalHealth.clinicAccess.None',
-        value: 'N'
+        value: 'None'
       },
       {
         label: 'global.other',
@@ -274,18 +274,18 @@ const configArray = {
     options: [
       {
         label: 'global.yes',
-        value: 'Y'
+        value: 'Yes'
       },
       {
         label: 'global.no',
-        value: 'N'
+        value: 'No'
       }
     ],
     validation: false
   },
   {
     label: 'environmentalHealth.floorCondition.label',
-    formikKey: 'floorCondition',
+    formikKey: 'conditionoFloorinyourhouse',
     value: '',
     fieldType: 'select',
     options: [
@@ -496,11 +496,11 @@ const configArray = {
       },
       {
         label: 'environmentalHealth.numberChildrenUnder5.6_12',
-        value: '6-12'
+        value: '6_12'
       },
       {
         label: 'environmentalHealth.numberChildrenUnder5.13_18',
-        value: '13-18'
+        value: '13_18'
       },
       {
         label: 'global.other',
