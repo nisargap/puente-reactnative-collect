@@ -266,7 +266,7 @@ const SignIn = ({ navigation }) => {
                       <Text style={styles.passwordText}>{I18n.t('signIn.showPassword')}</Text>
                     </View>
                     <Button style={{ flex: 1 }} onPress={handleForgotPassword}>
-                      Forgot password?
+                      {I18n.t('signIn.forgotPassword.label')}
                     </Button>
                   </View>
                   {loading ? (
@@ -307,7 +307,7 @@ const SignIn = ({ navigation }) => {
             <View style={styles.termsContainer}>
               <Text style={styles.accountText}>{I18n.t('signIn.noAccount')}</Text>
               <Button mode="text" theme={theme} color="#3E81FD" onPress={handleSignUp} labelStyle={{ marginLeft: 5 }}>
-                Sign up!
+                {I18n.t('signIn.signUpLink')}
               </Button>
             </View>
             <View style={styles.termsContainer}>

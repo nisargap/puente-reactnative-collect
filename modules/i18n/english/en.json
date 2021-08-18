@@ -46,11 +46,12 @@
     "puente2020": "Puente 2020 |",
     "termsConditions": "Terms & Conditions",
     "forgotPassword": {
+      "label": "Forgot your Password?",
       "enterEmail": "Please enter your email to reset your password",
       "sendLink": "Send Reset Link",
       "noAccount": "Don't have an account?",
       "signUp": "Sign Up!",
-      "rememberPass": "Remember your Password?",
+      "rememberPass": "Remember Password?",
       "signIn": "Sign In",
       "resetSuccess": "Your password reset link has been sent to your email. Please Check your email to change your password.",
       "resetError": "There was an error sending the password reset link. Please ensure that you entered your email correctly. You can try again by clicking the button below. If you believe the email is correct, please contact your manager."

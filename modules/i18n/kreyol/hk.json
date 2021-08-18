@@ -36,16 +36,17 @@
     "usernameError": "Tantativ enskri echwe. \n nOu te ka eseye enskri ak yon non itilizatè (imèl / nimewo telefòn) ki te deja anrejistre ak yon lòt kont. \n nTanpri kontakte sipèvizè ou si ou kwè sa se yon erè."
   },
   "signIn": {
-    "username": "Andres elektronik or Phone Number",
+    "username": "Andres elektronik oswa nimewo telefòn",
     "password": "Modpas",
     "showPassword": "Montre modpas",
     "login": "ouvri sesyon an",
-    "signUpLink": "Pa gen yon kont, enskri!",
+    "signUpLink": "enskri!",
     "deleteCreds": "Efase kalifikasyon",
     "noAccount": "Ou pa gen yon kont?",
     "puente2020": "Puente 2020 |",
     "termsConditions": "Tèm ak Kondisyon",
     "forgotPassword": {
+      "label" : "ou bliye modpas?",
       "enterEmail": "Tanpri antre imèl ou a Reyajiste modpas ou",
       "sendLink": "Voye Reyajiste Link",
       "noAccount": "Ou pa gen yon kont?",

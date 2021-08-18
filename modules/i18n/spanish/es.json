@@ -46,6 +46,7 @@
     "puente2020": "Puente 2020 |",
     "termsConditions": "Términos y condiciones",
     "forgotPassword": {
+      "label": "¿olvidado tu contraseña?",
       "enterEmail": "Ingrese su correo electrónico para restablecer su contraseña",
       "sendLink": "Enviar enlace de restablecimiento",
       "noAccount": "¿No tienes una cuenta?",
