@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "11.8.3",
+    "version": "11.8.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,7 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "11.8.3",
+      "buildNumber": "11.8.4",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately."
       },
@@ -34,7 +34,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 410110803,
+      "versionCode": 410110804,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
