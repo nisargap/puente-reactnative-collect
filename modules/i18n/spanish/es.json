@@ -146,7 +146,14 @@
       "5_10": "5-10 años",
       "moreThan10": "10+ años"
     },
-    "biggestProblemComm": "¿Cuál es el mayor problema de la comunidad?",
+    "biggestProblemComm":{
+      "label": "¿Cuál es el mayor problema de la comunidad?",
+      "Water": "El Agua",
+      "Trash": "La Basura",
+      "Street": "La Calle",
+      "AccessToBathrooms": "El Acceso a Baños",
+      "HouseArrangement": "El Arreglo de casas"
+    },
     "waterAccess": {
       "label": "Acceso al agua",
       "everyday": "Todos los días",
@@ -162,25 +169,49 @@
       "tap": "Llave",
       "filtered": "Filtrada"
     },
-    "bathroomAccess": "Acceso al baño",
+    "bathroomAccess": {
+      "label": "Acceso al baño",
+      "Bathroom": "El baño",
+      "Latrine": "La letrina",
+      "None": "Ninguno"
+    },
     "latrineAccess": "Acceso a letrinas",
-    "clinicAccess": "Acceso a la clínica",
+    "clinicAccess": {
+      "label":"Acceso a la clínica",
+      "Clinic": "Clinica/centro médico",
+      "Polyclinic": "Policlínica",
+      "Hospital": "Hospital",
+      "None": "Ninguno"
+    },
     "medicalProblemsGo": "¿A dónde vas por problemas médicos?",
-    "dentalProblemsGo": "¿A dónde vas por problemas dentales?",
-    "timesPerWeekTrash": "¿Cuántas veces por semana que se recogen la basura",
+    "dentalAccess": "¿A dónde vas por problemas dentales?",
+    "timesPerWeekTrash": {
+      "label": "Veces por semana que se recolecta la basura",
+      "Never": "Nunca",
+      "OnceAWeek": "1 vez a la semana",
+      "TwiceAWeek": "2 veces a la semana",
+      "OnceOrTwiceAMonth": "1-2 veces al mes"
+    },
     "trashBetweenPickups": "¿Dónde deja su basura al momento de ser recogida?",
     "houseOwnership": "¿Esta casa es propia?",
     "floorCondition": {
       "label": "¿Estado del suelo de su casa?",
-      "dirtFloorPoor": "Piso de tierra",
-      "dirtFloorWork": "Condiciones de trabajo del piso de tierra",
-      "cementPoor": "Piso de cemento en mal estado",
-      "cementWorking": "Piso de cemento en muy buen estado"
+      "Poor": "Pobre",
+      "Working": "Laboral",
+      "Excellent": "Excelente"
+    },
+    "floorMaterial": {
+      "label": "¿Material de piso en tu casa?",
+      "Dirt": "Tierra",
+      "Cement": "Cemento",
+      "Wood": "Madera",
+      "Ceramic": "Cerámico"
     },
     "roofCondition": {
-      "label": "¿Condición del techo de su casa?",
-      "normal": "Condición normal",
-      "bad": "Condición mala"
+      "label": "¿Estado del techo de su casa?",
+      "Poor": "Pobre",
+      "Working": "Laboral",
+      "Excellent": "Excelente"
     },
     "typeStove": {
       "label": "Tipo de estufa",
@@ -191,9 +222,9 @@
     "houseMaterials": {
       "label": "¿De qué material está hecha tu casa?",
       "zinc": "Zinc",
-      "wood": "madera",
+      "wood": "Madera",
       "partBlock_partWood": "Parte bloque, parte madera",
-      "block": "Block",
+      "block": "Cuadra",
       "brick": "Ladrillo",
       "clay": " Arcilla"
     },
@@ -211,7 +242,12 @@
       "noAssistance": "Sin ayuda"
     },
     "numberIndividualsHouse": "Número de personas que viven en la casa",
-    "numberChildrenUnder5": "Número de niños menores de 5 años que viven en esta casa"
+    "numberChildrenUnder5": {
+      "label": "Número de niños menores de 5 años que viven en esta casa",
+      "under_5":"Bajo 5",
+      "6_12": "6-12",
+      "13_18": "13-18"
+    }
   },
   "evaluationMedical": {
     "name": "Formulario de evaluación médica",
@@ -331,7 +367,7 @@
   "components": {
     "autofill": {
       "placeholder": "Entra",
-      "placeholder_end": "aquí"
+      "placeholder_end": "Aquí"
     }
   },
   "cards": {
@@ -348,7 +384,7 @@
     "searchIndividual": "Buscar individuo",
     "typeHere": "Escriba aquí...",
     "residentCard": {
-      "city": "City",
+      "city": "Ciudad",
       "community": "Comunidad"
     },
     "residentPage": {
@@ -472,7 +508,7 @@
     "feedback": "Contáctenos / Comentarios",
     "rateApp": "Califica nuestra aplicación",
     "helpCenter": "Centro de ayuda",
-    "back": "atrás"
+    "back": "Atrás"
   },
   "feedback": {
     "feedback": "Realimentación",
