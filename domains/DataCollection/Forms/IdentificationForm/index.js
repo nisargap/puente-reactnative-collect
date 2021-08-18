@@ -60,12 +60,13 @@ const IdentificationForm = ({
             formObject.searchIndex = [
               values.fname,
               values.lname,
+              values.nickname,
               values.communityname
-            ].map((result)=>{
-              if(result){
-                return result.toLowerCase().trim()
-              }
-            });
+            ]
+              .filter((result) => result)
+              .map((result) => result.toLowerCase().trim());
+
+            formObject.fullTextSearchIndex = formObject.searchIndex.join(' ');
 
             const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
             valuesToPrune.forEach((value) => {
