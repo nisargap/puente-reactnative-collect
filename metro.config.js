@@ -1,6 +1,6 @@
-import { getDefaultConfig } from '@expo/metro-config';
+const { getDefaultConfig } = require('@expo/metro-config');
 
-export default (async () => {
+module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts }
   } = await getDefaultConfig(__dirname);
