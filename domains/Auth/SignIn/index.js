@@ -176,17 +176,17 @@ const SignIn = ({ navigation }) => {
             if (userCreds === null || userCreds.credentials.store === 'No' || values.username !== userCreds.credentials.username
             || values.password !== userCreds.credentials.password) {
               // ask user to store credentials
-              setLoading(false)
+              setLoading(false);
               handleSaveCredentials(currentUser, values);
             } else {
               // store
-              setLoading(false)
+              setLoading(false);
               storeUserInformation(currentUser);
               // go to root
               await handleSignIn(values, actions.resetForm);
             }
           }, () => {
-            setLoading(false)
+            setLoading(false);
             handleSaveCredentials(currentUser, values);
           });
           // setLoading(false);
@@ -202,11 +202,11 @@ const SignIn = ({ navigation }) => {
           && values.password === userCreds.credentials.password) {
           // need some pincode verification
           await handleSignIn(values, actions.resetForm);
-          setLoading(false)
+          setLoading(false);
         } else {
           // incorrect usernmae/password offline
           handleFailedAttempt();
-          setLoading(false)
+          setLoading(false);
         }
       });
     }
@@ -231,7 +231,6 @@ const SignIn = ({ navigation }) => {
                   signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
-                  console.log("timepout false")
                   setLoading(false);
                 }, 5000);
               }}
