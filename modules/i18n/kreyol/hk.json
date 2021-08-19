@@ -146,7 +146,14 @@
       "5_10": "5-10 an",
       "moreThan10": "10+ an"
     },
-    "biggestProblemComm": "Pigro problem zon nan",
+    "biggestProblemComm": {
+      "label": "Pigro problem zon nan",
+      "Water": "Dlo",
+      "Trash": "Fatra",
+      "Street": "Lari",
+      "AccessToBathrooms": "Aksè nan twalèt",
+      "HouseArrangement": "Aranjman kay la"
+    },
     "waterAccess": {
       "label": "Akse ak dlo",
       "everyday": "Chakjou",
@@ -162,25 +169,49 @@
       "tap": "Tiyo",
       "filtered": "Filtre"
     },
-    "bathroomAccess": "Aksè nan yon twalèt?",
+    "bathroomAccess": { 
+      "label": "Aksè nan yon twalèt?",
+      "Bathroom": "Twalèt",
+      "Latrine": "Latrin",
+      "None": "Okenn"
+    },
     "latrineAccess": "Aksè gen aksè nan yon latrin?",
-    "clinicAccess": "Ou gen aksè ak yon klinik",
+    "clinicAccess": {
+      "label": "Ou gen aksè ak yon klinik",
+      "Clinic": "Klinik / sant medikal",
+      "Polyclinic": "Poliklinik",
+      "Hospital": "Lopital",
+      "None": "Okenn"
+    },
     "medicalProblemsGo": "Lew gen problem dokè ki kote wale?",
-    "dentalProblemsGo": "Lew gen problem dan ki kote wale?",
-    "timesPerWeekTrash": "Konbyen fwa yo ranmase fatra pa semèn",
+    "dentalAccess": "Lew gen problem dan ki kote wale?",
+    "timesPerWeekTrash": {
+      "label": "Konbyen fwa yo ranmase fatra pa semèn",
+      "Never": "Pa janm",
+      "OnceAWeek": "Yon fwa pa semèn",
+      "TwiceAWeek": "Defwa pa semèn",
+      "OnceOrTwiceAMonth": "Yon fwa oswa de fwa nan yon mwa"
+    },
     "trashBetweenPickups": "Ki kote roun yo jete fatra?",
     "houseOwnership": "Ou se mèt kaysaa?",
     "floorCondition": {
       "label": "Kijan atè a fèt?",
-      "dirtFloorPoor": "Etaj te fè nan pousyè tè Mal kondisyon",
-      "dirtFloorWork": "Etaj te fè nan pousyè tè Kondisyon travay",
-      "cementPoor": "Etaj ki fèt ak siman Mal kondisyon",
-      "cementWorking": "Etaj ki fèt ak siman Kondisyon travay"
+      "Poor": "Pòv",
+      "Working": "Travay",
+      "Excellent": "Ekselan"
     },
     "roofCondition": {
       "label": "Kijan anlè kay la fèt?",
-      "normal": "Kondisyon nòmal",
-      "bad": "Move kondisyon"
+      "Poor": "Pòv",
+      "Working": "Travay",
+      "Excellent": "Ekselan"
+    },
+    "floorMaterial": {
+      "label": "Materyèl nan etaj nan kay ou a?",
+      "Dirt": "Pousyè tè",
+      "Cement": "Cement",
+      "Wood": "Bwa",
+      "Ceramic": "Seramik"
     },
     "typeStove": {
       "label": "Kalite tèt recho",
@@ -211,7 +242,12 @@
       "noAssistance": "Pa gen asistans"
     },
     "numberIndividualsHouse": "Kantite moun k ap viv nan kay la",
-    "numberChildrenUnder5": "Kantite timoun k ap viv nan kay sa a ki poko gen laj 5 an"
+    "numberChildrenUnder5": {
+      "label": "Kantite timoun k ap viv nan kay sa a ki poko gen laj 5 an",
+      "under_5":"Mwens pase 5",
+      "6_12": "6-12",
+      "13_18": "13-18"
+    }
   },
   "evaluationMedical": {
     "name": "Evalyasyon Medikal",
