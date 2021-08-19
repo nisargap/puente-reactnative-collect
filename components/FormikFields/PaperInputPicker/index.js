@@ -68,6 +68,7 @@ const PaperInputPicker = ({
       if (value.formikKey === formikKey) {
         let repeatQuestions = [];
         for (let i = key - numberQuestionsToRepeat; i < key; i += 1) {
+          // ensure question does not excceed the first question
           if (i >= 0) {
             repeatQuestions = repeatQuestions.concat(numberedQestions[i]);
           }
@@ -568,9 +569,11 @@ const PaperInputPicker = ({
               formikProps={formikProps}
               customForm={customForm}
               config={config}
+              loopsAdded={loopsAdded}
+              setLoopsAdded={setLoopsAdded}
             />
           ))}
-          <Button onPress={() => addLoop()}>Add Loop</Button>
+          <Button onPress={() => addLoop()}>+ Additional {translatedLabel}</Button>
         </View>
       )}
     </>
