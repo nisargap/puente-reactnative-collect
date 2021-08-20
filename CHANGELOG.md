@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.9.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.8.4...v11.9.0) (2021-08-20)
+
+
+### Bug fixes
+
+* Disable the ability to submit asset supplementary form without anchor asset core form ([9a43a30](https://github.com/hopetambala/puente-reactnative-collect/commit/9a43a301086e5b29af9cba9ce29fd96d103452eb))
+* offline sign in - credentials object mutated ([847e036](https://github.com/hopetambala/puente-reactnative-collect/commit/847e0365f2ad680c31f3917a617f27b553ce39a9))
+
 ### [11.8.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.8.3...v11.8.4) (2021-08-18)
 
 
