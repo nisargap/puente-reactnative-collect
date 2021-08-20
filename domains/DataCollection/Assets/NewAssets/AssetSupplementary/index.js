@@ -9,6 +9,7 @@ import PaperInputPicker from '../../../../../components/FormikFields/PaperInputP
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
+import { theme } from '../../../../../modules/theme';
 import { isEmpty } from '../../../../../modules/utils';
 import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
@@ -20,7 +21,13 @@ const AssetSupplementary = ({
   selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser
 }) => {
   const [selectedForm, setSelectedForm] = useState();
+  const [submitting, setSubmitting] = useState(false);
   const [photoFile, setPhotoFile] = useState('State Photo String');
+
+  const validForm = () => {
+    if (Object.keys(selectedAsset).length > 0 && selectedForm?.objectId) return true;
+    return false;
+  };
 
   return (
     <ScrollView>
@@ -28,6 +35,7 @@ const AssetSupplementary = ({
         initialValues={{}}
         onSubmit={async (values, actions) => {
           setPhotoFile('Submitted Photo String');
+          setSubmitting(true);
 
           const formObject = values;
           const user = await getData('currentUser');
@@ -64,7 +72,7 @@ const AssetSupplementary = ({
 
           const submitAction = () => {
             setTimeout(() => {
-              actions.setSubmitting(false);
+              setSubmitting(false);
             }, 1000);
             setSelectedForm({});
           };
@@ -74,7 +82,10 @@ const AssetSupplementary = ({
               submitAction();
             })
             .then(() => actions.resetForm())
-            .catch((e) => console.log(e)); //eslint-disable-line
+            .catch((e) => {
+              console.log(e) //eslint-disable-line
+              setSubmitting(false);
+            });
         }}
       >
         {(formikProps) => (
@@ -107,14 +118,18 @@ const AssetSupplementary = ({
                     />
                   </View>
                 ))}
-                {formikProps.isSubmitting ? (
-                  <ActivityIndicator />
+                {submitting ? (
+                  <ActivityIndicator
+                    size="large"
+                    color={theme.colors.primary}
+                  />
                 ) : (
                   <PaperButton
-                    style={{ backgroundColor: selectedForm?.objectId ? 'green' : 'red' }}
+                    disabled={!validForm()}
+                    style={{ backgroundColor: validForm() ? 'green' : '#f75231' }}
                     onPressEvent={() => formikProps.handleSubmit()}
-                    icon={selectedForm?.objectId ? 'plus' : 'alert-octagon'}
-                    buttonText={selectedForm?.objectId ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
+                    icon={validForm() ? 'plus' : 'alert-octagon'}
+                    buttonText={validForm() ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
                   />
                 )}
               </View>

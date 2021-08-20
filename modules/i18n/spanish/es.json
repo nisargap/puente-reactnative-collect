@@ -332,8 +332,8 @@
     "attachResident": "Adjuntar una residente de la comunidad"
   },
   "assetForms": {
-    "attachForm": "Adjuntar una forma al activo",
-    "createAsset": "Create an Asset"
+    "attachForm": "Adjuntar una forma y un activo",
+    "createAsset": "Crear un activo"
   },
   "forms": {
     "successfullySubmitted": "Formulario entregado satisfactoriamente",
@@ -352,10 +352,10 @@
   },
   "dataCollection": {
     "newRecord": "Nuevo record",
-    "newAsset": "New Asset",
+    "newAsset": "Nuevo activo",
     "findRecord": "Buscar registro",
     "viewAll": "Ver todos los formularios",
-    "viewAssets": "View All Assets",
+    "viewAssets": "Ver todos los activo",
     "back": "Atrás"
   },
   "home": {

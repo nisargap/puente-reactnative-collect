@@ -332,7 +332,7 @@
     "attachResident": "Attach a Community Resident"
   },
   "assetForms": {
-    "attachForm": "Attach a Form to the Asset",
+    "attachForm": "Attach a form and an asset",
     "createAsset": "Create an Asset"
   },
   "forms": {
