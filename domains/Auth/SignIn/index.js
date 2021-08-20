@@ -232,7 +232,7 @@ const SignIn = ({ navigation }) => {
                 });
                 setTimeout(() => {
                   setLoading(false);
-                }, 5000);
+                }, 3000);
               }}
               validationSchema={validationSchema}
               validateOnBlur={false}
