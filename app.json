@@ -25,7 +25,8 @@
       "supportsTablet": true,
       "buildNumber": "11.9.0",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately."
+        "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately.",
+        "NSCameraUsageDescription":"This app uses photos to identify residents more accurately."
       },
       "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696",
       "bundleIdentifier": "io.ionic.starter1270348"
