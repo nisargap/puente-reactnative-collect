@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "11.9.1",
+    "version": "11.9.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,11 +23,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "11.9.1",
+      "buildNumber": "11.9.2",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately.",
         "NSCameraUsageDescription": "This app uses photos to identify residents more accurately.",
-        "NSPhotoLibraryUsageDescription":"This app uses the photo gallery to let you choose photos to identify residents more accurately."
+        "NSPhotoLibraryUsageDescription": "This app uses the photo gallery to let you choose photos to identify residents more accurately."
       },
       "appStoreUrl": "https://apps.apple.com/us/app/puente-collect/id1362371696",
       "bundleIdentifier": "io.ionic.starter1270348"
@@ -36,7 +36,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 410110901,
+      "versionCode": 410110902,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
