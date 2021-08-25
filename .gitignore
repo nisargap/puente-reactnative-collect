@@ -15,7 +15,6 @@ web-build/
 # macOS
 .DS_Store*
 .env*
-# environment.js
 scripts/dynamic-env/app.secrets.json
 scripts/update-version/app.secrets.json
 app.generated.json
