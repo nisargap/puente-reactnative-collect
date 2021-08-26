@@ -92,14 +92,15 @@ const PaperInputPicker = ({
 
     setAdditionalQuestions(additionalQuestions.concat(updatedQuestions));
     setLoopsAdded(loopsAdded + 1);
-    setIndividualLoopsAdded(individualLoopsAdded + 1)
+    setIndividualLoopsAdded(individualLoopsAdded + 1);
   };
 
   const removeLoop = () => {
     setLoopsAdded(loopsAdded - 1);
-    setIndividualLoopsAdded(individualLoopsAdded - 1)
-    setAdditionalQuestions(additionalQuestions.slice(0,additionalQuestions.length - numberQuestionsToRepeat));
-  }
+    setIndividualLoopsAdded(individualLoopsAdded - 1);
+    setAdditionalQuestions(additionalQuestions.slice(0,
+      additionalQuestions.length - numberQuestionsToRepeat));
+  };
 
   const handleLocation = async () => {
     setLocationLoading(true);
@@ -581,9 +582,15 @@ const PaperInputPicker = ({
               setLoopsAdded={setLoopsAdded}
             />
           ))}
-          <Button onPress={() => addLoop()}>Add Additional {translatedLabel}</Button>
-          {loopsAdded !== 0 && (
-            <Button onPress={() => removeLoop()}>Remove Previous {translatedLabel}</Button>
+          <Button onPress={() => addLoop()}>
+            Add Additional
+            {translatedLabel}
+          </Button>
+          {individualLoopsAdded !== 0 && (
+            <Button onPress={() => removeLoop()}>
+              Remove Previous
+              {translatedLabel}
+            </Button>
           )}
         </View>
       )}
