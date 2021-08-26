@@ -40,6 +40,7 @@ const PaperInputPicker = ({
   const [numberedQestions, setNumberedQuestions] = React.useState({});
   const [questionsToRepeat, setQuestionsToRepeat] = React.useState([]);
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
+  const [individualLoopsAdded, setIndividualLoopsAdded] = React.useState(0);
 
   useEffect(() => {
     if (fieldType === 'loop') {
@@ -85,13 +86,20 @@ const PaperInputPicker = ({
     let updatedQuestions = [];
     questionsToRepeat.forEach((question) => {
       const updatedQuestion = _.cloneDeep(question);
-      updatedQuestion.formikKey = `${updatedQuestion.formikKey}__loop${loopsAdded}`;
+      updatedQuestion.formikKey = `${updatedQuestion.formikKey}__loop${individualLoopsAdded}`;
       updatedQuestions = updatedQuestions.concat(updatedQuestion);
     });
 
     setAdditionalQuestions(additionalQuestions.concat(updatedQuestions));
     setLoopsAdded(loopsAdded + 1);
+    setIndividualLoopsAdded(individualLoopsAdded + 1)
   };
+
+  const removeLoop = () => {
+    setLoopsAdded(loopsAdded - 1);
+    setIndividualLoopsAdded(individualLoopsAdded - 1)
+    setAdditionalQuestions(additionalQuestions.slice(0,additionalQuestions.length - numberQuestionsToRepeat));
+  }
 
   const handleLocation = async () => {
     setLocationLoading(true);
@@ -573,7 +581,10 @@ const PaperInputPicker = ({
               setLoopsAdded={setLoopsAdded}
             />
           ))}
-          <Button onPress={() => addLoop()}>+ Additional {translatedLabel}</Button>
+          <Button onPress={() => addLoop()}>Add Additional {translatedLabel}</Button>
+          {loopsAdded !== 0 && (
+            <Button onPress={() => removeLoop()}>Remove Previous {translatedLabel}</Button>
+          )}
         </View>
       )}
     </>
