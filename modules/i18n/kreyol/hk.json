@@ -486,7 +486,9 @@
   "paperButton": {
     "getLocation": "Jwenn Kote",
     "getLocationAgain": "Jwenn Kote Ankò",
-    "takePhoto": "Pran foto"
+    "takePhoto": "Pran foto",
+    "addAdditional": "Add Lòt ",
+    "removePrevious": "Retire Previous "
   },
   "bottomTab":{
     "dataCollection": "Done Koleksyon"

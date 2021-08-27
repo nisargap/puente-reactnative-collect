@@ -486,7 +486,9 @@
   "paperButton": {
     "getLocation": "Get Location",
     "getLocationAgain": "Get Location Again",
-    "takePhoto": "Take Photo"
+    "takePhoto": "Take Photo",
+    "addAdditional": "Add Additional ",
+    "removePrevious": "Remove Previous "
   },
   "bottomTab":{
     "dataCollection": "Data Collection"

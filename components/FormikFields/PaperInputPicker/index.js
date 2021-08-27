@@ -583,13 +583,11 @@ const PaperInputPicker = ({
             />
           ))}
           <Button onPress={() => addLoop()}>
-            Add Additional
-            {translatedLabel}
+            {I18n.t('paperButton.addAdditional')}{translatedLabel}
           </Button>
           {individualLoopsAdded !== 0 && (
             <Button onPress={() => removeLoop()}>
-              Remove Previous
-              {translatedLabel}
+              {I18n.t('paperButton.removePrevious')}{translatedLabel}
             </Button>
           )}
         </View>
