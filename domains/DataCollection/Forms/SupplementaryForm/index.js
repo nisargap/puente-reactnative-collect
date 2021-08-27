@@ -104,8 +104,7 @@ const SupplementaryForm = ({
 
         postSupplementaryForm(postParams).then(() => {
           submitAction();
-        }, (error) => {
-          console.log(error)
+        }, () => {
           // perhaps an alert to let the user know there was an error
           setSubmitting(false);
         });
