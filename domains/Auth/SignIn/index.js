@@ -163,41 +163,50 @@ const SignIn = ({ navigation }) => {
   };
 
   const signInAndStore = (connected, values, actions) => {
+    setLoading(true);
     if (connected) {
+      // stores credentials for offline sign in, but does not offer passwordless entry
       retrieveSignInFunction(values.username, values.password)
         .then((currentUser) => {
-          setLoading(true);
+          // always sets crenetials.store == 'No'
           storeUserInformation(currentUser, values);
           getData('currentUser').then(async (userCreds) => {
             // credentials stored do not match those entered through sign-in, overwrite
-            if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
-            || values.password !== userCreds.password) {
-              // Store user organization
+            // always runs
+            if (userCreds === null || userCreds.credentials.store === 'No' || values.username !== userCreds.credentials.username
+            || values.password !== userCreds.credentials.password) {
+              // ask user to store credentials
+              setLoading(false);
               handleSaveCredentials(currentUser, values);
             } else {
+              // store
+              setLoading(false);
               storeUserInformation(currentUser);
-
+              // go to root
               await handleSignIn(values, actions.resetForm);
             }
           }, () => {
+            setLoading(false);
             handleSaveCredentials(currentUser, values);
           });
+          // setLoading(false);
         }, (err) => {
           setLoading(false);
           handleFailedAttempt(err);
-        },
-        setLoading(false));
+        });
     } else {
       // offline
       getData('currentUser').then(async (userCreds) => {
         // username and password entered (or saved in creds) match the saved cred
-        if (values.username === userCreds.username
-          && values.password === userCreds.password) {
+        if (values.username === userCreds.credentials.username
+          && values.password === userCreds.credentials.password) {
           // need some pincode verification
           await handleSignIn(values, actions.resetForm);
+          setLoading(false);
         } else {
           // incorrect usernmae/password offline
           handleFailedAttempt();
+          setLoading(false);
         }
       });
     }
@@ -222,8 +231,8 @@ const SignIn = ({ navigation }) => {
                   signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
-                  setLoading(true);
-                }, 1000);
+                  setLoading(false);
+                }, 3000);
               }}
               validationSchema={validationSchema}
               validateOnBlur={false}
