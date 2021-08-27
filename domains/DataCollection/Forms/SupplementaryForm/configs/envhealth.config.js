@@ -62,7 +62,7 @@ const configArray = {
   },
   {
     label: 'environmentalHealth.biggestProblemComm.label',
-    formikKey: 'biggestproblemofcommunity',
+    formikKey: 'biggestproblemofcommunity_v2',
     value: '',
     fieldType: 'selectMulti',
     options: [
@@ -83,14 +83,14 @@ const configArray = {
         value: 'AccessToBathrooms'
       },
       {
-        label: 'environmentalHealth.biggestProblemComm.HouseArrangement',
-        value: 'HouseArrangement'
+        label: 'environmentalHealth.biggestProblemComm.HouseRepairs',
+        value: 'HouseRepairs'
       },
       {
         label: 'global.other',
         value: 'other',
         text: true,
-        textKey: '__biggestproblemofcommunity__other'
+        textKey: '__biggestproblemofcommunity_v2__other'
       }
     ],
     validation: false
@@ -151,7 +151,7 @@ const configArray = {
   },
   {
     label: 'environmentalHealth.bathroomAccess.label',
-    formikKey: 'bathroomAccess',
+    formikKey: 'bathroomAccess_v2',
     value: '',
     fieldType: 'selectMulti',
     options: [
@@ -171,7 +171,7 @@ const configArray = {
         label: 'global.other',
         value: 'other',
         text: true,
-        textKey: '__bathroomAccess__other'
+        textKey: '__bathroomAccess_v2__other'
       }
     ],
     validation: false
@@ -195,7 +195,7 @@ const configArray = {
   },
   {
     label: 'environmentalHealth.clinicAccess.label',
-    formikKey: 'clinicAccess',
+    formikKey: 'clinicAccess_v2',
     value: '',
     fieldType: 'selectMulti',
     options: [
@@ -219,7 +219,7 @@ const configArray = {
         label: 'global.other',
         value: 'other',
         text: true,
-        textKey: '__clinicAccess__other'
+        textKey: '__clinicAccess_v2__other'
       }
     ],
     validation: false
@@ -486,27 +486,30 @@ const configArray = {
   },
   {
     label: 'environmentalHealth.numberChildrenUnder5.label',
-    formikKey: 'numberofChildrenLivinginHouseUndertheAgeof5',
+    formikKey: 'numberofChildrenLivinginHouseUndertheAgeof5_v2',
     value: '',
     fieldType: 'selectMulti',
     options: [
       {
         label: 'environmentalHealth.numberChildrenUnder5.under_5',
-        value: 'under_5'
+        value: 'under_5',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__under_5',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.under_5_textQuestion'
       },
       {
         label: 'environmentalHealth.numberChildrenUnder5.6_12',
-        value: '6_12'
+        value: '6_12',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__6_12',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.6_12_textQuestion'
       },
       {
         label: 'environmentalHealth.numberChildrenUnder5.13_18',
-        value: '13_18'
-      },
-      {
-        label: 'global.other',
-        value: 'other',
+        value: '13_18',
         text: true,
-        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5__other'
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__13_18',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.13_18_textQuestion'
       }
     ],
     validation: true
