@@ -152,7 +152,7 @@
       "Trash": "Fatra",
       "Street": "Lari",
       "AccessToBathrooms": "Aksè nan twalèt",
-      "HouseArrangement": "Aranjman kay la"
+      "HouseRepairs": "Reparasyon kay"
     },
     "waterAccess": {
       "label": "Akse ak dlo",
@@ -184,7 +184,7 @@
       "None": "Okenn"
     },
     "medicalProblemsGo": "Lew gen problem dokè ki kote wale?",
-    "dentalAccess": "Lew gen problem dan ki kote wale?",
+    "dentalAccess": "Èske ou gen aksè a yon dantis?",
     "timesPerWeekTrash": {
       "label": "Konbyen fwa yo ranmase fatra pa semèn",
       "Never": "Pa janm",
@@ -246,7 +246,10 @@
       "label": "Kantite timoun k ap viv nan kay sa a ki poko gen laj 5 an",
       "under_5":"Mwens pase 5",
       "6_12": "6-12",
-      "13_18": "13-18"
+      "13_18": "13-18",
+      "under_5_textQuestion": "Konbyen timoun ki poko gen 5 an?",
+      "6_12_textQuestion": "Konbyen timoun ki gen laj ant 6 - 12?",
+      "13_18_textQuestion": "Konbyen timoun ki gen laj 13 - 18?"
     }
   },
   "evaluationMedical": {

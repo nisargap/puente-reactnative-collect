@@ -152,7 +152,7 @@
       "Trash": "Trash",
       "Street": "Street",
       "AccessToBathrooms": "Access to Bathrooms",
-      "HouseArrangement": "House Arrangement"
+      "HouseRepairs": "House Repairs"
     },
     "waterAccess": {
       "label": "Water Access",
@@ -184,7 +184,7 @@
       "None": "None"
     },
     "medicalProblemsGo": "Where do you go for medical problems?",
-    "dentalAccess": "Where do you go for dental problems?",
+    "dentalAccess": "Do you have access to a dentist?",
     "timesPerWeekTrash": {
       "label": "Times per Week Trash is Collected",
       "Never": "Never",
@@ -243,10 +243,13 @@
     },
     "numberIndividualsHouse": "Number of Individuals Living in the House",
     "numberChildrenUnder5": {
-      "label": "Number of children living in this House under age of 5",
+      "label": "Are there any children living in the house in the following age groups?",
       "under_5":"Less than 5",
       "6_12": "6-12",
-      "13_18": "13-18"
+      "13_18": "13-18",
+      "under_5_textQuestion": "How many children under the age of 5?",
+      "6_12_textQuestion": "How many children between the ages of 6 - 12?",
+      "13_18_textQuestion": "How many children between the ages of 13 - 18?"
     }
   },
   "evaluationMedical": {

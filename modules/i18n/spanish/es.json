@@ -152,7 +152,7 @@
       "Trash": "La Basura",
       "Street": "La Calle",
       "AccessToBathrooms": "El Acceso a Baños",
-      "HouseArrangement": "El Arreglo de casas"
+      "HouseRepairs": "Reparaciones de la casa"
     },
     "waterAccess": {
       "label": "Acceso al agua",
@@ -184,7 +184,7 @@
       "None": "Ninguno"
     },
     "medicalProblemsGo": "¿A dónde vas por problemas médicos?",
-    "dentalAccess": "¿A dónde vas por problemas dentales?",
+    "dentalAccess": "¿Tienes acceso a un dentista?",
     "timesPerWeekTrash": {
       "label": "Veces por semana que se recolecta la basura",
       "Never": "Nunca",
@@ -246,7 +246,10 @@
       "label": "Número de niños menores de 5 años que viven en esta casa",
       "under_5":"Bajo 5",
       "6_12": "6-12",
-      "13_18": "13-18"
+      "13_18": "13-18",
+      "under_5_textQuestion": "¿Cuántos niños menores de 5 años?",
+      "6_12_textQuestion": "¿Cuántos niños entre las edades de 6 a 12 años?",
+      "13_18_textQuestion": "¿Cuántos niños entre las edades de 13 a 18 años?"
     }
   },
   "evaluationMedical": {
