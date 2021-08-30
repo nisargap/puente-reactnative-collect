@@ -10,6 +10,7 @@ import { getData } from '../../../modules/async-storage';
 import { theme } from '../../../modules/theme';
 import { countService } from '../../../services/parse/crud';
 import styles from '../index.styles';
+import I18n from 'i18n-js';
 
 const FormCounts = ({ setShowCounts }) => {
   const [surveyCount, setSurveyCount] = useState(0);
@@ -107,7 +108,7 @@ const FormCounts = ({ setShowCounts }) => {
       ) : (
         <Spinner color={theme.colors.primary} />
       )}
-      <Button onPress={() => setShowCounts(false)}>Back</Button>
+      <Button onPress={() => setShowCounts(false)}>{I18n.t('global.back')}</Button>
     </View>
   );
 };

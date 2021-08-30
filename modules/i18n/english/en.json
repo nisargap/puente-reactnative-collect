@@ -14,7 +14,8 @@
     "error": "Error",
     "success": "Success!",
     "ok": "Ok",
-    "emptyForm": "Empty Form"
+    "emptyForm": "Empty Form",
+    "back": "Back"
   },
   "signUp": {
     "firstName": "First Name",
@@ -40,13 +41,13 @@
     "password": "Password",
     "showPassword": "Show Password",
     "login": "Log-In",
-    "signUpLink": "Don't have an account, sign up!",
+    "signUpLink": "Sign Up!",
     "deleteCreds": "Delete Credentials",
     "noAccount": "Don't have an account?",
     "puente2020": "Puente 2020 |",
     "termsConditions": "Terms & Conditions",
     "forgotPassword": {
-      "label": "Forgot your Password?",
+      "label": "Forgot Password?",
       "enterEmail": "Please enter your email to reset your password",
       "sendLink": "Send Reset Link",
       "noAccount": "Don't have an account?",

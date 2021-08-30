@@ -14,7 +14,8 @@
     "error": "Erè",	
     "success": "Siksè!",	
     "ok": "Ok",	
-    "emptyForm": "Vide Fòm"
+    "emptyForm": "Vide Fòm",
+    "back":"Tounen"
   },
   "signUp": {
     "firstName": "Non",

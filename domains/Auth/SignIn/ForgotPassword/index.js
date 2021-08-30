@@ -51,10 +51,10 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
                   <View>
                     <Text style={{ marginHorizontal: 15, fontSize: 20, fontWeight: 'bold' }}>{I18n.t('signIn.forgotPassword.enterEmail')}</Text>
                     <FormInput
-                      label="Email"
+                      label={I18n.t('signUp.email')}
                       formikProps={formikProps}
                       formikKey="email"
-                      placeholder="Email"
+                      placeholder={I18n.t('signUp.email')}
                     />
                   </View>
                   <Button mode="contained" theme={theme} onPress={formikProps.handleSubmit}>{I18n.t('signIn.forgotPassword.sendLink')}</Button>

@@ -245,7 +245,7 @@ const SignIn = ({ navigation }) => {
                     label={I18n.t('signIn.password')}
                     formikProps={formikProps}
                     formikKey="password"
-                    placeholder="Password"
+                    placeholder={I18n.t('signIn.password')}
                     secureTextEntry={!checked}
                     value={formikProps.values.password}
                   />

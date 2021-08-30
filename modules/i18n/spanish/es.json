@@ -14,7 +14,8 @@
     "error": "Error",
     "success":"¡Éxito!",
     "ok": "OK",
-    "emptyForm": "Empty Form"
+    "emptyForm": "Empty Form",
+    "back": "Regresa"
   },
   "signUp": {
     "firstName": "Nombre de verdadero",
