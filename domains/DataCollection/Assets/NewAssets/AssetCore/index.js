@@ -104,7 +104,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                   theme={stylesPaper}
                   style={stylesDefault.label}
                 />
-              </View>
+              </View> 
               <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <PaperButton
                   buttonText={I18n.t('assetCore.addPeople')}
