@@ -2,18 +2,18 @@ import _ from 'lodash';
 import * as React from 'react';
 import { useEffect } from 'react/cjs/react.development';
 import {
-     View
+  View
 } from 'react-native';
 import {
   Button
 } from 'react-native-paper';
-import PaperInputPicker from '../';
 
 import I18n from '../../../../modules/i18n';
+import PaperInputPicker from '..';
 
 const Looper = ({
-    data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
-    customForm, config, loopsAdded, setLoopsAdded,
+  data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
+  customForm, config, loopsAdded, setLoopsAdded,
 }) => {
   const {
     label, formikKey, fieldType, numberQuestionsToRepeat
@@ -88,9 +88,9 @@ const Looper = ({
 
   return (
     <View key={formikKey}>
-        {additionalQuestions !== undefined && additionalQuestions.length !== 0
+      {additionalQuestions !== undefined && additionalQuestions.length !== 0
             && additionalQuestions.map((question) => (
-            <PaperInputPicker
+              <PaperInputPicker
                 data={question}
                 formikProps={formikProps}
                 customForm={customForm}
@@ -99,18 +99,21 @@ const Looper = ({
                 setLoopsAdded={setLoopsAdded}
                 surveyingOrganization={surveyingOrganization}
                 scrollViewScroll={scrollViewScroll}
-                setScrollViewScroll={setScrollViewScroll}   
-            />
-        ))}
-        <Button onPress={() => addLoop()}>
-        {I18n.t('paperButton.addAdditional')}{translatedLabel}
+                setScrollViewScroll={setScrollViewScroll}
+              />
+            ))}
+      <Button onPress={() => addLoop()}>
+        {I18n.t('paperButton.addAdditional')}
+        {translatedLabel}
+      </Button>
+      {individualLoopsAdded !== 0 && (
+        <Button onPress={() => removeLoop()}>
+          {I18n.t('paperButton.removePrevious')}
+          {translatedLabel}
         </Button>
-        {individualLoopsAdded !== 0 && (
-            <Button onPress={() => removeLoop()}>
-                {I18n.t('paperButton.removePrevious')}{translatedLabel}
-            </Button>
-        )}
+      )}
     </View>
-  )}
+  );
+};
 
-export default Looper
+export default Looper;

@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import { Spinner } from 'native-base';
 import * as React from 'react';
-import { useEffect } from 'react/cjs/react.development';
 import {
   Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
@@ -18,10 +16,10 @@ import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
 import HouseholdManager from './HouseholdManager';
-import Looper from './Looper';
 import {
   styleButton, styles, stylesDefault, stylesPaper, styleX
 } from './index.style';
+import Looper from './Looper';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -29,7 +27,7 @@ const PaperInputPicker = ({
   ...rest
 }) => {
   const {
-    label, formikKey, fieldType, sideLabel, numberQuestionsToRepeat
+    label, formikKey, fieldType, sideLabel,
   } = data;
 
   const {
@@ -38,7 +36,6 @@ const PaperInputPicker = ({
 
   const [location, setLocation] = React.useState({ latitude: 0, longitude: 0, altitude: 0 });
   const [locationLoading, setLocationLoading] = React.useState(false);
-
 
   const handleLocation = async () => {
     setLocationLoading(true);
