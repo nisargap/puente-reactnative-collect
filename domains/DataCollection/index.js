@@ -196,7 +196,6 @@ const DataCollection = ({ navigation }) => {
                     surveyee={surveyee}
                     setSurveyee={setSurveyee}
                     customForm={customForm}
-                    setCustomForm={setCustomForm}
                     setView={setView}
                     pinnedForms={pinnedForms}
                   />
