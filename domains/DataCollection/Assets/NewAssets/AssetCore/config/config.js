@@ -1,6 +1,20 @@
 const configArray = [
- {
-   label: 'assetCore.communityName',
+  {
+    label: 'assetCore.nameOfAssets',
+    formikKey: '',
+    value: '',
+    fieldType: 'input',
+    validation: false
+  },
+  {
+    label: 'assetCore.getLocation',
+    formikKey: 'location',
+    value: {},
+    fieldType: 'geolocation',
+    validation: false
+  },
+  {
+   label: 'global.commName',
    formikKey: 'communityname',
    value: '',
    fieldType: 'autofill',
@@ -8,7 +22,7 @@ const configArray = [
    validation: false
  },
  {
-    label: 'assetCore.province',
+    label: 'identificationForm.province',
     formikKey: 'province',
     value: '',
     fieldType: 'autofill',

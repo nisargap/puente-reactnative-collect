@@ -1,63 +1,81 @@
 import { Formik } from 'formik';
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  ActivityIndicator, Modal,
+  /*ActivityIndicator,/* Modal,*/
   ScrollView, View
 } from 'react-native';
 import {
-  Provider, Text,
-  TextInput
+  Provider, /*Text/*,
+  TextInput*/
 } from 'react-native-paper';
 
-import PaperButton from '../../../../../components/Button';
-import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
+import ErrorPicker from '../../../../../components/FormikFields/ErrorPicker';
+import yupValidationPicker from '../../../../../components/FormikFields/YupValidation';
+import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+//import PaperButton from '../../../../../components/Button';
+//import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
 import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
-import getLocation from '../../../../../modules/geolocation';
-import I18n from '../../../../../modules/i18n';
-import { generateRandomID, isEmpty } from '../../../../../modules/utils';
+//import getLocation from '../../../../../modules/geolocation';
+//import I18n from '../../../../../modules/i18n';
+import { /*generateRandomID,*/ isEmpty } from '../../../../../modules/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import styles from './index.styles';
-import PeopleModal from './PeopleModal';
+//import PeopleModal from './PeopleModal';
+import { layout, theme } from '../../../../../modules/theme';
+import configArray from './config/config';
 
-const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) => {
+const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
+  /*setSelectedForm, setSurveyee,*/ surveyingUser, surveyingOrganization }) => {
+  
+    useEffect(() => {
+      setValidationSchema(yupValidationPicker(configArray));
+    }, []);
+
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
-  const [location, setLocation] = useState();
-  const [locationLoading, setLocationLoading] = useState(false);
+ // const [location, setLocation] = useState();
+ // const [locationLoading, setLocationLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-
+  const [inputs, setInputs] = useState({});
   const toggleModal = () => setVisible(!visible);
+  //const [submitting, setSubmitting] = useState(false);
+  const [validationSchema, setValidationSchema] = useState();
+  
+  useEffect(() => {
+    setInputs(configArray);
+  }, [setInputs, configArray]);
 
-  const handleFormikPropsLocation = async (formikProps) => {
-    setLocationLoading(true);
-    const currentLocation = await getLocation().then().catch((e) => e);
-    const { latitude, longitude } = currentLocation.coords;
-    formikProps.setFieldValue('location', { latitude, longitude });
-    setLocation(currentLocation.coords);
-    setLocationLoading(false);
-  };
+  // const handleFormikPropsLocation = async (formikProps) => {
+  //   setLocationLoading(true);
+  //   const currentLocation = await getLocation().then().catch((e) => e);
+  //   const { latitude, longitude } = currentLocation.coords;
+  //   formikProps.setFieldValue('location', { latitude, longitude });
+  //   //setLocation(currentLocation.coords);
+  //  // setLocationLoading(false);
+  // };
 
   // handle input change
-  const handleInputChange = (text, index, name) => {
-    const list = [...people];
-    list[index][name] = text;
-    setPeople(list);
-  };
+  // const handleInputChange = (text, index, name) => {
+  //   const list = [...people];
+  //   list[index][name] = text;
+  //   setPeople(list);
+  // };
 
   // handle click event of the Remove button
-  const handleRemoveClick = (index) => {
-    const list = [...people];
-    list.splice(index, 1);
-    setPeople(list);
-  };
+  // const handleRemoveClick = (index) => {
+  //   const list = [...people];
+  //   list.splice(index, 1);
+  //   setPeople(list);
+  // };
 
   // handle click event of the Add button
-  const handleAddClick = () => {
-    setPeople([...people, { firstName: '', lastName: '' }]);
-  };
+  // const handleAddClick = () => {
+  //   setPeople([...people, { firstName: '', lastName: '' }]);
+  // };
 
   return (
+    
     <ScrollView>
       <Provider>
         <Formik
@@ -65,7 +83,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
           onSubmit={async (values, { resetForm }) => {
             const formObject = values;
             const user = await getData('currentUser');
-
+           
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
@@ -90,9 +108,36 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
               .then(() => resetForm())
               .catch((e) => console.log(e)); //eslint-disable-line
           }}
+          
         >
-
+         
           {(formikProps) => (
+          <View style={styles.assetContainer}>
+            
+              {inputs.length && inputs.map((result) => (
+               
+                <View key={result.formikKey}> 
+                  <PaperInputPicker
+                    data={result}
+                    formikProps={formikProps}
+                    surveyingOrganization={surveyingOrganization}
+                    scrollViewScroll={scrollViewScroll}
+                    setScrollViewScroll={setScrollViewScroll}
+                    customForm={false}
+                  />{console.log(result)}
+                </View>
+              )
+              )}
+              <ErrorPicker
+                formikProps={formikProps}
+                inputs={inputs}
+              />
+              
+            </View>
+          
+          )}
+          
+           {/* {(formikProps) => (
             <View style={styles.assetContainer}>
               <View id="top">
                 <TextInput
@@ -195,7 +240,7 @@ const AssetCore = ({ setSelectedAsset, surveyingOrganization, surveyingUser }) =
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
               />
             </View>
-          )}
+          )} */}
         </Formik>
       </Provider>
 
