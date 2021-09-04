@@ -472,7 +472,9 @@ const configArray = {
       },
       {
         label: 'global.other',
-        value: 'other'
+        value: 'other',
+        text: true,
+        textKey: '__govAssistance__other'
       }
     ],
     validation: false
