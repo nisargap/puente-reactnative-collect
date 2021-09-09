@@ -12,29 +12,25 @@ import I18n from '../../../../modules/i18n';
 
 const Looper = ({
   data, config, additionalQuestions,
-  setAdditionalQuestions, numberedQestions,
-  setNumberedQuestions, translatedLabel,
+  translatedLabel, setAdditionalQuestions, 
   loopsAdded, setLoopsAdded
 }) => {
   const {
-    formikKey, fieldType, numberQuestionsToRepeat
+    formikKey, numberQuestionsToRepeat
   } = data;
-  
-  useEffect(() => {
-    if (fieldType === 'loop') {
-      numberQuestionsInConfig();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (fieldType === 'loop') {
-      updateQuestionsToRepeat();
-    }
-  }, [numberedQestions]);
-
 
   const [individualLoopsAdded, setIndividualLoopsAdded] = React.useState(0);
   const [questionsToRepeat, setQuestionsToRepeat] = React.useState([]);
+  const [numberedQestions, setNumberedQuestions] = React.useState({});
+
+  useEffect(() => {
+      numberQuestionsInConfig();
+  }, []);
+
+  useEffect(() => {
+      updateQuestionsToRepeat();
+  }, [numberedQestions]);
+
 
   // number all questions in config (for looping ccapabilities)
   const numberQuestionsInConfig = () => {

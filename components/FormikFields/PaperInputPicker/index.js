@@ -66,8 +66,7 @@ const PaperInputPicker = ({
   const [image, setImage] = React.useState(null);
 
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
-  const [numberedQestions, setNumberedQuestions] = React.useState({});
-  
+
   return (
     <>
       {fieldType === 'input' && (
@@ -529,8 +528,6 @@ const PaperInputPicker = ({
           config={config}
           additionalQuestions={additionalQuestions}
           setAdditionalQuestions={setAdditionalQuestions}
-          numberedQestions={numberedQestions}
-          setNumberedQuestions={setNumberedQuestions}
           translatedLabel={translatedLabel}
           loopsAdded={loopsAdded}
           setLoopsAdded={setLoopsAdded}
