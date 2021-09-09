@@ -7,6 +7,7 @@ import {
   Button, Headline,
   TextInput,
 } from 'react-native-paper';
+import { number } from 'yup';
 
 import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';
@@ -64,10 +65,9 @@ const PaperInputPicker = ({
   const [pictureUris, setPictureUris] = React.useState({});
   const [image, setImage] = React.useState(null);
 
-  const [numberedQestions, setNumberedQuestions] = React.useState({});
-  const [questionsToRepeat, setQuestionsToRepeat] = React.useState([]);
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
-
+  const [numberedQestions, setNumberedQuestions] = React.useState({});
+  
   return (
     <>
       {fieldType === 'input' && (
@@ -527,12 +527,10 @@ const PaperInputPicker = ({
         <Looper
           data={data}
           config={config}
-          numberedQestions={numberedQestions}
-          setNumberedQuestions={setNumberedQuestions}
-          questionsToRepeat={questionsToRepeat}
-          setQuestionsToRepeat={setQuestionsToRepeat}
           additionalQuestions={additionalQuestions}
           setAdditionalQuestions={setAdditionalQuestions}
+          numberedQestions={numberedQestions}
+          setNumberedQuestions={setNumberedQuestions}
           translatedLabel={translatedLabel}
           loopsAdded={loopsAdded}
           setLoopsAdded={setLoopsAdded}
