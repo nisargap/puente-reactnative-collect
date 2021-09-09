@@ -7,7 +7,6 @@ import {
   Button, Headline,
   TextInput,
 } from 'react-native-paper';
-import { number } from 'yup';
 
 import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';

@@ -12,7 +12,7 @@ import I18n from '../../../../modules/i18n';
 
 const Looper = ({
   data, config, additionalQuestions,
-  translatedLabel, setAdditionalQuestions, 
+  translatedLabel, setAdditionalQuestions,
   loopsAdded, setLoopsAdded
 }) => {
   const {
@@ -24,13 +24,12 @@ const Looper = ({
   const [numberedQestions, setNumberedQuestions] = React.useState({});
 
   useEffect(() => {
-      numberQuestionsInConfig();
+    numberQuestionsInConfig();
   }, []);
 
   useEffect(() => {
-      updateQuestionsToRepeat();
+    updateQuestionsToRepeat();
   }, [numberedQestions]);
-
 
   // number all questions in config (for looping ccapabilities)
   const numberQuestionsInConfig = () => {
