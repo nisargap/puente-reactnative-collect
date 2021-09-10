@@ -17,10 +17,7 @@ const FormCounts = ({ setShowCounts }) => {
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
   const [userName, setUserName] = useState(' ');
-  const [surveyQueryDone, setSurveyQueryDone] = useState(false);
-  const [envHealthQueryDone, setEnvHealthQueryDone] = useState(false);
-  const [vitalsQueryDone, setVitalsQueryDone] = useState(false);
-  const [customQueryDone, setCustomQueryDone] = useState(false);
+  const [queryDone, setQueryDone] = useState(false)
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -35,45 +32,33 @@ const FormCounts = ({ setShowCounts }) => {
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    countService(postParamsSurvey).then((surveyCounts) => {
-      setSurveyCount(surveyCounts);
-      setSurveyQueryDone(true);
-    });
-  }, [userName]);
-
-  useEffect(() => {
     const postParamsEnvHealth = {
       ParseClass: 'HistoryEnvironmentalHealth',
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    countService(postParamsEnvHealth).then((envHealthCounts) => {
-      setEnvHealthCount(envHealthCounts);
-      setEnvHealthQueryDone(true);
-    });
-  }, [userName]);
-
-  useEffect(() => {
     const postParamsVitals = {
       ParseClass: 'Vitals',
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    countService(postParamsVitals).then((vitalsCounts) => {
-      setVitalsCount(vitalsCounts);
-      setVitalsQueryDone(true);
-    });
-  }, [userName]);
-
-  useEffect(() => {
     const postParamsCustomForms = {
       ParseClass: 'FormResults',
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    countService(postParamsCustomForms).then((customCounts) => {
-      setCustomCount(customCounts);
-      setCustomQueryDone(true);
+    const idPromise = countService(postParamsSurvey);
+    const envHealthPromise = countService(postParamsEnvHealth);
+    const vitalsPromise = countService(postParamsVitals);
+    const customFormsPromise = countService(postParamsCustomForms);
+    
+
+    Promise.all([idPromise, envHealthPromise, vitalsPromise, customFormsPromise]).then((values) => {
+      setSurveyCount(values[0]);
+      setEnvHealthCount(values[1]);
+      setVitalsCount(values[2]);
+      setCustomCount(values[3]);
+      setQueryDone(true);
     });
   }, [userName]);
 
@@ -81,7 +66,7 @@ const FormCounts = ({ setShowCounts }) => {
     <View>
       <Text style={styles.headerFormText}>Surveys Collected</Text>
       <View style={styles.horizontalLineGray} />
-      {surveyQueryDone && envHealthQueryDone && vitalsQueryDone && customQueryDone ? (
+      {queryDone ? (
         <View>
           <View style={styles.countContainer}>
             <Text style={styles.label}>ID Forms</Text>
