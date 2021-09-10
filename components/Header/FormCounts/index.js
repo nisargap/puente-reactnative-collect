@@ -17,7 +17,7 @@ const FormCounts = ({ setShowCounts }) => {
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
   const [userName, setUserName] = useState(' ');
-  const [queryDone, setQueryDone] = useState(false)
+  const [queryDone, setQueryDone] = useState(false);
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -51,7 +51,6 @@ const FormCounts = ({ setShowCounts }) => {
     const envHealthPromise = countService(postParamsEnvHealth);
     const vitalsPromise = countService(postParamsVitals);
     const customFormsPromise = countService(postParamsCustomForms);
-    
 
     Promise.all([idPromise, envHealthPromise, vitalsPromise, customFormsPromise]).then((values) => {
       setSurveyCount(values[0]);
