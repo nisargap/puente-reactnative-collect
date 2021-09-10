@@ -41,12 +41,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     paddingLeft: 10,
+    paddingTop:10,
+    paddingBottom: 10,
     flex: 1
   },
   calculationTextRight: {
     fontWeight: 'bold',
     textAlign: 'center',
     paddingRight: 10,
+    paddingTop:10,
+    paddingBottom: 10,
     flex: 1
   },
   headerFormText: {
