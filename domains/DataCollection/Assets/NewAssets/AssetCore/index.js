@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import {
-  /*ActivityIndicator,/* Modal,*/
+  ActivityIndicator,/* Modal,*/
   ScrollView, View
 } from 'react-native';
 import {
@@ -13,12 +13,12 @@ import {
 import ErrorPicker from '../../../../../components/FormikFields/ErrorPicker';
 import yupValidationPicker from '../../../../../components/FormikFields/YupValidation';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-//import PaperButton from '../../../../../components/Button';
+import PaperButton from '../../../../../components/Button';
 //import { stylesDefault, stylesPaper } from '../../../../../components/FormikFields/PaperInputPicker/index.style';
 import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 //import getLocation from '../../../../../modules/geolocation';
-//import I18n from '../../../../../modules/i18n';
+import I18n from '../../../../../modules/i18n';
 import { /*generateRandomID,*/ isEmpty } from '../../../../../modules/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import styles from './index.styles';
@@ -39,7 +39,7 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
   const [visible, setVisible] = useState(false);
   const [inputs, setInputs] = useState({});
   const toggleModal = () => setVisible(!visible);
-  //const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [validationSchema, setValidationSchema] = useState();
   
   useEffect(() => {
@@ -83,6 +83,7 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
           onSubmit={async (values, { resetForm }) => {
             const formObject = values;
             const user = await getData('currentUser');
+            setSubmitting(true);
            
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
@@ -104,9 +105,11 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
               .then((e) => {
                 const asset = JSON.parse(JSON.stringify(e));
                 setSelectedAsset(asset);
+                
               })
               .then(() => resetForm())
               .catch((e) => console.log(e)); //eslint-disable-line
+              setSubmitting(false);
           }}
           
         >
@@ -132,8 +135,22 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
                 formikProps={formikProps}
                 inputs={inputs}
               />
-              
-            </View>
+               {submitting ? (
+                <ActivityIndicator />
+              ) : (
+                <PaperButton
+                  onPressEvent={formikProps.handleSubmit}
+                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
+                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
+                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
+                />
+              )}
+              <PaperButton
+                icon="gesture-swipe"
+                mode="text"
+                buttonText={I18n.t('assetCore.swipeAttachForm')}
+              />
+          </View>
           
           )}
           
@@ -224,23 +241,9 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
                 theme={stylesPaper}
                 style={stylesDefault.label}
               />
-              {formikProps.isSubmitting ? (
-                <ActivityIndicator />
-              ) : (
-                <PaperButton
-                  onPressEvent={() => formikProps.handleSubmit()}
-                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
-                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
-                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
-                />
-              )}
-              <PaperButton
-                icon="gesture-swipe"
-                mode="text"
-                buttonText={I18n.t('assetCore.swipeAttachForm')}
-              />
+             
             </View>
-          )} */}
+          )}*/ }
         </Formik>
       </Provider>
 
