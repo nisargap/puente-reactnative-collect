@@ -17,7 +17,8 @@ const NewAsset = ({
           selectedAsset={selectedAsset}
           surveyingOrganization={surveyingOrganization}
           surveyingUser={surveyingUser}
-          scrollViewScroll={setScrollViewScroll}
+          scrollViewScroll={scrollViewScroll}
+          setScrollViewScroll={setScrollViewScroll}
         />
       </View>
       <View key="2" style={styles.page}>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   viewPager: {
     flex: 1,
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.65,
+    height: Dimensions.get('window').height,
   },
   page: {
     justifyContent: 'center',
