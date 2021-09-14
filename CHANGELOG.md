@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.9.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.2...v11.9.3) (2021-08-27)
+
+
+### Bug fixes
+
+* environmental form submission, and minor touch ups to form ([9fd1308](https://github.com/hopetambala/puente-reactnative-collect/commit/9fd13086cb2c29241a551b0f785665fa41529680))
+
+### [11.9.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.1...v11.9.2) (2021-08-25)
+
+### [11.9.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.0...v11.9.1) (2021-08-25)
+
+
+### Bug fixes
+
+* Specify the reason for your app to access the device’s camera ([afcc319](https://github.com/hopetambala/puente-reactnative-collect/commit/afcc319680b261e5e44d781907c0a42bd26338bb))
+
+## [11.9.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.8.4...v11.9.0) (2021-08-20)
+
+
+### Bug fixes
+
+* Disable the ability to submit asset supplementary form without anchor asset core form ([9a43a30](https://github.com/hopetambala/puente-reactnative-collect/commit/9a43a301086e5b29af9cba9ce29fd96d103452eb))
+* offline sign in - credentials object mutated ([847e036](https://github.com/hopetambala/puente-reactnative-collect/commit/847e0365f2ad680c31f3917a617f27b553ce39a9))
+
+### [11.8.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.8.3...v11.8.4) (2021-08-18)
+
+
+### New Features
+
+* add loading icon to survey counts ([52db9e4](https://github.com/hopetambala/puente-reactnative-collect/commit/52db9e4a0b14d8df6b56772252d9162ab74f0dc4))
+* add photo to surveyData, remove from vitals ([433b6d0](https://github.com/hopetambala/puente-reactnative-collect/commit/433b6d04efa46868becdaea2986e687ce6cc4708))
+* form counts added to header ([5279727](https://github.com/hopetambala/puente-reactnative-collect/commit/5279727000c6e7f477421dc94763d20734b9a980))
+
+
+### Bug fixes
+
+* add creole to settings page ([fa776ca](https://github.com/hopetambala/puente-reactnative-collect/commit/fa776ca5f4746eb695f06e93076d1bff8245bc88))
+* camera permissions - stop alert from constantly popping up ([2649c64](https://github.com/hopetambala/puente-reactnative-collect/commit/2649c640df3d920cf04f7e266d755c6dc5f154ad))
+* search  index is an array ([bfe34ba](https://github.com/hopetambala/puente-reactnative-collect/commit/bfe34baa8a4a06b89ed2160cf1936e0da8bc7d93))
+
 ### [11.8.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.8.2...v11.8.3) (2021-07-05)
 
 

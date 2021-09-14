@@ -146,7 +146,14 @@
       "5_10": "5-10 years",
       "moreThan10": "10+ years"
     },
-    "biggestProblemComm": "Biggest Problem of the Community",
+    "biggestProblemComm": {
+      "label": "Biggest Problem of the Community",
+      "Water": "Water",
+      "Trash": "Trash",
+      "Street": "Street",
+      "AccessToBathrooms": "Access to Bathrooms",
+      "HouseRepairs": "House Repairs"
+    },
     "waterAccess": {
       "label": "Water Access",
       "everyday": "Everyday",
@@ -162,25 +169,49 @@
       "tap": "Tap",
       "filtered": "Filtered"
     },
-    "bathroomAccess": "Bathroom Access",
+    "bathroomAccess":{
+      "label": "Bathroom Access",
+      "Bathroom": "Bathroom",
+      "Latrine": "Latrine",
+      "None": "None"
+    },
     "latrineAccess": "Latrine Access",
-    "clinicAccess": "Clinic Access",
+    "clinicAccess":{
+      "label": "Clinic Access",
+      "Clinic": "Clinic/Medical Center",
+      "Polyclinic": "Polyclinic",
+      "Hospital": "Hospital",
+      "None": "None"
+    },
     "medicalProblemsGo": "Where do you go for medical problems?",
-    "dentalProblemsGo": "Where do you go for dental problems?",
-    "timesPerWeekTrash": "Times per Week Trash is Collected",
+    "dentalAccess": "Do you have access to a dentist?",
+    "timesPerWeekTrash": {
+      "label": "Times per Week Trash is Collected",
+      "Never": "Never",
+      "OnceAWeek": "Once a Week",
+      "TwiceAWeek": "Twice a Week",
+      "OnceOrTwiceAMonth": "Once or Twice a Month"
+    },
     "trashBetweenPickups": "Where is trash left between pickups?",
     "houseOwnership": "House Ownership",
     "floorCondition": {
       "label": "Condition of Floor in your house?",
-      "dirtFloorPoor": "Dirt Floor Poor Condition",
-      "dirtFloorWork": "Dirt Floor Working Condition",
-      "cementPoor": "Cement Floor Poor Condition",
-      "cementWorking": "Cement Floor Working Condition"
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
+    },
+    "floorMaterial": {
+      "label": "Material of Floor in your house?",
+      "Dirt": "Dirt",
+      "Cement": "Cement",
+      "Wood": "Wood",
+      "Ceramic": "Ceramic"
     },
     "roofCondition": {
       "label": "Condition of Roof in your house?",
-      "normal": "Normal Condition",
-      "bad": "Bad Condition"
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
     },
     "typeStove": {
       "label": "Type of Stove Top",
@@ -211,7 +242,15 @@
       "noAssistance": "No assistance"
     },
     "numberIndividualsHouse": "Number of Individuals Living in the House",
-    "numberChildrenUnder5": "Number of children Living in this House under age of 5"
+    "numberChildrenUnder5": {
+      "label": "Are there any children living in the house in the following age groups?",
+      "under_5":"Less than 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "How many children under the age of 5?",
+      "6_12_textQuestion": "How many children between the ages of 6 - 12?",
+      "13_18_textQuestion": "How many children between the ages of 13 - 18?"
+    }
   },
   "evaluationMedical": {
     "name": "Medical Assessment Form",
@@ -296,7 +335,7 @@
     "attachResident": "Attach a Community Resident"
   },
   "assetForms": {
-    "attachForm": "Attach a Form to the Asset",
+    "attachForm": "Attach a form and an asset",
     "createAsset": "Create an Asset"
   },
   "forms": {

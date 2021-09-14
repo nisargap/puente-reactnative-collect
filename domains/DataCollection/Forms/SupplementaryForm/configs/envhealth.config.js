@@ -61,10 +61,38 @@ const configArray = {
     validation: false
   },
   {
-    label: 'environmentalHealth.biggestProblemComm',
-    formikKey: 'biggestproblemofcommunity',
+    label: 'environmentalHealth.biggestProblemComm.label',
+    formikKey: 'biggestproblemofcommunity_v2',
     value: '',
-    fieldType: 'input',
+    fieldType: 'selectMulti',
+    options: [
+      {
+        label: 'environmentalHealth.biggestProblemComm.Water',
+        value: 'Water'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.Trash',
+        value: 'Trash'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.Street',
+        value: 'Street'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.AccessToBathrooms',
+        value: 'AccessToBathrooms'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.HouseRepairs',
+        value: 'HouseRepairs'
+      },
+      {
+        label: 'global.other',
+        value: 'other',
+        text: true,
+        textKey: '__biggestproblemofcommunity_v2__other'
+      }
+    ],
     validation: false
   },
   {
@@ -122,18 +150,28 @@ const configArray = {
     validation: false
   },
   {
-    label: 'environmentalHealth.bathroomAccess',
-    formikKey: 'bathroomAccess',
+    label: 'environmentalHealth.bathroomAccess.label',
+    formikKey: 'bathroomAccess_v2',
     value: '',
-    fieldType: 'select',
+    fieldType: 'selectMulti',
     options: [
       {
-        label: 'global.yes',
-        value: 'Yes'
+        label: 'environmentalHealth.bathroomAccess.Bathroom',
+        value: 'Bathroom'
       },
       {
-        label: 'global.no',
-        value: 'No'
+        label: 'environmentalHealth.bathroomAccess.Latrine',
+        value: 'Latrine'
+      },
+      {
+        label: 'environmentalHealth.bathroomAccess.None',
+        value: 'None'
+      },
+      {
+        label: 'global.other',
+        value: 'other',
+        text: true,
+        textKey: '__bathroomAccess_v2__other'
       }
     ],
     validation: false
@@ -156,8 +194,39 @@ const configArray = {
     validation: false
   },
   {
-    label: 'environmentalHealth.clinicAccess',
-    formikKey: 'clinicAccess',
+    label: 'environmentalHealth.clinicAccess.label',
+    formikKey: 'clinicAccess_v2',
+    value: '',
+    fieldType: 'selectMulti',
+    options: [
+      {
+        label: 'environmentalHealth.clinicAccess.Clinic',
+        value: 'Clinic_Medical_Center'
+      },
+      {
+        label: 'environmentalHealth.clinicAccess.Polyclinic',
+        value: 'Polyclinic'
+      },
+      {
+        label: 'environmentalHealth.clinicAccess.Hospital',
+        value: 'Hospital'
+      },
+      {
+        label: 'environmentalHealth.clinicAccess.None',
+        value: 'None'
+      },
+      {
+        label: 'global.other',
+        value: 'other',
+        text: true,
+        textKey: '__clinicAccess_v2__other'
+      }
+    ],
+    validation: false
+  },
+  {
+    label: 'environmentalHealth.dentalAccess',
+    formikKey: 'dentalAccess',
     value: '',
     fieldType: 'select',
     options: [
@@ -173,31 +242,28 @@ const configArray = {
     validation: false
   },
   {
-    label: 'environmentalHealth.medicalProblemsGo',
-    formikKey: 'medicalproblemswheredoyougo',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'environmentalHealth.dentalProblemsGo',
-    formikKey: 'dentalproblemswheredoyougo',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'environmentalHealth.timesPerWeekTrash',
+    label: 'environmentalHealth.timesPerWeekTrash.label',
     formikKey: 'timesperweektrashcollected',
     value: '',
-    fieldType: 'numberInput',
-    validation: false
-  },
-  {
-    label: 'environmentalHealth.trashBetweenPickups',
-    formikKey: 'wheretrashleftbetweenpickups',
-    value: '',
-    fieldType: 'input',
+    fieldType: 'select',
+    options: [
+      {
+        label: 'environmentalHealth.timesPerWeekTrash.Never',
+        value: 'Never'
+      },
+      {
+        label: 'environmentalHealth.timesPerWeekTrash.OnceAWeek',
+        value: 'OnceAWeek'
+      },
+      {
+        label: 'environmentalHealth.timesPerWeekTrash.TwiceAWeek',
+        value: 'TwiceAWeek'
+      },
+      {
+        label: 'environmentalHealth.timesPerWeekTrash.OnceOrTwiceAMonth',
+        value: 'OnceOrTwiceAMonth'
+      }
+    ],
     validation: false
   },
   {
@@ -224,20 +290,41 @@ const configArray = {
     fieldType: 'select',
     options: [
       {
-        label: 'environmentalHealth.floorCondition.dirtFloorPoor',
-        value: 'dirtPoor'
+        label: 'environmentalHealth.floorCondition.Poor',
+        value: 'Poor'
       },
       {
-        label: 'environmentalHealth.floorCondition.dirtFloorWork',
-        value: 'dirtWorking'
+        label: 'environmentalHealth.floorCondition.Working',
+        value: 'Working'
       },
       {
-        label: 'environmentalHealth.floorCondition.cementPoor',
-        value: 'cementPoor'
+        label: 'environmentalHealth.floorCondition.Excellent',
+        value: 'Excellent'
+      }
+    ],
+    validation: false
+  },
+  {
+    label: 'environmentalHealth.floorMaterial.label',
+    formikKey: 'floorMaterial',
+    value: '',
+    fieldType: 'selectMulti',
+    options: [
+      {
+        label: 'environmentalHealth.floorMaterial.Dirt',
+        value: 'Dirt'
       },
       {
-        label: 'environmentalHealth.floorCondition.cementWorking',
-        value: 'cementWorking'
+        label: 'environmentalHealth.floorMaterial.Cement',
+        value: 'Cement'
+      },
+      {
+        label: 'environmentalHealth.floorMaterial.Wood',
+        value: 'Wood'
+      },
+      {
+        label: 'environmentalHealth.floorMaterial.Ceramic',
+        value: 'Ceramic'
       }
     ],
     validation: false
@@ -249,13 +336,17 @@ const configArray = {
     fieldType: 'select',
     options: [
       {
-        label: 'environmentalHealth.roofCondition.bad',
-        value: 'bad'
+        label: 'environmentalHealth.roofCondition.Poor',
+        value: 'Poor'
       },
       {
-        label: 'environmentalHealth.roofCondition.normal',
-        value: 'normal'
-      }
+        label: 'environmentalHealth.roofCondition.Working',
+        value: 'Working'
+      },
+      {
+        label: 'environmentalHealth.roofCondition.Excellent',
+        value: 'Excellent'
+      },
     ],
     validation: false
   },
@@ -394,10 +485,33 @@ const configArray = {
     validation: true
   },
   {
-    label: 'environmentalHealth.numberChildrenUnder5',
-    formikKey: 'numberofChildrenLivinginHouseUndertheAgeof5',
+    label: 'environmentalHealth.numberChildrenUnder5.label',
+    formikKey: 'numberofChildrenLivinginHouseUndertheAgeof5_v2',
     value: '',
-    fieldType: 'numberInput',
+    fieldType: 'selectMulti',
+    options: [
+      {
+        label: 'environmentalHealth.numberChildrenUnder5.under_5',
+        value: 'under_5',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__under_5',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.under_5_textQuestion'
+      },
+      {
+        label: 'environmentalHealth.numberChildrenUnder5.6_12',
+        value: '6_12',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__6_12',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.6_12_textQuestion'
+      },
+      {
+        label: 'environmentalHealth.numberChildrenUnder5.13_18',
+        value: '13_18',
+        text: true,
+        textKey: '__numberofChildrenLivinginHouseUndertheAgeof5_v2__13_18',
+        textQuestion: 'environmentalHealth.numberChildrenUnder5.13_18_textQuestion'
+      }
+    ],
     validation: true
   },
   ]

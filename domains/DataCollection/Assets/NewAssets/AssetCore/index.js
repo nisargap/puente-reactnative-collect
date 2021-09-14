@@ -6,7 +6,7 @@ import {
   ScrollView, View
 } from 'react-native';
 import {
-  Provider, /*Text/*,
+  Provider,Button /*Text/*,
   TextInput*/
 } from 'react-native-paper';
 
@@ -26,11 +26,11 @@ import styles from './index.styles';
 import { layout, theme } from '../../../../../modules/theme';
 import configArray from './config/config';
 
-const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
+const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
   /*setSelectedForm, setSurveyee,*/ surveyingUser, surveyingOrganization }) => {
   
     useEffect(() => {
-      setValidationSchema(yupValidationPicker(configArray));
+      setValidationSchema(yupValidationPicker(configArray.fields));
     }, []);
 
   const [people, setPeople] = useState([{ firstName: '', lastName: '' }]);
@@ -44,7 +44,8 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
   
   useEffect(() => {
     setInputs(configArray);
-  }, [setInputs, configArray]);
+  }, [configArray]);
+
 
   // const handleFormikPropsLocation = async (formikProps) => {
   //   setLocationLoading(true);
@@ -111,14 +112,10 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
               .catch((e) => console.log(e)); //eslint-disable-line
               setSubmitting(false);
           }}
-          
         >
-         
           {(formikProps) => (
-          <View style={styles.assetContainer}>
-            
-              {inputs.length && inputs.map((result) => (
-               
+            <View style={styles.assetContainer}>
+              {inputs.fields && inputs.fields.map((result) => (
                 <View key={result.formikKey}> 
                   <PaperInputPicker
                     data={result}
@@ -127,15 +124,15 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
                     scrollViewScroll={scrollViewScroll}
                     setScrollViewScroll={setScrollViewScroll}
                     customForm={false}
-                  />{console.log(result)}
+                  />
                 </View>
-              )
-              )}
+              ))}
               <ErrorPicker
                 formikProps={formikProps}
-                inputs={inputs}
+                inputs={inputs.fields}
               />
-               {submitting ? (
+
+              {submitting ? (
                 <ActivityIndicator />
               ) : (
                 <PaperButton
@@ -153,7 +150,13 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
           </View>
           
           )}
-          
+        </Formik>
+     </Provider>
+    </ScrollView>
+  );
+};
+
+export default AssetCore;
            {/* {(formikProps) => (
             <View style={styles.assetContainer}>
               <View id="top">
@@ -244,11 +247,3 @@ const AssetCore = ({  scrollViewScroll, setScrollViewScroll,
              
             </View>
           )}*/ }
-        </Formik>
-      </Provider>
-
-    </ScrollView>
-  );
-};
-
-export default AssetCore;
