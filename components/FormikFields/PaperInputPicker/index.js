@@ -25,7 +25,7 @@ const PaperInputPicker = ({
   customForm, ...rest
 }) => {
   const {
-    label, formikKey, fieldType, sideLabel 
+    label, formikKey, fieldType, sideLabel
   } = data;
 
   const {

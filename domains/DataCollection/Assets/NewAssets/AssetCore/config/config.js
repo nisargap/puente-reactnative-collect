@@ -24,14 +24,14 @@ const configArray = {
       validation: false
     },
     {
-    label: 'global.commName',
-    formikKey: 'communityname',
-    value: '',
-    fieldType: 'autofill',
-    parameter: 'Communities',
-    validation: false
-  },
-  {
+      label: 'global.commName',
+      formikKey: 'communityname',
+      value: '',
+      fieldType: 'autofill',
+      parameter: 'Communities',
+      validation: false
+    },
+    {
       label: 'identificationForm.province',
       formikKey: 'province',
       value: '',

@@ -105,7 +105,7 @@ const SupplementaryForm = ({
         postSupplementaryForm(postParams).then(() => {
           submitAction();
         }, (error) => {
-          console.log(error)
+          console.log(error); // eslint-disable-line
           // perhaps an alert to let the user know there was an error
           setSubmitting(false);
         });

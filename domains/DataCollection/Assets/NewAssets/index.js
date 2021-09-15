@@ -1,6 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import PagerView from 'react-native-pager-view';
+import { StyleSheet, View } from 'react-native';
 
 import AssetCore from './AssetCore';
 import AssetSupplementary from './AssetSupplementary';
@@ -10,7 +9,7 @@ const NewAsset = ({
   surveyingUser, scrollViewScroll, setScrollViewScroll, setPage
 }) => (
   <View>
-      {assetPageIndex == 'assetCore' && (
+    {assetPageIndex === 'assetCore' && (
       <View style={styles.page}>
         <AssetCore
           setSelectedAsset={setSelectedAsset}
@@ -22,8 +21,8 @@ const NewAsset = ({
           setPage={setPage}
         />
       </View>
-      )}
-      {assetPageIndex == 'assetSupplementary' && (
+    )}
+    {assetPageIndex === 'assetSupplementary' && (
       <View style={styles.page}>
         <AssetSupplementary
           setSelectedAsset={setSelectedAsset}
@@ -33,7 +32,7 @@ const NewAsset = ({
           setPage={setPage}
         />
       </View>
-      )}
+    )}
   </View>
 );
 
