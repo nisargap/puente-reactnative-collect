@@ -195,13 +195,13 @@ const Header = ({
                 )}
                 <View style={{ flexDirection: 'row' }}>
                   <Button
-                    style={styles.calculationText}
+                    style={styles.calculationTextLeft}
                     onPress={navToSettings}
                   >
-                    Settings Page
+                    {I18n.t('header.settingsPage')}
                   </Button>
                   <Button
-                    style={styles.calculationText}
+                    style={styles.calculationTextRight}
                     onPress={navToCounts}
                   >
                     {I18n.t('header.surveysCollected')}
@@ -213,7 +213,6 @@ const Header = ({
                 setShowCounts={setShowCounts}
               />
             )}
-            <Button onPress={navToSettings}>{I18n.t('header.settingsPage')}</Button>
           </View>
         )}
       <IconButton
