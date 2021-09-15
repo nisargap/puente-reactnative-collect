@@ -27,7 +27,7 @@ import { layout, theme } from '../../../../../modules/theme';
 import configArray from './config/config';
 
 const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
-  /*setSelectedForm, setSurveyee,*/ surveyingUser, surveyingOrganization }) => {
+  /*setSelectedForm, setSurveyee,*/ surveyingUser, surveyingOrganization, setPage }) => {
   
     useEffect(() => {
       setValidationSchema(yupValidationPicker(configArray.fields));
@@ -143,9 +143,9 @@ const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
                 />
               )}
               <PaperButton
-                icon="gesture-swipe"
                 mode="text"
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
+                onPressEvent={() => setPage('assetSupplementary')}
               />
           </View>
           

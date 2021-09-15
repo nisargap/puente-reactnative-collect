@@ -554,7 +554,8 @@
     "communityName": "Community Name",
     "province": "Province",
     "country": "Country",
-    "swipeAttachForm": "Swipe to Attach Form"
+    "swipeAttachForm": "Tap to Attach Form",
+    "tapCreateAsset": "Tap to Create New Asset"
   },
   "assetFormSelect": {
     "supAssetForms": "Supplementary Asset Forms"
