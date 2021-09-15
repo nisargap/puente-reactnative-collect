@@ -40,7 +40,7 @@ const NewAsset = ({
 const styles = StyleSheet.create({
   page: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 });
 

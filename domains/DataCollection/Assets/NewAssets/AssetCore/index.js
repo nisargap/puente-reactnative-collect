@@ -85,7 +85,7 @@ const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
             const formObject = values;
             const user = await getData('currentUser');
             setSubmitting(true);
-           
+            console.log(values);
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.relatedPeople = people;
             formObject.surveyingOrganization = surveyingOrganization;
@@ -115,6 +115,7 @@ const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
         >
           {(formikProps) => (
             <View style={styles.assetContainer}>
+              
               {inputs.fields && inputs.fields.map((result) => (
                 <View key={result.formikKey}> 
                   <PaperInputPicker
@@ -147,8 +148,8 @@ const AssetCore = ({  setSelectedAsset, scrollViewScroll, setScrollViewScroll,
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
                 onPressEvent={() => setPage('assetSupplementary')}
               />
+              
           </View>
-          
           )}
         </Formik>
      </Provider>
