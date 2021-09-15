@@ -525,7 +525,9 @@
   "paperButton": {
     "getLocation": "Obtener ubicación",
     "getLocationAgain": "Obtener ubicación de nuevo",
-    "takePhoto": "Tomar foto"
+    "takePhoto": "Tomar foto",
+    "addAdditional": "Agregar adicional ",
+    "removePrevious": "Quitar el anterior "
   },
   "bottomTab":{
     "dataCollection": "Recopilación de datos"

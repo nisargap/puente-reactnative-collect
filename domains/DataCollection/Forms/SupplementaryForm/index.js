@@ -29,6 +29,7 @@ const SupplementaryForm = ({
   const [photoFile, setPhotoFile] = useState('State Photo String');
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
+  const [loopsAdded, setLoopsAdded] = useState(0);
 
   const toRoot = () => {
     navigation.navigate('Root');
@@ -47,7 +48,9 @@ const SupplementaryForm = ({
     if (selectedForm === 'vitals') {
       setConfig(vitalsConfig);
     }
-    if (selectedForm === 'custom') setConfig(customForm);
+    if (selectedForm === 'custom') {
+      setConfig(customForm);
+    }
   }, [selectedForm, config]);
 
   return (
@@ -74,7 +77,8 @@ const SupplementaryForm = ({
           parseUser: user.objectId,
           parseClass: config.class,
           photoFile,
-          localObject: formObjectUpdated
+          localObject: formObjectUpdated,
+          loop: loopsAdded !== 0
         };
 
         if (selectedForm === 'custom') {
@@ -122,6 +126,9 @@ const SupplementaryForm = ({
                 data={result}
                 formikProps={formikProps}
                 customForm={config.customForm}
+                config={config}
+                loopsAdded={loopsAdded}
+                setLoopsAdded={setLoopsAdded}
               />
             </View>
           ))}
