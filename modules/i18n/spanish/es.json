@@ -556,7 +556,8 @@
     "communityName": "Nombre de la comunidad",
     "province": "Provincia",
     "country": "País",
-    "swipeAttachForm": "Deslizar para adjuntar formulario"
+    "swipeAttachForm": "Toque para adjuntar formulario",
+    "tapCreateAsset": "Toque para crear un activo nuevo"
   },
   "assetFormSelect": {
     "supAssetForms": "Formularios de activos suplementarios"

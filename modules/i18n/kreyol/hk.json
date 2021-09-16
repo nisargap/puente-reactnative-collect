@@ -556,7 +556,8 @@
     "communityName": "Non kominote a",
     "province": "Pwovens",
     "country": "Peyi",
-    "swipeAttachForm": "Glise nan Tache Fòm"
+    "swipeAttachForm": "Tape pou Tache Fòm",
+    "tapCreateAsset": "Tape pou kreye nouvo byen"
   },
   "assetFormSelect": {
     "supAssetForms": "Fòm Byen Siplemantè"

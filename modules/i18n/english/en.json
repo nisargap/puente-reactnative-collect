@@ -550,13 +550,15 @@
     "add": "Add"
   },
   "assetCore": {
+    "newAsset": "New Asset",
     "nameOfAssets": "Name of Assets",
     "addPeople": "Add People",
     "getLocation": "Get Location",
     "communityName": "Community Name",
     "province": "Province",
     "country": "Country",
-    "swipeAttachForm": "Swipe to Attach Form"
+    "swipeAttachForm": "Tap to Attach Form",
+    "tapCreateAsset": "Tap to Create New Asset"
   },
   "assetFormSelect": {
     "supAssetForms": "Supplementary Asset Forms"
