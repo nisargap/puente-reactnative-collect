@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.9.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.3...v11.9.4) (2021-09-16)
+
+
+### New Features
+
+* change swipe view on assets to button based for formatting purposes ([6677ab4](https://github.com/hopetambala/puente-reactnative-collect/commit/6677ab4ca8584eab0922607e737bd17d869753c6))
+* initial loop set up for forms ([ca67897](https://github.com/hopetambala/puente-reactnative-collect/commit/ca678977ec9bc709db0bd870b43a1f25e9b15bbb))
+* loops added and documented working ([ef3afe5](https://github.com/hopetambala/puente-reactnative-collect/commit/ef3afe50170d81bb445d4c35fecdd48ed9395070))
+* refactor loop PIP to separate cocmponent ([a9bf244](https://github.com/hopetambala/puente-reactnative-collect/commit/a9bf2446b29281b6a30cd94c5bafe003e7dd0005))
+* remove loop added and loops tracked individually ([4d0ea7f](https://github.com/hopetambala/puente-reactnative-collect/commit/4d0ea7f913e359d5226dc14b18686153d41a4b32))
+* translations for loop ([80c86ec](https://github.com/hopetambala/puente-reactnative-collect/commit/80c86ece21077ccadcc3edd464c831393e3791db))
+
+
+### Bug fixes
+
+* allow asset core to scroll entire height of device ([57593ed](https://github.com/hopetambala/puente-reactnative-collect/commit/57593edead08fb1715ecdecf25f7afcf5a7a9c49))
+* dependency cycle in looper resolved ([906bc1e](https://github.com/hopetambala/puente-reactnative-collect/commit/906bc1ed12e1ce640b9ce095817813dbb185cf11))
+* environmental form submission, and minor touch ups to form ([1284884](https://github.com/hopetambala/puente-reactnative-collect/commit/1284884d258505fb566c821510647c45ccd8106d))
+* other option envHealth govAssistance ([ddde463](https://github.com/hopetambala/puente-reactnative-collect/commit/ddde463b4f143bdff139a243260a4272c18ba75a))
+* pagerview to button ([17b2daa](https://github.com/hopetambala/puente-reactnative-collect/commit/17b2daa1d6387144a797d0e4b56c7a8b3acbc491))
+* survey Form issue (nmo config) and useEffect fix ([429bf16](https://github.com/hopetambala/puente-reactnative-collect/commit/429bf16944731a84db2b177ea4b0c8cc764a1eeb))
+
 ### [11.9.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.2...v11.9.3) (2021-08-27)
 
 
