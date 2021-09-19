@@ -213,6 +213,8 @@ const DataCollection = ({ navigation }) => {
                     setSelectedAsset={setSelectedAsset}
                     navigateToNewAssets={navigateToNewAssets}
                     navigateToViewAllAssets={navigateToViewAllAssets}
+                    scrollViewScroll={scrollViewScroll}
+                    setScrollViewScroll={setScrollViewScroll}
                   />
                 </View>
               )}

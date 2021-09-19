@@ -12,7 +12,7 @@ import { layout } from '../../../../../modules/theme';
 
 const SelectedAsset = ({ selectedMarker, switchAssetPage }) => (
   <TouchableWithoutFeedback
-    onPress={switchAssetPage ? () => switchAssetPage(1, selectedMarker) : (e) => e}
+    onPress={switchAssetPage ? () => switchAssetPage('assetSupplementary', selectedMarker) : (e) => e}
     style={layout.resCardContainer}
   >
     <View
