@@ -57,7 +57,16 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            formObject.searchIndex = `${values.fname || ''} ${values.lname || ''}`;
+            formObject.searchIndex = [
+              values.fname,
+              values.lname,
+              values.nickname,
+              values.communityname
+            ]
+              .filter((result) => result)
+              .map((result) => result.toLowerCase().trim());
+
+            formObject.fullTextSearchIndex = formObject.searchIndex.join(' ');
 
             const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
             valuesToPrune.forEach((value) => {
