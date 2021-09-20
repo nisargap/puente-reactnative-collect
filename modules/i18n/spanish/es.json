@@ -525,7 +525,9 @@
   "paperButton": {
     "getLocation": "Obtener ubicación",
     "getLocationAgain": "Obtener ubicación de nuevo",
-    "takePhoto": "Tomar foto"
+    "takePhoto": "Tomar foto",
+    "addAdditional": "Agregar adicional ",
+    "removePrevious": "Quitar el anterior "
   },
   "bottomTab":{
     "dataCollection": "Recopilación de datos"
@@ -554,7 +556,8 @@
     "communityName": "Nombre de la comunidad",
     "province": "Provincia",
     "country": "País",
-    "swipeAttachForm": "Deslizar para adjuntar formulario"
+    "swipeAttachForm": "Toque para adjuntar formulario",
+    "tapCreateAsset": "Toque para crear un activo nuevo"
   },
   "assetFormSelect": {
     "supAssetForms": "Formularios de activos suplementarios"

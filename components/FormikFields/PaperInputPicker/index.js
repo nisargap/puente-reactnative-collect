@@ -19,10 +19,12 @@ import HouseholdManager from './HouseholdManager';
 import {
   styleButton, styles, stylesDefault, stylesPaper, styleX
 } from './index.style';
+import Looper from './Looper';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
-  customForm, ...rest
+  customForm, config, loopsAdded, setLoopsAdded,
+  ...rest
 }) => {
   const {
     label, formikKey, fieldType, sideLabel
@@ -61,6 +63,8 @@ const PaperInputPicker = ({
   const [cameraVisible, setCameraVisible] = React.useState(false);
   const [pictureUris, setPictureUris] = React.useState({});
   const [image, setImage] = React.useState(null);
+
+  const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
 
   return (
     <>
@@ -501,6 +505,33 @@ const PaperInputPicker = ({
             </View>
           )}
         </View>
+      )}
+      {fieldType === 'loop' && (
+      <View key={formikKey}>
+        {additionalQuestions !== undefined && additionalQuestions.length !== 0
+              && additionalQuestions.map((question) => (
+                <PaperInputPicker
+                  data={question}
+                  formikProps={formikProps}
+                  customForm={customForm}
+                  config={config}
+                  loopsAdded={loopsAdded}
+                  setLoopsAdded={setLoopsAdded}
+                  surveyingOrganization={surveyingOrganization}
+                  scrollViewScroll={scrollViewScroll}
+                  setScrollViewScroll={setScrollViewScroll}
+                />
+              ))}
+        <Looper
+          data={data}
+          config={config}
+          additionalQuestions={additionalQuestions}
+          setAdditionalQuestions={setAdditionalQuestions}
+          translatedLabel={translatedLabel}
+          loopsAdded={loopsAdded}
+          setLoopsAdded={setLoopsAdded}
+        />
+      </View>
       )}
     </>
   );

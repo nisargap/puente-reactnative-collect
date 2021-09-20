@@ -5,9 +5,9 @@ import NewAssets from './NewAssets';
 import ViewAssets from './ViewAssets';
 
 const Assets = ({
-  selectedAsset, setSelectedAsset, surveyingOrganization
+  selectedAsset, setSelectedAsset, surveyingOrganization, scrollViewScroll, setScrollViewScroll
 }) => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState('assetCore');
 
   const switchAssetPage = (pageIndex, asset) => {
     setPage(pageIndex);
@@ -22,6 +22,9 @@ const Assets = ({
           selectedAsset={selectedAsset}
           surveyingOrganization={surveyingOrganization}
           assetPageIndex={page}
+          scrollViewScroll={scrollViewScroll}
+          setScrollViewScroll={setScrollViewScroll}
+          setPage={setPage}
         />
         )}
         {selectedAsset === null && (

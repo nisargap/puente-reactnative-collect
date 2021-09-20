@@ -18,7 +18,7 @@ import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 
 const AssetSupplementary = ({
-  selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser
+  selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser, setPage
 }) => {
   const [selectedForm, setSelectedForm] = useState();
   const [submitting, setSubmitting] = useState(false);
@@ -132,6 +132,11 @@ const AssetSupplementary = ({
                     buttonText={validForm() ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
                   />
                 )}
+                <PaperButton
+                  mode="text"
+                  buttonText={I18n.t('assetCore.tapCreateAsset')}
+                  onPressEvent={() => setPage('assetCore')}
+                />
               </View>
             </View>
           </TouchableWithoutFeedback>

@@ -525,7 +525,9 @@
   "paperButton": {
     "getLocation": "Jwenn Kote",
     "getLocationAgain": "Jwenn Kote Ankò",
-    "takePhoto": "Pran foto"
+    "takePhoto": "Pran foto",
+    "addAdditional": "Add Lòt ",
+    "removePrevious": "Retire Previous "
   },
   "bottomTab":{
     "dataCollection": "Done Koleksyon"
@@ -554,7 +556,8 @@
     "communityName": "Non kominote a",
     "province": "Pwovens",
     "country": "Peyi",
-    "swipeAttachForm": "Glise nan Tache Fòm"
+    "swipeAttachForm": "Tape pou Tache Fòm",
+    "tapCreateAsset": "Tape pou kreye nouvo byen"
   },
   "assetFormSelect": {
     "supAssetForms": "Fòm Byen Siplemantè"
