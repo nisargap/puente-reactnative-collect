@@ -80,7 +80,7 @@ export default function populateCache(user, expoToken) {
       // store current app version
       const appVersion = Updates.manifest.version;
       await getData('appVersion').then(async (currentAppVersion) => {
-        if (appVersion !== currentAppVersion && appVersion !== null && appVersion !== undefined) {
+        if (appVersion !== currentAppVersion && appVersion) {
           await storeData(appVersion, 'appVersion');
         }
       });
