@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Platform,
   View
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
@@ -65,7 +66,8 @@ const SupplementaryForm = ({
 
         formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
         formObject.surveyingOrganization = surveyingOrganization || user.organization;
-        formObject.appVersion = await getData('appVersion');
+        formObject.appVersion = await getData('appVersion') || '';
+        formObject.phoneOS = Platform.OS || '';
 
         let formObjectUpdated = addSelectTextInputs(values, formObject);
         if (selectedForm === 'vitals') {
