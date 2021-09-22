@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.9.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.4...v11.9.5) (2021-09-22)
+
+
+### Bug fixes
+
+* adding app version failsafe to the submissions ([990e269](https://github.com/hopetambala/puente-reactnative-collect/commit/990e26908ae3b17e89ac31897609539f6850922d))
+* remove promise.all ([767e98f](https://github.com/hopetambala/puente-reactnative-collect/commit/767e98f5da37e88352d60a8afa5356e9e29503a3))
+
 ### [11.9.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.3...v11.9.4) (2021-09-16)
 
 
