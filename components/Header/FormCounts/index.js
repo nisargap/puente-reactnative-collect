@@ -16,8 +16,15 @@ const FormCounts = ({ setShowCounts }) => {
   const [envHealthCount, setEnvHealthCount] = useState(0);
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
+  const [assetCount, setAssetCount] = useState(0)
   const [userName, setUserName] = useState(' ');
-  const [queryDone, setQueryDone] = useState(false);
+
+  const [queriesDone, setQueriesDone] = useState(0);
+  const [surveyDone,setSurveyDone] = useState(false);
+  const [envHealthDone, setEnvHealthDone] = useState(false);
+  const [vitalsDone, setVitalsDone] = useState(false);
+  const [customDone, setCustomDone] = useState(false);
+  const [assetDone, setAssetDone] = useState(false);
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -47,25 +54,50 @@ const FormCounts = ({ setShowCounts }) => {
       parseColumn: 'surveyingUser',
       parseParam: userName
     };
-    const idPromise = countService(postParamsSurvey);
-    const envHealthPromise = countService(postParamsEnvHealth);
-    const vitalsPromise = countService(postParamsVitals);
-    const customFormsPromise = countService(postParamsCustomForms);
+    const postParamsAssets = {
+      ParseClass: 'FormResults',
+      parseColumn: 'surveyingUser',
+      parseParam: userName
+    };
 
-    Promise.all([idPromise, envHealthPromise, vitalsPromise, customFormsPromise]).then((values) => {
-      setSurveyCount(values[0]);
-      setEnvHealthCount(values[1]);
-      setVitalsCount(values[2]);
-      setCustomCount(values[3]);
-      setQueryDone(true);
+    // update all queries to ensure each is done, other useEffect used
+    // to ensure all have completed before rendering
+    countService(postParamsSurvey).then(surveyCount => {
+      setSurveyCount(surveyCount)
+      setSurveyDone(true);
     });
+    countService(postParamsEnvHealth).then(envHealthCount => {
+      setEnvHealthCount(envHealthCount)
+      setEnvHealthDone(true);
+    });
+    countService(postParamsVitals).then(vitalsCount => {
+       setVitalsCount(vitalsCount)
+       setVitalsDone(true);
+    });
+    countService(postParamsCustomForms).then(customCount => {
+      setCustomCount(customCount)
+      setCustomDone(true);
+    });
+    countService(postParamsAssets).then(assetCount => {
+      setAssetCount(assetCount)
+      setAssetDone(true);
+    });
+  
   }, [userName]);
+
+  useEffect(() => {
+    if(surveyDone === true && envHealthDone === true &&
+      vitalsDone === true && customDone === true &&
+      assetDone === true) {
+        setQueriesDone(true);
+      }
+  }, [surveyDone, envHealthDone,vitalsDone,customDone,assetDone])
 
   return (
     <View>
       <Text style={styles.headerFormText}>Surveys Collected</Text>
       <View style={styles.horizontalLineGray} />
-      {queryDone ? (
+      {queriesDone ? (
         <View>
           <View style={styles.countContainer}>
             <Text style={styles.label}>ID Forms</Text>
@@ -85,6 +117,11 @@ const FormCounts = ({ setShowCounts }) => {
           <View style={styles.countContainer}>
             <Text style={styles.label}>Custom Forms</Text>
             <Text style={styles.count}>{customCount}</Text>
+          </View>
+          <View style={styles.horizontalLineGray} />
+          <View style={styles.countContainer}>
+            <Text style={styles.label}>Asset Forms</Text>
+            <Text style={styles.count}>{assetCount}</Text>
           </View>
           <View style={styles.horizontalLineGray} />
         </View>
