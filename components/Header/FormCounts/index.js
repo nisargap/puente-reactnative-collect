@@ -16,11 +16,11 @@ const FormCounts = ({ setShowCounts }) => {
   const [envHealthCount, setEnvHealthCount] = useState(0);
   const [vitalsCount, setVitalsCount] = useState(0);
   const [customCount, setCustomCount] = useState(0);
-  const [assetCount, setAssetCount] = useState(0)
+  const [assetCount, setAssetCount] = useState(0);
   const [userName, setUserName] = useState(' ');
 
   const [queriesDone, setQueriesDone] = useState(0);
-  const [surveyDone,setSurveyDone] = useState(false);
+  const [surveyDone, setSurveyDone] = useState(false);
   const [envHealthDone, setEnvHealthDone] = useState(false);
   const [vitalsDone, setVitalsDone] = useState(false);
   const [customDone, setCustomDone] = useState(false);
@@ -62,36 +62,35 @@ const FormCounts = ({ setShowCounts }) => {
 
     // update all queries to ensure each is done, other useEffect used
     // to ensure all have completed before rendering
-    countService(postParamsSurvey).then(surveyCount => {
-      setSurveyCount(surveyCount)
+    countService(postParamsSurvey).then((surveyCounts) => {
+      setSurveyCount(surveyCounts);
       setSurveyDone(true);
     });
-    countService(postParamsEnvHealth).then(envHealthCount => {
-      setEnvHealthCount(envHealthCount)
+    countService(postParamsEnvHealth).then((envHealthCounts) => {
+      setEnvHealthCount(envHealthCounts);
       setEnvHealthDone(true);
     });
-    countService(postParamsVitals).then(vitalsCount => {
-       setVitalsCount(vitalsCount)
-       setVitalsDone(true);
+    countService(postParamsVitals).then((vitalsCounts) => {
+      setVitalsCount(vitalsCounts);
+      setVitalsDone(true);
     });
-    countService(postParamsCustomForms).then(customCount => {
-      setCustomCount(customCount)
+    countService(postParamsCustomForms).then((customCounts) => {
+      setCustomCount(customCounts);
       setCustomDone(true);
     });
-    countService(postParamsAssets).then(assetCount => {
-      setAssetCount(assetCount)
+    countService(postParamsAssets).then((assetCounts) => {
+      setAssetCount(assetCounts);
       setAssetDone(true);
     });
-  
   }, [userName]);
 
   useEffect(() => {
-    if(surveyDone === true && envHealthDone === true &&
-      vitalsDone === true && customDone === true &&
-      assetDone === true) {
-        setQueriesDone(true);
-      }
-  }, [surveyDone, envHealthDone,vitalsDone,customDone,assetDone])
+    if (surveyDone === true && envHealthDone === true
+      && vitalsDone === true && customDone === true
+      && assetDone === true) {
+      setQueriesDone(true);
+    }
+  }, [surveyDone, envHealthDone, vitalsDone, customDone, assetDone]);
 
   return (
     <View>
