@@ -1,6 +1,5 @@
 import { Spinner } from 'native-base';
-import React, { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useState, useEffect } from 'react';
 import {
   View
 } from 'react-native';
@@ -19,12 +18,8 @@ const FormCounts = ({ setShowCounts }) => {
   const [assetCount, setAssetCount] = useState(0);
   const [userName, setUserName] = useState(' ');
 
-  const [queriesDone, setQueriesDone] = useState(0);
-  const [surveyDone, setSurveyDone] = useState(false);
-  const [envHealthDone, setEnvHealthDone] = useState(false);
-  const [vitalsDone, setVitalsDone] = useState(false);
-  const [customDone, setCustomDone] = useState(false);
-  const [assetDone, setAssetDone] = useState(false);
+  const [queryDone, setQueryDone] = useState(false);
+
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -60,43 +55,26 @@ const FormCounts = ({ setShowCounts }) => {
       parseParam: userName
     };
 
-    // update all queries to ensure each is done, other useEffect used
-    // to ensure all have completed before rendering
-    countService(postParamsSurvey).then((surveyCounts) => {
-      setSurveyCount(surveyCounts);
-      setSurveyDone(true);
-    });
-    countService(postParamsEnvHealth).then((envHealthCounts) => {
-      setEnvHealthCount(envHealthCounts);
-      setEnvHealthDone(true);
-    });
-    countService(postParamsVitals).then((vitalsCounts) => {
-      setVitalsCount(vitalsCounts);
-      setVitalsDone(true);
-    });
-    countService(postParamsCustomForms).then((customCounts) => {
-      setCustomCount(customCounts);
-      setCustomDone(true);
-    });
-    countService(postParamsAssets).then((assetCounts) => {
-      setAssetCount(assetCounts);
-      setAssetDone(true);
-    });
-  }, [userName]);
+    const idPromise = countService(postParamsSurvey);
+    const envHealthPromise = countService(postParamsEnvHealth);
+    const vitalsPromise = countService(postParamsVitals);
+    const customFormsPromise = countService(postParamsCustomForms);
+    const assetPromise = countService(postParamsAssets);
 
-  useEffect(() => {
-    if (surveyDone === true && envHealthDone === true
-      && vitalsDone === true && customDone === true
-      && assetDone === true) {
-      setQueriesDone(true);
-    }
-  }, [surveyDone, envHealthDone, vitalsDone, customDone, assetDone]);
+    Promise.all([idPromise, envHealthPromise, vitalsPromise, customFormsPromise, assetPromise]).then((values) => {
+      setSurveyCount(values[0]);
+      setEnvHealthCount(values[1]);
+      setVitalsCount(values[2]);
+      setCustomCount(values[3]);
+      setAssetCount(values[4])
+      setQueryDone(true);
+  }, [userName]);
 
   return (
     <View>
       <Text style={styles.headerFormText}>Surveys Collected</Text>
       <View style={styles.horizontalLineGray} />
-      {queriesDone ? (
+      {queryDone ? (
         <View>
           <View style={styles.countContainer}>
             <Text style={styles.label}>ID Forms</Text>
