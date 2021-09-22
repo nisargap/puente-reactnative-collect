@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Platform,
   ScrollView, View
 } from 'react-native';
 import {
@@ -43,7 +44,8 @@ const AssetCore = ({
             setSubmitting(true);
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.surveyingOrganization = surveyingOrganization;
-            formObject.appVersion = await getData('appVersion');
+            formObject.appVersion = await getData('appVersion') || '';
+            formObject.phoneOS = Platform.OS || '';
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
             formObject.altitude = values.location?.altitude || 0;
