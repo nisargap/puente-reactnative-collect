@@ -569,6 +569,17 @@
     "Vitals": "Partes vitales"
   },
   "submissionError":{
-    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste."
+    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste.",
+  },
+  "formCounts": {
+    "surveysCollected": "Encuestas recopiladas",
+    "error": "Ha habido un error al obtener sus datos. Verifique su conexión a Internet y vuelva a intentarlo.",
+    "offline": "Actualmente estás desconectado. Vuelva a consultar cuando esté conectado a Internet.",
+    "idForms": "Formularios de identificación",
+    "envHealthForms": "Formularios de salud ambiental",
+    "vitalsForms": "Formas vitales",
+    "customForms": "Formularios personalizados",
+    "assetForms": "Formularios de activos",
+    "back": "atrás"
   }
 }
