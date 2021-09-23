@@ -562,6 +562,9 @@
   "assetFormSelect": {
     "supAssetForms": "Fòm Byen Siplemantè"
   },
+  "submissionError":{
+    "error": "ERÈ!\n\nFòm ou pa te soumèt. Tanpri eseye ankò oswa kontakte sipèvizè ou a si pwoblèm nan kontinye."
+  },
   "formCounts": {
     "surveysCollected": "Sondaj kolekte",
     "error": "Te gen yon erè ap resevwa done ou. Tcheke koneksyon entènèt ou an epi eseye ankò.",
