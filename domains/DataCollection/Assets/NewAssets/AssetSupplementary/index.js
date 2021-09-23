@@ -1,6 +1,8 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { ActivityIndicator, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  ActivityIndicator, Platform, TouchableWithoutFeedback, View
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
@@ -41,7 +43,7 @@ const AssetSupplementary = ({
           const user = await getData('currentUser');
 
           const surveyingUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-          const appVersion = await getData('appVersion');
+          const appVersion = await getData('appVersion') || '';
 
           const formObjectUpdated = addSelectTextInputs(values, formObject);
 
@@ -67,7 +69,8 @@ const AssetSupplementary = ({
             fields: fieldsArray,
             surveyingOrganization,
             surveyingUser: surveyingUserFailSafe,
-            appVersion
+            appVersion,
+            phoneOS: Platform.OS || ''
           };
 
           const submitAction = () => {

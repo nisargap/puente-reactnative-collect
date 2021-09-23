@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+import * as Updates from 'expo-updates';
 
 import { retrievAddUserPushToken, retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
@@ -78,9 +78,9 @@ export default function populateCache(user, expoToken) {
     })
     .then(async () => {
       // store current app version
-      const appVersion = Constants.manifest.version;
+      const appVersion = Updates.manifest.version;
       await getData('appVersion').then(async (currentAppVersion) => {
-        if (appVersion !== currentAppVersion && appVersion !== null && appVersion !== undefined) {
+        if (appVersion !== currentAppVersion && appVersion) {
           await storeData(appVersion, 'appVersion');
         }
       });

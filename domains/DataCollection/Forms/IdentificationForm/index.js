@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Keyboard,
-  TouchableWithoutFeedback, View,
+  Platform,
+  TouchableWithoutFeedback, View
 } from 'react-native';
 
 import PaperButton from '../../../../components/Button';
@@ -49,7 +50,8 @@ const IdentificationForm = ({
 
             formObject.surveyingOrganization = surveyingOrganization || user.organization;
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-            formObject.appVersion = await getData('appVersion');
+            formObject.appVersion = await getData('appVersion') || '';
+            formObject.phoneOS = Platform.OS || '';
 
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
