@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import * as React from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useEffect, useState } from 'react';
 import {
   View
 } from 'react-native';
@@ -19,9 +18,9 @@ const Looper = ({
     formikKey, numberQuestionsToRepeat
   } = data;
 
-  const [individualLoopsAdded, setIndividualLoopsAdded] = React.useState(0);
-  const [questionsToRepeat, setQuestionsToRepeat] = React.useState([]);
-  const [numberedQestions, setNumberedQuestions] = React.useState({});
+  const [individualLoopsAdded, setIndividualLoopsAdded] = useState(0);
+  const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
+  const [numberedQestions, setNumberedQuestions] = useState({});
 
   useEffect(() => {
     numberQuestionsInConfig();

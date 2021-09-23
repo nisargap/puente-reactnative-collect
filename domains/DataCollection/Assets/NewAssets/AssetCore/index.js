@@ -111,7 +111,7 @@ const AssetCore = ({
               <PopupError
                 error={submissionError}
                 setError={setSubmissionError}
-                errorMessage={"submissionError.error"}
+                errorMessage="submissionError.error"
               />
             </View>
           )}

@@ -563,7 +563,8 @@
     "supAssetForms": "Fòm Byen Siplemantè"
   },
   "submissionError":{
-    "error": "ERÈ!\n\nFòm ou pa te soumèt. Tanpri eseye ankò oswa kontakte sipèvizè ou a si pwoblèm nan kontinye."
+    "error": "ERÈ!\n\nFòm ou pa te soumèt. Tanpri eseye ankò oswa kontakte sipèvizè ou a si pwoblèm nan kontinye.",
+    "geolocation":"DELÉ!\n\nGeolokalizasyon telefòn ou an pa t 'kapab jwenn nan aparèy ou an. Tanpri eseye ankò"
   },
   "formCounts": {
     "surveysCollected": "Sondaj kolekte",
