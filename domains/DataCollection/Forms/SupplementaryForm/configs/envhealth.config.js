@@ -87,6 +87,22 @@ const configArray = {
         value: 'HouseRepairs'
       },
       {
+        label: 'environmentalHealth.biggestProblemComm.education',
+        value: 'Education'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.sports',
+        value: 'Sports'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.sanitation',
+        value: 'Sanitation'
+      },
+      {
+        label: 'environmentalHealth.biggestProblemComm.communityAwareness',
+        value: 'CommunityAwareness'
+      },
+      {
         label: 'global.other',
         value: 'other',
         text: true,
@@ -267,18 +283,22 @@ const configArray = {
     validation: false
   },
   {
-    label: 'environmentalHealth.houseOwnership',
+    label: 'environmentalHealth.houseOwnership.label',
     formikKey: 'houseownership',
     value: '',
     fieldType: 'select',
     options: [
       {
-        label: 'global.yes',
-        value: 'Yes'
+        label: 'environmentalHealth.houseOwnership.Own',
+        value: 'Own'
       },
       {
-        label: 'global.no',
-        value: 'No'
+        label: 'environmentalHealth.houseOwnership.Rent',
+        value: 'Rent'
+      },
+      {
+        label: 'environmentalHealth.houseOwnership.Provided',
+        value: 'Provided'
       }
     ],
     validation: false
@@ -357,16 +377,16 @@ const configArray = {
     fieldType: 'select',
     options: [
       {
-        label: 'environmentalHealth.typeStove.constructedVentilation',
-        value: 'cementStove-Ventilation'
-      },
-      {
         label: 'environmentalHealth.typeStove.stoveTop',
-        value: 'stoveTop'
+        value: 'gasStove'
       },
       {
-        label: 'environmentalHealth.typeStove.openFire',
-        value: 'openfire-noVentilation'
+        label: 'environmentalHealth.typeStove.firewood',
+        value: 'firewoodStove'
+      },
+      {
+        label: 'environmentalHealth.typeStove.charcoalStove',
+        value: 'charcoalStove'
       }
     ],
     validation: false
@@ -386,8 +406,12 @@ const configArray = {
         value: 'wood'
       },
       {
-        label: 'environmentalHealth.houseMaterials.partBlock_partWood',
-        value: 'partBlock_partWood'
+        label: 'environmentalHealth.houseMaterials.woodAndBlock',
+        value: 'woodAndBlock'
+      },
+      {
+        label: 'environmentalHealth.houseMaterials.woodAndZinc',
+        value: 'woodAndZinc'
       },
       {
         label: 'environmentalHealth.houseMaterials.block',
@@ -459,8 +483,12 @@ const configArray = {
     fieldType: 'select',
     options: [
       {
+        label: 'environmentalHealth.govAssistance.solidarityCard',
+        value: 'solidarityCard'
+      },
+      {
         label: 'environmentalHealth.govAssistance.foodStamps',
-        value: 'solidaridad'
+        value: 'foodStamps'
       },
       {
         label: 'environmentalHealth.govAssistance.adultLiteracy',

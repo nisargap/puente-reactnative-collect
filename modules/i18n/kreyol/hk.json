@@ -99,7 +99,7 @@
       "year": "Ane"
     },
     "sex": {
-      "label": "Sex",
+      "label": "Sèks byolojik",
       "male": "Gason",
       "female": "Fanm",
       "notSay": "Prefere pa di"
@@ -132,7 +132,7 @@
     "latitude": "Latitid",
     "longitude": "Lonjitid",
     "household": "Kay",
-    "subcounty": "Sub-county",
+    "subcounty": "Sub-konte",
     "region": "Rejyon an",
     "country": "Peyi",
     "photoAssessment": "Foto Evalyasyon"
@@ -154,7 +154,11 @@
       "Trash": "Fatra",
       "Street": "Lari",
       "AccessToBathrooms": "Aksè nan twalèt",
-      "HouseRepairs": "Reparasyon kay"
+      "HouseRepairs": "Reparasyon kay",
+      "education": "Edikasyon",
+      "sports": "Espò",
+      "sanitation": "Asenisman",
+      "communityAwareness": "Konsyantizasyon Kominote"
     },
     "waterAccess": {
       "label": "Akse ak dlo",
@@ -195,7 +199,12 @@
       "OnceOrTwiceAMonth": "Yon fwa oswa de fwa nan yon mwa"
     },
     "trashBetweenPickups": "Ki kote roun yo jete fatra?",
-    "houseOwnership": "Ou se mèt kaysaa?",
+    "houseOwnership": {
+      "label": "Pwopriyetè kay",
+      "Own":"Pwòp",
+      "Rent":"Lwe",
+      "Provided": "Bay"
+    },
     "floorCondition": {
       "label": "Kijan atè a fèt?",
       "Poor": "Pòv",
@@ -211,21 +220,22 @@
     "floorMaterial": {
       "label": "Materyèl nan etaj nan kay ou a?",
       "Dirt": "Pousyè tè",
-      "Cement": "Cement",
+      "Cement": "Siman",
       "Wood": "Bwa",
       "Ceramic": "Seramik"
     },
     "typeStove": {
       "label": "Kalite tèt recho",
-      "constructedVentilation": "Konstwi recho ak vantilasyon",
-      "stoveTop": "Recho ak tank oswa elektrisite",
-      "openFire": "Louvri dife"
+      "charcoalStove": "Recho chabon",
+      "stoveTop": "Recho tank gaz",
+      "firewood": "Recho bwa dife"
     },
     "houseMaterials": {
-      "label": "Ki materyèl kay ou te fè soti nan",
+      "label": "Ki materyèl kay ou te fè soti nan?",
       "zinc": "Zenk",
       "wood": "Bwa",
-      "partBlock_partWood": "Pati cinderblock, pati bwa",
+      "woodAndBlock": "Cinderblock ak bwa",
+      "woodAndZinc": "Bwa ak zenk",
       "block": "Cinderblock",
       "brick": "Brik",
       "clay": "Ajil"
@@ -241,7 +251,8 @@
       "label": "Èske ou gen aksè a asistans gouvènman an?",
       "foodStamps": "Koupon pou Achte Manje",
       "adultLiteracy": "Pwogram alfabetizasyon pou granmoun",
-      "noAssistance": "Pa gen asistans"
+      "noAssistance": "Pa gen asistans",
+      "solidarityCard": "Kat solidarite"
     },
     "numberIndividualsHouse": "Kantite moun k ap viv nan kay la",
     "numberChildrenUnder5": {
@@ -318,7 +329,7 @@
     "pulse": "Batman (batman pa minit)",
     "bpm": "Respirasyon pa minit",
     "respRate": "Nivo respirasyon",
-    "breathspm": "Breaths Per Minute",
+    "breathspm": "Souf pou chak minit",
     "bloodPressure": {
       "label": "Presyon sangen",
       "systolic": "Sistolik",

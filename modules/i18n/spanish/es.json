@@ -14,7 +14,7 @@
     "error": "Error",
     "success":"¡Éxito!",
     "ok": "OK",
-    "emptyForm": "Empty Form",
+    "emptyForm": "Forma vacía",
     "back": "Regresa"
   },
   "signUp": {
@@ -107,10 +107,10 @@
     "telephone": "Número de teléfono",
     "marriageStatus": {
       "label": "Estado civil",
-      "single": "Soltera",
-      "married": "Casada",
+      "single": "Soltero/a",
+      "married": "Casado/a",
       "cohabitation": "Unión libre",
-      "widow": "Viuda"
+      "widow": "Viudo/a"
     },
     "occupation": "Ocupación",
     "educationLevel": {
@@ -120,7 +120,8 @@
       "hs": "Termino la escuela secundaria",
       "someHS": "Algún instituto",
       "college": "Universidad terminada",
-      "someCollege": "Alguna educación superior"
+      "someCollege": "Alguna educación superior",
+      "technicalCourse": "Curso técnico"
     },
     "cedulaNumber": "Número de cedula",
     "location": "Ubicación",
@@ -154,7 +155,11 @@
       "Trash": "La Basura",
       "Street": "La Calle",
       "AccessToBathrooms": "El Acceso a Baños",
-      "HouseRepairs": "Reparaciones de la casa"
+      "HouseRepairs": "Reparaciones de la casa",
+      "education": "Educación",
+      "sports": "Deportes",
+      "sanitation": "Sanemiento",
+      "communityAwareness": "Concientización comunitaria"
     },
     "waterAccess": {
       "label": "Acceso al agua",
@@ -195,12 +200,17 @@
       "OnceOrTwiceAMonth": "1-2 veces al mes"
     },
     "trashBetweenPickups": "¿Dónde deja su basura al momento de ser recogida?",
-    "houseOwnership": "¿Esta casa es propia?",
+    "houseOwnership":{
+      "label": "¿Esta casa es propia?",
+      "Own": "Propia",
+      "Rent": "Alquilada",
+      "Provided": "Prestada"
+    },
     "floorCondition": {
       "label": "¿Estado del suelo de su casa?",
-      "Poor": "Pobre",
-      "Working": "Laboral",
-      "Excellent": "Excelente"
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
     },
     "floorMaterial": {
       "label": "¿Material de piso en tu casa?",
@@ -211,24 +221,25 @@
     },
     "roofCondition": {
       "label": "¿Estado del techo de su casa?",
-      "Poor": "Pobre",
-      "Working": "Laboral",
-      "Excellent": "Excelente"
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
     },
     "typeStove": {
-      "label": "Tipo de estufa",
-      "constructedVentilation": "Estufa construida con ventilación",
-      "stoveTop": "Estufa con tanque o electricidad",
-      "openFire": " Leña"
+      "label": "¿Tipo de estufa que utiliza?",
+      "charcoalStove": "Anafe con carbón",
+      "stoveTop": "Estufa con tanque de gas",
+      "firewood": "Fogón con leña"
     },
     "houseMaterials": {
       "label": "¿De qué material está hecha tu casa?",
       "zinc": "Zinc",
       "wood": "Madera",
-      "partBlock_partWood": "Parte bloque, parte madera",
+      "woodAndBlock": "Madera y Block",
       "block": "Cuadra",
       "brick": "Ladrillo",
-      "clay": " Arcilla"
+      "clay": "Arcilla",
+      "woodAndZinc": "Madera y Zinc"
     },
     "electricityAccess": {
       "label": "¿Con qué frecuencia tiene acceso a la electricidad?",
@@ -236,12 +247,13 @@
       "sometimes": "A veces",
       "always": "Siempre"
     },
-    "foodSecurity": "En el último mes, ¿alguna vez te ha preocupado que tú o tu familia no tuvieran suficiente comida para comer?",
+    "foodSecurity": "En el último mes, ¿alguna vez te has preocupado que tú o tu familia no tuvieran suficiente comida para comer?",
     "govAssistance": {
       "label": "¿Tiene acceso a la asistencia del gobierno?",
       "foodStamps": "Cupones de alimentos",
       "adultLiteracy": "Programa de alfabetización de adultos",
-      "noAssistance": "Sin ayuda"
+      "noAssistance": "Sin ayuda",
+      "solidarityCard": "Tarjeta Solidaridad"
     },
     "numberIndividualsHouse": "Número de personas que viven en la casa",
     "numberChildrenUnder5": {
@@ -417,13 +429,13 @@
   },
   "householdManager": {
     "createHousehold": "Crear un nuevo hogar",
-    "linkIndividual": "Vincular a esta persona a una casa existente",
+    "linkIndividual": "Vincular ID con un hogar existente",
     "household": "Casa",
     "householdManager": "Administrador del hogar",
     "relationshipHousehold": "¿Cuál es su función / relación en el hogar?",
     "linked": "Vinculada",
     "useSearchBar": "Please use the searchbar to find and select the correct Household.",
-    "doNothing": "Haga nada",
+    "doNothing": "Solo crear ID",
     "successCreateHousehold": "Ha creado correctamente un nuevo hogar.",
     "noHousehold": "Ha elegido no vincular un hogar.",
     "addCreateHousehold": "Agrega o crea un hogar"

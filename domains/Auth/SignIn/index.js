@@ -105,7 +105,7 @@ const SignIn = ({ navigation }) => {
       I18n.t('signIn.saveLoginCreds'),
       [
         {
-          text: 'Yes',
+          text: 'global.yes',
           onPress: () => {
             const usr = currentUser;
             const credentials = values;
@@ -118,7 +118,7 @@ const SignIn = ({ navigation }) => {
           }
         },
         {
-          text: 'No',
+          text: 'global.no',
           style: 'cancel',
           onPress: () => {
             handleSignIn(values);
