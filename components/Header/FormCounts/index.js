@@ -68,7 +68,8 @@ const FormCounts = ({ setShowCounts }) => {
       setCustomCount(values[3]);
       setAssetCount(values[4])
       setQueryDone(true);
-  }, [userName]);
+  })
+}, [userName]);
 
   return (
     <View>
