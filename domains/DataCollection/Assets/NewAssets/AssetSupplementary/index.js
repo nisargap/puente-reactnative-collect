@@ -18,6 +18,7 @@ import surveyingUserFailsafe from '../../../Forms/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
+import SubmissionError from '../../../../../components/SubmissionError';
 
 const AssetSupplementary = ({
   selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser, setPage
@@ -25,6 +26,7 @@ const AssetSupplementary = ({
   const [selectedForm, setSelectedForm] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [photoFile, setPhotoFile] = useState('State Photo String');
+  const [submissionError, setSubmissionError] = useState(false);
 
   const validForm = () => {
     if (Object.keys(selectedAsset).length > 0 && selectedForm?.objectId) return true;
@@ -88,6 +90,7 @@ const AssetSupplementary = ({
             .catch((e) => {
               console.log(e) //eslint-disable-line
               setSubmitting(false);
+              setSubmissionError(true)
             });
         }}
       >
@@ -141,6 +144,10 @@ const AssetSupplementary = ({
                   onPressEvent={() => setPage('assetCore')}
                 />
               </View>
+              <SubmissionError
+                error={submissionError}
+                setError={setSubmissionError}
+            />
             </View>
           </TouchableWithoutFeedback>
         )}

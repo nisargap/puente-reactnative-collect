@@ -21,6 +21,7 @@ import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
 import { addSelectTextInputs, vitalsBloodPressue } from './utils';
+import SubmissionError from '../../../../components/SubmissionError';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -31,6 +32,7 @@ const SupplementaryForm = ({
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [loopsAdded, setLoopsAdded] = useState(0);
+  const [submissionError, setSubmissionError] = useState(false);
 
   const toRoot = () => {
     navigation.navigate('Root');
@@ -114,6 +116,7 @@ const SupplementaryForm = ({
           console.log(error); // eslint-disable-line
           // perhaps an alert to let the user know there was an error
           setSubmitting(false);
+          setSubmissionError(true)
         });
       }}
       validationSchema={validationSchema}
@@ -156,6 +159,10 @@ const SupplementaryForm = ({
               {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
             </Button>
           )}
+          <SubmissionError
+            error={submissionError}
+            setError={setSubmissionError}
+          />
         </View>
       )}
     </Formik>

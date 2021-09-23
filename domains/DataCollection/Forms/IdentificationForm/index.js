@@ -19,6 +19,7 @@ import { layout, theme } from '../../../../modules/theme';
 import { isEmpty } from '../../../../modules/utils';
 import surveyingUserFailsafe from '../utils';
 import configArray from './config/config';
+import SubmissionError from '../../../../components/SubmissionError';
 
 const IdentificationForm = ({
   scrollViewScroll, setScrollViewScroll,
@@ -31,6 +32,7 @@ const IdentificationForm = ({
   const [inputs, setInputs] = useState({});
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
     setInputs(configArray);
@@ -93,6 +95,7 @@ const IdentificationForm = ({
             }, () => {
               // perhaps an alert to let the user know there was an error
               setSubmitting(false);
+              setSubmissionError(true);
             });
           }}
           validationSchema={validationSchema}
@@ -131,6 +134,10 @@ const IdentificationForm = ({
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
+              <SubmissionError
+                error={submissionError}
+                setError={setSubmissionError}
+              />
             </View>
           )}
         </Formik>

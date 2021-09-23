@@ -20,13 +20,15 @@ import { isEmpty } from '../../../../../modules/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import configArray from './config/config';
 import styles from './index.styles';
+import SubmissionError from '../../../../../components/SubmissionError';
 
 const AssetCore = ({
   setSelectedAsset, scrollViewScroll, setScrollViewScroll,
   surveyingUser, surveyingOrganization, setPage
 }) => {
   const [inputs, setInputs] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);  
+  const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
     setInputs(configArray);
@@ -64,7 +66,10 @@ const AssetCore = ({
                 setSelectedAsset(asset);
               })
               .then(() => resetForm())
-              .catch((e) => console.log(e)); //eslint-disable-line
+              .catch((e) => {
+                console.log(e)
+                setSubmissionError(true)
+              }); //eslint-disable-line
             setSubmitting(false);
           }}
         >
@@ -103,7 +108,10 @@ const AssetCore = ({
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
                 onPressEvent={() => setPage('assetSupplementary')}
               />
-
+              <SubmissionError
+                error={submissionError}
+                setError={setSubmissionError}
+              />
             </View>
           )}
         </Formik>
