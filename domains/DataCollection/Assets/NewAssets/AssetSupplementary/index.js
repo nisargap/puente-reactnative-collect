@@ -147,7 +147,7 @@ const AssetSupplementary = ({
               <PopupError
                 error={submissionError}
                 setError={setSubmissionError}
-                errorMessage={"submissionError.error"}
+                errorMessage="submissionError.error"
               />
             </View>
           </TouchableWithoutFeedback>
