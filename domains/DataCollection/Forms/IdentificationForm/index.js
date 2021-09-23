@@ -12,7 +12,7 @@ import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
-import SubmissionError from '../../../../components/SubmissionError';
+import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -134,9 +134,10 @@ const IdentificationForm = ({
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
-              <SubmissionError
+              <PopupError
                 error={submissionError}
                 setError={setSubmissionError}
+                errorMessage={"submissionError.error"}
               />
             </View>
           )}

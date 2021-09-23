@@ -569,7 +569,7 @@
     "Vitals": "Partes vitales"
   },
   "submissionError":{
-    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste.",
+    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste."
   },
   "formCounts": {
     "surveysCollected": "Encuestas recopiladas",

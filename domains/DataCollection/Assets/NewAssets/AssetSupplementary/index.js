@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import SubmissionError from '../../../../../components/SubmissionError';
+import PopupError from '../../../../../components/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -144,9 +144,10 @@ const AssetSupplementary = ({
                   onPressEvent={() => setPage('assetCore')}
                 />
               </View>
-              <SubmissionError
+              <PopupError
                 error={submissionError}
                 setError={setSubmissionError}
+                errorMessage={"submissionError.error"}
               />
             </View>
           </TouchableWithoutFeedback>

@@ -7,7 +7,7 @@ import { Snackbar } from 'react-native-paper';
 
 import I18n from '../../modules/i18n';
 
-const SubmissionError = ({ error, setError }) => {
+const PopupError = ({ error, setError, errorMessage }) => {
   useEffect(() => {
     setVisible(error);
   }, [error]);
@@ -31,11 +31,11 @@ const SubmissionError = ({ error, setError }) => {
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
-          {I18n.t('submissionError.error')}
+          {I18n.t(errorMessage)}
         </Text>
       </Snackbar>
     </View>
   );
 };
 
-export default SubmissionError;
+export default PopupError;

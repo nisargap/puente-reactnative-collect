@@ -11,7 +11,7 @@ import { Button, Text } from 'react-native-paper';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
-import SubmissionError from '../../../../components/SubmissionError';
+import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -159,9 +159,10 @@ const SupplementaryForm = ({
               {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
             </Button>
           )}
-          <SubmissionError
+          <PopupError
             error={submissionError}
             setError={setSubmissionError}
+            errorMessage={"submissionError.error"}
           />
         </View>
       )}
