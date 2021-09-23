@@ -568,5 +568,8 @@
     "EnvironmentalHealth": "Environmental Health",
     "MedicalEvaluation": "Medical Evaluation",
     "Vitals": "Vitals"
+  },
+  "submissionError":{
+    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persits."
   }
 }
