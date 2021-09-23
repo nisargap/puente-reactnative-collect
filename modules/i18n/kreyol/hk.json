@@ -561,5 +561,16 @@
   },
   "assetFormSelect": {
     "supAssetForms": "Fòm Byen Siplemantè"
+  },
+  "formCounts": {
+    "surveysCollected": "Sondaj kolekte",
+    "error": "Te gen yon erè ap resevwa done ou. Tcheke koneksyon entènèt ou an epi eseye ankò.",
+    "offline": "Ou se kounye a offline. Tanpri tcheke tounen lè ou konekte ak entènèt la.",
+    "idForms": "Fòm ID",
+    "envHealthForms": "Fòm Sante Anviwonman",
+    "vitalsForms": "Fòm Vitals",
+    "customForms": "Fòm Custom",
+    "assetForms": "Fòm Byen",
+    "back": "Retounen"
   }
 }
