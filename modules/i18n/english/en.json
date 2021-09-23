@@ -570,7 +570,8 @@
     "Vitals": "Vitals"
   },
   "submissionError":{
-    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persits."
+    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persits.",
+    "geolocation":"TIMEOUT!\n\nYour phone's geolocation wasn't able to be retrieved from your device. Please try again"
   },
   "formCounts": {
     "surveysCollected": "Surveys Collected",

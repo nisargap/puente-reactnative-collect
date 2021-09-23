@@ -13,10 +13,12 @@ import I18n from '../../../../modules/i18n';
 import { theme } from '../../../../modules/theme';
 import { fulfillWithTimeLimit } from '../../../../modules/utils';
 import PaperButton from '../../../Button';
+import PopupError from '../../../PopupError';
 
 const Geolocation = ({ errors, formikKey, setFieldValue }) => {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0, altitude: 0 });
   const [locationLoading, setLocationLoading] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
 
   const handleLocation = async () => {
     setLocationLoading(true);
@@ -29,15 +31,18 @@ const Geolocation = ({ errors, formikKey, setFieldValue }) => {
       }
     });
 
-    const currentLocation = await fulfillWithTimeLimit(5000, locationPromise, null);
+    const currentLocation = await fulfillWithTimeLimit(20000, locationPromise, null);
 
-    const { latitude, longitude, altitude } = currentLocation.coords;
-
-    setFieldValue('location', { latitude, longitude, altitude });
-    setLocation({ latitude, longitude, altitude });
-    setTimeout(() => {
+    if (!currentLocation) {
+      setFieldValue('location', { latitude: 0, longitude: 0, altitude: 0 });
       setLocationLoading(false);
-    }, 1000);
+      setSubmissionError(true);
+    } else {
+      const { latitude, longitude, altitude } = currentLocation.coords;
+      setFieldValue('location', { latitude, longitude, altitude });
+      setLocation({ latitude, longitude, altitude });
+      setLocationLoading(false);
+    }
   };
   return (
     <View key={formikKey}>
@@ -72,6 +77,11 @@ const Geolocation = ({ errors, formikKey, setFieldValue }) => {
         </Text>
       </View>
       )}
+      <PopupError
+        error={submissionError}
+        setError={setSubmissionError}
+        errorMessage="submissionError.geolocation"
+      />
     </View>
   );
 };
