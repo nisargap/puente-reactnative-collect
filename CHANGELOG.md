@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.9.6](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.5...v11.9.6) (2021-09-23)
+
+
+### Bug fixes
+
+* formCounts missing } ([a9ec096](https://github.com/hopetambala/puente-reactnative-collect/commit/a9ec096b861ef9d86444f5c716071c481ec0be28))
+
+
+### New Features
+
+* Create timeout for geolocation. The device will provide a notification after 20 seconds if geolocation cannot be retrieved ([3943554](https://github.com/hopetambala/puente-reactnative-collect/commit/39435546186bc62aa2df5c3595367fc826e6c975))
+* error and offline handling ([bf94921](https://github.com/hopetambala/puente-reactnative-collect/commit/bf94921b18e2130867ae00a73504db00d3c3cb93))
+* submissionError snackbar ([04e9b6d](https://github.com/hopetambala/puente-reactnative-collect/commit/04e9b6dee69998721fca4a096540e3ac98d3806c))
+
 ### [11.9.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.4...v11.9.5) (2021-09-22)
 
 
