@@ -11,6 +11,7 @@ import { Button, Text } from 'react-native-paper';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -31,6 +32,7 @@ const SupplementaryForm = ({
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [loopsAdded, setLoopsAdded] = useState(0);
+  const [submissionError, setSubmissionError] = useState(false);
 
   const toRoot = () => {
     navigation.navigate('Root');
@@ -114,6 +116,7 @@ const SupplementaryForm = ({
           console.log(error); // eslint-disable-line
           // perhaps an alert to let the user know there was an error
           setSubmitting(false);
+          setSubmissionError(true);
         });
       }}
       validationSchema={validationSchema}
@@ -156,6 +159,11 @@ const SupplementaryForm = ({
               {!surveyee.objectId && <Text>{I18n.t('supplementaryForms.attachResident')}</Text>}
             </Button>
           )}
+          <PopupError
+            error={submissionError}
+            setError={setSubmissionError}
+            errorMessage={"submissionError.error"}
+          />
         </View>
       )}
     </Formik>
