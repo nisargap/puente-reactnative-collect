@@ -12,6 +12,7 @@ import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import SubmissionError from '../../../../components/SubmissionError';
 import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -19,7 +20,6 @@ import { layout, theme } from '../../../../modules/theme';
 import { isEmpty } from '../../../../modules/utils';
 import surveyingUserFailsafe from '../utils';
 import configArray from './config/config';
-import SubmissionError from '../../../../components/SubmissionError';
 
 const IdentificationForm = ({
   scrollViewScroll, setScrollViewScroll,

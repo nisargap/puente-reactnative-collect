@@ -1,5 +1,5 @@
 import { Spinner } from 'native-base';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View
 } from 'react-native';
@@ -19,7 +19,6 @@ const FormCounts = ({ setShowCounts }) => {
   const [userName, setUserName] = useState(' ');
 
   const [queryDone, setQueryDone] = useState(false);
-
 
   useEffect(() => {
     getData('currentUser').then((user) => {
@@ -61,15 +60,16 @@ const FormCounts = ({ setShowCounts }) => {
     const customFormsPromise = countService(postParamsCustomForms);
     const assetPromise = countService(postParamsAssets);
 
-    Promise.all([idPromise, envHealthPromise, vitalsPromise, customFormsPromise, assetPromise]).then((values) => {
+    Promise.all([idPromise, envHealthPromise, vitalsPromise,
+      customFormsPromise, assetPromise]).then((values) => {
       setSurveyCount(values[0]);
       setEnvHealthCount(values[1]);
       setVitalsCount(values[2]);
       setCustomCount(values[3]);
-      setAssetCount(values[4])
+      setAssetCount(values[4]);
       setQueryDone(true);
-  })
-}, [userName]);
+    });
+  }, [userName]);
 
   return (
     <View>

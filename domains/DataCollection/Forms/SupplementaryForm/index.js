@@ -11,6 +11,7 @@ import { Button, Text } from 'react-native-paper';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import SubmissionError from '../../../../components/SubmissionError';
 import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -21,7 +22,6 @@ import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
 import { addSelectTextInputs, vitalsBloodPressue } from './utils';
-import SubmissionError from '../../../../components/SubmissionError';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -116,7 +116,7 @@ const SupplementaryForm = ({
           console.log(error); // eslint-disable-line
           // perhaps an alert to let the user know there was an error
           setSubmitting(false);
-          setSubmissionError(true)
+          setSubmissionError(true);
         });
       }}
       validationSchema={validationSchema}

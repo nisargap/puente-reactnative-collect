@@ -13,6 +13,7 @@ import {
 import PaperButton from '../../../../../components/Button';
 import ErrorPicker from '../../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import SubmissionError from '../../../../../components/SubmissionError';
 import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -20,14 +21,13 @@ import { isEmpty } from '../../../../../modules/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import configArray from './config/config';
 import styles from './index.styles';
-import SubmissionError from '../../../../../components/SubmissionError';
 
 const AssetCore = ({
   setSelectedAsset, scrollViewScroll, setScrollViewScroll,
   surveyingUser, surveyingOrganization, setPage
 }) => {
   const [inputs, setInputs] = useState({});
-  const [submitting, setSubmitting] = useState(false);  
+  const [submitting, setSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
@@ -67,9 +67,9 @@ const AssetCore = ({
               })
               .then(() => resetForm())
               .catch((e) => {
-                console.log(e)
-                setSubmissionError(true)
-              }); //eslint-disable-line
+                console.log(e); //eslint-disable-line
+                setSubmissionError(true);
+              });
             setSubmitting(false);
           }}
         >

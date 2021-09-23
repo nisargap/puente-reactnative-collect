@@ -8,16 +8,16 @@ import { Snackbar } from 'react-native-paper';
 import I18n from '../../modules/i18n';
 
 const SubmissionError = ({ error, setError }) => {
-    useEffect(() => {
-        error ? setVisible(true) : setVisible(false);
-    }, [error])
+  useEffect(() => {
+    setVisible(error);
+  }, [error]);
 
   const [visible, setVisible] = useState(false);
 
   const dismissSnackBar = () => {
-      setVisible(false);
-      setError(false);
-  }
+    setVisible(false);
+    setError(false);
+  };
 
   return (
     <View>

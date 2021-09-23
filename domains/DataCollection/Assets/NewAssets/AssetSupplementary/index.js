@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import SubmissionError from '../../../../../components/SubmissionError';
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -18,7 +19,6 @@ import surveyingUserFailsafe from '../../../Forms/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
-import SubmissionError from '../../../../../components/SubmissionError';
 
 const AssetSupplementary = ({
   selectedAsset, setSelectedAsset, surveyingOrganization, surveyingUser, setPage
@@ -90,7 +90,7 @@ const AssetSupplementary = ({
             .catch((e) => {
               console.log(e) //eslint-disable-line
               setSubmitting(false);
-              setSubmissionError(true)
+              setSubmissionError(true);
             });
         }}
       >
@@ -147,7 +147,7 @@ const AssetSupplementary = ({
               <SubmissionError
                 error={submissionError}
                 setError={setSubmissionError}
-            />
+              />
             </View>
           </TouchableWithoutFeedback>
         )}
