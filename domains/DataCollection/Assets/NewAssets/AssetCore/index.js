@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Platform,
   ScrollView, View
 } from 'react-native';
 import {
@@ -12,6 +13,7 @@ import {
 import PaperButton from '../../../../../components/Button';
 import ErrorPicker from '../../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import PopupError from '../../../../../components/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -26,6 +28,7 @@ const AssetCore = ({
 }) => {
   const [inputs, setInputs] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
     setInputs(configArray);
@@ -43,7 +46,8 @@ const AssetCore = ({
             setSubmitting(true);
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
             formObject.surveyingOrganization = surveyingOrganization;
-            formObject.appVersion = await getData('appVersion');
+            formObject.appVersion = await getData('appVersion') || '';
+            formObject.phoneOS = Platform.OS || '';
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
             formObject.altitude = values.location?.altitude || 0;
@@ -62,7 +66,10 @@ const AssetCore = ({
                 setSelectedAsset(asset);
               })
               .then(() => resetForm())
-              .catch((e) => console.log(e)); //eslint-disable-line
+              .catch((e) => {
+                console.log(e); //eslint-disable-line
+                setSubmissionError(true);
+              });
             setSubmitting(false);
           }}
         >
@@ -101,7 +108,11 @@ const AssetCore = ({
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
                 onPressEvent={() => setPage('assetSupplementary')}
               />
-
+              <PopupError
+                error={submissionError}
+                setError={setSubmissionError}
+                errorMessage="submissionError.error"
+              />
             </View>
           )}
         </Formik>
