@@ -561,5 +561,20 @@
   },
   "assetFormSelect": {
     "supAssetForms": "Fòm Byen Siplemantè"
+  },
+  "submissionError":{
+    "error": "ERÈ!\n\nFòm ou pa te soumèt. Tanpri eseye ankò oswa kontakte sipèvizè ou a si pwoblèm nan kontinye.",
+    "geolocation":"DELÉ!\n\nGeolokalizasyon telefòn ou an pa t 'kapab jwenn nan aparèy ou an. Tanpri eseye ankò"
+  },
+  "formCounts": {
+    "surveysCollected": "Sondaj kolekte",
+    "error": "Te gen yon erè ap resevwa done ou. Tcheke koneksyon entènèt ou an epi eseye ankò.",
+    "offline": "Ou se kounye a offline. Tanpri tcheke tounen lè ou konekte ak entènèt la.",
+    "idForms": "Fòm ID",
+    "envHealthForms": "Fòm Sante Anviwonman",
+    "vitalsForms": "Fòm Vitals",
+    "customForms": "Fòm Custom",
+    "assetForms": "Fòm Byen",
+    "back": "Retounen"
   }
 }
