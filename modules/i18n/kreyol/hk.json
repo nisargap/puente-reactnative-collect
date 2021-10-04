@@ -37,6 +37,7 @@
     "usernameError": "Tantativ enskri echwe. \n nOu te ka eseye enskri ak yon non itilizatè (imèl / nimewo telefòn) ki te deja anrejistre ak yon lòt kont. \n nTanpri kontakte sipèvizè ou si ou kwè sa se yon erè."
   },
   "signIn": {
+    "user":"Non itilizatè",
     "username": "Andres elektronik oswa nimewo telefòn",
     "password": "Modpas",
     "showPassword": "Montre modpas",
@@ -551,7 +552,8 @@
     "retake": "Rekomanse Foto",
     "flip": "Flip",
     "takePicture": "Pran foto",
-    "done": "Fè"
+    "done": "Fè",
+    "sorryAlert":"Nou bezwen otorizasyon woulo liv kamera pou fè travay sa a!"
   },
   "peopleModal": {
     "fname": "Premye Non",

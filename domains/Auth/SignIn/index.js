@@ -38,11 +38,11 @@ import ForgotPassword from './ForgotPassword';
 const validationSchema = yup.object().shape({
   username: yup
     .string()
-    .label('Username')
+    .label(I18n.t('signIn.user'))
     .required(),
   password: yup
     .string()
-    .label('Password')
+    .label(I18n.t('signIn.password'))
     .required()
     .min(4, 'Seems a bit short...')
 });
@@ -105,7 +105,7 @@ const SignIn = ({ navigation }) => {
       I18n.t('signIn.saveLoginCreds'),
       [
         {
-          text: 'global.yes',
+          text: I18n.t('global.yes'),
           onPress: () => {
             const usr = currentUser;
             const credentials = values;
@@ -118,7 +118,7 @@ const SignIn = ({ navigation }) => {
           }
         },
         {
-          text: 'global.no',
+          text: I18n.t('global.no'),
           style: 'cancel',
           onPress: () => {
             handleSignIn(values);

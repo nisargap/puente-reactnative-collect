@@ -37,6 +37,7 @@
     "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error."
   },
   "signIn": {
+    "user":"Username",
     "username": "Email or Phone Number",
     "password": "Password",
     "showPassword": "Show Password",
@@ -552,7 +553,9 @@
     "retake": "Retake Picture",
     "flip": "Flip",
     "takePicture": "Take Picture",
-    "done": "Done"
+    "done": "Done",
+    "sorryAlert":"Sorry, we need camera roll permissions to make this work!"
+ 
   },
   "peopleModal": {
     "fname": "First Name",
