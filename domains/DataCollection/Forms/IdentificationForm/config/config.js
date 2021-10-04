@@ -40,7 +40,7 @@ const configArray = [
         label: 'identificationForm.dob.month',
         value: 'Month',
         maxLength: 2
-      },      
+      },
       {
         label: 'identificationForm.dob.year',
         value: 'Year',

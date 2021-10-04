@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import { Spinner } from 'native-base';
 import React, { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
@@ -10,7 +11,6 @@ import { getData } from '../../../modules/async-storage';
 import { theme } from '../../../modules/theme';
 import { countService } from '../../../services/parse/crud';
 import styles from '../index.styles';
-import I18n from 'i18n-js';
 
 const FormCounts = ({ setShowCounts }) => {
   const [surveyCount, setSurveyCount] = useState(0);
