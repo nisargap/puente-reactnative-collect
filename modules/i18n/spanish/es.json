@@ -84,7 +84,9 @@
     "noPinnedForms": "No tiene formularios favoritos",
     "checkOutMarketplace": "Visite nuestro mercado para ver los formularios disponibles",
     "viewMarketplace": "Ver mercado de formularios",
-    "marketPlace": "Mercado de formularios"
+    "marketPlace": "Mercado de formularios",
+    "workflows": "Flujos de trabajo",
+    "noWorflowAssigned": "Sin flujo de trabajo asignado"
   },
   "identificationForm": {
     "demographics": "Demografía",

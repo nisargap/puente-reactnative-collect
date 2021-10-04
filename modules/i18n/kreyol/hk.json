@@ -84,7 +84,9 @@
     "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Ou pa gen okenn fòm koutim",
     "viewMarketplace": "VAl gade nan Marketplace",
-    "marketPlace": "Marketplace"
+    "marketPlace": "Marketplace",
+    "workflows": "Workflows",
+    "noWorflowAssigned": "Pa gen Workflow asiyen"
   },
   "identificationForm": {
     "demographics": "Demografi",

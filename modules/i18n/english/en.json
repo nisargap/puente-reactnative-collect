@@ -84,7 +84,9 @@
     "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Check out our marketplace to view available forms",
     "viewMarketplace": "View Marketplace",
-    "marketPlace": "Marketplace"
+    "marketPlace": "Marketplace",
+    "workflows": "Workflows",
+    "noWorflowAssigned": "No Workflow Assigned"
   },
   "identificationForm": {
     "demographics": "Demographics",

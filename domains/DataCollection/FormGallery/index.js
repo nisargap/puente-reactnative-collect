@@ -175,7 +175,7 @@ const FormGallery = ({
       {noWorkflowData.length > 0  && (
         <FormsHorizontalView
           forms={noWorkflowData}
-          header={'No Workflow Assigned'}
+          header={I18n.t('formsGallery.noWorflowAssigned')}
           navigateToCustomForm={navigateToCustomForm}
           pinForm={pinForm}
         />
