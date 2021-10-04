@@ -12,6 +12,7 @@ import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
@@ -31,6 +32,7 @@ const IdentificationForm = ({
   const [inputs, setInputs] = useState({});
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
     setInputs(configArray);
@@ -93,6 +95,7 @@ const IdentificationForm = ({
             }, () => {
               // perhaps an alert to let the user know there was an error
               setSubmitting(false);
+              setSubmissionError(true);
             });
           }}
           validationSchema={validationSchema}
@@ -131,6 +134,11 @@ const IdentificationForm = ({
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
               )}
+              <PopupError
+                error={submissionError}
+                setError={setSubmissionError}
+                errorMessage="submissionError.error"
+              />
             </View>
           )}
         </Formik>

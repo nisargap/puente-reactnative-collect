@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import PopupError from '../../../../../components/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
@@ -25,6 +26,7 @@ const AssetSupplementary = ({
   const [selectedForm, setSelectedForm] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [photoFile, setPhotoFile] = useState('State Photo String');
+  const [submissionError, setSubmissionError] = useState(false);
 
   const validForm = () => {
     if (Object.keys(selectedAsset).length > 0 && selectedForm?.objectId) return true;
@@ -88,6 +90,7 @@ const AssetSupplementary = ({
             .catch((e) => {
               console.log(e) //eslint-disable-line
               setSubmitting(false);
+              setSubmissionError(true);
             });
         }}
       >
@@ -141,6 +144,11 @@ const AssetSupplementary = ({
                   onPressEvent={() => setPage('assetCore')}
                 />
               </View>
+              <PopupError
+                error={submissionError}
+                setError={setSubmissionError}
+                errorMessage="submissionError.error"
+              />
             </View>
           </TouchableWithoutFeedback>
         )}

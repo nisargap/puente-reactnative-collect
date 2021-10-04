@@ -569,6 +569,10 @@
     "MedicalEvaluation": "Medical Evaluation",
     "Vitals": "Vitals"
   },
+  "submissionError":{
+    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persits.",
+    "geolocation":"TIMEOUT!\n\nYour phone's geolocation wasn't able to be retrieved from your device. Please try again"
+  },
   "formCounts": {
     "surveysCollected": "Surveys Collected",
     "error": "There has been an error getting your data. Check your internet connection and try again.",
