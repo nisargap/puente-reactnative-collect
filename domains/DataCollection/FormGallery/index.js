@@ -15,9 +15,8 @@ import { getData, storeData } from '../../../modules/async-storage';
 import { customFormsQuery } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
-import styles from './index.styles';
-
 import FormsHorizontalView from './FormsHorizontalView';
+import styles from './index.styles';
 
 const FormGallery = ({
   navigateToNewRecord, navigateToCustomForm,
@@ -27,18 +26,18 @@ const FormGallery = ({
 }) => {
   const [customForms, setCustomForms] = useState([]);
   const [workflowData, setWorkflowData] = useState({});
-  const [noWorkflowData, setNoWorkflowData] = useState([])
+  const [noWorkflowData, setNoWorkflowData] = useState([]);
 
   useEffect(() => {
     getData('customForms').then((forms) => {
       setCustomForms(forms);
       filterWorkflows(forms);
-    })
+    });
   }, [customForms]);
 
-  const filterWorkflows = (customForms) => {
+  const filterWorkflows = (forms) => {
     const tableDataByCategory = {};
-    customForms.forEach((record) => {
+    forms.forEach((record) => {
       if (!Array.isArray(record.workflows) || record.workflows.length < 1) {
         if ('No Workflow Assigned' in tableDataByCategory) {
           tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
@@ -130,7 +129,7 @@ const FormGallery = ({
         />
       </View>
       {/* ALL custom forms */}
-      <View key="customForms" style={{marginHorizontal: 20}}>
+      <View key="customForms" style={{ marginHorizontal: 20 }}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
           <IconButton
@@ -144,13 +143,13 @@ const FormGallery = ({
       </View>
       {customForms.length > 0 && (
         <FormsHorizontalView
-            forms={customForms}
-            navigateToCustomForm={navigateToCustomForm}
-            pinForm={pinForm}
+          forms={customForms}
+          navigateToCustomForm={navigateToCustomForm}
+          pinForm={pinForm}
         />
       )}
       {/* Workflows */}
-      <View key="workflows" style={{marginHorizontal: 20}}>
+      <View key="workflows" style={{ marginHorizontal: 20 }}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.header}>{I18n.t('formsGallery.workflows')}</Text>
           <IconButton
@@ -163,7 +162,7 @@ const FormGallery = ({
         </View>
       </View>
       {/* custom forms with workflows */}
-      {Object.keys(workflowData).length > 0  && Object.keys(workflowData).map((key) => (
+      {Object.keys(workflowData).length > 0 && Object.keys(workflowData).map((key) => (
         <FormsHorizontalView
           forms={workflowData[key]}
           header={key}
@@ -172,7 +171,7 @@ const FormGallery = ({
         />
       ))}
       {/* custom forms with no workflow assigned */}
-      {noWorkflowData.length > 0  && (
+      {noWorkflowData.length > 0 && (
         <FormsHorizontalView
           forms={noWorkflowData}
           header={I18n.t('formsGallery.noWorflowAssigned')}
