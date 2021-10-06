@@ -34,6 +34,7 @@ const FormGallery = ({
   const refreshCustomForms = () => {
     setLoading(true);
     customFormsQuery(surveyingOrganization).then((forms) => {
+      console.log(forms)
       setCustomForms(forms);
       setLoading(false);
     });
