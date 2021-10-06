@@ -66,12 +66,12 @@ function customFormsQuery(surveyingOrganization) {
 
       return customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
         if (forms !== null && forms !== undefined && forms !== '') {
-          let activeForms = []
+          let activeForms = [];
           JSON.parse(JSON.stringify(forms)).forEach((form) => {
-            if(form.active !== 'false'){
-              activeForms = activeForms.concat([form])
+            if (form.active !== 'false') {
+              activeForms = activeForms.concat([form]);
             }
-          })
+          });
           await storeData(activeForms, 'customForms');
           return activeForms;
         }
@@ -116,12 +116,12 @@ function assetFormsQuery(surveyingOrganization) {
           organizations: surveyingOrganization
         };
         customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then((forms) => {
-          let activeForms = []
+          let activeForms = [];
           JSON.parse(JSON.stringify(forms)).forEach((form) => {
-            if(form.active !== 'false'){
-              activeForms = activeForms.concat([form])
+            if (form.active !== 'false') {
+              activeForms = activeForms.concat([form]);
             }
-          })
+          });
           storeData(activeForms, 'assetForms');
           resolve(activeForms);
         }, (error) => {
