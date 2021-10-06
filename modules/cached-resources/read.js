@@ -116,8 +116,14 @@ function assetFormsQuery(surveyingOrganization) {
           organizations: surveyingOrganization
         };
         customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then((forms) => {
-          storeData(forms, 'assetForms');
-          resolve(JSON.parse(JSON.stringify(forms)));
+          let activeForms = []
+          JSON.parse(JSON.stringify(forms)).forEach((form) => {
+            if(form.active !== 'false'){
+              activeForms = activeForms.concat([form])
+            }
+          })
+          storeData(activeForms, 'assetForms');
+          resolve(activeForms);
         }, (error) => {
           reject(error);
         });
