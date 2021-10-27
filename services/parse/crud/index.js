@@ -55,6 +55,16 @@ function getObjectsByGeolocation(params) {
   });
 }
 
+function postOfflineForms(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('postOfflineForms', params).then((result) => {
+      resolve(result)
+    }, (error) => {
+      reject(error);
+    })
+  })
+}
+
 export {
   countService,
   customMultiParamQueryService,
@@ -63,5 +73,6 @@ export {
   postObjectsToClass,
   postObjectsToClassWithRelation,
   residentIDQuery,
-  retrieveHelloFunction
+  retrieveHelloFunction,
+  postOfflineForms
 };
