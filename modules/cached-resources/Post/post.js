@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { postObjectsToClass, postObjectsToClassWithRelation } from '../../../services/parse/crud';
 import {
   getData,
@@ -7,12 +5,6 @@ import {
 } from '../../async-storage';
 import checkOnlineStatus from '../../offline';
 import { generateRandomID } from '../../utils';
-import {
-  postForms,
-  postHouseholdRelations,
-  postHouseholds,
-  postSupForms
-} from './Offline';
 
 function postIdentificationForm(postParams) {
   return new Promise((resolve, reject) => {
@@ -211,7 +203,6 @@ export {
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
-  postOfflineForms,
   postSupplementaryAssetForm,
   postSupplementaryForm
 };

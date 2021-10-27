@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, View } from 'react-native';
 import Emoji from 'react-native-emoji';
 import {
   Button,
   Headline, IconButton, Text,
 } from 'react-native-paper';
 
+import surveyingUserFailsafe from '../../domains/DataCollection/Forms/utils';
 import { deleteData, getData } from '../../modules/async-storage';
-// import { postOfflineForms } from '../../modules/cached-resources';
-import {postOfflineForms} from '../../services/parse/crud';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
+import checkOnlineStatus from '../../modules/offline';
+import { isEmpty } from '../../modules/utils';
+import { postOfflineForms } from '../../services/parse/crud';
 import FormCounts from './FormCounts';
 import styles from './index.styles';
-import { isEmpty } from '../../modules/utils';
-
-import surveyingUserFailsafe from '../../domains/DataCollection/Forms/utils';
-import checkOnlineStatus from '../../modules/offline';
-
 
 const Header = ({
   setSettings
@@ -98,18 +95,17 @@ const Header = ({
   };
 
   const postOffline = async () => {
-    console.log("Test")
     const user = await getData('currentUser');
 
     const surveyUser = await surveyingUserFailsafe(user, undefined, isEmpty);
-    const organization = user.organization;
+    const { organization } = user;
     const appVersion = await getData('appVersion') || '';
     const phoneOS = Platform.OS || '';
 
     const idFormsAsync = await getData('offlineIDForms');
     const supplementaryFormsAsync = await getData('offlineSupForms');
-    const assetIdFormsAsync = await getData('offlineAssetIDForms')
-    const assetSupFormsAsync = await getData('offlineAssetSupForms')
+    const assetIdFormsAsync = await getData('offlineAssetIDForms');
+    const assetSupFormsAsync = await getData('offlineAssetSupForms');
     const householdsAsync = await getData('offlineHouseholds');
     const householdRelationsAsync = await getData('offlineHouseholdsRelation');
 
@@ -123,11 +119,11 @@ const Header = ({
       surveyingUser: surveyUser,
       surveyingOrganization: organization,
       parseUser: user.objectId,
-      appVersion: appVersion,
-      phoneOS: phoneOS
-    }
+      appVersion,
+      phoneOS
+    };
     checkOnlineStatus().then((connected) => {
-      if(connected) {
+      if (connected) {
         postOfflineForms(offlineParams).then(async (result) => {
           if (result) {
             await deleteData('offlineIDForms');
@@ -160,11 +156,10 @@ const Header = ({
             setSubmission(false);
           });
         });
-      }
-      else {
+      } else {
         setSubmission(false);
       }
-    })
+    });
   };
 
   const navToSettings = () => {
