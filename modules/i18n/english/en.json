@@ -14,7 +14,8 @@
     "error": "Error",
     "success": "Success!",
     "ok": "Ok",
-    "emptyForm": "Empty Form"
+    "emptyForm": "Empty Form",
+    "back": "Back"
   },
   "signUp": {
     "firstName": "First Name",
@@ -29,28 +30,30 @@
       "acknoledgement": "By checking this box, I acknowledge that I have read and understood the Terms and Service agreement"
     },
     "submit": "Submit",
-    "toEnglish": "Changle language to English",
+    "toEnglish": "Change language to English",
     "toSpanish": "Change Language to Spanish",
     "errorTerms": "Error, terms and service need to be agreed to.",
     "errorPassword": "Error, your passwords do not match.",
     "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error."
   },
   "signIn": {
+    "user":"Username",
     "username": "Email or Phone Number",
     "password": "Password",
     "showPassword": "Show Password",
     "login": "Log-In",
-    "signUpLink": "Don't have an account, sign up!",
+    "signUpLink": "Sign Up!",
     "deleteCreds": "Delete Credentials",
     "noAccount": "Don't have an account?",
     "puente2020": "Puente 2020 |",
     "termsConditions": "Terms & Conditions",
     "forgotPassword": {
+      "label": "Forgot Password?",
       "enterEmail": "Please enter your email to reset your password",
       "sendLink": "Send Reset Link",
       "noAccount": "Don't have an account?",
       "signUp": "Sign Up!",
-      "rememberPass": "Remember your Password?",
+      "rememberPass": "Remember Password?",
       "signIn": "Sign In",
       "resetSuccess": "Your password reset link has been sent to your email. Please Check your email to change your password.",
       "resetError": "There was an error sending the password reset link. Please ensure that you entered your email correctly. You can try again by clicking the button below. If you believe the email is correct, please contact your manager."
@@ -118,7 +121,8 @@
       "someHS": "Some high school",
       "hs": "Highschool",
       "someCollege": "Some College",
-      "college": "College"
+      "college": "College",
+      "technicalCourse": "Technical course"
     },
     "cedulaNumber": "License Number",
     "location": "Location",
@@ -152,7 +156,11 @@
       "Trash": "Trash",
       "Street": "Street",
       "AccessToBathrooms": "Access to Bathrooms",
-      "HouseRepairs": "House Repairs"
+      "HouseRepairs": "House Repairs",
+      "education": "Education",
+      "sports": "Sports",
+      "sanitation": "Sanitation",
+      "communityAwareness": "Community Awareness"
     },
     "waterAccess": {
       "label": "Water Access",
@@ -193,7 +201,12 @@
       "OnceOrTwiceAMonth": "Once or Twice a Month"
     },
     "trashBetweenPickups": "Where is trash left between pickups?",
-    "houseOwnership": "House Ownership",
+    "houseOwnership": {
+      "label": "House Ownership",
+      "Own":"Own",
+      "Rent":"Rent",
+      "Provided": "Provided"
+    },
     "floorCondition": {
       "label": "Condition of Floor in your house?",
       "Poor": "Poor",
@@ -215,18 +228,19 @@
     },
     "typeStove": {
       "label": "Type of Stove Top",
-      "constructedVentilation": "Constructed stove with ventilation",
-      "stoveTop": "Stovetop with tank or electricity",
-      "openFire": "Open Fire"
+      "charcoalStove": "Charcoal stove",
+      "stoveTop": "Gas tank stove",
+      "firewood": "Firewood Stove"
     },
     "houseMaterials": {
       "label": "What material is your house made from?",
       "zinc": "Zinc",
       "wood": "Wood",
-      "partBlock_partWood": "Part cinderblock, part wood",
+      "woodAndBlock": "Cinderblock and wood",
       "block": "Cinderblock",
       "brick": "Brick",
-      "clay": "Clay"
+      "clay": "Clay",
+      "woodAndZinc": "Wood and Zinc"
     },
     "electricityAccess": {
       "label": "How often do you have access to electricity?",
@@ -239,7 +253,8 @@
       "label": "Do you have access to government assistance?",
       "foodStamps": "Food Stamps",
       "adultLiteracy": "Adult literacy Program",
-      "noAssistance": "No assistance"
+      "noAssistance": "No assistance",
+      "solidarityCard": "Solidarity Card"
     },
     "numberIndividualsHouse": "Number of Individuals Living in the House",
     "numberChildrenUnder5": {
@@ -538,7 +553,9 @@
     "retake": "Retake Picture",
     "flip": "Flip",
     "takePicture": "Take Picture",
-    "done": "Done"
+    "done": "Done",
+    "sorryAlert":"Sorry, we need camera roll permissions to make this work!"
+ 
   },
   "peopleModal": {
     "fname": "First Name",

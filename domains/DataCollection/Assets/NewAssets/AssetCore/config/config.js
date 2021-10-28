@@ -4,7 +4,7 @@ const configArray = {
   customForm: false,
   fields: [
     {
-      label: 'assetCore.newAsset',
+      label: 'dataCollection.newAsset',
       // add translation
       fieldType: 'header',
       formikKey: 'none_bi',
