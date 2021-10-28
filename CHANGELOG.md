@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.10.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.5...v11.10.0) (2021-10-28)
+
+
+### Bug fixes
+
+* correct spanish translations and add hk translations ([fe5875b](https://github.com/hopetambala/puente-reactnative-collect/commit/fe5875ba87ef8b10ff3dc3c1accc67da627d30fd))
+* formCounts missing } ([a9ec096](https://github.com/hopetambala/puente-reactnative-collect/commit/a9ec096b861ef9d86444f5c716071c481ec0be28))
+
+
+### New Features
+
+* add acctive flag to asset supplementary too ([72473ce](https://github.com/hopetambala/puente-reactnative-collect/commit/72473ceefe9521f6d9ec088c1742c72dd27a111f))
+* Create timeout for geolocation. The device will provide a notification after 20 seconds if geolocation cannot be retrieved ([3943554](https://github.com/hopetambala/puente-reactnative-collect/commit/39435546186bc62aa2df5c3595367fc826e6c975))
+* error and offline handling ([bf94921](https://github.com/hopetambala/puente-reactnative-collect/commit/bf94921b18e2130867ae00a73504db00d3c3cb93))
+* only show active custom forms in gallery ([e434e24](https://github.com/hopetambala/puente-reactnative-collect/commit/e434e24757e4c6f8ef83d27e6ea1c123926b9036))
+* remove offline from app, send request to backend to handle ([cb1eaa2](https://github.com/hopetambala/puente-reactnative-collect/commit/cb1eaa2aa4715d255d435688737ed27daa446cbd))
+* submissionError snackbar ([04e9b6d](https://github.com/hopetambala/puente-reactnative-collect/commit/04e9b6dee69998721fca4a096540e3ac98d3806c))
+
 ### [11.9.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.4...v11.9.5) (2021-09-22)
 
 
