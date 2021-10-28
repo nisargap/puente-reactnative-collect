@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### New Features
 
-* add acctive flag to asset supplementary too ([72473ce](https://github.com/hopetambala/puente-reactnative-collect/commit/72473ceefe9521f6d9ec088c1742c72dd27a111f))
+* add active flag to asset supplementary too ([72473ce](https://github.com/hopetambala/puente-reactnative-collect/commit/72473ceefe9521f6d9ec088c1742c72dd27a111f))
 * Create timeout for geolocation. The device will provide a notification after 20 seconds if geolocation cannot be retrieved ([3943554](https://github.com/hopetambala/puente-reactnative-collect/commit/39435546186bc62aa2df5c3595367fc826e6c975))
 * error and offline handling ([bf94921](https://github.com/hopetambala/puente-reactnative-collect/commit/bf94921b18e2130867ae00a73504db00d3c3cb93))
 * only show active custom forms in gallery ([e434e24](https://github.com/hopetambala/puente-reactnative-collect/commit/e434e24757e4c6f8ef83d27e6ea1c123926b9036))
