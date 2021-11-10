@@ -49,7 +49,7 @@ const AssetSupplementary = ({
 
           let formObjectUpdated = addSelectTextInputs(values, formObject);
           formObjectUpdated = cleanLoopSubmissions(values, formObjectUpdated);
-          
+
           const postParams = {
             parseParentClassID: selectedAsset.objectId,
             parseParentClass: 'Assets',

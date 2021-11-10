@@ -491,7 +491,7 @@ const PaperInputPicker = ({
       {/* relies on function to clean the values prior to submission */}
       {fieldType === 'loopSameForm' && (
         <View key={formikKey}>
-        {additionalQuestions !== undefined && additionalQuestions.length !== 0
+          {additionalQuestions !== undefined && additionalQuestions.length !== 0
               && additionalQuestions.map((question) => (
                 <PaperInputPicker
                   data={question}
@@ -503,15 +503,15 @@ const PaperInputPicker = ({
                   setScrollViewScroll={setScrollViewScroll}
                 />
               ))}
-        <Looper
-          data={data}
-          config={config}
-          additionalQuestions={additionalQuestions}
-          setAdditionalQuestions={setAdditionalQuestions}
-          translatedLabel={translatedLabel}
-          sameForm={true}
-        />
-      </View>
+          <Looper
+            data={data}
+            config={config}
+            additionalQuestions={additionalQuestions}
+            setAdditionalQuestions={setAdditionalQuestions}
+            translatedLabel={translatedLabel}
+            sameForm
+          />
+        </View>
       )}
 
     </>

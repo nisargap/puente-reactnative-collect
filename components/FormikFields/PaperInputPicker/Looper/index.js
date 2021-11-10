@@ -72,7 +72,7 @@ const Looper = ({
 
     setAdditionalQuestions(additionalQuestions.concat(updatedQuestions));
     if (sameForm !== true) {
-    setLoopsAdded(loopsAdded + 1);
+      setLoopsAdded(loopsAdded + 1);
     }
     setIndividualLoopsAdded(individualLoopsAdded + 1);
   };

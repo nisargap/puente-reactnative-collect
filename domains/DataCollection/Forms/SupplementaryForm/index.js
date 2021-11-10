@@ -21,7 +21,7 @@ import surveyingUserFailsafe from '../utils';
 import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
-import { addSelectTextInputs, vitalsBloodPressue, cleanLoopSubmissions } from './utils';
+import { addSelectTextInputs, cleanLoopSubmissions, vitalsBloodPressue } from './utils';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -114,15 +114,14 @@ const SupplementaryForm = ({
           }, 1000);
         };
 
-        setSubmitting(false);
-        // postSupplementaryForm(postParams).then(() => {
-        //   submitAction();
-        // }, (error) => {
-        //   console.log(error); // eslint-disable-line
-        //   // perhaps an alert to let the user know there was an error
-        //   setSubmitting(false);
-        //   setSubmissionError(true);
-        // });
+        postSupplementaryForm(postParams).then(() => {
+          submitAction();
+        }, (error) => {
+          console.log(error); // eslint-disable-line
+          // perhaps an alert to let the user know there was an error
+          setSubmitting(false);
+          setSubmissionError(true);
+        });
       }}
       validationSchema={validationSchema}
       // only validate on submit, errors persist after fixing
