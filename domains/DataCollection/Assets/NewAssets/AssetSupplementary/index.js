@@ -14,7 +14,7 @@ import { postSupplementaryAssetForm } from '../../../../../modules/cached-resour
 import I18n from '../../../../../modules/i18n';
 import { theme } from '../../../../../modules/theme';
 import { isEmpty } from '../../../../../modules/utils';
-import { addSelectTextInputs, cleanLoopSubmissions } from '../../../Forms/SupplementaryForm/utils';
+import { addSelectTextInputs } from '../../../Forms/SupplementaryForm/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
@@ -47,9 +47,8 @@ const AssetSupplementary = ({
           const surveyingUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
           const appVersion = await getData('appVersion') || '';
 
-          let formObjectUpdated = addSelectTextInputs(values, formObject);
-          formObjectUpdated = cleanLoopSubmissions(values, formObjectUpdated);
-          
+          const formObjectUpdated = addSelectTextInputs(values, formObject);
+
           const postParams = {
             parseParentClassID: selectedAsset.objectId,
             parseParentClass: 'Assets',

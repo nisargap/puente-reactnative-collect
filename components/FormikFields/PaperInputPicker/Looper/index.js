@@ -12,7 +12,7 @@ import I18n from '../../../../modules/i18n';
 const Looper = ({
   data, config, additionalQuestions,
   translatedLabel, setAdditionalQuestions,
-  loopsAdded, setLoopsAdded, sameForm
+  loopsAdded, setLoopsAdded
 }) => {
   const {
     formikKey, numberQuestionsToRepeat
@@ -62,25 +62,17 @@ const Looper = ({
     let updatedQuestions = [];
     questionsToRepeat.forEach((question) => {
       const updatedQuestion = _.cloneDeep(question);
-      if (sameForm !== true) {
-        updatedQuestion.formikKey = `${updatedQuestion.formikKey}__loop${individualLoopsAdded}`;
-      } else {
-        updatedQuestion.formikKey = `${updatedQuestion.formikKey}__sameForm${individualLoopsAdded}`;
-      }
+      updatedQuestion.formikKey = `${updatedQuestion.formikKey}__loop${individualLoopsAdded}`;
       updatedQuestions = updatedQuestions.concat(updatedQuestion);
     });
 
     setAdditionalQuestions(additionalQuestions.concat(updatedQuestions));
-    if (sameForm !== true) {
     setLoopsAdded(loopsAdded + 1);
-    }
     setIndividualLoopsAdded(individualLoopsAdded + 1);
   };
 
   const removeLoop = () => {
-    if (sameForm !== true) {
-      setLoopsAdded(loopsAdded - 1);
-    }
+    setLoopsAdded(loopsAdded - 1);
     setIndividualLoopsAdded(individualLoopsAdded - 1);
     setAdditionalQuestions(additionalQuestions.slice(0,
       additionalQuestions.length - numberQuestionsToRepeat));
