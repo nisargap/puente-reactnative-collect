@@ -488,6 +488,32 @@ const PaperInputPicker = ({
         />
       </View>
       )}
+      {/* relies on function to clean the values prior to submission */}
+      {fieldType === 'loopSameForm' && (
+        <View key={formikKey}>
+        {additionalQuestions !== undefined && additionalQuestions.length !== 0
+              && additionalQuestions.map((question) => (
+                <PaperInputPicker
+                  data={question}
+                  formikProps={formikProps}
+                  customForm={customForm}
+                  config={config}
+                  surveyingOrganization={surveyingOrganization}
+                  scrollViewScroll={scrollViewScroll}
+                  setScrollViewScroll={setScrollViewScroll}
+                />
+              ))}
+        <Looper
+          data={data}
+          config={config}
+          additionalQuestions={additionalQuestions}
+          setAdditionalQuestions={setAdditionalQuestions}
+          translatedLabel={translatedLabel}
+          sameForm={true}
+        />
+      </View>
+      )}
+
     </>
   );
 };
