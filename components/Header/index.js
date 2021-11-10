@@ -137,7 +137,7 @@ const Header = ({
           } else {
             setSubmission(false);
           }
-        }, (error) => {
+        }).catch((error) => {
           // handle session token error
           handleParseError(error, postOfflineForms).then(async (result) => {
             if (result) {
