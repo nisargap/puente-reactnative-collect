@@ -32,13 +32,13 @@ const configArray = [
     fieldType: 'multiInputRowNum',
     options: [
       {
-        label: 'identificationForm.dob.month',
-        value: 'Month',
+        label: 'identificationForm.dob.day',
+        value: 'Day',
         maxLength: 2
       },
       {
-        label: 'identificationForm.dob.day',
-        value: 'Day',
+        label: 'identificationForm.dob.month',
+        value: 'Month',
         maxLength: 2
       },
       {
@@ -141,6 +141,10 @@ const configArray = [
       {
         label: 'identificationForm.educationLevel.someCollege',
         value: 'someCollege'
+      },
+      {
+        label: 'identificationForm.educationLevel.technicalCourse',
+        value: 'technicalCourse'
       },
       {
         label: 'identificationForm.educationLevel.college',

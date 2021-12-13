@@ -38,11 +38,11 @@ import ForgotPassword from './ForgotPassword';
 const validationSchema = yup.object().shape({
   username: yup
     .string()
-    .label('Username')
+    .label(I18n.t('signIn.user'))
     .required(),
   password: yup
     .string()
-    .label('Password')
+    .label(I18n.t('signIn.password'))
     .required()
     .min(4, 'Seems a bit short...')
 });
@@ -105,7 +105,7 @@ const SignIn = ({ navigation }) => {
       I18n.t('signIn.saveLoginCreds'),
       [
         {
-          text: 'Yes',
+          text: I18n.t('global.yes'),
           onPress: () => {
             const usr = currentUser;
             const credentials = values;
@@ -118,7 +118,7 @@ const SignIn = ({ navigation }) => {
           }
         },
         {
-          text: 'No',
+          text: I18n.t('global.no'),
           style: 'cancel',
           onPress: () => {
             handleSignIn(values);
@@ -254,7 +254,7 @@ const SignIn = ({ navigation }) => {
                     label={I18n.t('signIn.password')}
                     formikProps={formikProps}
                     formikKey="password"
-                    placeholder="Password"
+                    placeholder={I18n.t('signIn.password')}
                     secureTextEntry={!checked}
                     value={formikProps.values.password}
                   />
@@ -275,7 +275,7 @@ const SignIn = ({ navigation }) => {
                       <Text style={styles.passwordText}>{I18n.t('signIn.showPassword')}</Text>
                     </View>
                     <Button style={{ flex: 1 }} onPress={handleForgotPassword}>
-                      Forgot password?
+                      {I18n.t('signIn.forgotPassword.label')}
                     </Button>
                   </View>
                   {loading ? (
@@ -316,7 +316,7 @@ const SignIn = ({ navigation }) => {
             <View style={styles.termsContainer}>
               <Text style={styles.accountText}>{I18n.t('signIn.noAccount')}</Text>
               <Button mode="text" theme={theme} color="#3E81FD" onPress={handleSignUp} labelStyle={{ marginLeft: 5 }}>
-                Sign up!
+                {I18n.t('signIn.signUpLink')}
               </Button>
             </View>
             <View style={styles.termsContainer}>
