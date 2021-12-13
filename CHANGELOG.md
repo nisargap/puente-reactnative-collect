@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.10.0...v12.0.0) (2021-12-13)
+
+
+### New Features
+
+* add workflows to form gallery, refactor horizontalCard View ([c9a7839](https://github.com/hopetambala/puente-reactnative-collect/commit/c9a78397254353353ce6f17a8291917cba9d4cda))
+* loop for same form submission, ie. concatenate repeated questions ([e642e1a](https://github.com/hopetambala/puente-reactnative-collect/commit/e642e1a5c5485b512343325b157638d238533497))
+* loop that submits one form ie. concatenates repeated groups to original key ([4907fc2](https://github.com/hopetambala/puente-reactnative-collect/commit/4907fc2984ce1155eca50522cef3a799a9a5f618))
+
+
+### Bug fixes
+
+* PLATFORM-518 ([6992819](https://github.com/hopetambala/puente-reactnative-collect/commit/69928192a413b6c9d082d6983a0a4a47ce474e1a))
+
 ## [11.10.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.5...v11.10.0) (2021-10-28)
 
 
