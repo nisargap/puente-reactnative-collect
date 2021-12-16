@@ -4,7 +4,6 @@ import {
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
-  postOfflineForms,
   postSupplementaryAssetForm,
   postSupplementaryForm,
 } from './Post/post';
@@ -30,7 +29,6 @@ export {
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
-  postOfflineForms,
   postSupplementaryAssetForm,
   postSupplementaryForm,
   residentQuery

@@ -29,4 +29,33 @@ function vitalsBloodPressue(values, formObject) {
   return newFormObject;
 }
 
-export { addSelectTextInputs, vitalsBloodPressue };
+// function to concatenate all loopSameForm keys to orginal key in use
+function cleanLoopSubmissions(values, formObject) {
+  const newFormObject = formObject;
+  const repeatedQuestions = {};
+  const valuesToPrune = [];
+  Object.entries(values).forEach(([key, val]) => {
+    if (key.includes('__sameForm')) {
+      valuesToPrune.push(key);
+      const actualKey = key.split('__sameForm')[0];
+      if (Object.prototype.hasOwnProperty.call(repeatedQuestions, actualKey)) {
+        repeatedQuestions[actualKey].push(val);
+      } else {
+        repeatedQuestions[actualKey] = [val];
+      }
+    }
+  });
+
+  valuesToPrune.forEach((value) => {
+    delete newFormObject[value];
+  });
+  Object.entries(repeatedQuestions).forEach(([key, value]) => {
+    value.forEach((val) => {
+      newFormObject[key] = `${newFormObject[key]}|${val}`;
+    });
+  });
+
+  return newFormObject;
+}
+
+export { addSelectTextInputs, cleanLoopSubmissions, vitalsBloodPressue };
