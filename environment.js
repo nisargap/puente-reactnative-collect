@@ -47,7 +47,6 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) =>
   //   return ENV.prod;
   // }
   ENV.prod;
-
 const selectedENV = getEnvVars();
 
 export default selectedENV;
