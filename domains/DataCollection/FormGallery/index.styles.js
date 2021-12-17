@@ -23,7 +23,11 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold'
-  }
+  },
+  mediumHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Emoji from 'react-native-emoji';
 import {
   Button,
   Headline, IconButton, Text,
 } from 'react-native-paper';
 
+import surveyingUserFailsafe from '../../domains/DataCollection/Forms/utils';
 import { deleteData, getData } from '../../modules/async-storage';
-import { postOfflineForms } from '../../modules/cached-resources';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
+import checkOnlineStatus from '../../modules/offline';
+import { isEmpty } from '../../modules/utils';
+import { postOfflineForms } from '../../services/parse/crud';
 import FormCounts from './FormCounts';
 import styles from './index.styles';
 
@@ -17,7 +20,6 @@ const Header = ({
   setSettings
 }) => {
   const { header, headerText, headerIcon } = styles;
-
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [volunteerDate, setVolunteerDate] = useState('');
   const [volunteerGreeting, setVolunteerGreeting] = useState('');
@@ -92,34 +94,71 @@ const Header = ({
     setDrawerOpen(!drawerOpen);
   };
 
-  const postOffline = () => {
-    postOfflineForms().then(async (result) => {
-      if (result) {
-        await deleteData('offlineIDForms');
-        await deleteData('offlineSupForms');
-        await deleteData('offlineAssetIDForms');
-        await deleteData('offlineAssetSupForms');
-        await deleteData('offlineHouseholds');
-        await deleteData('offlineHouseholdsRelation');
-        setOfflineForms(false);
-        setSubmission(true);
-      }
-    }, (error) => {
-      // handle session token error
-      handleParseError(error, postOfflineForms).then(async (result) => {
-        if (result) {
-          await deleteData('offlineIDForms');
-          await deleteData('offlineSupForms');
-          await deleteData('offlineAssetIDForms');
-          await deleteData('offlineAssetSupForms');
-          await deleteData('offlineHouseholds');
-          await deleteData('offlineHouseholdsRelation');
-          setOfflineForms(false);
-          setSubmission(true);
-        }
-      }, () => {
+  const postOffline = async () => {
+    const user = await getData('currentUser');
+
+    const surveyUser = await surveyingUserFailsafe(user, undefined, isEmpty);
+    const { organization } = user;
+    const appVersion = await getData('appVersion') || '';
+    const phoneOS = Platform.OS || '';
+
+    const idFormsAsync = await getData('offlineIDForms');
+    const supplementaryFormsAsync = await getData('offlineSupForms');
+    const assetIdFormsAsync = await getData('offlineAssetIDForms');
+    const assetSupFormsAsync = await getData('offlineAssetSupForms');
+    const householdsAsync = await getData('offlineHouseholds');
+    const householdRelationsAsync = await getData('offlineHouseholdsRelation');
+
+    const offlineParams = {
+      surveyData: idFormsAsync,
+      supForms: supplementaryFormsAsync,
+      households: householdsAsync,
+      householdRelations: householdRelationsAsync,
+      assetIdForms: assetIdFormsAsync,
+      assetSupForms: assetSupFormsAsync,
+      surveyingUser: surveyUser,
+      surveyingOrganization: organization,
+      parseUser: user.objectId,
+      appVersion,
+      phoneOS
+    };
+    checkOnlineStatus().then((connected) => {
+      if (connected) {
+        postOfflineForms(offlineParams).then(async (result) => {
+          if (result) {
+            await deleteData('offlineIDForms');
+            await deleteData('offlineSupForms');
+            await deleteData('offlineAssetIDForms');
+            await deleteData('offlineAssetSupForms');
+            await deleteData('offlineHouseholds');
+            await deleteData('offlineHouseholdsRelation');
+            setOfflineForms(false);
+            setSubmission(true);
+          } else {
+            setSubmission(false);
+          }
+        }).catch((error) => {
+          // handle session token error
+          handleParseError(error, postOfflineForms).then(async (result) => {
+            if (result) {
+              await deleteData('offlineIDForms');
+              await deleteData('offlineSupForms');
+              await deleteData('offlineAssetIDForms');
+              await deleteData('offlineAssetSupForms');
+              await deleteData('offlineHouseholds');
+              await deleteData('offlineHouseholdsRelation');
+              setOfflineForms(false);
+              setSubmission(true);
+            } else {
+              setSubmission(false);
+            }
+          }, () => {
+            setSubmission(false);
+          });
+        });
+      } else {
         setSubmission(false);
-      });
+      }
     });
   };
 

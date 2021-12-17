@@ -11,11 +11,11 @@ const parseSearch = (surveyingOrganization, qry) => {
   }
 
   const fname = new Parse.Query('SurveyData');
-  fname.limit(1000);
+  fname.limit(3000);
   fname.startsWith('fname', qry);
 
   const lname = new Parse.Query('SurveyData');
-  lname.limit(1000);
+  lname.limit(3000);
   lname.startsWith('lname', qry);
 
   return new Promise((resolve, reject) => {

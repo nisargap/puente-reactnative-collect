@@ -15,7 +15,7 @@ export default function UseCameraRoll(
         await ImagePicker.requestMediaLibraryPermissionsAsync().then((status) => {
           if (status.status !== 'granted') {
             // await Permissions.askAsync(Permissions.CAMERA_ROLL)
-            alert('Sorry, we need camera roll permissions to make this work!'); // eslint-disable-line
+            alert(I18n.t('camera.sorryAlert')); // eslint-disable-line
           }
         }, (error) => {
           console.log(error); // eslint-disable-line

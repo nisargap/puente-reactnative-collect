@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import { Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import {
@@ -6,7 +7,6 @@ import {
 import { Button, Text } from 'react-native-paper';
 
 import { getData } from '../../../modules/async-storage';
-import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
 import { countService } from '../../../services/parse/crud';

@@ -18,6 +18,7 @@ import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';
 import { isEmpty } from '../../../../../modules/utils';
+import { cleanLoopSubmissions } from '../../../Forms/SupplementaryForm/utils';
 import surveyingUserFailsafe from '../../../Forms/utils';
 import configArray from './config/config';
 import styles from './index.styles';
@@ -52,12 +53,15 @@ const AssetCore = ({
             formObject.longitude = values.location?.longitude || 0;
             formObject.altitude = values.location?.altitude || 0;
 
+            // add any looped values to formObject
+            const formObjectUpdated = cleanLoopSubmissions(values, formObject);
+
             const postParams = {
               parseClass: 'Assets',
               parseUser: user.objectId,
               signature: 'Asset Signature',
               photoFile: 'photo',
-              localObject: formObject
+              localObject: formObjectUpdated
             };
 
             postAssetForm(postParams)
