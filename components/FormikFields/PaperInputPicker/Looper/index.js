@@ -67,6 +67,9 @@ const Looper = ({
       } else {
         updatedQuestion.formikKey = `${updatedQuestion.formikKey}__sameForm${individualLoopsAdded}`;
       }
+      if (updatedQuestion.options) {
+        updatedQuestion.options = updateTextKeys(updatedQuestion.options)
+      }
       updatedQuestions = updatedQuestions.concat(updatedQuestion);
     });
 
@@ -76,6 +79,17 @@ const Looper = ({
     }
     setIndividualLoopsAdded(individualLoopsAdded + 1);
   };
+
+  const updateTextKeys = (options) => {
+    let updatedOptions = []
+    options.forEach((option) => {
+      const updatedOption = _.cloneDeep(option);
+      const textKeys = updatedOption.textKey.split("__")
+      updatedOption.textKey = sameForm ? `__${textKeys[1]}__sameForm${individualLoopsAdded}__${textKeys[2]}` : `__${textKeys[1]}__loop${individualLoopsAdded}__${textKeys[2]}`;
+      updatedOptions = updatedOptions.concat(updatedOption)
+    })
+    return updatedOptions
+  }
 
   const removeLoop = () => {
     if (sameForm !== true) {
