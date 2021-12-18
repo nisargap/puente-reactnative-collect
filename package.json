@@ -16,7 +16,7 @@
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "./node_modules/.bin/eslint '**/*.{js,jsx}' --fix",
     "publish-prod": "eas build --platform all --profile=release",
-    "upload": "EXPO_APPLE_APP_SPECIFIC_PASSWORD=pwbb-lvma-bbsg-jkpn eas submit -p ios --latest --apple-id=hopetambala@outlook.com --asc-app-id=1362371696 && eas submit -p android --latest --key='./expo-resources/android/api-6741007454030476273-79684-2bb9749d6828.json'",
+    "upload": "eas submit -p ios --latest && eas submit -p android --latest",
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
     "release-minor": "npx standard-version --release-as minor",
