@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import {
+  Keyboard, ScrollView, TouchableWithoutFeedback, View
+} from 'react-native';
+import { Button, Card, Text } from 'react-native-paper';
 
 import PostSubmissionSVG from '../../../assets/graphics/static/Submission-Page-Icon.svg';
-import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
 import ResidentIdSearchbar from '../../../components/ResidentIdSearchbar';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
 import GdprCompliance from '../GdprCompliance';
 import IdentificationForm from './IdentificationForm';
+import styles from './index.styles';
 import SupplementaryForm from './SupplementaryForm';
 
 const Forms = (props) => {
   const {
-    navigation, navigateToGallery,
+    navigation, navigateToGallery, navigateToCustomForm,
     selectedForm, setSelectedForm, navigateToNewRecord,
     scrollViewScroll, setScrollViewScroll,
-    puenteForms,
+    pinnedForms,
     surveyingUser, surveyingOrganization,
     surveyee, setSurveyee,
     customForm, navigateToRoot
@@ -41,7 +43,7 @@ const Forms = (props) => {
       )}
       {consent === true && selectedForm !== 'id' && selectedForm !== '' && (
         <View>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss()} accessible={false}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View>
               <View style={layout.container}>
                 <ResidentIdSearchbar
@@ -82,11 +84,33 @@ const Forms = (props) => {
           </View>
           <View style={layout.container}>
             <Text style={{ fontSize: 15, marginBottom: 5 }}>{I18n.t('forms.suggestedForms')}</Text>
-            <SmallCardsCarousel
-              puenteForms={puenteForms}
-              navigateToNewRecord={navigateToNewRecord}
-              setUser={false}
-            />
+            <ScrollView horizontal>
+              {pinnedForms && pinnedForms.map((form) => (
+                <Card
+                  key={form.objectId ?? form.tag}
+                  style={layout.cardSmallStyle}
+                  onPress={() => {
+                    if (!form.tag) return navigateToCustomForm(form);
+                    return navigateToNewRecord(form.tag);
+                  }}
+                >
+                  <View style={styles.cardContainer}>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.text}>
+                        {form.name}
+                      </Text>
+                    </View>
+                  </View>
+                </Card>
+              ))}
+              {pinnedForms.length < 1 && (
+                <View style={layout.screenRow}>
+                  <Card>
+                    <Card.Title title={I18n.t('formsGallery.noPinnedForms')} />
+                  </Card>
+                </View>
+              )}
+            </ScrollView>
             <Button mode="contained" onPress={navigateToGallery}>
               <Text style={{ color: 'white' }}>{I18n.t('forms.viewGallery')}</Text>
             </Button>

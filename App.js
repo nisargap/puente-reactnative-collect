@@ -1,19 +1,13 @@
+/* eslint-disable-file */
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { Platform } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { enableScreens } from 'react-native-screens';
-import useCachedResources from './modules/cached-resources/useCachedResources'
-// import { Provider as StoreProvider } from 'react-redux';
 
 import MainNavigation from './components/MainNavigation';
-// import configureStore from './modules/state-management/configure-store';
+import useCachedResources from './modules/cached-resources/useCachedResources';
 import { theme } from './modules/theme';
-
-// const store = configureStore();
-
-if (Platform.OS === 'android') {
-  enableScreens(true);
-}
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,10 +16,12 @@ export default function App() {
     return null;
   }
   return (
-    // <StoreProvider store={store}>
-    <PaperProvider theme={theme}>
-      <MainNavigation />
-    </PaperProvider>
-    // </StoreProvider>
+    <NavigationContainer independent>
+
+      <PaperProvider theme={theme}>
+        <MainNavigation />
+      </PaperProvider>
+    </NavigationContainer>
+
   );
 }

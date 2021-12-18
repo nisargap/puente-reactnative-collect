@@ -9,15 +9,13 @@ import {
 
 import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
 import Header from '../../components/Header';
-import { deleteData } from '../../modules/async-storage';
 import { getTasksAsync } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
-import { retrieveSignOutFunction } from '../../services/parse/auth';
 
-const HomeScreen = (props) => {
+const HomeScreen = () => {
   const [tasks, setTasks] = useState(null);
-  const { navigation } = props;
+  // const { navigation } = props;
 
   const showTasks = async () => {
     await getTasksAsync().then((result) => {
@@ -25,19 +23,9 @@ const HomeScreen = (props) => {
     });
   };
 
-  const logOut = () => {
-    retrieveSignOutFunction().then(() => {
-      deleteData('credentials');
-      deleteData('pincode');
-      deleteData('organization');
-      deleteData('currentUser');
-      navigation.navigate('Sign In');
-    });
-  };
-
   return (
     <View style={layout.screenContainer}>
-      <Header logOut={logOut} />
+      <Header />
       <ScrollView>
         <View style={layout.screenRow}>
           <Title>{I18n.t('home.myTasks')}</Title>
@@ -70,9 +58,6 @@ const HomeScreen = (props) => {
             </Card.Content>
           </Card>
         </View> */}
-        <Button onPress={logOut} mode="contained">
-          <Text>{I18n.t('home.logOut')}</Text>
-        </Button>
       </ScrollView>
     </View>
   );

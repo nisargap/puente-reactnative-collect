@@ -1,25 +1,28 @@
-import { Spinner } from 'native-base';
 import * as React from 'react';
 import {
-  Text,
-  View
+  Image, Text, TouchableWithoutFeedback, View
 } from 'react-native';
 import {
   Button, Headline,
   TextInput,
 } from 'react-native-paper';
 
-import getLocation from '../../../modules/geolocation';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
-import PaperButton from '../../Button';
+import UseCameraRoll from '../../Multimedia/CameraRoll';
+import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
+import Geolocation from './Geolocation';
 import HouseholdManager from './HouseholdManager';
-import { stylesDefault, stylesPaper, styleX } from './index.style';
+import {
+  styleButton, styles, stylesDefault, stylesPaper, styleX
+} from './index.style';
+import Looper from './Looper';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
-  customForm, ...rest
+  customForm, config, loopsAdded, setLoopsAdded,
+  ...rest
 }) => {
   const {
     label, formikKey, fieldType, sideLabel
@@ -28,21 +31,6 @@ const PaperInputPicker = ({
   const {
     handleChange, handleBlur, errors, setFieldValue, values
   } = formikProps;
-
-  const [location, setLocation] = React.useState({ latitude: 0, longitude: 0, altitude: 0 });
-  const [locationLoading, setLocationLoading] = React.useState(false);
-
-  const handleLocation = async () => {
-    setLocationLoading(true);
-    const currentLocation = await getLocation().catch((e) => e);
-    const { latitude, longitude, altitude } = currentLocation.coords;
-
-    setFieldValue('location', { latitude, longitude, altitude });
-    setLocation({ latitude, longitude, altitude });
-    setTimeout(() => {
-      setLocationLoading(false);
-    }, 1000);
-  };
 
   const translatedLabel = customForm ? label : I18n.t(label);
   const translatedLabelSide = customForm ? sideLabel : I18n.t(sideLabel);
@@ -55,14 +43,20 @@ const PaperInputPicker = ({
     }
   };
 
+  const [cameraVisible, setCameraVisible] = React.useState(false);
+  const [pictureUris, setPictureUris] = React.useState({});
+  const [image, setImage] = React.useState(null);
+
+  const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
+
   return (
     <>
       {fieldType === 'input' && (
         <View style={stylesDefault.container} key={formikKey}>
-          {translatedLabel.length > 40
+          {translatedLabel.length > 30
             && <Text style={stylesDefault.label}>{translatedLabel}</Text>}
           <TextInput
-            label={translatedLabel.length > 40 ? '' : translatedLabel}
+            label={translatedLabel.length > 30 ? '' : translatedLabel}
             onChangeText={handleChange(formikKey)}
             onBlur={handleBlur(formikKey)}
             {...rest} //eslint-disable-line
@@ -77,7 +71,7 @@ const PaperInputPicker = ({
       )}
       {fieldType === 'numberInput' && (
         <View style={stylesDefault.container} key={formikKey}>
-          {translatedLabel.length > 40
+          {translatedLabel.length > 30
             && (
               <Text style={[stylesDefault.label, {
                 bottom: -15, zIndex: 1, left: 5, padding: 5
@@ -87,7 +81,7 @@ const PaperInputPicker = ({
               </Text>
             )}
           <TextInput
-            label={translatedLabel.length > 40 ? '' : translatedLabel}
+            label={translatedLabel.length > 30 ? '' : translatedLabel}
             onChangeText={handleChange(formikKey)}
             onBlur={handleBlur(formikKey)}
             {...rest} //eslint-disable-line
@@ -196,31 +190,28 @@ const PaperInputPicker = ({
               <View key={result.value}>
                 {/* selected value */}
                 {result.value === values[formikKey] && (
-                  <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
-                  </View>
+                  <TouchableWithoutFeedback OnPress={() => setFieldValue(formikKey, result.value)}>
+                    <View style={styleButton.selected}>
+
+                      <View style={styles.button}>
+                        <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                      </View>
+
+                    </View>
+                  </TouchableWithoutFeedback>
                 )}
                 {/* non-selected value */}
                 {result.value !== values[formikKey] && (
-                  <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
-                      onPress={() => setFieldValue(formikKey, result.value)}
-                    >
+                  <TouchableWithoutFeedback
+                    onPress={() => setFieldValue(formikKey, result.value)}
+                  >
+                    <View style={styleButton.unselected}>
                       <Text style={{ color: theme.colors.primary }}>
                         {customForm ? result.label : I18n.t(result.label)}
                       </Text>
-                    </Button>
-                  </View>
+                    </View>
+
+                  </TouchableWithoutFeedback>
                 )}
               </View>
             ))}
@@ -230,6 +221,9 @@ const PaperInputPicker = ({
             <View key={result.value}>
               {result.text === true && result.value === values[formikKey] && (
                 <View style={stylesDefault} key={result.textKey}>
+                  {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                    <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                  )}
                   <TextInput
                     label={customForm ? result.label : I18n.t(result.label)}
                     onChangeText={handleChange(result.textKey)}
@@ -259,32 +253,32 @@ const PaperInputPicker = ({
                 {/* selected value */}
                 {values[formikKey] && values[formikKey].includes(result.value) && (
                   <View>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="contained"
+                    <TouchableWithoutFeedback
                       onPress={() => {
                         const test = values[formikKey].filter((item) => item !== result.value);
                         setFieldValue(formikKey, test);
                       }}
                     >
-                      <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
-                    </Button>
+                      <View style={styleButton.selected}>
+                        <View style={styles.button}>
+                          <Text style={{ color: 'white' }}>{customForm ? result.label : I18n.t(result.label)}</Text>
+                        </View>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
                 {/* non-selected value */}
                 {(!values[formikKey] || !(values[formikKey]).includes(result.value)) && (
                   <View style={stylesDefault}>
-                    <Button
-                      style={layout.buttonGroupButtonStyle}
-                      key={result.value}
-                      mode="outlined"
+                    <TouchableWithoutFeedback
                       onPress={() => addArrayVal(result)}
                     >
-                      <Text style={{ color: theme.colors.primary }}>
-                        {customForm ? result.label : I18n.t(result.label)}
-                      </Text>
-                    </Button>
+                      <View style={styleButton.unselected}>
+                        <Text style={{ color: theme.colors.primary }}>
+                          {customForm ? result.label : I18n.t(result.label)}
+                        </Text>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 )}
               </View>
@@ -296,6 +290,9 @@ const PaperInputPicker = ({
               {result.text === true && values[formikKey]
                 && values[formikKey].includes(result.value) && (
                   <View style={stylesDefault} key={result.textKey}>
+                    {result.textQuestion !== undefined && result.textQuestion.length > 0 && (
+                      <Text>{customForm ? result.textQuestion : I18n.t(result.textQuestion)}</Text>
+                    )}
                     <TextInput
                       label={customForm ? result.label : I18n.t(result.label)}
                       onChangeText={handleChange(result.textKey)}
@@ -333,39 +330,11 @@ const PaperInputPicker = ({
         </View>
       )}
       {fieldType === 'geolocation' && (
-        <View key={formikKey}>
-          {location === null && (
-            <PaperButton
-              onPressEvent={handleLocation}
-              buttonText="Get Location"
-            />
-          )}
-          {location !== null && (
-            <View>
-              <PaperButton
-                onPressEvent={handleLocation}
-                buttonText="Get Location Again"
-              />
-              <View style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: 'row' }}>
-                {
-                  locationLoading === true
-                  && <Spinner color={theme.colors.primary} />
-                }
-                {locationLoading === false
-                  && (
-                    <View>
-                      <Headline>
-                        {`(${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)})`}
-                      </Headline>
-                    </View>
-                  )}
-              </View>
-              <Text style={{ color: 'red' }}>
-                {errors[formikKey]}
-              </Text>
-            </View>
-          )}
-        </View>
+        <Geolocation
+          errors={errors}
+          formikKey={formikKey}
+          setFieldValue={setFieldValue}
+        />
       )}
       {fieldType === 'household' && (
         <View key={formikKey}>
@@ -399,7 +368,7 @@ const PaperInputPicker = ({
                   label={customForm ? result.label : I18n.t(result.label)}
                   onChangeText={handleChange(customForm ? result.label : I18n.t(result.label))}
                   onBlur={handleBlur(customForm ? result.label : I18n.t(result.label))}
-                    {...rest} //eslint-disable-line
+                  {...rest} //eslint-disable-line
                   mode="outlined"
                   theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
                 />
@@ -411,36 +380,114 @@ const PaperInputPicker = ({
           </View>
         </View>
       )}
-      {
-        fieldType === 'multiInputRowNum' && (
-          <View style={stylesDefault.container}>
-            <Text style={stylesDefault.label}>{translatedLabel}</Text>
-            <View style={stylesDefault.multiInputContainer}>
-              {data.options.map((result) => (result.textSplit ? (
-                <View key={`${result}`} style={{ flex: 1 }}>
-                  <Text style={styleX.textSplit}>{result.label}</Text>
-                </View>
-              ) : (
-                <View key={result.value} style={stylesDefault.inputItem}>
-                  <TextInput
-                    label={customForm ? result.label : I18n.t(result.label)}
-                    onChangeText={handleChange(result.value)}
-                    onBlur={handleBlur(result.value)}
-                      {...rest} //eslint-disable-line
-                    mode="outlined"
-                    keyboardType="numeric"
-                    maxLength={result.maxLength ? result.maxLength : null}
-                    theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
-                  />
-                  <Text style={{ color: 'red' }}>
-                    {errors[result.value]}
-                  </Text>
-                </View>
-              )))}
+      {fieldType === 'multiInputRowNum' && (
+      <View style={stylesDefault.container}>
+        <Text style={stylesDefault.label}>{translatedLabel}</Text>
+        <View style={stylesDefault.multiInputContainer}>
+          {data.options.map((result) => (result.textSplit ? (
+            <View key={`${result}`} style={{ flex: 1 }}>
+              <Text style={styleX.textSplit}>{result.label}</Text>
             </View>
-          </View>
-        )
-      }
+          ) : (
+            <View key={result.value} style={stylesDefault.inputItem}>
+              <TextInput
+                label={customForm ? result.label : I18n.t(result.label)}
+                onChangeText={handleChange(result.value)}
+                onBlur={handleBlur(result.value)}
+                    {...rest} //eslint-disable-line
+                mode="outlined"
+                keyboardType="numeric"
+                maxLength={result.maxLength ? result.maxLength : null}
+                theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+              />
+              <Text style={{ color: 'red' }}>
+                {errors[result.value]}
+              </Text>
+            </View>
+          )))}
+        </View>
+      </View>
+      )}
+      {fieldType === 'photo' && (
+        <View style={stylesDefault.container}>
+          {!cameraVisible && image === null && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+              <Button onPress={() => setCameraVisible(true)}>{I18n.t('paperButton.takePhoto')}</Button>
+              <UseCameraRoll
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+          {!cameraVisible && image !== null && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
+              <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
+              <Button onPress={() => {
+                setCameraVisible(true);
+              }}
+              >
+                {I18n.t('paperButton.takePhoto')}
+              </Button>
+              <UseCameraRoll
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+          {cameraVisible && (
+            <View>
+              <Text style={stylesDefault.labelImage}>{label}</Text>
+              <UseCamera
+                cameraVisible={cameraVisible}
+                setCameraVisible={setCameraVisible}
+                pictureUris={pictureUris}
+                setPictureUris={setPictureUris}
+                formikProps={formikProps}
+                formikKey={formikKey}
+                image={image}
+                setImage={setImage}
+              />
+            </View>
+          )}
+        </View>
+      )}
+      {fieldType === 'loop' && (
+      <View key={formikKey}>
+        {additionalQuestions !== undefined && additionalQuestions.length !== 0
+              && additionalQuestions.map((question) => (
+                <PaperInputPicker
+                  data={question}
+                  formikProps={formikProps}
+                  customForm={customForm}
+                  config={config}
+                  loopsAdded={loopsAdded}
+                  setLoopsAdded={setLoopsAdded}
+                  surveyingOrganization={surveyingOrganization}
+                  scrollViewScroll={scrollViewScroll}
+                  setScrollViewScroll={setScrollViewScroll}
+                />
+              ))}
+        <Looper
+          data={data}
+          config={config}
+          additionalQuestions={additionalQuestions}
+          setAdditionalQuestions={setAdditionalQuestions}
+          translatedLabel={translatedLabel}
+          loopsAdded={loopsAdded}
+          setLoopsAdded={setLoopsAdded}
+        />
+      </View>
+      )}
     </>
   );
 };

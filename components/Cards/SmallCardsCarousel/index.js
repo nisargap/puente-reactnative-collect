@@ -7,9 +7,6 @@ import {
   Card, Text
 } from 'react-native-paper';
 
-import MedEvalSVG from '../../../assets/icons/Heart-Icon.svg';
-import EnvSVG from '../../../assets/icons/Home-icon.svg';
-import NewRecordSVG from '../../../assets/icons/New-Record-icon.svg';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
 
@@ -32,7 +29,7 @@ import { theme } from '../../../modules/theme';
  */
 
 const SmallCardsCarousel = ({
-  puenteForms, navigateToNewRecord, setView, surveyee, setUser
+  puenteForms, navigateToNewRecord, setView, surveyee, setUser, pinForm
 }) => (
   <ScrollView horizontal>
     {puenteForms.map((form) => (
@@ -47,48 +44,17 @@ const SmallCardsCarousel = ({
             navigateToNewRecord(form.tag);
           }
         }}
+        onLongPress={pinForm ? () => pinForm(form) : null}
       >
-        {form.tag === 'id' && (
         <View style={styles.cardContainer}>
-          <NewRecordSVG height={40} style={styles.svg} />
+          <form.image height={40} style={styles.svg} />
           <View style={styles.textContainer}>
             <Text style={styles.text}>
-              {I18n.t('cards.smallCards.residentID')}
+              {I18n.t(form.name)}
             </Text>
           </View>
         </View>
-        )}
 
-        {form.tag === 'env' && (
-        <View style={styles.cardContainer}>
-          <EnvSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {`${I18n.t('cards.smallCards.environmental')} ${I18n.t('cards.smallCards.history')}`}
-            </Text>
-          </View>
-        </View>
-        )}
-        {form.tag === 'med-eval' && (
-        <View style={styles.cardContainer}>
-          <MedEvalSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {`${I18n.t('cards.smallCards.medical')} ${I18n.t('cards.smallCards.evaluation')}`}
-            </Text>
-          </View>
-        </View>
-        )}
-        {form.tag === 'vitals' && (
-        <View style={styles.cardContainer}>
-          <NewRecordSVG height={40} style={styles.svg} />
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {I18n.t('cards.smallCards.vitals')}
-            </Text>
-          </View>
-        </View>
-        )}
       </Card>
     ))}
   </ScrollView>

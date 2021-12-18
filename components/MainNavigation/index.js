@@ -26,7 +26,7 @@ const MainNavigation = () => {
   return (
     <View style={container}>
       {Platform.OS === 'ios' && <StatusBar />}
-      <NavigationContainer linking={LinkingConfiguration}>
+      <NavigationContainer linking={LinkingConfiguration} independent>
         <Stack.Navigator>
           <Stack.Screen name="Sign In" component={SignIn} options={{ headerShown: false }} />
           <Stack.Screen name="Sign Up" component={SignUp} options={{ headerShown: false }} />

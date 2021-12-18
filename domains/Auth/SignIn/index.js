@@ -24,6 +24,7 @@ import * as yup from 'yup';
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
+import registerForPushNotificationsAsync from '../../../components/PushNotification';
 import TermsModal from '../../../components/TermsModal';
 import { deleteData, getData, storeData } from '../../../modules/async-storage';
 import { populateCache } from '../../../modules/cached-resources';
@@ -34,15 +35,14 @@ import { retrieveSignInFunction } from '../../../services/parse/auth';
 import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
-// components/FormikFields/PaperInputPicker';
 const validationSchema = yup.object().shape({
   username: yup
     .string()
-    .label('Username')
+    .label(I18n.t('signIn.user'))
     .required(),
   password: yup
     .string()
-    .label('Password')
+    .label(I18n.t('signIn.password'))
     .required()
     .min(4, 'Seems a bit short...')
 });
@@ -51,21 +51,33 @@ const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [user, setUser] = useState(null);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('');
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [forgotPassword, setForgotPassword] = useState(false);
 
   const load = false;
 
   useEffect(() => {
-    getData('credentials').then((values) => {
-      setUser(values);
-      if (values?.store === 'Yes') {
+    getData('currentUser').then((currentUser) => {
+      setUser(currentUser);
+      if (currentUser?.credentials?.store === 'Yes') {
         setModalVisible(true);
       }
     });
   }, [load]);
+
+  useEffect(() => {
+    async function checkLanguage() {
+      const currentLocale = await getData('locale');
+
+      if (currentLocale !== 'en' && currentLocale !== null && currentLocale !== undefined) {
+        handleLanguage(currentLocale);
+      }
+    }
+    checkLanguage();
+  }, []);
 
   const handleFailedAttempt = () => {
     Alert.alert(
@@ -81,30 +93,35 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('Sign Up');
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async (values, callback) => {
+    if (callback) callback();
     Keyboard.dismiss();
-    navigation.navigate('Root');
+    navigation.navigate('Root', values);
   };
 
-  const handleSaveCredentials = (values) => {
+  const handleSaveCredentials = (currentUser, values) => {
     Alert.alert(
       I18n.t('signIn.credentials'),
       I18n.t('signIn.saveLoginCreds'),
       [
         {
-          text: 'Yes',
+          text: I18n.t('global.yes'),
           onPress: () => {
+            const usr = currentUser;
             const credentials = values;
-            credentials.store = 'Yes';
-            storeData(credentials, 'credentials');
+            usr.set('credentials', {
+              ...credentials,
+              store: 'Yes'
+            });
+            storeData(usr, 'currentUser');
             navigation.navigate('StorePincode');
           }
         },
         {
-          text: 'No',
+          text: I18n.t('global.no'),
           style: 'cancel',
           onPress: () => {
-            navigation.navigate('Root');
+            handleSignIn(values);
           }
         },
       ],
@@ -127,20 +144,76 @@ const SignIn = ({ navigation }) => {
   };
 
   const deleteCreds = () => {
-    deleteData('credentials');
+    deleteData('currentUser');
   };
 
-  const storeUserInformation = (userData, userCreds) => {
+  const storeUserInformation = async (currentUser, userCreds) => {
     // store username and password
+    const usr = currentUser;
     if (userCreds) {
-      const credentials = userCreds;
-      credentials.store = 'No';
-      storeData(credentials, 'credentials');
+      usr.set('credentials', {
+        ...userCreds,
+        store: 'No'
+      });
+      storeData(usr, 'currentUser');
     }
-    populateCache(userData);
+    // send push to update app if necessary and retrieve push token
+    const expoToken = await registerForPushNotificationsAsync();
+    populateCache(usr, expoToken);
+  };
+
+  const signInAndStore = (connected, values, actions) => {
+    setLoading(true);
+    if (connected) {
+      // stores credentials for offline sign in, but does not offer passwordless entry
+      retrieveSignInFunction(values.username, values.password)
+        .then((currentUser) => {
+          // always sets crenetials.store == 'No'
+          storeUserInformation(currentUser, values);
+          getData('currentUser').then(async (userCreds) => {
+            // credentials stored do not match those entered through sign-in, overwrite
+            // always runs
+            if (userCreds === null || userCreds.credentials.store === 'No' || values.username !== userCreds.credentials.username
+            || values.password !== userCreds.credentials.password) {
+              // ask user to store credentials
+              setLoading(false);
+              handleSaveCredentials(currentUser, values);
+            } else {
+              // store
+              setLoading(false);
+              storeUserInformation(currentUser);
+              // go to root
+              await handleSignIn(values, actions.resetForm);
+            }
+          }, () => {
+            setLoading(false);
+            handleSaveCredentials(currentUser, values);
+          });
+          // setLoading(false);
+        }, (err) => {
+          setLoading(false);
+          handleFailedAttempt(err);
+        });
+    } else {
+      // offline
+      getData('currentUser').then(async (userCreds) => {
+        // username and password entered (or saved in creds) match the saved cred
+        if (values.username === userCreds.credentials.username
+          && values.password === userCreds.credentials.password) {
+          // need some pincode verification
+          await handleSignIn(values, actions.resetForm);
+          setLoading(false);
+        } else {
+          // incorrect usernmae/password offline
+          handleFailedAttempt();
+          setLoading(false);
+        }
+      });
+    }
   };
 
   return (
+
     <KeyboardAvoidingView
       enabled
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -152,49 +225,14 @@ const SignIn = ({ navigation }) => {
             <LanguagePicker language={language} onChangeLanguage={handleLanguage} />
             <Formik
               initialValues={{ username: '', password: '' }}
-              onSubmit={(values, actions) => {
-                checkOnlineStatus().then((connected) => {
-                  if (connected) {
-                    retrieveSignInFunction(values.username, values.password).then((userData) => {
-                      getData('credentials').then((userCreds) => {
-                        // credentials saved do not match those entered, overwrite saved
-                        // credentials
-                        if (userCreds === null || userCreds.store === 'No' || values.username !== userCreds.username
-                          || values.password !== userCreds.password) {
-                          // Store user organization
-                          storeUserInformation(userData, values);
-                          handleSaveCredentials(values);
-                        } else {
-                          storeUserInformation(userData);
-                          handleSignIn(values, actions.resetForm());
-                        }
-                      }, () => {
-                        // Store user organization
-                        storeUserInformation(userData, values);
-                        // no credentials saved, give option to save
-                        handleSaveCredentials(values);
-                      });
-                      // handleSignIn(values, actions.resetForm());
-                    }, (err) => {
-                      handleFailedAttempt(err);
-                    });
-                  } else {
-                    // offline
-                    getData('credentials').then((userCreds) => {
-                      // username and password entered (or saved in creds) match the saved cred
-                      if (values.username === userCreds.username
-                        && values.password === userCreds.password) {
-                        // need some pincode verification
-                        handleSignIn(values, actions.resetForm());
-                      } else {
-                        // cannot log in offline without saved credentials, connect to internet
-                      }
-                    });
-                  }
+              onSubmit={async (values, actions) => {
+                setLoading(true);
+                await checkOnlineStatus().then((connected) => {
+                  signInAndStore(connected, values, actions);
                 });
                 setTimeout(() => {
-                  actions.setSubmitting(false);
-                }, 1000);
+                  setLoading(false);
+                }, 3000);
               }}
               validationSchema={validationSchema}
               validateOnBlur={false}
@@ -216,10 +254,11 @@ const SignIn = ({ navigation }) => {
                     label={I18n.t('signIn.password')}
                     formikProps={formikProps}
                     formikKey="password"
-                    placeholder="Password"
+                    placeholder={I18n.t('signIn.password')}
                     secureTextEntry={!checked}
                     value={formikProps.values.password}
                   />
+
                   <View style={{ flexDirection: 'row' }}>
                     <View style={styles.container}>
                       <View style={styles.checkbox}>
@@ -236,10 +275,10 @@ const SignIn = ({ navigation }) => {
                       <Text style={styles.passwordText}>{I18n.t('signIn.showPassword')}</Text>
                     </View>
                     <Button style={{ flex: 1 }} onPress={handleForgotPassword}>
-                      Forgot password?
+                      {I18n.t('signIn.forgotPassword.label')}
                     </Button>
                   </View>
-                  {formikProps.isSubmitting ? (
+                  {loading ? (
                     <ActivityIndicator />
                   ) : (
                     <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
@@ -277,7 +316,7 @@ const SignIn = ({ navigation }) => {
             <View style={styles.termsContainer}>
               <Text style={styles.accountText}>{I18n.t('signIn.noAccount')}</Text>
               <Button mode="text" theme={theme} color="#3E81FD" onPress={handleSignUp} labelStyle={{ marginLeft: 5 }}>
-                Sign up!
+                {I18n.t('signIn.signUpLink')}
               </Button>
             </View>
             <View style={styles.termsContainer}>
@@ -289,6 +328,7 @@ const SignIn = ({ navigation }) => {
       }
 
     </KeyboardAvoidingView>
+
   );
 };
 

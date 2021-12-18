@@ -22,15 +22,15 @@ const GetPinCode = ({ navigation }) => {
             // IF ONLINE, otherwise just log in
             checkOnlineStatus().then((connected) => {
               if (connected) {
-                getData('credentials')
-                  .then((userCreds) => {
-                    retrieveSignInFunction(userCreds.username, userCreds.password)
-                      .then((currentUser) => {
-                        populateCache(currentUser);
+                getData('currentUser')
+                  .then((asyncUser) => {
+                    retrieveSignInFunction(asyncUser.username, asyncUser.credentials.password)
+                      .then((signedInUser) => {
+                        populateCache(signedInUser);
                       });
                     navigation.navigate('Root');
                   }, () => {
-                    // error with stored credentials
+                    // error with stored currentUser
                   });
               } else {
                 navigation.navigate('Root');
@@ -40,7 +40,7 @@ const GetPinCode = ({ navigation }) => {
             setFailedAttempts(failedAttempts + 1);
             // go back to sign in on 3rd attempt
             if (failedAttempts >= 3) {
-              deleteData('credentials');
+              deleteData('currentUser');
               deleteData('pincode');
               deleteData('organization');
               navigation.navigate('Sign In');

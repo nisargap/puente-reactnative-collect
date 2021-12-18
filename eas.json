@@ -1,0 +1,10 @@
+{
+  "build": {
+    "release": {
+      "releaseChannel": "production",
+      "ios": {
+        "image": "latest"
+      }
+    }
+  }
+}

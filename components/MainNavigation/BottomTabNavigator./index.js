@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import I18n from 'i18n-js';
 import * as React from 'react';
 
-import DataAnalysis from '../../../domains/DataAnalysis';
+// import DataAnalysis from '../../../domains/DataAnalysis';
 // import HomeScreen from '../../../domains/HomeScreen';
 import DataCollection from '../../../domains/DataCollection';
 import TabBarIcon from '../../TabBarIcon';
@@ -9,12 +10,7 @@ import TabBarIcon from '../../TabBarIcon';
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Data_Collection';
 
-export default function BottomTabNavigator({ navigation, route }) {
-  navigation.setOptions({
-    headerTitle: getHeaderTitle(route),
-    headerLeft: null
-  });
-
+export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName={INITIAL_ROUTE_NAME}
@@ -31,36 +27,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Data_Collection"
         component={DataCollection}
         options={{
-          title: 'Data Collection',
+          title: I18n.t('bottomTab.dataCollection'),
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-folder" />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Data_Analysis"
         component={DataAnalysis}
         options={{
           title: 'Data Analysis',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-analytics" />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
 
   );
-}
-
-function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-  switch (routeName) {
-    // case 'Home':
-    //   return 'Home';
-    case 'Data_Collection':
-      return 'Data Collection';
-    case 'Data_Analysis':
-      return 'Data Analysis';
-    // default:
-    //   return 'Home';
-    default:
-      return 'Data Collection';
-  }
 }

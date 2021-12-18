@@ -5,12 +5,6 @@ import {
 } from '../../async-storage';
 import checkOnlineStatus from '../../offline';
 import { generateRandomID } from '../../utils';
-import {
-  postForms,
-  postHouseholdRelations,
-  postHouseholds,
-  postSupForms
-} from './Offline';
 
 function postIdentificationForm(postParams) {
   return new Promise((resolve, reject) => {
@@ -36,6 +30,46 @@ function postIdentificationForm(postParams) {
             // idData[id] = postParams;
             await storeData(idData, 'offlineIDForms');
             resolve(idParams.localObject);
+          }
+        });
+      }
+    });
+  });
+}
+
+/** ***********************************************
+ * Function to post asset id form offline offline
+ * @name postForms
+ * @example
+ * postAssetForm(postParam);
+ *
+ * @param {Object} postParam Object normally configirued for for Parse-server
+ *
+ *********************************************** */
+
+function postAssetForm(postParams) {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((connected) => {
+      if (connected) {
+        postObjectsToClass(postParams).then((asset) => {
+          const assetSanitized = JSON.parse(JSON.stringify(asset));
+          resolve(assetSanitized);
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('offlineAssetIDForms').then(async (assetIdForms) => {
+          const id = `AssetID-${generateRandomID()}`;
+          const assetIdParams = postParams;
+          assetIdParams.localObject.objectId = id;
+          if (assetIdForms !== null || assetIdForms === []) {
+            const forms = assetIdForms.concat(assetIdParams);
+            await storeData(forms, 'offlineAssetIDForms');
+            resolve(assetIdParams.localObject);
+          } else {
+            const idData = [assetIdParams];
+            await storeData(idData, 'offlineAssetIDForms');
+            resolve(assetIdParams.localObject);
           }
         });
       }
@@ -69,38 +103,37 @@ function postSupplementaryForm(postParams) {
   });
 }
 
-function postOfflineForms() {
+/** ***********************************************
+ * Function to post asset supplementary form offline
+ * @name postForms
+ * @example
+ * postSupplementaryAssetForm(postParam);
+ *
+ * @param {Object} postParams Object normally configured for for Parse-Server Cloud Code
+ *
+ *********************************************** */
+function postSupplementaryAssetForm(postParams) {
   return new Promise((resolve, reject) => {
-    checkOnlineStatus().then(async (connected) => {
-      if (connected) {
-        const idForms = await getData('offlineIDForms');
-        const supForms = await getData('offlineSupForms');
-        const households = await getData('offlineHouseholds');
-        const householdsRelation = await getData('offlineHouseholdsRelation');
-
-        // post all offline data
-        postHouseholds(households, householdsRelation, idForms, supForms).then(() => {
-          postHouseholdRelations(householdsRelation, idForms, supForms).then(async () => {
-            postForms(idForms, supForms).then(() => {
-              postSupForms(supForms).then(() => {
-                resolve(true);
-              }, (error) => {
-                reject(error);
-              });
-            }, (error) => {
-              reject(error);
-            });
-          }, (error) => {
-            reject(error);
-          });
+    checkOnlineStatus().then((connected) => {
+      if (connected && !postParams.parseParentClassID.includes('AssetID-')) {
+        postObjectsToClassWithRelation(postParams).then(() => {
+          resolve('success');
         }, (error) => {
           reject(error);
         });
       } else {
-        reject();
+        getData('offlineAssetSupForms').then(async (supForms) => {
+          if (supForms !== null) {
+            const forms = supForms.concat(postParams);
+            await storeData(forms, 'offlineAssetSupForms');
+            resolve('success');
+          } else {
+            const supData = [postParams];
+            await storeData(supData, 'offlineAssetSupForms');
+            resolve('success');
+          }
+        });
       }
-    }, (error) => {
-      reject(error);
     });
   });
 }
@@ -166,9 +199,10 @@ function postHouseholdWithRelation(postParams) {
 }
 
 export {
+  postAssetForm,
   postHousehold,
   postHouseholdWithRelation,
   postIdentificationForm,
-  postOfflineForms,
+  postSupplementaryAssetForm,
   postSupplementaryForm
 };

@@ -32,13 +32,13 @@ const configArray = [
     fieldType: 'multiInputRowNum',
     options: [
       {
-        label: 'identificationForm.dob.month',
-        value: 'Month',
+        label: 'identificationForm.dob.day',
+        value: 'Day',
         maxLength: 2
       },
       {
-        label: 'identificationForm.dob.day',
-        value: 'Day',
+        label: 'identificationForm.dob.month',
+        value: 'Month',
         maxLength: 2
       },
       {
@@ -143,6 +143,10 @@ const configArray = [
         value: 'someCollege'
       },
       {
+        label: 'identificationForm.educationLevel.technicalCourse',
+        value: 'technicalCourse'
+      },
+      {
         label: 'identificationForm.educationLevel.college',
         value: 'college'
       },
@@ -204,39 +208,6 @@ const configArray = [
     validation: false
   },
   {
-    label: 'identificationForm.insurance',
-    fieldType: 'header',
-    formikKey: 'none_insurance',
-  },
-  {
-    label: 'identificationForm.insNumber',
-    formikKey: 'insuranceNumber',
-    value: '',
-    fieldType: 'numberInput',
-    validation: false
-  },
-  {
-    label: 'identificationForm.insProvider',
-    formikKey: 'insuranceProvider',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'identificationForm.clinicProvider',
-    formikKey: 'clinicProvider',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'identificationForm.cedulaNumber',
-    formikKey: 'cedulaNumber',
-    value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
     label: 'identificationForm.location',
     formikKey: 'location',
     value: {},
@@ -244,8 +215,15 @@ const configArray = [
     validation: false
   },
   {
+    label: 'identificationForm.photoAssessment',
+    fieldType: 'photo',
+    formikKey: 'photoFile',
+    value: ''
+  },
+  {
     label: 'identificationForm.household',
     fieldType: 'header',
+    formikKey: 'none_household'
   },
   {
     label: 'identificationForm.household',

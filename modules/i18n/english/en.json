@@ -10,7 +10,12 @@
     "city": "City",
     "commName": "Community Name",
     "notes": "Notes",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "error": "Error",
+    "success": "Success!",
+    "ok": "Ok",
+    "emptyForm": "Empty Form",
+    "back": "Back"
   },
   "signUp": {
     "firstName": "First Name",
@@ -25,29 +30,33 @@
       "acknoledgement": "By checking this box, I acknowledge that I have read and understood the Terms and Service agreement"
     },
     "submit": "Submit",
-    "toEnglish": "Changle language to English",
+    "toEnglish": "Change language to English",
     "toSpanish": "Change Language to Spanish",
     "errorTerms": "Error, terms and service need to be agreed to.",
     "errorPassword": "Error, your passwords do not match.",
     "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error."
   },
   "signIn": {
+    "user":"Username",
     "username": "Email or Phone Number",
     "password": "Password",
     "showPassword": "Show Password",
     "login": "Log-In",
-    "signUpLink": "Don't have an account, sign up!",
+    "signUpLink": "Sign Up!",
     "deleteCreds": "Delete Credentials",
     "noAccount": "Don't have an account?",
     "puente2020": "Puente 2020 |",
     "termsConditions": "Terms & Conditions",
     "forgotPassword": {
+      "label": "Forgot Password?",
       "enterEmail": "Please enter your email to reset your password",
       "sendLink": "Send Reset Link",
       "noAccount": "Don't have an account?",
       "signUp": "Sign Up!",
-      "rememberPass": "Remember your Password?",
-      "signIn": "Sign In"
+      "rememberPass": "Remember Password?",
+      "signIn": "Sign In",
+      "resetSuccess": "Your password reset link has been sent to your email. Please Check your email to change your password.",
+      "resetError": "There was an error sending the password reset link. Please ensure that you entered your email correctly. You can try again by clicking the button below. If you believe the email is correct, please contact your manager."
     },
     "credentialsModal": {
       "useCreds": "Would you like to use your saved login credentials?"
@@ -70,10 +79,12 @@
   "formsGallery": {
     "puenteForms": "Puente Forms",
     "customForms": "Custom Forms",
+    "pinnedForms": "Pinned Forms",
     "ourMarketPlace": "Our Marketplace",
     "discoverForms": "Discover forms created by trusted companies",
     "exploreForms": "Explore Forms",
     "noCustomForms": "You do not have any custom forms",
+    "noPinnedForms": "You do not have any pinned forms",
     "checkOutMarketplace": "Check out our marketplace to view available forms",
     "viewMarketplace": "View Marketplace",
     "marketPlace": "Marketplace"
@@ -110,7 +121,8 @@
       "someHS": "Some high school",
       "hs": "Highschool",
       "someCollege": "Some College",
-      "college": "College"
+      "college": "College",
+      "technicalCourse": "Technical course"
     },
     "cedulaNumber": "License Number",
     "location": "Location",
@@ -124,7 +136,8 @@
     "household": "Household",
     "subcounty": "Sub-county",
     "region": "Region",
-    "country": "Country"
+    "country": "Country",
+    "photoAssessment": "Photo Assessment"
   },
   "environmentalHealth": {
     "name": "Environmental Health Form",
@@ -137,7 +150,18 @@
       "5_10": "5-10 years",
       "moreThan10": "10+ years"
     },
-    "biggestProblemComm": "Biggest Problem of the Community",
+    "biggestProblemComm": {
+      "label": "Biggest Problem of the Community",
+      "Water": "Water",
+      "Trash": "Trash",
+      "Street": "Street",
+      "AccessToBathrooms": "Access to Bathrooms",
+      "HouseRepairs": "House Repairs",
+      "education": "Education",
+      "sports": "Sports",
+      "sanitation": "Sanitation",
+      "communityAwareness": "Community Awareness"
+    },
     "waterAccess": {
       "label": "Water Access",
       "everyday": "Everyday",
@@ -153,40 +177,70 @@
       "tap": "Tap",
       "filtered": "Filtered"
     },
-    "bathroomAccess": "Bathroom Access",
+    "bathroomAccess":{
+      "label": "Bathroom Access",
+      "Bathroom": "Bathroom",
+      "Latrine": "Latrine",
+      "None": "None"
+    },
     "latrineAccess": "Latrine Access",
-    "clinicAccess": "Clinic Access",
+    "clinicAccess":{
+      "label": "Clinic Access",
+      "Clinic": "Clinic/Medical Center",
+      "Polyclinic": "Polyclinic",
+      "Hospital": "Hospital",
+      "None": "None"
+    },
     "medicalProblemsGo": "Where do you go for medical problems?",
-    "dentalProblemsGo": "Where do you go for dental problems?",
-    "timesPerWeekTrash": "Times per Week Trash is Collected",
+    "dentalAccess": "Do you have access to a dentist?",
+    "timesPerWeekTrash": {
+      "label": "Times per Week Trash is Collected",
+      "Never": "Never",
+      "OnceAWeek": "Once a Week",
+      "TwiceAWeek": "Twice a Week",
+      "OnceOrTwiceAMonth": "Once or Twice a Month"
+    },
     "trashBetweenPickups": "Where is trash left between pickups?",
-    "houseOwnership": "House Ownership",
+    "houseOwnership": {
+      "label": "House Ownership",
+      "Own":"Own",
+      "Rent":"Rent",
+      "Provided": "Provided"
+    },
     "floorCondition": {
       "label": "Condition of Floor in your house?",
-      "dirtFloorPoor": "Dirt Floor Poor Condition",
-      "dirtFloorWork": "Dirt Floor Working Condition",
-      "cementPoor": "Cement Floor Poor Condition",
-      "cementWorking": "Cement Floor Working Condition"
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
+    },
+    "floorMaterial": {
+      "label": "Material of Floor in your house?",
+      "Dirt": "Dirt",
+      "Cement": "Cement",
+      "Wood": "Wood",
+      "Ceramic": "Ceramic"
     },
     "roofCondition": {
       "label": "Condition of Roof in your house?",
-      "normal": "Normal Condition",
-      "bad": "Bad Condition"
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
     },
     "typeStove": {
       "label": "Type of Stove Top",
-      "constructedVentilation": "Constructed stove with ventilation",
-      "stoveTop": "Stovetop with tank or electricity",
-      "openFire": "Open Fire"
+      "charcoalStove": "Charcoal stove",
+      "stoveTop": "Gas tank stove",
+      "firewood": "Firewood Stove"
     },
     "houseMaterials": {
       "label": "What material is your house made from?",
       "zinc": "Zinc",
       "wood": "Wood",
-      "partBlock_partWood": "Part cinderblock, part wood",
+      "woodAndBlock": "Cinderblock and wood",
       "block": "Cinderblock",
       "brick": "Brick",
-      "clay": "Clay"
+      "clay": "Clay",
+      "woodAndZinc": "Wood and Zinc"
     },
     "electricityAccess": {
       "label": "How often do you have access to electricity?",
@@ -199,10 +253,19 @@
       "label": "Do you have access to government assistance?",
       "foodStamps": "Food Stamps",
       "adultLiteracy": "Adult literacy Program",
-      "noAssistance": "No assistance"
+      "noAssistance": "No assistance",
+      "solidarityCard": "Solidarity Card"
     },
     "numberIndividualsHouse": "Number of Individuals Living in the House",
-    "numberChildrenUnder5": "Number of children Living in this House under age of 5"
+    "numberChildrenUnder5": {
+      "label": "Are there any children living in the house in the following age groups?",
+      "under_5":"Less than 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "How many children under the age of 5?",
+      "6_12_textQuestion": "How many children between the ages of 6 - 12?",
+      "13_18_textQuestion": "How many children between the ages of 13 - 18?"
+    }
   },
   "evaluationMedical": {
     "name": "Medical Assessment Form",
@@ -287,7 +350,8 @@
     "attachResident": "Attach a Community Resident"
   },
   "assetForms": {
-    "attachForm": "Attach a Form to the Asset"
+    "attachForm": "Attach a form and an asset",
+    "createAsset": "Create an Asset"
   },
   "forms": {
     "successfullySubmitted": "Form successfully submitted",
@@ -388,6 +452,7 @@
     "volunteerSince": "Volunteer Since",
     "surveysCollected": "Surveys Collected",
     "submitOffline": "Submit Offline Forms",
+    "settingsPage": "Settings Page",
     "failedAttempt": "Failed Attempt Submitting Offline Forms.",
     "tryAgain": "Please ensure that you are connected to the internet and try again.",
     "ok": "Ok",
@@ -398,10 +463,15 @@
   },
   "languagePicker": {
     "english": "English",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "creole": "Haitian Creole"
   },
   "residentIdSearchbar": {
     "searchIndividual": "Search Individual"
+  },
+  "assetSearchbar": {
+    "searchIndividual": "Search Assets",
+    "placeholder": "Type Here..."
   },
   "termsModal": {
     "termsService": "Terms and Service",
@@ -410,5 +480,125 @@
   },
   "errorPicker": {
     "invalidFields": "Invalid Fields:"
+  },
+  "accountSettings": {
+    "settings": "Settings",
+    "support": "Support",
+    "accountSettings": "Account Settings",
+    "namePhoneEmail": "Name, Phone, Email",
+    "changePassword": "Change Password",
+    "findRecords": "Find Records",
+    "language": "Language",
+    "back": "Back",
+    "logout": "Log out"
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Current records stored",
+    "recordStorageLimit": "Record storage limit",
+    "errorMessage": "There was an error processing your request. Please ensure you are connected to the internet and try again.",
+    "successMessage": "You have updated your storage limit. You may experience app related issues if your phone cannot handle the new limit. If this occurs, your experience may be better if you reduce the limit.",
+    "findRecords": "Find Records",
+    "edit": "Edit"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Choose Language"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "There was an error processing your request. Common issues include incorrect email format or no internet connection. Please try again and contact your supervisor if the issue persits.",
+    "successMessage": "You have updated your account.",
+    "userInformation": {
+      "fname": "First Name",
+      "lname": "Last Name",
+      "phoneNumber": "Phone Number",
+      "email": "Email"
+    },
+    "namePhoneEmail": "Name, Phone, Email"
+  },
+  "passwordSettings": {
+    "wrongCreds": "Your current password is incorrect. Please try again.",
+    "errorMessage": "There was an error processing your request. Common issues include no internet connection or incorrect password. Please try again and contact your supervisor if the issue persits.",
+    "successMessage": "You have updated your password.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password"
+  },
+  "supportHome": {
+    "feedback": "Contact us / Feedback",
+    "rateApp": "Rate our app",
+    "helpCenter": "Help Center",
+    "back": "Back"
+  },
+  "feedback": {
+    "feedback": "Feedback",
+    "enterFeedback": "Please enter your feedback in the input below and press the \"Send Feedback\" button. This will redirect you to your email where you can send your feedback.",
+    "sendMail": "Send Mail",
+    "typeFeedback": "Type your feedback here..."
+  },
+  "pushNotifications": {
+    "updateApp": "Please update in the App Store. Your application is out of date."
+  },
+  "paperButton": {
+    "getLocation": "Get Location",
+    "getLocationAgain": "Get Location Again",
+    "takePhoto": "Take Photo",
+    "addAdditional": "Add Additional ",
+    "removePrevious": "Remove Previous "
+  },
+  "bottomTab":{
+    "dataCollection": "Data Collection"
+  },
+  "camera":{
+    "useImage": "Use image from camera roll",
+    "noAccess": "No access to camera",
+    "retake": "Retake Picture",
+    "flip": "Flip",
+    "takePicture": "Take Picture",
+    "done": "Done",
+    "sorryAlert":"Sorry, we need camera roll permissions to make this work!"
+ 
+  },
+  "peopleModal": {
+    "fname": "First Name",
+    "enterFname": "Enter First Name",
+    "lname": "Last Name",
+    "enterLname": "Enter Last Name",
+    "relationship": "Relationship",
+    "remove": "Remove",
+    "add": "Add"
+  },
+  "assetCore": {
+    "newAsset": "New Asset",
+    "nameOfAssets": "Name of Assets",
+    "addPeople": "Add People",
+    "getLocation": "Get Location",
+    "communityName": "Community Name",
+    "province": "Province",
+    "country": "Country",
+    "swipeAttachForm": "Tap to Attach Form",
+    "tapCreateAsset": "Tap to Create New Asset"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Supplementary Asset Forms"
+  },
+  "puenteForms":{
+    "ResidentID": "Resident ID",
+    "EnvironmentalHealth": "Environmental Health",
+    "MedicalEvaluation": "Medical Evaluation",
+    "Vitals": "Vitals"
+  },
+  "submissionError":{
+    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persits.",
+    "geolocation":"TIMEOUT!\n\nYour phone's geolocation wasn't able to be retrieved from your device. Please try again"
+  },
+  "formCounts": {
+    "surveysCollected": "Surveys Collected",
+    "error": "There has been an error getting your data. Check your internet connection and try again.",
+    "offline": "You are currently offline. Please check back when you are connected to the internet.",
+    "idForms": "ID Forms",
+    "envHealthForms": "Environmental Health Forms",
+    "vitalsForms": "Vitals Forms",
+    "customForms": "Custom Forms",
+    "assetForms": "Asset Forms",
+    "back": "Back"
   }
 }

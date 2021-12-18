@@ -1,0 +1,595 @@
+{
+  "global": {
+    "yes": "Wi",
+    "no": "Non",
+    "notSure": "Pa sèten",
+    "other": "Lòt",
+    "submit": "Envoyar",
+    "fName": "Non",
+    "lName": "Sinyati",
+    "city": "Vil",
+    "commName": "Katye",
+    "notes": "Nòt",
+    "refresh": "Rafrechi",	
+    "error": "Erè",	
+    "success": "Siksè!",	
+    "ok": "Ok",	
+    "emptyForm": "Vide Fòm",
+    "back":"Tounen"
+  },
+  "signUp": {
+    "firstName": "Non",
+    "lastName": "Sinyati",
+    "email": "Andres elektronik",
+    "phoneNumber": "Nimewo telefòn",
+    "password": "Modpas",
+    "password2": "Antre Passward ankò",
+    "organization": "Organizationganizasyon",
+    "termsOfService": {
+      "view": "Li Regleman yo ak Sèvis",
+      "acknoledgement": "Lè mwen tcheke bwat sa a, mwen rekonèt ke mwen te li epi mwen konprann Tèm ak Akò Sèvis la"
+    },
+    "submit": "Envoyer",
+    "toEnglish": "Chanje lang pou English",
+    "toSpanish": "Chanje lang pou Espanol",
+    "errorTerms": "Erè, tèm ak sèvis yo bezwen dakò.",
+    "errorPassword": "Erè, modpas ou pa matche ak.",
+    "usernameError": "Tantativ enskri echwe. \n nOu te ka eseye enskri ak yon non itilizatè (imèl / nimewo telefòn) ki te deja anrejistre ak yon lòt kont. \n nTanpri kontakte sipèvizè ou si ou kwè sa se yon erè."
+  },
+  "signIn": {
+    "user":"Non itilizatè",
+    "username": "Andres elektronik oswa nimewo telefòn",
+    "password": "Modpas",
+    "showPassword": "Montre modpas",
+    "login": "ouvri sesyon an",
+    "signUpLink": "enskri!",
+    "deleteCreds": "Efase kalifikasyon",
+    "noAccount": "Ou pa gen yon kont?",
+    "puente2020": "Puente 2020 |",
+    "termsConditions": "Tèm ak Kondisyon",
+    "forgotPassword": {
+      "label" : "ou bliye modpas?",
+      "enterEmail": "Tanpri antre imèl ou a Reyajiste modpas ou",
+      "sendLink": "Voye Reyajiste Link",
+      "noAccount": "Ou pa gen yon kont?",
+      "signUp": "Enskri!",
+      "rememberPass": "Sonje modpas ou?",
+      "signIn": "Ouvè sesion",
+      "resetSuccess": "Lyen Reyajiste modpas ou te voye nan imèl ou. Tanpri Tcheke imèl ou a chanje modpas ou.",
+	    "resetError": "Te gen yon erè nan voye lyen an Reyajiste modpas. Tanpri asire ke ou te antre nan imèl ou kòrèkteman. Ou ka eseye ankò pa klike sou bouton ki anba a. Si ou kwè imèl la kòrèk, tanpri kontakte manadjè ou."
+    },
+    "credentialsModal": {
+      "useCreds": "Èske ou ta renmen itilize kalifikasyon login ou sove?"
+    },
+    "unableLogin": "Kapab konekte",
+    "usernamePasswordIncorrect": "Non itilizatè ou an oswa modpas ou ka kòrèk, tanpri eseye ankò.",
+    "credentials": "Credentials",
+    "saveLoginCreds": "Èske ou ta renmen sove kalifikasyon login ou pou itilize nan lavni?"
+  },
+  "pinCode": {
+    "getPinCode": {
+      "enterPinCode": "Antre nan kod",
+      "incorrect1": "Pincode kòrèk, tanpri eseye ankò. Sa a se dènye chans ou a antre nan pincode ou, kalifikasyon ou yo pral Reyajiste ak pincode yo pral efase sou yon lòt tantativ echwe.",
+      "incorrect2": "Pincode kòrèk, tanpri eseye ankò."
+    },
+    "storePinCode": {
+      "enterPinCode": "Enter Pincode to use instead of username/password"
+    }
+  },
+  "formsGallery": {
+    "puenteForms": "Fòm Puente",
+    "customForms": "Fòm Koutim",
+    "pinnedForms": "Pinned Forms",
+    "ourMarketPlace": "Fòm Marketplace",
+    "discoverForms": "Dekouvri fòm ki te kreye pa konpayi ou fè konfyans",
+    "exploreForms": "Eksplore Fòm yo",
+    "noCustomForms": "You do not have any custom forms",
+    "noPinnedForms": "You do not have any pinned forms",
+    "checkOutMarketplace": "Ou pa gen okenn fòm koutim",
+    "viewMarketplace": "VAl gade nan Marketplace",
+    "marketPlace": "Marketplace"
+  },
+  "identificationForm": {
+    "demographics": "Demografi",
+    "nickname": "Ti non",
+    "age": "Laj (si dat nesans yo pa disponib)",
+    "dob": {
+      "label": "Dat de nesans",
+      "month": "Mwa",
+      "day": "Jou",
+      "year": "Ane"
+    },
+    "sex": {
+      "label": "Sèks byolojik",
+      "male": "Gason",
+      "female": "Fanm",
+      "notSay": "Prefere pa di"
+    },
+    "telephone": "Nimero telefon",
+    "marriageStatus": {
+      "label": "Eta sivil",
+      "single": "Selibatè",
+      "married": "Marye",
+      "cohabitation": "Plase",
+      "widow": "Vèv"
+    },
+    "occupation": "Okipasyon",
+    "educationLevel": {
+      "label": "Nivo edikasyon",
+      "lessPrim": "Mwens ke primè",
+      "prim": "Primè",
+      "someHS": "Pa fini segondè",
+      "hs": "Liceè",
+      "someCollege": "Pafini inivesite",
+      "college": "Inivesite"
+    },
+    "cedulaNumber": "Nimero kat didantite",
+    "location": "Zòn",
+    "province": "Provens",
+    "insurance": "Asirans",
+    "insNumber": "Nimero asirans",
+    "insProvider": "Konpaiy asirans",
+    "clinicProvider": "Klinikou konn ale",
+    "latitude": "Latitid",
+    "longitude": "Lonjitid",
+    "household": "Kay",
+    "subcounty": "Sub-konte",
+    "region": "Rejyon an",
+    "country": "Peyi",
+    "photoAssessment": "Foto Evalyasyon"
+  },
+  "environmentalHealth": {
+    "name": "Istwa sante anvironmantal",
+    "yearsLived": {
+      "community": "Kanitite ane'w genyen nan kominote a",
+      "house": "Kantite ane'w genyen nan kay sa",
+      "less1": "Mwens ke 1 an",
+      "1_2": "1-2 an",
+      "3_4": "3-4 an",
+      "5_10": "5-10 an",
+      "moreThan10": "10+ an"
+    },
+    "biggestProblemComm": {
+      "label": "Pigro problem zon nan",
+      "Water": "Dlo",
+      "Trash": "Fatra",
+      "Street": "Lari",
+      "AccessToBathrooms": "Aksè nan twalèt",
+      "HouseRepairs": "Reparasyon kay",
+      "education": "Edikasyon",
+      "sports": "Espò",
+      "sanitation": "Asenisman",
+      "communityAwareness": "Konsyantizasyon Kominote"
+    },
+    "waterAccess": {
+      "label": "Akse ak dlo",
+      "everyday": "Chakjou",
+      "4_6": "4-6 jou nan semèn nan",
+      "2_3": "2-3 jou nan semèn nan",
+      "1perWeek": "Mwens jou nan semèn nan",
+      "1perMonth": "1 jou chak mwa",
+      "never": "Jamè"
+    },
+    "typeOfWater": {
+      "label": "Ki katite dlo kew itilize?",
+      "bottled": "Met nan boutèy",
+      "tap": "Tiyo",
+      "filtered": "Filtre"
+    },
+    "bathroomAccess": { 
+      "label": "Aksè nan yon twalèt?",
+      "Bathroom": "Twalèt",
+      "Latrine": "Latrin",
+      "None": "Okenn"
+    },
+    "latrineAccess": "Aksè gen aksè nan yon latrin?",
+    "clinicAccess": {
+      "label": "Ou gen aksè ak yon klinik",
+      "Clinic": "Klinik / sant medikal",
+      "Polyclinic": "Poliklinik",
+      "Hospital": "Lopital",
+      "None": "Okenn"
+    },
+    "medicalProblemsGo": "Lew gen problem dokè ki kote wale?",
+    "dentalAccess": "Èske ou gen aksè a yon dantis?",
+    "timesPerWeekTrash": {
+      "label": "Konbyen fwa yo ranmase fatra pa semèn",
+      "Never": "Pa janm",
+      "OnceAWeek": "Yon fwa pa semèn",
+      "TwiceAWeek": "Defwa pa semèn",
+      "OnceOrTwiceAMonth": "Yon fwa oswa de fwa nan yon mwa"
+    },
+    "trashBetweenPickups": "Ki kote roun yo jete fatra?",
+    "houseOwnership": {
+      "label": "Pwopriyetè kay",
+      "Own":"Pwòp",
+      "Rent":"Lwe",
+      "Provided": "Bay"
+    },
+    "floorCondition": {
+      "label": "Kijan atè a fèt?",
+      "Poor": "Pòv",
+      "Working": "Travay",
+      "Excellent": "Ekselan"
+    },
+    "roofCondition": {
+      "label": "Kijan anlè kay la fèt?",
+      "Poor": "Pòv",
+      "Working": "Travay",
+      "Excellent": "Ekselan"
+    },
+    "floorMaterial": {
+      "label": "Materyèl nan etaj nan kay ou a?",
+      "Dirt": "Pousyè tè",
+      "Cement": "Siman",
+      "Wood": "Bwa",
+      "Ceramic": "Seramik"
+    },
+    "typeStove": {
+      "label": "Kalite tèt recho",
+      "charcoalStove": "Recho chabon",
+      "stoveTop": "Recho tank gaz",
+      "firewood": "Recho bwa dife"
+    },
+    "houseMaterials": {
+      "label": "Ki materyèl kay ou te fè soti nan?",
+      "zinc": "Zenk",
+      "wood": "Bwa",
+      "woodAndBlock": "Cinderblock ak bwa",
+      "woodAndZinc": "Bwa ak zenk",
+      "block": "Cinderblock",
+      "brick": "Brik",
+      "clay": "Ajil"
+    },
+    "electricityAccess": {
+      "label": "Konbyen fwa ou gen aksè a elektrisite?",
+      "never": "Pa janm",
+      "sometimes": "Pafwa",
+      "always": "Toujou"
+    },
+    "foodSecurity": "Nan mwa ki sot pase a, èske ou janm enkyete ke ou menm oswa fanmi ou pa t 'gen ase manje yo manje?",
+    "govAssistance": {
+      "label": "Èske ou gen aksè a asistans gouvènman an?",
+      "foodStamps": "Koupon pou Achte Manje",
+      "adultLiteracy": "Pwogram alfabetizasyon pou granmoun",
+      "noAssistance": "Pa gen asistans",
+      "solidarityCard": "Kat solidarite"
+    },
+    "numberIndividualsHouse": "Kantite moun k ap viv nan kay la",
+    "numberChildrenUnder5": {
+      "label": "Kantite timoun k ap viv nan kay sa a ki poko gen laj 5 an",
+      "under_5":"Mwens pase 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "Konbyen timoun ki poko gen 5 an?",
+      "6_12_textQuestion": "Konbyen timoun ki gen laj ant 6 - 12?",
+      "13_18_textQuestion": "Konbyen timoun ki gen laj 13 - 18?"
+    }
+  },
+  "evaluationMedical": {
+    "name": "Evalyasyon Medikal",
+    "chronicHypertension": "Kondisyon ki la lontan Tansyon wo",
+    "chronicDiabetes": "Kondisyon ki la lontan Dyabèt",
+    "chronicOther": "Kondisyon ki la lontan Lòt",
+    "doctor": "Ou te wè doktè pou problem saa?",
+    "statusOfHealth": {
+      "label": "Eta Sante",
+      "receivingNoSupport": "Resevwa tretman oswa swen swivi | Pa gen okenn sipò ki nesesè",
+      "receivingSupport": "Resevwa tretman oswa swen swivi | Sipò nesesè",
+      "awaitingNoSupport": "Ap tann  tretman oswa swen swivi | Pa gen okenn sipò ki nesesè",
+      "noTreatmentSupport": "Pa gen tretman | Sipò nesesè"
+    },
+    "partOfBody": {
+      "label": "Pati nan kò",
+      "bonesJoints": "Zo oswa jwenti",
+      "eyes": "Je",
+      "earsNoseThroat": "Zòrèy, nen oswa gòj",
+      "skin": "Po",
+      "headMental": "Pwoblèm tèt oswa mantal",
+      "stomachIntestines": "L'estomak oubyen trip",
+      "bladderUrinary": "Nan blad pipi ak, aparèy urin",
+      "reproductiveOrgans": "Ògàn repwodiktf",
+      "nutritionIssues": "Pwoblèm nitrisyon",
+      "---": "---"
+    },
+    "partOfBodyDescription": "Pati nan deskripsyon kò",
+    "duration": {
+      "label": "Dire",
+      "lastMonth": "Mwa pase",
+      "lastYear": "Ane pase",
+      "last5Years": "Nan 5 dènye ane yo",
+      "past5Years": "Apre 5 lane"
+    },
+    "problemSuddenness": {
+      "label": "Ka sibit",
+      "suddenTrauma": "Ka sibit akòz chòk",
+      "suddenNoTrauma": "Ka sibit, men se pa akòz chòk",
+      "gradually": "Gradyèlman"
+    },
+    "progressionOfCondition": {
+      "label": "Pwogrè nan kondisyon",
+      "improving": "Amelyore",
+      "worsening": "Vin pi mal",
+      "constant": "Konpoze"
+    },
+    "generalHealthConsult": "Sante general rekomande?",
+    "surgicalRequired": "Èske bezwen chirijikal Nesesè?",
+    "yourGuess": "Devine ou",
+    "immediateFollowupRequired": "Èske  swivi imedya nesesè?",
+    "plan": "Plan"
+  },
+  "vitals": {
+    "name": "Vitals",
+    "height": "Otè",
+    "inches": "Pye",
+    "weight": "Pwa",
+    "pounds": "Liv",
+    "bmi": "Indis mas koporèl",
+    "temp": "Tanperati",
+    "celsius": "°Santigrad",
+    "pulse": "Batman (batman pa minit)",
+    "bpm": "Respirasyon pa minit",
+    "respRate": "Nivo respirasyon",
+    "breathspm": "Souf pou chak minit",
+    "bloodPressure": {
+      "label": "Presyon sangen",
+      "systolic": "Sistolik",
+      "diastolic": "Diastolic"
+    },
+    "bloodOxygen": "Oxyjen nan san",
+    "mmHg": "mm Hg",
+    "bloodSugar": "San jèn glikoz",
+    "mgdL": "mg/dL",
+    "hemoglobinLevels": "Nivo emoglobin",
+    "hemoglobinA1c": "Emoglobin A1c (HbA1c)",
+    "gdL": "g/dL",
+    "pain": "Doulè"
+  },
+  "supplementaryForms": {
+    "attachResident": "Tache yon rezidan nan kominote a"
+  },
+  "assetForms": {	
+    "attachForm": "Tache yon Fòm Byen an",	
+    "createAsset": "Kreye yon Byen"	
+  },
+  "forms": {
+    "successfullySubmitted": "Fòm soumèt avèk siksè",
+    "grabCoffee": "Gwo travay, pwan tèt ou yon kafe",
+    "suggestedForms": "Sijere pwochen fòm yo",
+    "viewGallery": "Gade Fòm Galeri",
+    "returnHome": "Retounen nan ekran lakay ou"
+  },
+  "gdpr": {
+    "consentForm": "Fòm Konsantman",
+    "mustConsent": "Manm kominote a dwe konsanti anvan ou ka kontinye.",
+    "policy": "Règleman sou Konfidansyalite\nPolitik sa a dekri kijan nou kolekte, itilize ak okipe enfòmasyon ou lè ou sèvi ak sit entènèt nou an, lojisyèl ak sèvis ('Sèvis'). \n\nSi w ap itilize Sèvis nou yo pou yon òganizasyon, ou dakò ak konfidansyalite sa a. Règleman sou non òganizasyon sa a. \n\nSi w ap itilize Sèvis nou yo pou bay sèvis, lojisyèl ak kontni pou yon lòt moun, ou dakò ak Règleman sou enfòmasyon prive sa a sou non yo. \n\nSI OU OUBYEN OGANIZASYON OU REPREZANTE PA DAK TO POU MARTE POU RÈGLEMAN KONFIDANSYALITE SA A, OU PA DWE ITILIZE SÈVIS NOU YO.",
+    "viewFullPolicy": "Gade Règleman konplè",
+    "communityMemAgrees": "Manm kominote a dakò ak règleman done yo",
+    "continueToForm": "Kontinye nan Fòm lan"
+  },
+  "dataCollection": {
+    "newRecord": "Nouvo Fòm",
+    "newAsset": "Nouvo Byen",
+    "findRecord": "Chèche dosye yo",
+    "viewAll": "Gade tout fòm yo",
+    "viewAssets": "Gade tout Byen yo",
+    "back": "Retounen"
+  },
+  "home": {
+    "myTasks": "Travay mwen yo",
+    "comingSoon": "Vini Talè",
+    "tasks": "Travay",
+    "logOut": "Dekonekte"
+  },
+  "components": {
+    "autofill": {
+      "placeholder": "Antre nan la",
+      "placeholder_end": "isit la"
+    }
+  },
+  "cards": {
+    "smallCards": {
+      "residentID": "Idantifikasyon",
+      "environmental": "Anvironmantal",
+      "history": "Listwa",
+      "medical": "Medikal",
+      "evaluation": "Evalyasyon",
+      "vitals": "Pativital"
+    }
+  },
+  "findResident": {
+    "searchIndividual": "Rechèch endividyèl",
+    "typeHere": "Tape isit la...",
+    "residentCard": {
+      "city": "Vil",
+      "community": "Katye"
+    },
+    "residentPage": {
+      "demographics": {
+        "dob": "Dat de nesans:",
+        "city": "Vil:",
+        "community": "Katye:",
+        "province": "Provens:",
+        "license": "Nimero kat didantite:"
+      },
+      "forms": {
+        "completedForms": "Ranpli Fòm",
+        "formCategory": "Fòm Kategori",
+        "comingSoon": "Vini Talè",
+        "suggestedForms": "Fòm sijere"
+      },
+      "household": {
+        "editProfile": "Edite Pwofil",
+        "demographics": "Demografik",
+        "forms": "Fòm",
+        "household": "Kay",
+        "goBack": "Retounen"
+      }
+    }
+  },
+  "householdManager": {
+    "createHousehold": "Kreye yon nouvo kay",
+    "linkIndividual": "Lye moun sa a ak yon kay ki egziste deja",
+    "household": "Kay",
+    "householdManager": "Manadjè kay la",
+    "relationshipHousehold": "Ki wòl / relasyon yo genyen nan kay la?",
+    "linked": "Lye",
+    "useSearchBar": "Tanpri itilize rechèch la pou jwenn epi chwazi kay ki kòrèk la.",
+    "doNothing": "Pa fè anyen",
+    "successCreateHousehold": "Ou te kreye yon nouvo kay avèk siksè.",
+    "noHousehold": "Ou chwazi pou ou pa konekte yon kay.",
+    "addCreateHousehold": "Ajoute oswa kreye yon kay"
+  },
+  "header": {
+    "goodMorning": "Bonjou",
+    "goodAfternoon": "Bonswa",
+    "goodEvening": "Bonswa",
+    "goodMorning!": "Bonjou!",
+    "goodAfternoon!": "Bonswa!",
+    "goodEvening!": "Bonswa!",
+    "puente": "PUENTE",
+    "volunteerSince": "Volontè depi",
+    "surveysCollected": "Sondaj kolekte",
+    "submitOffline": "Soumèt fòm san entènèt",
+    "settingsPage": "Paj Anviwònman",
+    "failedAttempt": "Echwe Tant pou soumèt fòm san entènèt.",
+    "tryAgain": "Tanpri asire ke ou konekte ak entènèt la epi eseye ankò.",
+    "ok": "Ok",
+    "success": "Siksè!",
+    "justSubmitted": "Ou fenk soumèt",
+    "form": "fòm!",
+    "forms": "fòm!"
+  },
+  "languagePicker": {
+    "english": "English",
+    "spanish": "Spanish",
+    "creole": "Kreyòl"
+  },
+  "residentIdSearchbar": {
+    "searchIndividual": "Rechèch endividyèl"
+  },
+  "assetSearchbar": {	
+    "searchIndividual": "Rechèch Byen",	
+    "placeholder": "Tape isit la ..."	
+  },
+  "termsModal": {
+    "termsService": "Regleman ak Sèvis",
+    "policy": "Règleman sou enfòmasyon prive\nRègleman sa a dekri kijan nou kolekte, itilize ak okipe enfòmasyon ou lè ou sèvi ak sit entènèt nou an, lojisyèl ak sèvis ('Sèvis').\n\nSi w ap itilize Sèvis nou yo pou yon òganizasyon, w ap dakò ak Règleman sou enfòmasyon prive sa a sou non òganizasyon sa a.\nSi w ap itilize Sèvis nou yo bay sèvis, lojisyèl ak kontni pou yon lòt moun, w ap dakò ak Règleman sou enfòmasyon prive sa a sou non yo.\n\nSI OU OUBYEN ORGANIZASYON OU REPREZANTE PA DAK TO POU MARE POU RÈGLEMAN SOU KONFIDANSYALITE, OU PA DWE ITILIZE SÈVIS NOU YO.\n\nDwa ou yo\nLejislasyon sou pwoteksyon done ba ou yon kantite dwa pou pwoteje ou kont yon òganizasyon ki mal trete enfòmasyon pèsonèl ou. Li enpòtan ke ou konprann dwa ou yo ak nan Règleman sa a nou te etabli ki dwa sa yo ye ak ki jan ou ka fè egzèsis dwa ou yo nan respè nan pwosesis Puente a nan enfòmasyon pèsonèl ou.n\nDwa pou jwenn aksè\nOu gen dwa pou mande Puente pou kopi done pèsonèl ou.\n\nDwa a redresman\nOu gen dwa pou mande pou Puente korije nenpòt enfòmasyon ou kwè ki pa kòrèk oswa ranpli enfòmasyon ou kwè ki pa konplè.\n\nDwa efasman\nOu gen dwa pou mande pou Puente efase done pèsonèl ou, nan sèten kondisyon.\n\nDwa a mete restriksyon sou pwosesis\nOu gen dwa pou mande pou Puente mete restriksyon sou pwosesis la nan done pèsonèl ou, nan sèten kondisyon.\n\nDwa a nan Transparans done\nOu gen dwa pou mande pou Puente transfere done ke nou te kolekte nan yon lòt òganizasyon, oswa dirèkteman ba ou, nan sèten kondisyon.\n\nSi ou fè yon demann, Puente ap reponn pi bonè posib, maksimòm yon mwa pou reponn. Si ou ta renmen fè egzèsis nenpòt nan dwa yo susmansyone tanpri kontakte nou info@puente-dr.org.\n\nKi enfòmasyon nou kolekte\nNou kolekte epi sèvi ak enfòmasyon sa yo nan lòd yo bay Sèvis nou yo.\n\nKont\nNou kolekte ak asosye kont ou ak enfòmasyon tankou non ou, adrès imel, ak òganizasyon.\n\nCookies\nPuente pa sèvi ak Cookies. Si nou itilize Cookies nan tan kap vini an, nou pral notifye itilizatè yo epi mete ajou Règleman sou enfòmasyon prive kòmsadwa.\n\nSèvi ak enfòmasyon\nNou ka itilize enfòmasyon sou ou pou: Pèmèt ou gen aksè konplè nan Sèvis yo; bay, kenbe ak amelyore Sèvis yo; Bay ak delivre pwodwi yo ak sèvis ou mande, tranzaksyon pwosesis epi voye ba ou enfòmasyon ki gen rapò, ki gen ladan konfimasyon ak bòdwo; Voye ou avi teknik, dènye nouvèl, alèt sekirite, sipò ak mesaj administratif; Reponn sou kòmantè ou, kesyon ak demann, epi bay sipò pou kliyan; Kreye kont Puente ou epi idantifye ou lè ou siyen nan kont ou an akò avèk akò ou avèk nou; Siveye ak analize tandans, l 'ak aktivite an koneksyon avèk Sèvis yo; Detekte, envestige ak anpeche fwod ak lòt aktivite ilegal epi pwoteje dwa ak pwopriyete Puente ak lòt moun; Enfòme ou sou chanjman enpòtan nan Sèvis yo, ki gen ladan chanjman oswa dènye nan Règleman sou enfòmasyon prive sa a; Fasilite konpetisyon ak pwomosyon; Lye oswa konbine avèk enfòmasyon nou jwenn nan men lòt moun pou ede konprann bezwen ou yo epi ba ou pi bon sèvis; Konsidere ou pou travay posib nan Puente an koneksyon avèk yon aplikasyon ke ou soumèt; epi Pote soti nan nenpòt lòt rezon ki dekri ou nan moman enfòmasyon yo te kolekte.\n\nAk kiyès nou pataje\nNou ka pataje enfòmasyon jan yo eksplike sa anba a, sepandan, nou pap janm vann li bay piblisite oswa lòt twazyèm pati.\n\nFòm done ke ou kreye ak peple posede pa ou. Puente ap kenbe fòm ou an prive, sof si ou dakò pou fè fòm ou yo disponib piblikman. Puente pwoteje enfòmasyon moun ki repond yo epi kenbe done ou yo byen. \n\nFòm yo administre pa kreyatè fòm ak òganizasyon espesifik. Puente gen tout fòm sou sit entènèt nou yo ak kolekte repons yo òganizasyon ou soumèt. Puente pa vann oswa fè disponib piblikman repons ou bay twazyèm pati.\n\nLòt moun k ap travay pou Puente: Puente itilize sèten twazyèm pati ou fè konfyans (pa egzanp, founisè sèvis IT) pou ede nou bay, amelyore, pwoteje ak ankouraje Sèvis nou yo. Twazyèm pati sa yo pral jwenn aksè nan enfòmasyon ou sèlman nan fè travay sou non nou an konfòmite avèk Règleman sou enfòmasyon prive sa a. Nou itilize Stripe, DonorBox, Square, GiveButter ak PayPal pou travay sou kat kredi, tout moun ke yo te patnè pwosesis PCI-DSS konfòme peman nou yo.\n\nAnalytics: Nou itilize patnè analitik, ki gen ladan MailChimp pou analize kèk enfòmasyon maketing nou kolekte. Si ou pa dakò ak patnè analytics nou yo ki gen aksè a enfòmasyon ou (adrès imèl), tanpri fè nou konnen nan info@puente-dr.org \n\n Konfòmite ak Pwoteksyon Legal: Nou ka divilge enfòmasyon ou bay twazyèm pati si nou detèmine ke divilgasyon sa a rezonab nesesè pou (i) konfòme li avèk lwa a; (ii) pwoteje nenpòt moun kont lanmò oswa blesi grav nan kò ou; (iii) anpeche fwod oswa abi nan Puente oswa itilizatè nou yo, oswa (iv) pwoteje dwa pwopriyete Puente.\n\nKonfòmite ak Pwoteksyon Legal: Nou ka divilge enfòmasyon ou bay twazyèm pati si nou detèmine ke divilgasyon sa yo rezonab nesesè pou (i) konfòme yo avèk lwa a; (ii) pwoteje nenpòt moun kont lanmò oswa blesi grav nan kò ou; (iii) anpeche fwod oswa abi nan Puente oswa itilizatè nou yo, oswa (iv) pwoteje dwa pwopriyete Puente a. \n\nKi jan nou pwoteje enfòmasyon ou yo\nPuente dedye a kenbe enfòmasyon ou an sekirite ak tès pou frajilite yo. Pou anpeche aksè san otorizasyon, kenbe presizyon, epi asire bon itilizasyon enfòmasyon, nou te anplwaye pwosesis fizik, teknik ak administratif pou pwoteje ak sekirite enfòmasyon nou kolekte yo.\n\nNote: Remak: Pa gen metòd pou transmisyon sou entènèt la, oswa metòd nan depo elektwonik, se 100% sekirite, sekirite nan enfòmasyon ou tou depann sou ki jan ou itilize Sèvis yo ak pwoteje kalifikasyon login ou. \n\nOu pral kenbe enfòmasyon pèsonèl ou pa Puente pou dire a nan kont ou epi yo ka kenbe pou yon peryòd apre tan sa a jan sa nesesè ak ki gen rapò ak enterè lejitim nou an, kondisyon nou yo nan akò avèk ou ak an akò ak obligasyon legal ki aplikab yo. Sa ka gen ladan retansyon ki nesesè pou ranpli kondisyon rapò taks nou yo ansanm ak tan ki nesesè pou ranfòse kondisyon ki enpòtan nan akò oswa pou idantifye, bay pwoblèm oswa rezoud pwosedi legal yo.\nNou ka kenbe yon dosye sou objeksyon ou deklare nan pwosesis la nan done ou, ki gen ladan nan respè nan yon objeksyon a resevwa kominikasyon maketing, pou sèl rezon lejitim nan asire ke nou ka kontinye respekte volonte ou epi yo pa kontra ou pi lwen, pandan la tèm de objeksyon ou.\n\nKi kote nou estoke enfòmasyon ou yo\nPou ofri ou Sèvis yo, nou ka estoke, trete ak transmèt enfòmasyon Ozetazini ak lòt kote atravè mond lan - tankou moun ki andeyò peyi ou. Enfòmasyon yo ka estoke lokalman tou sou aparèy ou itilize pou jwenn aksè nan Sèvis yo.  \n\nChanjman\nSi nou patisipe nan yon reòganizasyon oswa fizyon, enfòmasyon ou yo ka transfere kòm yon pati nan kontra sa a. Nou pral fè w konnen nenpòt ki kontra sa yo ak deskripsyon chwa ou yo.\n\nNou ka revize Règleman sou enfòmasyon prive sa a de tan zan tan, epi yo pral afiche vèsyon ki pi aktyèl la sou sit entènèt nou an. Si yon revizyon siyifikativman diminye dwa ou yo, n ap fè ou konnen.\n\n\nKontakte\nGen kesyon oswa enkyetid sou Puente, Sèvis nou yo ak vi prive? Kontakte nou nan info@puente-dr.org\n\n\nDènye Mizajou: Oktòb 2020",
+    "ok": "Ok"
+  },
+  "errorPicker": {
+    "invalidFields": "Jaden ki pa valab:"
+  },
+  "accountSettings": {
+    "settings": "Anviwònman",
+    "support": "Sipò",
+    "accountSettings": "Anviwònman Kont",
+    "namePhoneEmail": "Non, Telefòn, Imèl",
+    "changePassword": "Chanje Modpas",
+    "findRecords": "Jwenn Dosye",
+    "language": "Lang",
+    "back": "Retounen",
+    "logout": "Dekonekte"
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Dosye aktyèl ki estoke",
+    "recordStorageLimit": "Limit depo dosye",
+    "errorMessage": "Te gen yon erè nan pwosesis demann ou an. Tanpri asire ou konekte ak entènèt la epi eseye ankò.",
+    "successMessage": "Ou mete ajou limit depo ou. Ou ka fè eksperyans pwoblèm app ki gen rapò si telefòn ou pa ka okipe nouvo limit la. Si sa rive, eksperyans ou ka pi bon si ou diminye limit la.",
+    "findRecords": "Jwenn Dosye",
+    "edit": "Edite"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Chwazi Lang"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "Te gen yon erè nan pwosesis demann ou an. Pwoblèm ki komen yo enkli fòma imèl kòrèk oswa pa gen okenn koneksyon entènèt. Tanpri eseye ankò epi kontakte sipèvizè ou a si pwoblèm nan pèsiste.",
+    "successMessage": "Ou te mete ajou kont ou.",
+    "userInformation": {
+      "fname": "Premye Non",
+      "lname": "Siyati",
+      "phoneNumber": "Nimewo telefòn",
+      "email": "Imèl"
+    },
+    "namePhoneEmail": "Non, Telefòn, Imèl"
+  },
+  "passwordSettings": {
+    "wrongCreds": "Modpas ou ye kounye a pa kòrèk. Tanpri eseye ankò.",
+    "errorMessage": "Te gen yon erè nan pwosesis demann ou an. Pwoblèm ki komen yo enkli pa gen okenn koneksyon entènèt oswa modpas ki pa kòrèk. Tanpri eseye ankò epi kontakte sipèvizè ou a si pwoblèm nan pèsiste.",
+    "successMessage": "Ou mete modpas ou ajou.",
+    "changePassword": "Chanje Modpas",
+    "currentPassword": "Modpas Kouran",
+    "newPassword": "Nouvo modpas"
+  },
+  "supportHome": {
+    "feedback": "Kontakte nou / Feedback",
+    "rateApp": "To app nou an",
+    "helpCenter": "Sant Èd",
+    "back": "Retounen"
+  },
+  "feedback": {
+    "feedback": "Feedback",
+    "enterFeedback": "Tanpri antre fidbak ou nan opinyon ki anba a epi peze bouton \"Voye Feedback\" la. Sa a pral redireksyon ou nan imèl ou kote ou ka voye voye fidbak ou.",
+    "sendMail": "Voye lapòs",
+    "typeFeedback": "Tape fidbak ou isit la ..."
+  },
+  "pushNotifications": {
+    "updateApp": "Tanpri mete ajou nan magazen an App. Aplikasyon w la pa gen dat."
+  },
+  "paperButton": {
+    "getLocation": "Jwenn Kote",
+    "getLocationAgain": "Jwenn Kote Ankò",
+    "takePhoto": "Pran foto",
+    "addAdditional": "Add Lòt ",
+    "removePrevious": "Retire Previous "
+  },
+  "bottomTab":{
+    "dataCollection": "Done Koleksyon"
+  },
+  "camera":{
+    "useImage": "Sèvi ak imaj ki soti nan woulo kamera",
+    "noAccess": "Pa gen aksè a kamera",
+    "retake": "Rekomanse Foto",
+    "flip": "Flip",
+    "takePicture": "Pran foto",
+    "done": "Fè",
+    "sorryAlert":"Nou bezwen otorizasyon woulo liv kamera pou fè travay sa a!"
+  },
+  "peopleModal": {
+    "fname": "Premye Non",
+    "enterFname": "Mete Premye Non",
+    "lname": "Siyati",
+    "enterLname": "Antre Non",
+    "relationship": "Relasyon",
+    "remove": "Retire",
+    "add": "Ajoute"
+  },
+  "assetCore": {
+    "nameOfAssets": "Non Byen yo",
+    "addPeople": "Add Moun",
+    "getLocation": "Jwenn Kote",
+    "communityName": "Non kominote a",
+    "province": "Pwovens",
+    "country": "Peyi",
+    "swipeAttachForm": "Tape pou Tache Fòm",
+    "tapCreateAsset": "Tape pou kreye nouvo byen"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Fòm Byen Siplemantè"
+  },
+  "submissionError":{
+    "error": "ERÈ!\n\nFòm ou pa te soumèt. Tanpri eseye ankò oswa kontakte sipèvizè ou a si pwoblèm nan kontinye.",
+    "geolocation":"DELÉ!\n\nGeolokalizasyon telefòn ou an pa t 'kapab jwenn nan aparèy ou an. Tanpri eseye ankò"
+  },
+  "formCounts": {
+    "surveysCollected": "Sondaj kolekte",
+    "error": "Te gen yon erè ap resevwa done ou. Tcheke koneksyon entènèt ou an epi eseye ankò.",
+    "offline": "Ou se kounye a offline. Tanpri tcheke tounen lè ou konekte ak entènèt la.",
+    "idForms": "Fòm ID",
+    "envHealthForms": "Fòm Sante Anviwonman",
+    "vitalsForms": "Fòm Vitals",
+    "customForms": "Fòm Custom",
+    "assetForms": "Fòm Byen",
+    "back": "Retounen"
+  }
+}

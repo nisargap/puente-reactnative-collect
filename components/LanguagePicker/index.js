@@ -9,6 +9,9 @@ const languages = [
   },
   {
     key: 'es', label: I18n.t('languagePicker.spanish')
+  },
+  {
+    key: 'hk', label: I18n.t('languagePicker.creole')
   }
 ];
 

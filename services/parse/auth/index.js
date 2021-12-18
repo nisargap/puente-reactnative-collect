@@ -10,13 +10,6 @@ function initialize() {
   Parse.initialize(parseAppId, parseJavascriptKey);
   Parse.serverURL = parseServerUrl;
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line
-  createRoles();
-}
-
-function createRoles() {
-  Parse.Cloud.run('createAdminRole');
-  Parse.Cloud.run('createManagerRole');
-  Parse.Cloud.run('createContributorRole');
 }
 
 function retrieveSignUpFunction(params) {
@@ -42,14 +35,11 @@ function retrieveSignInFunction(username, password) {
   });
 }
 
-function retrieveSignOutFunction() {
-  return new Promise((resolve, reject) => {
-    Parse.User.logOut().then((result) => {
-      resolve(result);
-    }, (error) => {
-      reject(error);
+async function retrieveSignOutFunction() {
+  return Parse.User.logOut()
+    .catch((error) => {
+      console.log(error.message); //eslint-disable-line
     });
-  });
 }
 
 function retrieveForgotPasswordFunction(params) {
@@ -97,8 +87,19 @@ function retrieveDeleteUserFunction(params) {
   Parse.Cloud.run('deleteUser', params).then((result) => result);
 }
 
+function retrievAddUserPushToken(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('addUserPushToken', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
   initialize,
+  retrievAddUserPushToken,
   retrieveCurrentUserAsyncFunction,
   retrieveCurrentUserFunction, retrieveDeleteUserFunction,
   retrieveForgotPasswordFunction,

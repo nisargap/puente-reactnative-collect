@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  ScrollView, StyleSheet,
+  ScrollView,
   View
 } from 'react-native';
 import {
@@ -11,24 +11,92 @@ import {
 
 import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
 import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import { getData, storeData } from '../../../modules/async-storage';
+import { customFormsQuery } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
+import styles from './index.styles';
 
-const FormGallery = (props) => {
-  const {
-    navigateToNewRecord, navigateToCustomForm, puenteForms, customForms, refreshCustomForms
-  } = props;
+const FormGallery = ({
+  navigateToNewRecord, navigateToCustomForm,
+  puenteForms,
+  pinnedForms, setPinnedForms,
+  setLoading, surveyingOrganization
+}) => {
+  const [customForms, setCustomForms] = useState([]);
+
+  useEffect(() => {
+    getData('customForms').then((forms) => {
+      setCustomForms(forms);
+    });
+  }, [customForms]);
+
+  const refreshCustomForms = () => {
+    setLoading(true);
+    customFormsQuery(surveyingOrganization).then((forms) => {
+      setCustomForms(forms);
+      setLoading(false);
+    });
+  };
+
+  const pinForm = async (form) => {
+    setPinnedForms([...pinnedForms, form]);
+    storeData(pinnedForms, 'pinnedForms');
+  };
+
+  const removePinnedForm = async (form) => {
+    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
+    setPinnedForms(filteredPinnedForms);
+    storeData(filteredPinnedForms, 'pinnedForms');
+  };
+
   return (
     <View>
-      <View style={layout.screenRow}>
+      <View key="pinnedForms" style={layout.screenRow}>
+        <Text style={styles.header}>{I18n.t('formsGallery.pinnedForms')}</Text>
+        <ScrollView horizontal>
+          {pinnedForms?.map((form) => (
+            <Card
+              key={form.objectId ?? form.tag}
+              style={layout.cardSmallStyle}
+              onPress={() => {
+                if (!form.tag) return navigateToCustomForm(form);
+                return navigateToNewRecord(form.tag);
+              }}
+              onLongPress={() => removePinnedForm(form)}
+            >
+
+              <View style={styles.cardContainer}>
+                {form.image !== undefined && (
+                  <form.image height={40} style={styles.svg} />
+                )}
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>
+                    { form.customForm === false ? I18n.t(form.name) : form.name}
+                  </Text>
+                </View>
+              </View>
+            </Card>
+          ))}
+          {pinnedForms?.length < 1 && (
+            <View style={layout.screenRow}>
+              <Card>
+                <Card.Title title={I18n.t('formsGallery.noPinnedForms')} />
+              </Card>
+            </View>
+          )}
+        </ScrollView>
+      </View>
+      <View key="puenteForms" style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.puenteForms')}</Text>
         <SmallCardsCarousel
           puenteForms={puenteForms}
           navigateToNewRecord={navigateToNewRecord}
+          pinForm={pinForm}
           setUser={false}
         />
       </View>
-      <View style={layout.screenRow}>
+      <View key="customForms" style={layout.screenRow}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
           <IconButton
@@ -40,13 +108,14 @@ const FormGallery = (props) => {
           />
         </View>
         <ScrollView horizontal>
-          {customForms && customForms.map((form) => (
+          {customForms?.map((form) => (
             <Card
               key={form.objectId}
               style={layout.cardSmallStyle}
               onPress={() => {
                 navigateToCustomForm(form);
               }}
+              onLongPress={() => pinForm(form)}
             >
               <View style={styles.cardContainer}>
                 <View style={styles.textContainer}>
@@ -57,27 +126,24 @@ const FormGallery = (props) => {
               </View>
             </Card>
           ))}
-        </ScrollView>
-      </View>
-      {customForms.length < 1 && (
-        <View style={layout.screenRow}>
-          <Card>
-            <Card.Title title={I18n.t('formsGallery.noCustomForms')} />
-            {/* To be used when marketplace is available */}
-            {/* <Card.Content>
+          {customForms?.length < 1 && (
+            <View style={layout.screenRow}>
+              <Card>
+                <Card.Title title={I18n.t('formsGallery.noCustomForms')} />
+                {/* To be used when marketplace is available */}
+                {/* <Card.Content>
               <Text>{I18n.t('formsGallery.checkOutMarketplace')}</Text>
               <Button>{I18n.t('formsGallery.viewMarketplace')}</Button>
             </Card.Content> */}
-          </Card>
-        </View>
-      )}
-      {/* <View style={layout.screenRow}>
-        <Text>Manage My Pinned Forms</Text>
-      </View> */}
+              </Card>
+            </View>
+          )}
+        </ScrollView>
+      </View>
       <View style={layout.screenRow}>
         <Text style={styles.header}>{I18n.t('formsGallery.marketPlace')}</Text>
       </View>
-      <View style={layout.screenRow}>
+      <View key="marketplace" style={layout.screenRow}>
         <Card>
           <Card.Content>
             <ComingSoonSVG width={200} height={200} />
@@ -92,26 +158,4 @@ const FormGallery = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
-  },
-  textContainer: {
-    flexDirection: 'row',
-  },
-  text: {
-    flexShrink: 1,
-    textAlign: 'center',
-    color: theme.colors.primary,
-    fontWeight: 'bold',
-    marginVertical: 7,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  }
-});
 export default FormGallery;

@@ -4,24 +4,29 @@ import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
 
 import { getData } from '../../modules/async-storage';
-import { residentQuery } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
 import ResidentCard from '../FindResidents/Resident/ResidentCard';
 import styles from './index.styles';
+import parseSearch from './utils';
 
 const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) => {
-  const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
-  const [residents, setResidents] = useState([]);
+  const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [online, setOnline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
-    fetchAsyncData();
+    checkOnlineStatus().then(async (connected) => {
+      if (connected) fetchData(true, '');
+      if (!connected) fetchData(false, '');
+    });
   }, [surveyingOrganization]);
 
-  const fetchAsyncData = () => {
-    setLoading(true);
+  const fetchOfflineData = async () => {
+    setOnline(false);
+
     getData('residentData').then((residentData) => {
       if (residentData) {
         let offlineData = [];
@@ -32,50 +37,48 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
             });
           }
           const allData = residentData.concat(offlineData);
-          // console.log(allData)
-          setData(allData || []);
-          setResidents(allData.slice() || [].slice());
+          setResidentsData(allData.slice() || []);
         });
       }
       setLoading(false);
     });
   };
 
-  const fetchData = async () => {
-    setLoading(true);
-    checkOnlineStatus().then(async (connected) => {
-      if (connected) {
-        const queryParams = {
-          skip: 0,
-          offset: 0,
-          limit: 100000,
-          parseColumn: 'surveyingOrganization',
-          parseParam: surveyingOrganization,
-        };
-        const records = await residentQuery(queryParams);
-        let offlineData = [];
-        await getData('offlineIDForms').then((offlineResidentData) => {
-          if (offlineResidentData !== null) {
-            Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
-              offlineData = offlineData.concat(value.localObject);
-            });
-          }
+  const fetchOnlineData = async (qry) => {
+    setOnline(true);
+
+    const records = await parseSearch(surveyingOrganization, qry);
+
+    let offlineData = [];
+
+    await getData('offlineIDForms').then((offlineResidentData) => {
+      if (offlineResidentData !== null) {
+        Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
+          offlineData = offlineData.concat(value.localObject);
         });
-        const allData = records.concat(offlineData);
-        setData(allData);
-        setResidents(allData.slice());
       }
-      setLoading(false);
     });
+
+    const allData = records.concat(offlineData);
+    setResidentsData(allData.slice());
+    setLoading(false);
   };
 
-  const filterList = () => data.filter(
+  const fetchData = (onLine, qry) => {
+    if (!onLine) fetchOfflineData();
+    if (onLine) fetchOnlineData(qry);
+  };
+
+  const filterOfflineList = () => residentsData.filter(
     (listItem) => {
       const fname = listItem.fname || ' ';
       const lname = listItem.lname || ' ';
       const nickname = listItem.nickname || ' ';
       return fname.toLowerCase().includes(query.toLowerCase())
         || lname
+          .toLowerCase()
+          .includes(query.toLowerCase())
+        || `${fname} ${lname}`
           .toLowerCase()
           .includes(query.toLowerCase())
         || nickname
@@ -85,12 +88,20 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   );
 
   const onChangeSearch = (input) => {
-    setResidents(data.slice());
+    setLoading(true);
+
+    if (input === '') setLoading(false);
+
+    clearTimeout(searchTimeout);
+
     setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
+      fetchData(online, input);
+    }, 1000));
   };
 
   const onSelectSurveyee = (listItem) => {
-    // console.log(listItem)
     setSurveyee(listItem);
     setQuery('');
   };
@@ -98,7 +109,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const renderItem = ({ item }) => (
     <View>
       <Button onPress={() => onSelectSurveyee(item)} contentStyle={{ marginRight: 5 }}>
-        <Text style={{ marginRight: 10 }}>{`${item?.fname} ${item?.lname}`}</Text>
+        <Text style={{ marginRight: 10 }}>{`${item?.fname || ''} ${item?.lname || ''}`}</Text>
         {/* offline IDform */}
         {item.objectId.includes('PatientID-') && (
           <View style={{
@@ -120,25 +131,18 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
     <View>
       <Headline style={styles.header}>{I18n.t('residentIdSearchbar.searchIndividual')}</Headline>
       <Searchbar
-        placeholder="Type Here..."
+        placeholder={I18n.t('findResident.typeHere')}
         onChangeText={onChangeSearch}
         value={query}
       />
-      <Button onPress={fetchData}>{I18n.t('global.refresh')}</Button>
+      {!online
+        && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
       {loading
         && <Spinner color="blue" />}
 
-      {/* {query !== '' && filterList(residents).map((listItem,) => (
-        <View key={listItem.objectId}>
-          <Button onPress={() => onSelectSurveyee(listItem)}>
-          {listItem.fname || listItem.lname}
-          </Button>
-        </View>
-      ))} */}
-
       {query !== '' && (
         <FlatList
-          data={filterList(residents)}
+          data={online ? residentsData : filterOfflineList(residentsData)}
           renderItem={renderItem}
           keyExtractor={(item) => item.objectId}
         />

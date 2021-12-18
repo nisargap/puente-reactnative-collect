@@ -1,6 +1,6 @@
 import { Parse } from 'parse/react-native';
 
-import customQueryService from './custom-queries';
+import { customMultiParamQueryService, customQueryService } from './custom-queries';
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
@@ -8,6 +8,16 @@ function retrieveHelloFunction() {
 function residentIDQuery(params) {
   return new Promise((resolve, reject) => {
     Parse.Cloud.run('basicQuery', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
+function countService(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('countService', params).then((result) => {
       resolve(result);
     }, (error) => {
       reject(error);
@@ -45,11 +55,24 @@ function getObjectsByGeolocation(params) {
   });
 }
 
+function postOfflineForms(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('postOfflineForms', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
+  countService,
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
   postObjectsToClassWithRelation,
+  postOfflineForms,
   residentIDQuery,
   retrieveHelloFunction
 };

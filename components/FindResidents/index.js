@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
 
-import { getData, storeData } from '../../modules/async-storage';
-import { residentQuery } from '../../modules/cached-resources';
+import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
+import checkOnlineStatus from '../../modules/offline';
+import parseSearch from './_utils';
 import styles from './index.styles';
 import ResidentCard from './Resident/ResidentCard';
 import ResidentPage from './Resident/ResidentPage';
@@ -14,71 +15,74 @@ const FindResidents = ({
   selectPerson, setSelectPerson, organization, puenteForms, navigateToNewRecord,
   surveyee, setSurveyee, setView
 }) => {
-  const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
-  const [residents, setResidents] = useState([]);
+  const [residentsData, setResidentsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [offline, setOffline] = useState(false);
-  useEffect(() => {
-    setOffline(true);
-    fetchAsyncData();
-  }, [organization, offline]);
+  const [online, setOnline] = useState(true);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
-  const fetchAsyncData = () => {
-    setLoading(true);
+  useEffect(() => {
+    checkOnlineStatus().then(async (connected) => {
+      if (connected) fetchData(true, '');
+      if (!connected) fetchData(false, '');
+    });
+  }, [organization]);
+
+  const fetchOfflineData = async () => {
+    setOnline(false);
+
     getData('residentData').then((residentData) => {
       if (residentData) {
         let offlineData = [];
         getData('offlineIDForms').then((offlineResidentData) => {
           if (offlineResidentData !== null) {
-            Object.entries(offlineResidentData).forEach(([key, value]) => { // eslint-disable-line
+            Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
               offlineData = offlineData.concat(value.localObject);
             });
           }
           const allData = residentData.concat(offlineData);
-          setData(allData || []);
-          setResidents(allData.slice() || [].slice());
+          setResidentsData(allData.slice() || []);
         });
       }
       setLoading(false);
     });
   };
 
-  const fetchData = async () => {
-    setLoading(true);
-    const queryParams = {
-      skip: 0,
-      offset: 0,
-      limit: 100000,
-      parseColumn: 'surveyingOrganization',
-      parseParam: organization,
-    };
+  const fetchOnlineData = async (qry) => {
+    setOnline(true);
 
-    const records = await residentQuery(queryParams);
-
-    storeData(records, 'residentData');
+    const records = await parseSearch(organization, qry);
 
     let offlineData = [];
+
     await getData('offlineIDForms').then((offlineResidentData) => {
       if (offlineResidentData !== null) {
-        Object.entries(offlineResidentData).forEach(([key, value]) => { // eslint-disable-line
+        Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
           offlineData = offlineData.concat(value.localObject);
         });
       }
     });
+
     const allData = records.concat(offlineData);
-    setData(allData);
-    setResidents(allData.slice());
+    setResidentsData(allData.slice());
     setLoading(false);
   };
 
-  const filterList = () => data.filter(
+  const fetchData = (onLine, qry) => {
+    if (!onLine) fetchOfflineData();
+    if (onLine) fetchOnlineData(qry);
+  };
+
+  const filterOfflineList = () => residentsData.filter(
     (listItem) => {
       const fname = listItem.fname || ' ';
       const lname = listItem.lname || ' ';
       const nickname = listItem.nickname || ' ';
       return fname.toLowerCase().includes(query.toLowerCase())
         || lname
+          .toLowerCase()
+          .includes(query.toLowerCase())
+        || `${fname} ${lname}`
           .toLowerCase()
           .includes(query.toLowerCase())
         || nickname
@@ -88,8 +92,17 @@ const FindResidents = ({
   );
 
   const onChangeSearch = (input) => {
-    setResidents(data.slice());
+    setLoading(true);
+
+    if (input === '') setLoading(false);
+
+    clearTimeout(searchTimeout);
+
     setQuery(input);
+
+    setSearchTimeout(setTimeout(() => {
+      fetchData(online, input);
+    }, 1000));
   };
 
   const onSelectPerson = (listItem) => {
@@ -117,26 +130,18 @@ const FindResidents = ({
               onChangeText={onChangeSearch}
               value={query}
             />
-            <Button onPress={fetchData}>Refresh</Button>
           </>
         )}
 
-        {/* Non-virtualized list */}
-        {/* {!selectPerson && filterList(residents).map((listItem,) => (
-        <View key={listItem.objectId}>
-          <ResidentCard
-            resident={listItem}
-            onSelectPerson={onSelectPerson}
-          />
-        </View>
-      ))} */}
+        {!online
+          && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
         {loading
           && <Spinner color="blue" />}
 
         {!selectPerson
           && (
             <FlatList
-              data={filterList(residents)}
+              data={online ? residentsData : filterOfflineList(residentsData)}
               renderItem={renderItem}
               keyExtractor={(item) => item.objectId}
             />

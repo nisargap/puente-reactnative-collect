@@ -1,19 +1,12 @@
 import {
+  Dimensions,
   StyleSheet
 } from 'react-native';
 
 const styles = StyleSheet.create({
   assetContainer: {
-    flex: 1,
-    width: '90%',
-    margin: 20,
-    padding: 10,
-    textAlign: 'left',
-    backgroundColor: 'white',
-    borderColor: '#eaeaea',
-    borderRadius: 10,
-    borderWidth: 1,
-    // justifyContent: 'center',
+    width: Dimensions.get('window').width * 0.90,
+    textAlign: 'left'
   }
 });
 

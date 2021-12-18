@@ -1,15 +1,19 @@
 import { Formik } from 'formik';
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Keyboard,
-  TouchableWithoutFeedback, View,
+  Platform,
+  TouchableWithoutFeedback, View
 } from 'react-native';
 
 import PaperButton from '../../../../components/Button';
 import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
+import PopupError from '../../../../components/PopupError';
+import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -26,9 +30,9 @@ const IdentificationForm = ({
   }, []);
 
   const [inputs, setInputs] = useState({});
-  const [photoFile, setPhotoFile] = useState('State Photo String');
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
 
   useEffect(() => {
     setInputs(configArray);
@@ -36,16 +40,20 @@ const IdentificationForm = ({
 
   return (
     <View>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss()} accessible={false}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Formik
           initialValues={{}}
           onSubmit={async (values,) => {
             setSubmitting(true);
-            setPhotoFile('Submitted Photo String');
+            const { photoFile } = values;
 
             const formObject = values;
-            formObject.surveyingOrganization = surveyingOrganization;
-            formObject.surveyingUser = await surveyingUserFailsafe(surveyingUser, isEmpty);
+            const user = await getData('currentUser');
+
+            formObject.surveyingOrganization = surveyingOrganization || user.organization;
+            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
+            formObject.appVersion = await getData('appVersion') || '';
+            formObject.phoneOS = Platform.OS || '';
 
             formObject.latitude = values.location?.latitude || 0;
             formObject.longitude = values.location?.longitude || 0;
@@ -53,7 +61,18 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            const valuesToPrune = ['Month', 'Day', 'Year', 'location'];
+            formObject.searchIndex = [
+              values.fname,
+              values.lname,
+              values.nickname,
+              values.communityname
+            ]
+              .filter((result) => result)
+              .map((result) => result.toLowerCase().trim());
+
+            formObject.fullTextSearchIndex = formObject.searchIndex.join(' ');
+
+            const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
             valuesToPrune.forEach((value) => {
               delete formObject[value];
             });
@@ -64,20 +83,19 @@ const IdentificationForm = ({
                 setSubmitting(false);
               }, 1000);
             };
-
             const postParams = {
               parseClass: 'SurveyData',
-              signature: 'Sample Signature',
+              parseUser: user.objectId,
               photoFile,
               localObject: formObject
             };
-
             postIdentificationForm(postParams).then((surveyee) => {
               setSurveyee(surveyee);
               submitAction();
             }, () => {
               // perhaps an alert to let the user know there was an error
               setSubmitting(false);
+              setSubmissionError(true);
             });
           }}
           validationSchema={validationSchema}
@@ -111,12 +129,16 @@ const IdentificationForm = ({
               ) : (
                 <PaperButton
                   onPressEvent={formikProps.handleSubmit}
-                  buttonText={I18n.t('global.submit')}
+                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
+                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
+                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
                 />
-              // <Button icon="human" onPress={formikProps.handleSubmit}>
-              //   <Text>Submit</Text>
-              // </Button>
               )}
+              <PopupError
+                error={submissionError}
+                setError={setSubmissionError}
+                errorMessage="submissionError.error"
+              />
             </View>
           )}
         </Formik>

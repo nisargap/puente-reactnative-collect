@@ -10,7 +10,12 @@
     "city": "Ciudad",
     "commName": "Nombre de comunidad",
     "notes": "Notas",
-    "refresh": "Actualiza"
+    "refresh": "Actualiza",
+    "error": "Error",
+    "success":"¡Éxito!",
+    "ok": "OK",
+    "emptyForm": "Forma vacía",
+    "back": "Regresa"
   },
   "signUp": {
     "firstName": "Nombre de verdadero",
@@ -28,26 +33,30 @@
     "toEnglish": "Cambiar el idioma al inglés",
     "toSpanish": "Cambiar el idioma al español",
     "errorTerms": "Error, se deben acordar los términos y el servicio",
-    "error Contraseña": "Error, sus contraseñas no coinciden.",
+    "errorPassword": "Error, sus contraseñas no coinciden.",
     "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error."
   },
   "signIn": {
+    "user": "Nombre de usuario",
     "username": "Número de teléfono o Correo electronico ",
     "password": "Contraseña",
     "showPassword": "Mostrar contraseña",
     "login": "Iniciar sesión",
-    "signUpLink": "No tienes una cuenta, regístrate!",
+    "signUpLink": "Regístrate!",
     "deleteCreds": "Eliminar usuario",
     "noAccount": "¿No tienes una cuenta?",
     "puente2020": "Puente 2020 |",
     "termsConditions": "Términos y condiciones",
     "forgotPassword": {
+      "label": "¿olvidado tu contraseña?",
       "enterEmail": "Ingrese su correo electrónico para restablecer su contraseña",
       "sendLink": "Enviar enlace de restablecimiento",
       "noAccount": "¿No tienes una cuenta?",
       "signUp": "¡Regístrate!",
       "rememberPass": "¿Recuerdas tu contraseña?",
-      "signIn": "Registrarse"
+      "signIn": "Registrarse",
+      "resetSuccess": "Su enlace de restablecimiento de contraseña se ha enviado a su correo electrónico. Por favor revise su correo electrónico para cambiar su contraseña.",
+      "resetError": "Hubo un error al enviar el enlace para restablecer la contraseña. Asegúrese de haber ingresado su correo electrónico correctamente. Puede intentarlo de nuevo haciendo clic en el botón de abajo. Si cree que el correo electrónico es correcto, comuníquese con su gerente."
     },
     "credentialsModal": {
       "useCreds": "¿Le gustaría guardar su usuario y contraseña?"
@@ -70,10 +79,12 @@
   "formsGallery": {
     "puenteForms": "Formularios Puente",
     "customForms": "Formularios personalizados",
+    "pinnedForms": "Formularios favoritos",
     "ourMarketPlace": "Nuestro mercado de formularios",
     "discoverForms": "Descubra formularios creados por empresas de confianza",
     "exploreForms": "Explorar formularios",
     "noCustomForms": "No tiene formularios personalizados",
+    "noPinnedForms": "No tiene formularios favoritos",
     "checkOutMarketplace": "Visite nuestro mercado para ver los formularios disponibles",
     "viewMarketplace": "Ver mercado de formularios",
     "marketPlace": "Mercado de formularios"
@@ -97,22 +108,21 @@
     "telephone": "Número de teléfono",
     "marriageStatus": {
       "label": "Estado civil",
-      "single": "Soltera",
-      "married": "Casada",
+      "single": "Soltero/a",
+      "married": "Casado/a",
       "cohabitation": "Unión libre",
-      "widow": "Viuda"
+      "widow": "Viudo/a"
     },
     "occupation": "Ocupación",
     "educationLevel": {
       "label": "Nivel de Educación",
       "lessPrim": "No termino la primaria",
       "prim": "Termino la primaria",
-      "lesshs": "No termino la escuela secundaria",
       "hs": "Termino la escuela secundaria",
       "someHS": "Algún instituto",
-      "lesscollege": "Universidad sin terminar",
       "college": "Universidad terminada",
-      "someCollege": "Alguna educación superior"
+      "someCollege": "Alguna educación superior",
+      "technicalCourse": "Curso técnico"
     },
     "cedulaNumber": "Número de cedula",
     "location": "Ubicación",
@@ -126,7 +136,8 @@
     "household": "Casa",
     "subcounty": "Sub-condado",
     "region": "Región",
-    "country": "País"
+    "country": "País",
+    "photoAssessment": "Evaluación de fotos"
   },
   "environmentalHealth": {
     "name": "Formulario de salud ambiental",
@@ -139,7 +150,18 @@
       "5_10": "5-10 años",
       "moreThan10": "10+ años"
     },
-    "biggestProblemComm": "¿Cuál es el mayor problema de la comunidad?",
+    "biggestProblemComm":{
+      "label": "¿Cuál es el mayor problema de la comunidad?",
+      "Water": "El Agua",
+      "Trash": "La Basura",
+      "Street": "La Calle",
+      "AccessToBathrooms": "El Acceso a Baños",
+      "HouseRepairs": "Reparaciones de la casa",
+      "education": "Educación",
+      "sports": "Deportes",
+      "sanitation": "Sanemiento",
+      "communityAwareness": "Concientización comunitaria"
+    },
     "waterAccess": {
       "label": "Acceso al agua",
       "everyday": "Todos los días",
@@ -155,40 +177,70 @@
       "tap": "Llave",
       "filtered": "Filtrada"
     },
-    "bathroomAccess": "Acceso al baño",
+    "bathroomAccess": {
+      "label": "Acceso al baño",
+      "Bathroom": "El baño",
+      "Latrine": "La letrina",
+      "None": "Ninguno"
+    },
     "latrineAccess": "Acceso a letrinas",
-    "clinicAccess": "Acceso a la clínica",
+    "clinicAccess": {
+      "label":"Acceso a la clínica",
+      "Clinic": "Clinica/centro médico",
+      "Polyclinic": "Policlínica",
+      "Hospital": "Hospital",
+      "None": "Ninguno"
+    },
     "medicalProblemsGo": "¿A dónde vas por problemas médicos?",
-    "dentalProblemsGo": "¿A dónde vas por problemas dentales?",
-    "timesPerWeekTrash": "¿Cuántas veces por semana que se recogen la basura",
+    "dentalAccess": "¿Tienes acceso a un dentista?",
+    "timesPerWeekTrash": {
+      "label": "Veces por semana que se recolecta la basura",
+      "Never": "Nunca",
+      "OnceAWeek": "1 vez a la semana",
+      "TwiceAWeek": "2 veces a la semana",
+      "OnceOrTwiceAMonth": "1-2 veces al mes"
+    },
     "trashBetweenPickups": "¿Dónde deja su basura al momento de ser recogida?",
-    "houseOwnership": "¿Esta casa es propia?",
+    "houseOwnership":{
+      "label": "¿Esta casa es propia?",
+      "Own": "Propia",
+      "Rent": "Alquilada",
+      "Provided": "Prestada"
+    },
     "floorCondition": {
       "label": "¿Estado del suelo de su casa?",
-      "dirtFloorPoor": "Piso de tierra",
-      "dirtFloorWork": "Condiciones de trabajo del piso de tierra",
-      "cementPoor": "Piso de cemento en mal estado",
-      "cementWorking": "Piso de cemento en muy buen estado"
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
+    },
+    "floorMaterial": {
+      "label": "¿Material de piso en tu casa?",
+      "Dirt": "Tierra",
+      "Cement": "Cemento",
+      "Wood": "Madera",
+      "Ceramic": "Cerámico"
     },
     "roofCondition": {
-      "label": "¿Condición del techo de su casa?",
-      "normal": "Condición normal",
-      "bad": "Condición mala"
+      "label": "¿Estado del techo de su casa?",
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
     },
     "typeStove": {
-      "label": "Tipo de estufa",
-      "constructedVentilation": "Estufa construida con ventilación",
-      "stoveTop": "Estufa con tanque o electricidad",
-      "openFire": " Leña"
+      "label": "¿Tipo de estufa que utiliza?",
+      "charcoalStove": "Anafe con carbón",
+      "stoveTop": "Estufa con tanque de gas",
+      "firewood": "Fogón con leña"
     },
     "houseMaterials": {
       "label": "¿De qué material está hecha tu casa?",
       "zinc": "Zinc",
-      "wood": "madera",
-      "partBlock_partWood": "Parte bloque, parte madera",
-      "block": "Block",
+      "wood": "Madera",
+      "woodAndBlock": "Madera y Block",
+      "block": "Cuadra",
       "brick": "Ladrillo",
-      "clay": " Arcilla"
+      "clay": "Arcilla",
+      "woodAndZinc": "Madera y Zinc"
     },
     "electricityAccess": {
       "label": "¿Con qué frecuencia tiene acceso a la electricidad?",
@@ -196,15 +248,24 @@
       "sometimes": "A veces",
       "always": "Siempre"
     },
-    "foodSecurity": "En el último mes, ¿alguna vez te ha preocupado que tú o tu familia no tuvieran suficiente comida para comer?",
+    "foodSecurity": "En el último mes, ¿alguna vez te has preocupado que tú o tu familia no tuvieran suficiente comida para comer?",
     "govAssistance": {
       "label": "¿Tiene acceso a la asistencia del gobierno?",
       "foodStamps": "Cupones de alimentos",
       "adultLiteracy": "Programa de alfabetización de adultos",
-      "noAssistance": "Sin ayuda"
+      "noAssistance": "Sin ayuda",
+      "solidarityCard": "Tarjeta Solidaridad"
     },
     "numberIndividualsHouse": "Número de personas que viven en la casa",
-    "numberChildrenUnder5": "Número de niños menores de 5 años que viven en esta casa"
+    "numberChildrenUnder5": {
+      "label": "Número de niños menores de 5 años que viven en esta casa",
+      "under_5":"Bajo 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "¿Cuántos niños menores de 5 años?",
+      "6_12_textQuestion": "¿Cuántos niños entre las edades de 6 a 12 años?",
+      "13_18_textQuestion": "¿Cuántos niños entre las edades de 13 a 18 años?"
+    }
   },
   "evaluationMedical": {
     "name": "Formulario de evaluación médica",
@@ -289,7 +350,8 @@
     "attachResident": "Adjuntar una residente de la comunidad"
   },
   "assetForms": {
-    "attachForm": "Adjuntar una forma al activo"
+    "attachForm": "Adjuntar una forma y un activo",
+    "createAsset": "Crear un activo"
   },
   "forms": {
     "successfullySubmitted": "Formulario entregado satisfactoriamente",
@@ -301,17 +363,17 @@
   "gdpr": {
     "consentForm": "Formulario de consentimiento",
     "mustConsent": "El miembro de la comunidad debe dar su consentimiento antes de poder continuar.",
-    "policy": "Privacy Policy\nThis policy describes how we collect, use and handle your information when you use our website, software and services (“Services”).\n\nIf you’re using our Services for an organization, you are agreeing to this Privacy Policy on behalf of that organization.\nIf you’re using our Services to provide services, software and content for someone else, you are agreeing to this Privacy Policy on their behalf.\n\nIF YOU OR THE ORGANIZATION YOU REPRESENT DON’T AGREE TO BE BOUND TO THIS PRIVACY POLICY, YOU SHOULD NOT USE OUR SERVICES.",
+    "policy": "Esta política describe cómo recopilamos, usamos y manejamos su información cuando usa nuestro sitio web, software y servicios (\"Servicios\").\n\n Si está utilizando nuestros Servicios para una organización, acepta esta Política de privacidad en nombre de esa organización.\n\n Si está utilizando nuestros Servicios para proporcionar servicios, software y contenido para otra persona, acepta esta Política de privacidad en su nombre.\n\n SI USTED O LA ORGANIZACIÓN QUE REPRESENTA NO ACEPTA ESTAR OBLIGADO A ESTA POLÍTICA DE PRIVACIDAD, NO DEBE UTILIZAR NUESTROS SERVICIOS.",
     "viewFullPolicy": "Ver política completa",
     "communityMemAgrees": "El miembro de la comunidad acepta la política de datos",
     "continueToForm": "Continuar con el formulario"
   },
   "dataCollection": {
     "newRecord": "Nuevo record",
-    "newAsset": "New Asset",
+    "newAsset": "Nuevo activo",
     "findRecord": "Buscar registro",
     "viewAll": "Ver todos los formularios",
-    "viewAssets": "View All Assets",
+    "viewAssets": "Ver todos los activo",
     "back": "Atrás"
   },
   "home": {
@@ -323,7 +385,7 @@
   "components": {
     "autofill": {
       "placeholder": "Entra",
-      "placeholder_end": "aquí"
+      "placeholder_end": "Aquí"
     }
   },
   "cards": {
@@ -332,19 +394,19 @@
       "environmental": "Medio ambiente",
       "history": "Historia",
       "medical": "Médica",
-      "evaluation": "Evaluación"
+      "evaluation": "Evaluación",
+      "vitals": "Partes vitales"
     }
   },
   "findResident": {
     "searchIndividual": "Buscar individuo",
     "typeHere": "Escriba aquí...",
     "residentCard": {
-      "city": "City",
+      "city": "Ciudad",
       "community": "Comunidad"
     },
     "residentPage": {
       "demographics": {
-        "age": "Edad",
         "dob": "Fecha de nacimiento:",
         "city": "Ciudad:",
         "community": "Comunidad:",
@@ -368,13 +430,13 @@
   },
   "householdManager": {
     "createHousehold": "Crear un nuevo hogar",
-    "linkIndividual": "Vincular a esta persona a una casa existente",
+    "linkIndividual": "Vincular ID con un hogar existente",
     "household": "Casa",
     "householdManager": "Administrador del hogar",
     "relationshipHousehold": "¿Cuál es su función / relación en el hogar?",
     "linked": "Vinculada",
     "useSearchBar": "Please use the searchbar to find and select the correct Household.",
-    "doNothing": "Haga nada",
+    "doNothing": "Solo crear ID",
     "successCreateHousehold": "Ha creado correctamente un nuevo hogar.",
     "noHousehold": "Ha elegido no vincular un hogar.",
     "addCreateHousehold": "Agrega o crea un hogar"
@@ -390,6 +452,7 @@
     "volunteerSince": "Voluntaria desde",
     "surveysCollected": "Encuestas recopiladas",
     "submitOffline": "Enviar formularios sin conexión",
+    "settingsPage": "Página de configuración",
     "failedAttempt": "Intento fallido de envío de formularios sin conexión.",
     "tryAgain": "Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
     "ok": "Okay",
@@ -400,17 +463,141 @@
   },
   "languagePicker": {
     "english": "Ingles",
-    "spanish": "Español"
+    "spanish": "Español",
+    "creole": "Kreyòl"
   },
   "residentIdSearchbar": {
     "searchIndividual": "Buscar individuo"
   },
+  "assetSearchbar": {
+    "searchIndividual": "Buscar activo",
+    "placeholder": "Escriba Aquí"
+  },
   "termsModal": {
     "termsService": "Condiciones y servicio",
-    "policy": "Privacy Policy\nThis policy describes how we collect, use and handle your information when you use our website, software and services (“Services”).\n\nIf you’re using our Services for an organization, you are agreeing to this Privacy Policy on behalf of that organization.\nIf you’re using our Services to provide services, software and content for someone else, you are agreeing to this Privacy Policy on their behalf.\n\nIF YOU OR THE ORGANIZATION YOU REPRESENT DON’T AGREE TO BE BOUND TO THIS PRIVACY POLICY, YOU SHOULD NOT USE OUR SERVICES.\n\nYour Rights\nData protection legislation gives you a number of rights to protect you against an organization mishandling your personal information. It is important that you understand your rights and in this Policy we have set out what those rights are and how you can exercise your rights in respect of Puente’s processing of your personal information.\n\nThe right to access\nYou have the right to request Puente for copies of your personal data.\n\nThe right to rectification\nYou have the right to request that Puente correct any information you believe is inaccurate or complete the information you believe is incomplete.\n\nThe right to erasure\nYou have the right to request that Puente erase your personal data, under certain conditions.\n\nThe right to restrict processing\nYou have the right to request that Puente restrict the processing of your personal data, under certain conditions.\n\nThe right to data portability\nYou have the right to request that Puente transfer the data that we have collected to another organization, or directly to you, under certain conditions.\n\nIf you make a request, Puente will respond as early as possible, maximum one month to respond. If you would like to exercise any of the aforementioned rights please contact us info@puente-dr.org.\n\nWhat information we collect\nWe collect and use the following information in order to provide our Services.\n\nAccount\nWe collect and associate your account with information such as your name, email address, and organization.\n\nCookies\nPuente does not use cookies. If we use cookies in the future, we will notify users and update Privacy Policy accordingly.\n\nUse of Information\nWe may use information about you to: Enable you to have full access to the Services; provide, maintain and improve the Services; Provide and deliver the products and services you request, process transactions and send you related information, including confirmations and invoices; Send you technical notices, updates, security alerts, support and administrative messages; Respond to your comments, questions and requests, and provide customer support; Create your Puente account and identify you when signing-in to your account in accordance with your agreement with us; Monitor and analyze trends, usage and activities  in connection with the Services; Detect, investigate and prevent fraud and other illegal activities and protect the rights and property of Puente and others; Notify you about important changes to the Services, including changes or updates to this Privacy Policy; Facilitate contests and promotions; Link or combine with information we get from others to help understand your needs and provide you with better service; Consider you for possible employment at Puente in connection with an application that you submit; and Carry out any other purpose described to you at the time the information was collected. \n\nWith whom do we share\nWe may share information as explained below, however, we will never sell it to advertisers or other third parties.\n\nForm data that you create and populate is owned by you. Puente will keep your forms private, unless you agree to make your forms publicly available. Puente safeguards respondents’ information and holds your data securely. \n\nForms are administered by form creators and specific organizations. Puente hosts forms on our websites and collects the responses your organization submits. Puente does not sell or make publicly available your responses to third parties. \n\nOthers working for Puente: Puente uses certain trusted third parties (for example, providers of IT services) to help us provide, improve, protect and promote our Services. These third parties will access your information only to perform tasks on our behalf in compliance with this Privacy Policy. We use Stripe, DonorBox, Square, GiveButter and PayPal to process credit cards, all of whom being our PCI-DSS compliant payment processing partners.\n\nAnalytics: We use analytic partners, including MailChimp to analyze some of the marketing information we collect. If you do not consent to our analytics partners having access to your information (email address), please let us know at info@puente-dr.org\n\nLegal Compliance and Protection: We may disclose your information to third parties if we determine that such disclosure is reasonably necessary to (i) comply with the law; (ii) protect any person from death or serious bodily injury; (iii) prevent fraud or abuse of Puente or our users, or (iv) protect Puente’s property rights. \n\nHow do we protect your information\nPuente is dedicated to keeping your information secure and testing for vulnerabilities. To prevent unauthorized access, maintain accuracy, and ensure proper use of information, we have employed physical, technical, and administrative processes to safeguard and secure the information we collect.\n\nNote: No method of transmission over the internet, or method of electronic storage, is 100% secure, the security of your information ALSO depends on how you use the Services and protect your login credentials. \n\nYour personal information will be retained by Puente for the duration of your account and may be retained for a period after this time as necessary and relevant to our legitimate interests, our terms of agreement with you and in accordance with applicable legal obligations. This may include retention necessary to meet our tax reporting requirements as well as time required to enforce the relevant terms of agreement or to identify, issue or resolve legal proceedings.\nWe may retain a record of your stated objection to the processing of your data, including in respect of an objection to receiving marketing communications, for the sole legitimate purpose of ensuring that we can continue to respect your wishes and not contract you further, during the term of your objection. \n\nWhere we store your information\nTo provide you with the Services, we may store, process and transmit information to the United States and other locations around the world--including those outside of your country. Information may also be stored locally on devices you use to access the Services.  \n\nChanges\nIf we are involved in a reorganization or merger, your information may be transferred as part of that deal. We will notify you of any such deal and outline your choices.\n\nWe may revise this Privacy Policy from time to time, and will post the most current version on our website. If a revision meaningfully reduces your rights, we will notify you.\n\n\nContact\nHave questions or concerns about Puente, our Services and privacy? Contact us at info@puente-dr.org\n\n\nLast Update: October 2020",
-    "ok": "Ok"
+    "policy": "Esta política describe cómo recopilamos, usamos y manejamos su información cuando usa nuestro sitio web, software y servicios (\"Servicios\").\n\n Si está utilizando nuestros Servicios para una organización, acepta esta Política de privacidad en nombre de esa organización.\n\n Si está utilizando nuestros Servicios para proporcionar servicios, software y contenido para otra persona, acepta esta Política de privacidad en su nombre.\n\n SI USTED O LA ORGANIZACIÓN QUE REPRESENTA NO ACEPTA ESTAR OBLIGADO A ESTA POLÍTICA DE PRIVACIDAD, NO DEBE UTILIZAR NUESTROS SERVICIOS.\n\n Tus derechos\n La legislación de protección de datos le otorga una serie de derechos para protegerlo contra una organización que maneje indebidamente su información personal. Es importante que comprenda sus derechos y en esta Política hemos establecido cuáles son esos derechos y cómo puede ejercer sus derechos con respecto al procesamiento de su información personal por parte de Puente.\n\n Que información recopilamos\n Recopilamos y usamos la siguiente información para brindar nuestros Servicios.\n\n Cuenta\n Recopilamos y asociamos su cuenta con información como su nombre, dirección de correo electrónico y organización.\n\n Cookies y otras tecnologías\n Usamos   tecnología   como   cookies   para   proporcionar,   mejorar,   proteger   y promover nuestros Servicios. Por ejemplo, las cookies nos ayudan con cosas como recordar su nombre de usuario para su próxima visita. Puede configurar su navegador para que no acepte cookies, pero esto puede limitar su capacidad para utilizar los Servicios.\n\n  Uso de la información\n Podemos utilizar su información para: Permitirle tener acceso completo a los Servicios; proporcionar,   mantener   y   mejorar   los   Servicios; Proporcionar   y entregar los productos y servicios que solicite, procesar transacciones y enviarle información relacionada, incluidas confirmaciones y facturas; Enviarle avisos técnicos,   actualizaciones,   alertas   de   seguridad,   soporte   y   mensajes administrativos; Responder a sus comentarios, preguntas y solicitudes, y brindar soporte al cliente; Cree su cuenta Puente e identifíquelo al iniciar sesión en su cuenta   de   acuerdo   con   su   acuerdo   con   nosotros; Monitorear   y   analizar tendencias, uso y actividades en relación con los Servicios; Detectar, investigar y prevenir el fraude y otras actividades ilegales y proteger los derechos y la propiedad de Puente y otros; Notificarle sobre cambios importantes en los Servicios,   incluidos   cambios   o   actualizaciones   de   esta   Política   de privacidad; Facilitar   concursos   y   promociones; Vincular   o   combinar   con   la información   que   obtenemos   de   otros   para   ayudarlo   a   comprender   sus  necesidades y brindarle un mejor servicio; Considerarlo para un posible empleo  en Puente en relación con una solicitud que envíe; y Llevar a cabo cualquier otro propósito que se le describió en el momento en que se recopiló la información. \n\n Con quien compartimos\n Podemos compartir información como se explica a continuación, sin embargo, nunca la venderemos a anunciantes u otros terceros.\n\n Otros que trabajan para Puente: Puente utiliza ciertos terceros confiables (por ejemplo, proveedores de servicios de TI) para ayudarnos a brindar, mejorar, proteger   y   promover   nuestros   Servicios. Estos   terceros   accederán   a   su información solo para realizar tareas en nuestro nombre de conformidad con esta Política de privacidad. Usamos Stripe, DonorBox, Square y PayPal para procesar   tarjetas   de   crédito,   todos   los   cuales   son   nuestros   socios   de procesamiento de pagos que cumplen con PCI-DSS.  \n\n  Análisis: utilizamos socios analíticos, incluido MailChimp, para analizar parte de la información de marketing que recopilamos. Si no da su consentimiento para que nuestros socios de análisis tengan acceso a su información (dirección de correo electrónico), háganoslo saber en info@puente-dr.com \n\n Protección y cumplimiento legal: Podemos divulgar su información a terceros si determinamos que dicha divulgación es razonablemente necesaria para (i) cumplir con la ley; (ii) proteger a cualquier persona de la muerte o lesiones corporales graves; (iii) evitar el fraude o abuso de Puente o de nuestros usuarios, o (iv) proteger los derechos de propiedad de Puente.\n\n Cómo protegemos tu información\n Puente se dedica a mantener su información segura y a realizar pruebas de vulnerabilidades. Para evitar el acceso no autorizado, mantener la precisión y garantizar el uso adecuado de la información, hemos empleado procesos físicos, técnicos y administrativos para salvaguardar y asegurar la información que recopilamos.\n\n Nota:   Ningún   método   de   transmisión   a   través   de   Internet   o   método   de almacenamiento electrónico es 100% seguro, la seguridad de su información también depende de cómo utilice los Servicios y proteja sus credenciales de inicio de sesión.\n\n Su información personal será retenida por Puente durante la duración de su cuenta y puede ser retenida por un período después de este tiempo según sea necesario y relevante para nuestros intereses legítimos, nuestros términos de acuerdo con usted y de acuerdo con las obligaciones legales aplicables. Esto puede incluir la retención necesaria para cumplir con nuestros requisitos de declaración de impuestos, así como el tiempo necesario para hacer cumplir los términos   del   acuerdo   relevantes   o   para   identificar,   emitir   o   resolver procedimientos legales. Podemos conservar un registro de su objeción declarada al procesamiento de sus datos, incluso con respecto a una objeción a recibir comunicaciones de marketing, con el único propósito legítimo de garantizar que podamos seguir respetando sus deseos y no contratarlo más, durante el plazo de su objeción.\n\n Dónde almacenamos su información\n Para   brindarle   los   Servicios,   podemos   almacenar,   procesar   y   transmitir información a los Estados Unidos y otros lugares del mundo, incluidos los que se encuentran   fuera   de   su   país. La   información   también   puede   almacenarse localmente en los dispositivos que usa para acceder a los Servicios.\n\n  Cambios\n Si estamos involucrados en una reorganización o fusión, su información puede ser transferida como parte de ese trato. Le notificaremos sobre dicho acuerdo y describiremos sus opciones. Podemos revisar esta Política de privacidad de vez en cuando y publicaremos la versión más actual en nuestro sitio web. Si una revisión reduce significativamente sus derechos, se lo notificaremos.\n\n Contacto\n ¿Tiene   preguntas   o   inquietudes   sobre   Puente,   nuestros Servicios y la privacidad? Contáctenos en info@puente-dr.com",
+     "ok": "Ok"
   },
   "errorPicker": {
     "invalidFields": "Campos inválidos:"
+  },
+  "accountSettings": {
+    "settings": "Ajustes",
+    "support": "Apoyo",
+    "accountSettings": "Configuraciones de la cuenta",
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico",
+    "changePassword": "Cambiar la contraseña",
+    "findRecords": "Buscar registros",
+    "language": "Idioma",
+    "back": "Atrás",
+    "logout":"Cerrar sesión"
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Registros actuales almacenados",
+    "recordStorageLimit": "Límite de almacenamiento de registros",
+    "errorMessage": "Hubo un error al procesar su solicitud. Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
+    "successMessage": "Has actualizado tu límite de almacenamiento. Puede experimentar problemas relacionados con la aplicación si su teléfono no puede manejar el nuevo límite. Si esto ocurre, su experiencia puede mejorar si reduce el límite.",
+    "findRecords": "Buscar registros",
+    "edit": "Editar"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Elige lengua"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "Hubo un error al procesar su solicitud. Los problemas comunes incluyen el formato de correo electrónico incorrecto o la falta de conexión a Internet. Vuelva a intentarlo y comuníquese con su supervisor si el problema persiste.",
+    "successMessage": "Ha actualizado su cuenta.",
+    "userInformation": {
+      "fname": "Nombre de pila",
+      "lname": "Apellido",
+      "phoneNumber": "Número de teléfono",
+      "email": "Correo electrónico"
+    },
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico"
+  },
+  "passwordSettings": {
+    "wrongCreds": "Tu contraseña actual es incorrecta. Inténtalo de nuevo.",
+    "errorMessage": "Hubo un error al procesar su solicitud. Los problemas comunes incluyen la falta de conexión a Internet o la contraseña incorrecta. Vuelva a intentarlo y comuníquese con su supervisor si el problema persiste.",
+    "successMessage": "Ha actualizado su contraseña.",
+    "changePassword": "Cambiar la contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña"
+  },
+  "supportHome": {
+    "feedback": "Contáctenos / Comentarios",
+    "rateApp": "Califica nuestra aplicación",
+    "helpCenter": "Centro de ayuda",
+    "back": "Atrás"
+  },
+  "feedback": {
+    "feedback": "Realimentación",
+    "enterFeedback": "Ingrese sus comentarios en la entrada a continuación y presione el botón \"Enviar comentarios\". Esto lo redireccionará a su correo electrónico donde puede enviar sus comentarios.",
+    "sendMail": "Enviar correo",
+    "typeFeedback": "Escriba sus comentarios aquí ..."
+  },
+  "pushNotifications": {
+    "updateApp": "Actualiza en la App Store. Tu aplicación está desactualizada."
+  },
+  "paperButton": {
+    "getLocation": "Obtener ubicación",
+    "getLocationAgain": "Obtener ubicación de nuevo",
+    "takePhoto": "Tomar foto",
+    "addAdditional": "Agregar adicional ",
+    "removePrevious": "Quitar el anterior "
+  },
+  "bottomTab":{
+    "dataCollection": "Recopilación de datos"
+  },
+  "camera":{
+    "useImage": "Usar imagen del carrete de la cámara",
+    "noAccess": "Sin acceso a la cámara",
+    "retake": "Volver a tomar la imagen",
+    "flip": "Dar la vuelta",
+    "takePicture": "Tomar la foto",
+    "done": "Hecho",
+    "sorryAlert":"Necesitamos permisos de cámara para que esto funcione"
+  },
+  "peopleModal": {
+    "fname": "Primer nombre",
+    "enterFname": "Ingrese el nombre",
+    "lname": "Apellido",
+    "enterLname": "Introduzca el apellido",
+    "relationship": "Relación",
+    "remove": "Eliminar",
+    "add": "Agregar"
+  },
+  "assetCore": {
+    "nameOfAssets": "Nombre de los activos",
+    "addPeople": "Añadir personas",
+    "getLocation": "Obtener ubicación",
+    "communityName": "Nombre de la comunidad",
+    "province": "Provincia",
+    "country": "País",
+    "swipeAttachForm": "Toque para adjuntar formulario",
+    "tapCreateAsset": "Toque para crear un activo nuevo"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Formularios de activos suplementarios"
+  },
+  "puenteForms":{
+    "ResidentID": "Identificación de residente",
+    "EnvironmentalHealth": "Salud Ambiental",
+    "MedicalEvaluation": "Evaluación Médica",
+    "Vitals": "Partes vitales"
+  },
+  "submissionError":{
+    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste.",
+    "geolocation":"SE ACABÓ EL TIEMPO!\n\nNo se pudo recuperar la geolocalización de tu teléfono. Inténtalo de nuevo"
+
+  },
+  "formCounts": {
+    "surveysCollected": "Encuestas recopiladas",
+    "error": "Ha habido un error al obtener sus datos. Verifique su conexión a Internet y vuelva a intentarlo.",
+    "offline": "Actualmente estás desconectado. Vuelva a consultar cuando esté conectado a Internet.",
+    "idForms": "Formularios de identificación",
+    "envHealthForms": "Formularios de salud ambiental",
+    "vitalsForms": "Formas vitales",
+    "customForms": "Formularios personalizados",
+    "assetForms": "Formularios de activos",
+    "back": "atrás"
   }
 }

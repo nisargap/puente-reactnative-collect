@@ -23,7 +23,11 @@ const getData = async (storageName) => {
 };
 
 const deleteData = async (storageName) => {
-  await AsyncStorage.removeItem(storageName);
+  try {
+    await AsyncStorage.removeItem(storageName);
+  } catch (e) {
+    console.log(e); //eslint-disable-line
+  }
 };
 
 const getAllData = async () => {

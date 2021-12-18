@@ -1,5 +1,5 @@
 import retrievePuenteAutofillData from '../../services/aws';
-import { customQueryService, residentIDQuery } from '../../services/parse/crud';
+import { customMultiParamQueryService, customQueryService, residentIDQuery } from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
 import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
@@ -22,8 +22,28 @@ async function cacheAutofillData(parameter) {
     checkOnlineStatus().then((connected) => {
       if (connected) {
         retrievePuenteAutofillData('all').then((result) => {
-          storeData(result, 'autofill_information');
-          resolve(result[parameter]);
+          // cache organizations tied to all users
+          customQueryService(0, 500, 'User', 'adminVerified', true).then((users) => {
+            const orgsCapitalized = [];
+            const orgResults = [];
+            users.forEach((user) => {
+              const org = user.get('organization');
+              if (org !== null && org !== undefined && org !== '') {
+                const orgCapitalized = org.toUpperCase().trim() || '';
+                if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
+                  orgsCapitalized.push(orgCapitalized);
+                  orgResults.push(org);
+                }
+              }
+            });
+            const autofillData = result;
+            autofillData.organization = orgResults;
+            storeData(autofillData, 'autofill_information');
+            resolve(autofillData[parameter]);
+          }, () => {
+            storeData(result, 'autofill_information');
+            resolve(result[parameter]);
+          });
         }, (error) => {
           reject(error);
         });
@@ -37,56 +57,30 @@ async function cacheAutofillData(parameter) {
 }
 
 function customFormsQuery(surveyingOrganization) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((online) => {
-      if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', surveyingOrganization).then(async (forms) => {
-          if (forms !== null && forms !== undefined && forms !== '') {
-            await storeData(forms, 'customForms');
-            resolve(JSON.parse(JSON.stringify(forms)));
-          } else {
-            getData('customForms').then((customForms) => {
-              resolve(customForms);
-            }, (error) => {
-              reject(error);
-            });
-          }
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('customForms').then((forms) => {
-          resolve(forms);
-        }, (error) => {
-          reject(error);
-        });
-      }
-    }, (error) => {
-      reject(error);
-    });
-  });
-}
+  return checkOnlineStatus().then((online) => {
+    if (online) {
+      const parseParams = {
+        typeOfForm: 'Custom',
+        organizations: surveyingOrganization
+      };
 
-function assetFormsQuery() {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((online) => {
-      if (online) {
-        customQueryService(0, 5000, 'FormSpecificationsV2', 'typeOfForm', 'Assets').then(async (forms) => {
-          await storeData(forms, 'assetForms');
-          resolve(JSON.parse(JSON.stringify(forms)));
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('assetForms').then((forms) => {
-          resolve(forms);
-        }, (error) => {
-          reject(error);
-        });
-      }
-    }, (error) => {
-      reject(error);
-    });
+      return customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then(async (forms) => {
+        if (forms !== null && forms !== undefined && forms !== '') {
+          let activeForms = [];
+          JSON.parse(JSON.stringify(forms)).forEach((form) => {
+            if (form.active !== 'false') {
+              activeForms = activeForms.concat([form]);
+            }
+          });
+          await storeData(activeForms, 'customForms');
+          return activeForms;
+        }
+        return getData('customForms').then((customForms) => customForms);
+      }, (error) => {
+        console.log(error); //eslint-disable-line
+      });
+    }
+    return getData('customForms').then((forms) => forms, (error) => console.log(error)); // eslint-disable-line
   });
 }
 
@@ -113,7 +107,64 @@ function getTasksAsync() {
   });
 }
 
+function assetFormsQuery(surveyingOrganization) {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((online) => {
+      if (online) {
+        const parseParams = {
+          typeOfForm: 'Assets',
+          organizations: surveyingOrganization
+        };
+        customMultiParamQueryService(5000, 'FormSpecificationsV2', parseParams).then((forms) => {
+          let activeForms = [];
+          JSON.parse(JSON.stringify(forms)).forEach((form) => {
+            if (form.active !== 'false') {
+              activeForms = activeForms.concat([form]);
+            }
+          });
+          storeData(activeForms, 'assetForms');
+          resolve(activeForms);
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('assetForms').then((forms) => {
+          resolve(forms);
+        }, (error) => {
+          reject(error);
+        });
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
+function assetDataQuery(surveyingOrganization) {
+  return new Promise((resolve, reject) => {
+    checkOnlineStatus().then((online) => {
+      if (online) {
+        customQueryService(0, 10000, 'Assets', 'surveyingOrganization', surveyingOrganization).then(async (forms) => {
+          await storeData(forms, 'assetData');
+          resolve(JSON.parse(JSON.stringify(forms)));
+        }, (error) => {
+          reject(error);
+        });
+      } else {
+        getData('assetData').then((forms) => {
+          resolve(forms);
+        }, (error) => {
+          reject(error);
+        });
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
+  assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
   cacheResidentData,
