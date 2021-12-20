@@ -171,7 +171,7 @@ const FormGallery = ({
         />
       ))}
       {/* custom forms with no workflow assigned */}
-      {noWorkflowData.length > 0 && (
+      {noWorkflowData && noWorkflowData.length > 0 && (
         <FormsHorizontalView
           forms={noWorkflowData}
           header={I18n.t('formsGallery.noWorflowAssigned')}
