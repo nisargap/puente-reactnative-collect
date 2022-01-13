@@ -1,3 +1,4 @@
+import { createIconSetFromFontello } from '@expo/vector-icons';
 import NetInfo from '@react-native-community/netinfo';
 import * as Network from 'expo-network';
 import { Platform } from 'react-native';
@@ -12,7 +13,12 @@ const checkOnlineStatus = () => new Promise((resolve, reject) => {
     });
   } else {
     NetInfo.fetch().then((state) => {
-      resolve(state.isConnected);
+      // check if signal strength is strong enough to support online functionality
+      if (state.isConnected && state.details.strength !== undefined && state.details.strength > 10) {
+        resolve(true)
+      } else {
+        resolve(false);
+      }
     }, (error) => {
       reject(error);
     });
