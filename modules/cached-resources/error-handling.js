@@ -7,7 +7,8 @@ export default async function handleParseError(err, functionToCall, params) {
   return new Promise((resolve, reject) => {
     if (err.code === Parse.Error.INVALID_SESSION_TOKEN) {
       getData('currentUser').then((currentUser) => {
-        retrieveSignInFunction(currentUser.credentials.username, currentUser.credentials.password).then(() => {
+        retrieveSignInFunction(currentUser.credentials.username,
+          currentUser.credentials.password).then(() => {
           functionToCall(params).then(() => {
             resolve(true);
           }, (error) => {
