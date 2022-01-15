@@ -11,9 +11,10 @@ import FindRecords from './FindRecords';
 import Language from './Language';
 import NamePhoneEmail from './NamePhoneEmail';
 import Password from './Password';
+import OfflineData from './OfflineData';
 
 const AccountSettings = ({
-  accountSettingsView, setAccountSettingsView
+  accountSettingsView, setAccountSettingsView, surveyingOrganization, scrollViewScroll, setScrollViewScroll
 }) => (
   <View style={styles.mainContainer}>
     {accountSettingsView === 'NamePhoneEmail' && (
@@ -27,6 +28,13 @@ const AccountSettings = ({
     )}
     {accountSettingsView === 'Language' && (
     <Language />
+    )}
+    {accountSettingsView === 'OfflineData' && (
+    <OfflineData 
+      surveyingOrganization={surveyingOrganization}
+      scrollViewScroll={scrollViewScroll}
+      setScrollViewScroll={setScrollViewScroll}
+    />
     )}
     <Button onPress={() => {
       setAccountSettingsView('');
