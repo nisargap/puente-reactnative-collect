@@ -12,7 +12,8 @@ import styles from '../index.styles';
 import AccountSettings from './AccountSettings';
 
 const SettingsHome = ({
-  logOut, settingsView, setSettingsView, setSettings,surveyingOrganization, scrollViewScroll, setScrollViewScroll
+  logOut, settingsView, setSettingsView, setSettings,
+  surveyingOrganization, scrollViewScroll, setScrollViewScroll
 }) => {
   const [accountSettingsView, setAccountSettingsView] = useState('');
   const inputs = [

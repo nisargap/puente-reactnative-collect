@@ -36,24 +36,23 @@ async function cacheAutofillData(parameter, surveyingOrganization) {
                 }
               }
             });
+            const autofillData = result;
+            const communityList = [];
+            let autoCommunities = [];
+            let communitiesComplete = [];
             customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
               .then((forms) => {
-                let communityList = []
-                JSON.parse(JSON.stringify(forms)).forEach(form => {
-                    if(!communityList.includes(form.communityname)){
-                        communityList.push(form.communityname)
-                    } console.log(communityList)
+                JSON.parse(JSON.stringify(forms)).forEach((form) => {
+                  if (!communityList.includes(form.communityname) && form.communityname) {
+                    communityList.push(form.communityname);
+                  }
                 });
-                let autofillData = result;
+                autoCommunities = autofillData.Communities;
+                communitiesComplete = autoCommunities.concat(communityList);
+                autofillData.CommunitiesComplete = communitiesComplete;
                 autofillData.organization = orgResults;
-                autofillData['CommunitiesComplete'] = communityList;
-                console.log(autofillData['CommunitiesComplete']);
                 storeData(autofillData, 'autofill_information');
-                resolve(autofillData[parameter]);
-              })
-            const autofillData = result;
-            autofillData.organization = orgResults;
-            storeData(autofillData, 'autofill_information');
+              });
             resolve(autofillData[parameter]);
           }, () => {
             storeData(result, 'autofill_information');

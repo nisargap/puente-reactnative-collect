@@ -30,11 +30,8 @@ export default class AutoFill extends Component {
     const { parameter } = this.props;
     cacheAutofillData(parameter)
       .then(async () => {
-        console.log("param: " + parameter);
         const data = await getData('autofill_information');
-        console.log("FAT " + Object.keys(data));
         const result = data[parameter];
-        // console.log("HERE:" + result)
         this.setState({
           fields: result,
           values: result.length > 0
