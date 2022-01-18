@@ -10,12 +10,13 @@ export default async function handleParseError(err, functionToCall, params) {
         const { credentials } = currentUser;
         retrieveSignInFunction(
           credentials.username,
-          credentials.password).then(() => functionToCall(params).then(() => {
+          credentials.password
+        ).then(() => functionToCall(params).then(() => {
           resolve(true);
         }, (error) => {
           reject(error);
         }));
-      },(error) => {
+      }, (error) => {
         reject(error);
       });
     }
