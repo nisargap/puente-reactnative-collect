@@ -3,8 +3,8 @@ function addSelectTextInputs(values, formObject) {
   Object.entries(values).forEach(([key, val]) => {
     if (key.slice(0, 2) === '__') {
       const keys = key.split('__');
-      const formikKey = keys[1];
-      const formikOrigVal = keys[2];
+      const formikKey = keys[2].includes('sameForm') || keys[2].includes('loop') ? `${keys[1]}__${keys[2]}` : keys[1];
+      const formikOrigVal = keys[2].includes('sameForm') || keys[2].includes('loop') ? keys[3] : keys[2];
       if (typeof (formObject[formikKey]) === 'object') {
         const index = newFormObject[formikKey].indexOf(formikOrigVal);
         newFormObject[formikKey][index] = `${formikOrigVal}__${val}`;
