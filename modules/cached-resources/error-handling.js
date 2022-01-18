@@ -15,6 +15,8 @@ export default async function handleParseError(err, functionToCall, params) {
         }, (error) => {
           reject(error);
         }));
+      },(error) => {
+        reject(error);
       });
     }
   });

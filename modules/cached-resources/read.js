@@ -17,7 +17,7 @@ async function cacheResidentData(queryParams) {
   }
 }
 
-async function cacheAutofillData(parameter) {
+async function cacheAutofillData(parameter, surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
       if (connected) {
@@ -37,8 +37,20 @@ async function cacheAutofillData(parameter) {
               }
             });
             const autofillData = result;
-            autofillData.organization = orgResults;
-            storeData(autofillData, 'autofill_information');
+            const communityList = [];
+            let communitiesComplete = [];
+            customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
+              .then((forms) => {
+                JSON.parse(JSON.stringify(forms)).forEach((form) => {
+                  if (!communityList.includes(form.communityname) && form.communityname) {
+                    communityList.push(form.communityname);
+                  }
+                });
+                communitiesComplete = communitiesComplete.concat(communityList);
+                autofillData.CommunitiesComplete = communitiesComplete;
+                autofillData.organization = orgResults;
+                storeData(autofillData, 'autofill_information');
+              });
             resolve(autofillData[parameter]);
           }, () => {
             storeData(result, 'autofill_information');
