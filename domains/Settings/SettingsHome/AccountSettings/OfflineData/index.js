@@ -9,45 +9,19 @@ import {
 
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
+import PopupSuccess from '../../../../../components/PopupSuccess';
+import { deleteData, getData } from '../../../../../modules/async-storage';
 import { cacheResidentData } from '../../../../../modules/cached-resources';
 import { layout } from '../../../../../modules/theme';
 import configArray from './config/config';
 
 const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScroll }) => {
   const [inputs, setInputs] = useState({});
-  //   const [loopsAdded, setLoopsAdded] = useState(0);
+  const [cacheSuccess, setCacheSuccess] = useState(false);
+  const [submittedForms, setSubmittedForms] = useState(0);
 
   useEffect(() => {
     setInputs(configArray);
-    // console.log(this.data)
-    // let communityList = []
-    // customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
-    // .then(async (forms) => {
-    //     // await storeData(forms, 'assetData');
-
-    //     JSON.parse(JSON.stringify(forms)).forEach(form => {
-    //         if(!communityList.includes(form.communityname)){
-    //             communityList.push(form.communityname)
-    //         }
-    //     });
-    //     // console.log(communityList)
-    //     // await storeData(forms, 'CommunitiesComplete')
-    //   }, (error) => {
-    //     reject(error);
-    //   });
-
-    // cacheAutofillData('Communities')
-    // .then(async () => {
-    //     const data = await getData('autofill_information');
-    //     data['CommunitiesComplete'] = communityList;
-    //     console.log("DATA: " + Object.keys(data));
-    //     await storeData(data, 'autofill_information');
-    //     let test = await getData('autofill_information')
-    //     console.log("TEST: " + Object.keys(test))
-    // });
-
-    // communitiesComplete = communityList.concat(communities)
-    // console.log("Complete: "+communitiesComplete)
   }, [configArray]);
 
   return (
@@ -56,14 +30,23 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
         <Formik
           initialValues={{}}
           onSubmit={async (values) => {
+            //   console.log(values)
             const queryParams = {
               skip: 0,
               offset: 0,
-              limit: 1000,
+              limit: 2000,
               parseColumn: 'communityname',
-              parseParam: values,
+              parseParam: values.communityname,
             };
             cacheResidentData(queryParams);
+            await getData('residentData').then((forms) => {
+              setSubmittedForms(Object.keys(forms).length);
+            //    let keys = []
+            //    keys = Object.keys(forms)
+            //    console.log("KEYS length: " + Object.keys(forms).length)
+            });
+
+            setCacheSuccess(true);
           }}
         >
           {(formikProps) => (
@@ -86,6 +69,19 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
                 buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
                 icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                 style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
+              />
+              <PaperButton
+                onPressEvent={() => {
+                  deleteData('residentData');
+                }}
+                buttonText="Clear Cached Forms"
+                icon="delete"
+                style={{ backgroundColor: 'gray' }}
+              />
+              <PopupSuccess
+                success={cacheSuccess}
+                setSuccess={setCacheSuccess}
+                submittedForms={submittedForms}
               />
             </View>
           )}

@@ -38,7 +38,6 @@ async function cacheAutofillData(parameter, surveyingOrganization) {
             });
             const autofillData = result;
             const communityList = [];
-            let autoCommunities = [];
             let communitiesComplete = [];
             customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
               .then((forms) => {
@@ -47,8 +46,7 @@ async function cacheAutofillData(parameter, surveyingOrganization) {
                     communityList.push(form.communityname);
                   }
                 });
-                autoCommunities = autofillData.Communities;
-                communitiesComplete = autoCommunities.concat(communityList);
+                communitiesComplete = communitiesComplete.concat(communityList);
                 autofillData.CommunitiesComplete = communitiesComplete;
                 autofillData.organization = orgResults;
                 storeData(autofillData, 'autofill_information');
