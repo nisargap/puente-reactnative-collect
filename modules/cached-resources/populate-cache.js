@@ -9,7 +9,7 @@ import {
 export default function populateCache(user, expoToken) {
   // communities called since we need a paramter, all data would be cached in the
   // cacheAutofillData function
-  cacheAutofillData('Communities', user.get('organization'))
+  cacheAutofillData('Communities')
     .then(async () => {
       const currentUserAsync = await getData('currentUser');
       const currentOrgAsync = await getData('currentUser').then((currentUser) => currentUser.organization);

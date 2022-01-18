@@ -7,7 +7,7 @@ import SettingsHome from './SettingsHome';
 import SupportHome from './SupportHome';
 
 const SettingsView = ({
-  logOut, setSettings, surveyingOrganization, scrollViewScroll, setScrollViewScroll
+  logOut, setSettings
 }) => {
   const [settingsView, setSettingsView] = useState('Settings');
   return (
@@ -19,9 +19,6 @@ const SettingsView = ({
             settingsView={settingsView}
             setSettingsView={setSettingsView}
             setSettings={setSettings}
-            surveyingOrganization={surveyingOrganization}
-            scrollViewScroll={scrollViewScroll}
-            setScrollViewScroll={setScrollViewScroll}
           />
         )}
         {settingsView === 'Support' && (

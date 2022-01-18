@@ -141,9 +141,6 @@ const DataCollection = ({ navigation }) => {
               setView={setView}
               setSettings={setSettings}
               logOut={logOut}
-              surveyingOrganization={surveyingOrganization}
-              scrollViewScroll={scrollViewScroll}
-              setScrollViewScroll={setScrollViewScroll}
             />
           ) : (
             <View>
