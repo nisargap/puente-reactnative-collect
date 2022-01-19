@@ -5,7 +5,7 @@ import {
   StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
-import { TextInput } from 'react-native-paper';
+import { Chip, TextInput } from 'react-native-paper';
 
 import { getData } from '../../../../modules/async-storage';
 import I18n from '../../../../modules/i18n';
@@ -51,20 +51,20 @@ const AutoFillMS = (props) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.chipRow}>
         {selectedValues.map((item) => (
           <TouchableOpacity
-            style={styles.itemText}
             key={item}
+            style={styles.chip}
             onPress={() => {
               const arr = selectedValues.filter((itm) => itm !== item);
               setSelectedValues(arr);
               formikProps.setFieldValue(formikKey, arr);
             }}
           >
-            <Text key={item}>
+            <Chip key={item}>
               {item}
-            </Text>
+            </Chip>
           </TouchableOpacity>
         ))}
       </View>
@@ -164,6 +164,13 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 10,
     marginBottom: 75,
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    padding: 5
   },
   textInputContainer: {
     borderColor: theme.colors.primary,
