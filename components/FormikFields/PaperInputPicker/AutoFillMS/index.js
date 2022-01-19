@@ -52,7 +52,21 @@ const AutoFillMS = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        {selectedValues.map((item) => <Text style={styles.itemText} key={item}>{item}</Text>)}
+        {selectedValues.map((item) => (
+          <TouchableOpacity
+            style={styles.itemText}
+            key={item}
+            onPress={() => {
+              const arr = selectedValues.filter((itm) => itm !== item);
+              setSelectedValues(arr);
+              formikProps.setFieldValue(formikKey, arr);
+            }}
+          >
+            <Text key={item}>
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
       {!values && (
         <TextInput
