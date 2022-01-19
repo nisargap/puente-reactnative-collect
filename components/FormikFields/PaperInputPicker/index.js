@@ -12,6 +12,7 @@ import { layout, theme } from '../../../modules/theme';
 import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
+import AutoFillMS from './AutoFillMS';
 import Geolocation from './Geolocation';
 import HouseholdManager from './HouseholdManager';
 import {
@@ -316,6 +317,22 @@ const PaperInputPicker = ({
       {fieldType === 'autofill' && (
         <View key={formikKey}>
           <AutoFill
+            parameter={data.parameter}
+            formikProps={formikProps}
+            formikKey={formikKey}
+            label={label}
+            translatedLabel={translatedLabel}
+            scrollViewScroll={scrollViewScroll}
+            setScrollViewScroll={setScrollViewScroll}
+          />
+          <Text style={{ color: 'red' }}>
+            {errors[formikKey]}
+          </Text>
+        </View>
+      )}
+      {fieldType === 'autofillms' && (
+        <View key={formikKey}>
+          <AutoFillMS
             parameter={data.parameter}
             formikProps={formikProps}
             formikKey={formikKey}

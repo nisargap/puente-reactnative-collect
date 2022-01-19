@@ -11,7 +11,7 @@ import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import PopupSuccess from '../../../../../components/PopupSuccess';
 import { deleteData, getData } from '../../../../../modules/async-storage';
-import { cacheResidentData } from '../../../../../modules/cached-resources';
+import { cacheResidentDataMulti } from '../../../../../modules/cached-resources';
 import { layout } from '../../../../../modules/theme';
 import configArray from './config/config';
 
@@ -30,19 +30,11 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
         <Formik
           initialValues={{}}
           onSubmit={async (values) => {
-            const queryParams = {
-              skip: 0,
-              offset: 0,
-              limit: 2000,
-              parseColumn: 'communityname',
-              parseParam: values.communityname,
-            };
-            cacheResidentData(queryParams);
+            await cacheResidentDataMulti(values.communityname);
             await getData('residentData').then((forms) => {
               setSubmittedForms(Object.keys(forms).length);
+              setCacheSuccess(true);
             });
-
-            setCacheSuccess(true);
           }}
         >
           {(formikProps) => (
