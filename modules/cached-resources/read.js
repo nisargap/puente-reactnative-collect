@@ -3,6 +3,8 @@ import { customMultiParamQueryService, customQueryService, residentIDQuery } fro
 import getTasks from '../../services/tasky';
 import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
+import _ from 'lodash';
+
 
 async function residentQuery(queryParams) {
   let records = await residentIDQuery(queryParams);
@@ -21,36 +23,40 @@ async function cacheAutofillData(parameter, surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
       if (connected) {
-        retrievePuenteAutofillData('all').then((result) => {
+        retrievePuenteAutofillData('all').then(async (result) => {
           // cache organizations tied to all users
-          customQueryService(0, 500, 'User', 'adminVerified', true).then((users) => {
-            const orgsCapitalized = [];
-            const orgResults = [];
-            users.forEach((user) => {
-              const org = user.get('organization');
-              if (org !== null && org !== undefined && org !== '') {
-                const orgCapitalized = org.toUpperCase().trim() || '';
-                if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
-                  orgsCapitalized.push(orgCapitalized);
-                  orgResults.push(org);
-                }
-              }
-            });
-            const autofillData = result;
-            const communityList = [];
-            let communitiesComplete = [];
-            customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
-              .then((forms) => {
-                JSON.parse(JSON.stringify(forms)).forEach((form) => {
-                  if (!communityList.includes(form.communityname) && form.communityname) {
-                    communityList.push(form.communityname);
+          customQueryService(0, 500, 'User', 'adminVerified', true).then( async (users) => {
+            const orgs = () => {
+              const orgsCapitalized = [];
+              const orgResults = [];
+              users.forEach((user) => {
+                const org = user.get('organization');
+                if (org !== null && org !== undefined && org !== '') {
+                  const orgCapitalized = org.toUpperCase().trim() || '';
+                  if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
+                    orgsCapitalized.push(orgCapitalized);
+                    orgResults.push(org);
                   }
-                });
-                communitiesComplete = communitiesComplete.concat(communityList);
-                autofillData.CommunitiesComplete = communitiesComplete;
-                autofillData.organization = orgResults;
-                storeData(autofillData, 'autofill_information');
+                }
               });
+
+              return orgs
+            }
+
+            const comms = async () => {
+              const records = await customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
+              const uniqueCommunities = _.sortedUniq(_.map(JSON.parse(JSON.stringify(records)), 'communityname'))
+              return uniqueCommunities
+            }
+            
+            const autofillData = result;
+
+            if(surveyingOrganization) autofillData.communities = await comms();
+
+            autofillData.organization = orgs();
+
+            storeData(autofillData, 'autofill_information');
+            
             resolve(autofillData[parameter]);
           }, () => {
             storeData(result, 'autofill_information');
