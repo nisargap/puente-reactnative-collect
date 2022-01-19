@@ -30,7 +30,6 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
         <Formik
           initialValues={{}}
           onSubmit={async (values) => {
-            //   console.log(values)
             const queryParams = {
               skip: 0,
               offset: 0,
@@ -41,9 +40,6 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
             cacheResidentData(queryParams);
             await getData('residentData').then((forms) => {
               setSubmittedForms(Object.keys(forms).length);
-            //    let keys = []
-            //    keys = Object.keys(forms)
-            //    console.log("KEYS length: " + Object.keys(forms).length)
             });
 
             setCacheSuccess(true);

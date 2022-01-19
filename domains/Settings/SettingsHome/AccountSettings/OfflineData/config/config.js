@@ -4,7 +4,7 @@ const configArray = [
     formikKey: 'communityname',
     value: '',
     fieldType: 'autofill',
-    parameter: 'CommunitiesComplete',
+    parameter: 'CommunitiesUserEntered',
     validation: false
   }
 ];

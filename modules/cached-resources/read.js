@@ -1,10 +1,10 @@
+import _ from 'lodash';
+
 import retrievePuenteAutofillData from '../../services/aws';
 import { customMultiParamQueryService, customQueryService, residentIDQuery } from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
 import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
-import _ from 'lodash';
-
 
 async function residentQuery(queryParams) {
   let records = await residentIDQuery(queryParams);
@@ -19,13 +19,13 @@ async function cacheResidentData(queryParams) {
   }
 }
 
-async function cacheAutofillData(parameter, surveyingOrganization) {
+async function cacheAutofillData(surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
       if (connected) {
         retrievePuenteAutofillData('all').then(async (result) => {
           // cache organizations tied to all users
-          customQueryService(0, 500, 'User', 'adminVerified', true).then( async (users) => {
+          customQueryService(0, 500, 'User', 'adminVerified', true).then(async (users) => {
             const orgs = () => {
               const orgsCapitalized = [];
               const orgResults = [];
@@ -40,33 +40,35 @@ async function cacheAutofillData(parameter, surveyingOrganization) {
                 }
               });
 
-              return orgs
-            }
-
+              return orgs;
+            };
+            /**
+             * @returns Unique list of communities entered by the users organization
+             */
             const comms = async () => {
-              const records = await customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization)
-              const uniqueCommunities = _.sortedUniq(_.map(JSON.parse(JSON.stringify(records)), 'communityname'))
-              return uniqueCommunities
-            }
-            
-            const autofillData = result;
+              const records = await customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization);
+              const uniqueCommunities = _.uniq(_.map(JSON.parse(JSON.stringify(records)), 'communityname')).sort().filter(Boolean);
+              return uniqueCommunities;
+            };
 
-            if(surveyingOrganization) autofillData.communities = await comms();
+            const autofillData = result; // This result already has City, Communities stored
+
+            if (surveyingOrganization) autofillData.CommunitiesUserEntered = await comms();
 
             autofillData.organization = orgs();
 
             storeData(autofillData, 'autofill_information');
-            
-            resolve(autofillData[parameter]);
+
+            resolve(autofillData);
           }, () => {
             storeData(result, 'autofill_information');
-            resolve(result[parameter]);
+            resolve(result);
           });
         }, (error) => {
           reject(error);
         });
       } else {
-        resolve(getData('autofill_information')[parameter]);
+        resolve(getData('autofill_information'));
       }
     }, (error) => {
       reject(error);
