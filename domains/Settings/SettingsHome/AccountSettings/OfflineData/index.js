@@ -55,16 +55,17 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
               <PaperButton
                 onPressEvent={formikProps.handleSubmit}
                 buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
+                disabled={_.isEmpty(formikProps.values) ? true : false}
                 icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
-                style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
+                style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' },{}}
               />
               <PaperButton
                 onPressEvent={() => {
                   deleteData('residentData');
                 }}
-                buttonText="Clear Cached Forms"
+                buttonText="Clear Cached ID Forms"
                 icon="delete"
-                style={{ backgroundColor: 'gray' }}
+                style={{ backgroundColor: 'red' }}
               />
               <PopupSuccess
                 success={cacheSuccess}
