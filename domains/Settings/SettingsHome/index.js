@@ -12,7 +12,8 @@ import styles from '../index.styles';
 import AccountSettings from './AccountSettings';
 
 const SettingsHome = ({
-  logOut, settingsView, setSettingsView, setSettings
+  logOut, settingsView, setSettingsView, setSettings,
+  surveyingOrganization, scrollViewScroll, setScrollViewScroll
 }) => {
   const [accountSettingsView, setAccountSettingsView] = useState('');
   const inputs = [
@@ -31,6 +32,10 @@ const SettingsHome = ({
     {
       key: 'Language',
       label: I18n.t('accountSettings.language')
+    },
+    {
+      key: 'OfflineData',
+      label: I18n.t('accountSettings.offlineData')
     }
   ];
 
@@ -83,6 +88,9 @@ const SettingsHome = ({
           <AccountSettings
             accountSettingsView={accountSettingsView}
             setAccountSettingsView={setAccountSettingsView}
+            surveyingOrganization={surveyingOrganization}
+            scrollViewScroll={scrollViewScroll}
+            setScrollViewScroll={setScrollViewScroll}
           />
         </View>
       )}
