@@ -55,9 +55,9 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
               <PaperButton
                 onPressEvent={formikProps.handleSubmit}
                 buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
-                disabled={_.isEmpty(formikProps.values) ? true : false}
+                disabled={!!_.isEmpty(formikProps.values)}
                 icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
-                style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' },{}}
+                style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' }}
               />
               <PaperButton
                 onPressEvent={() => {
