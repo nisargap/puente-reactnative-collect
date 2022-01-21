@@ -7,9 +7,7 @@ import {
 } from './read';
 
 export default function populateCache(user, expoToken) {
-  // communities called since we need a paramter, all data would be cached in the
-  // cacheAutofillData function
-  cacheAutofillData('Communities')
+  cacheAutofillData(user.get('organization'))
     .then(async () => {
       const currentUserAsync = await getData('currentUser');
       const currentOrgAsync = await getData('currentUser').then((currentUser) => currentUser.organization);
@@ -59,6 +57,7 @@ export default function populateCache(user, expoToken) {
           });
       }
     })
+    /** THIS NEEDS TO BE MODIFIED OR REMOVED */
     .then(async () => {
       const localLimit = await getData('findRecordsLimit');
       const limit = localLimit === null || localLimit === undefined ? 2000 : localLimit;

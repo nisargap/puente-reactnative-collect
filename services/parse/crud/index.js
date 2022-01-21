@@ -1,6 +1,6 @@
 import { Parse } from 'parse/react-native';
 
-import { customMultiParamQueryService, customQueryService } from './custom-queries';
+import { customMultiParamQueryService, customMultiValueArrayService, customQueryService } from './custom-queries';
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
@@ -68,6 +68,7 @@ function postOfflineForms(params) {
 export {
   countService,
   customMultiParamQueryService,
+  customMultiValueArrayService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
