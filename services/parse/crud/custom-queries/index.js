@@ -75,4 +75,39 @@ function customMultiParamQueryService(limit = 5000, parseModel, parseParams) {
   });
 }
 
-export { customMultiParamQueryService, customQueryService };
+/**
+  * Performs a query based on the parameter defined in a column
+  *
+  * @example
+  * customMultiParamQueryService(0,1000,SurveyData,organization,Puente)
+  *
+  * @param {number} offset First number
+  * @param {number} limit Max limit of results
+  * @param {string} parseModel Name of Backend Model
+  * @param {object} parseParams object of key-value pairs of params
+  * @returns Results of Query
+  */
+function customMultiValueArrayService(limit = 5000, parseModel, parseColumn, parseParamsArray) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const Model = Parse.Object.extend(parseModel);
+
+      const query = new Parse.Query(Model);
+
+      query.limit(limit);
+
+      query.descending('createdAt');
+
+      // Finds scores from any of Jonathan, Dario, or Shawn
+      query.containedIn(parseColumn, parseParamsArray);
+
+      query.find().then((records) => {
+        resolve(records);
+      }, (error) => {
+        reject(error);
+      });
+    }, 1500);
+  });
+}
+
+export { customMultiParamQueryService, customMultiValueArrayService, customQueryService };

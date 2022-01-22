@@ -1,10 +1,20 @@
 {
   "build": {
-    "release": {
-      "releaseChannel": "production",
+    "production": {}
+  },
+  "submit": {
+    "production": {
       "ios": {
-        "image": "latest"
+        "appleId":"hopetambala@outlook.com",
+        "ascAppId": "1362371696"
+      },
+      "android" :{
+        "serviceAccountKeyPath": "./expo-resources/android/api-6741007454030476273-79684-2bb9749d6828.json",
+        "track": "beta"
       }
     }
+  },
+  "cli": {
+    "version": ">= 0.41.0"
   }
 }

@@ -8,7 +8,6 @@ import Autocomplete from 'react-native-autocomplete-input';
 import { TextInput } from 'react-native-paper';
 
 import { getData } from '../../../../modules/async-storage';
-import { cacheAutofillData } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { theme } from '../../../../modules/theme';
 import { stylesDefault, stylesPaper } from '../index.style';
@@ -26,17 +25,14 @@ export default class AutoFill extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { parameter } = this.props;
-    cacheAutofillData(parameter)
-      .then(async () => {
-        const data = await getData('autofill_information');
-        const result = data[parameter];
-        this.setState({
-          fields: result,
-          values: result.length > 0
-        });
-      });
+    const data = await getData('autofill_information');
+    const result = data[parameter];
+    this.setState({
+      fields: result.sort(),
+      values: result.length > 0
+    });
   }
 
   findField(query) {

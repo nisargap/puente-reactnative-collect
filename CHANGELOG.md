@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.0.0...v12.1.0) (2022-01-19)
+
+
+### Bug fixes
+
+* autofill and offline query ([4cc430e](https://github.com/hopetambala/puente-reactnative-collect/commit/4cc430ec50527b889ff16a4e0ccc51afbcc07914))
+* textKeys for select/multiselet questions in loops ([0b88450](https://github.com/hopetambala/puente-reactnative-collect/commit/0b884500c5f1ecded62739da2ac2ab765235cc85))
+* upgrade to expo 42 ([d151bdb](https://github.com/hopetambala/puente-reactnative-collect/commit/d151bdbe90493e68a3dd42367770131c411b6c27))
+* workflow data ([a670db0](https://github.com/hopetambala/puente-reactnative-collect/commit/a670db00832d4a49addf693c89f09d0ef22d064d))
+
+
+### New Features
+
+* add custommultivalue service ([069a696](https://github.com/hopetambala/puente-reactnative-collect/commit/069a6961b51f068b499ba340e51a544782109050))
+* add signal strength to online status for android ([6dd56ab](https://github.com/hopetambala/puente-reactnative-collect/commit/6dd56abea7c484f15f468b58810e59ee75f038ff))
+* unique communities ([dfc4cb6](https://github.com/hopetambala/puente-reactnative-collect/commit/dfc4cb617c123f1e279f6b67b7d0f310eb20886f))
+
+## [12.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.10.0...v12.0.0) (2021-12-13)
+
+
+### New Features
+
+* add workflows to form gallery, refactor horizontalCard View ([c9a7839](https://github.com/hopetambala/puente-reactnative-collect/commit/c9a78397254353353ce6f17a8291917cba9d4cda))
+* loop for same form submission, ie. concatenate repeated questions ([e642e1a](https://github.com/hopetambala/puente-reactnative-collect/commit/e642e1a5c5485b512343325b157638d238533497))
+* loop that submits one form ie. concatenates repeated groups to original key ([4907fc2](https://github.com/hopetambala/puente-reactnative-collect/commit/4907fc2984ce1155eca50522cef3a799a9a5f618))
+
+
+### Bug fixes
+
+* PLATFORM-518 ([6992819](https://github.com/hopetambala/puente-reactnative-collect/commit/69928192a413b6c9d082d6983a0a4a47ce474e1a))
+
 ## [11.10.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.9.5...v11.10.0) (2021-10-28)
 
 
