@@ -12,6 +12,7 @@ import { layout, theme } from '../../../modules/theme';
 import UseCameraRoll from '../../Multimedia/CameraRoll';
 import UseCamera from '../../Multimedia/UseCamera';
 import AutoFill from './AutoFill';
+import AutoFillMS from './AutoFillMS';
 import Geolocation from './Geolocation';
 import HouseholdManager from './HouseholdManager';
 import {
@@ -329,6 +330,22 @@ const PaperInputPicker = ({
           </Text>
         </View>
       )}
+      {fieldType === 'autofillms' && (
+        <View key={formikKey}>
+          <AutoFillMS
+            parameter={data.parameter}
+            formikProps={formikProps}
+            formikKey={formikKey}
+            label={label}
+            translatedLabel={translatedLabel}
+            scrollViewScroll={scrollViewScroll}
+            setScrollViewScroll={setScrollViewScroll}
+          />
+          <Text style={{ color: 'red' }}>
+            {errors[formikKey]}
+          </Text>
+        </View>
+      )}
       {fieldType === 'geolocation' && (
         <Geolocation
           errors={errors}
@@ -488,6 +505,32 @@ const PaperInputPicker = ({
         />
       </View>
       )}
+      {/* relies on function to clean the values prior to submission */}
+      {fieldType === 'loopSameForm' && (
+        <View key={formikKey}>
+          {additionalQuestions !== undefined && additionalQuestions.length !== 0
+              && additionalQuestions.map((question) => (
+                <PaperInputPicker
+                  data={question}
+                  formikProps={formikProps}
+                  customForm={customForm}
+                  config={config}
+                  surveyingOrganization={surveyingOrganization}
+                  scrollViewScroll={scrollViewScroll}
+                  setScrollViewScroll={setScrollViewScroll}
+                />
+              ))}
+          <Looper
+            data={data}
+            config={config}
+            additionalQuestions={additionalQuestions}
+            setAdditionalQuestions={setAdditionalQuestions}
+            translatedLabel={translatedLabel}
+            sameForm
+          />
+        </View>
+      )}
+
     </>
   );
 };

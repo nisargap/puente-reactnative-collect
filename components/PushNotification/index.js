@@ -56,32 +56,34 @@ const checkAppVersionAndSendPush = async (token) => {
     const minorCurrentInt = toInteger(minorCurrent);
     const patchCurrentInt = toInteger(patchCurrent);
     if (Platform.OS === 'android') {
-      await axios.get(`${selectedENV.awsFlaskApi}android`).then((latestVersion) => {
-        const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.');
-        const majorLatestInt = toInteger(majorLatest);
-        const minorLatestInt = toInteger(minorLatest);
-        const patchLatestInt = toInteger(patchLatest);
-        if (!((majorCurrentInt > majorLatestInt)
+      await axios.get(`${selectedENV.awsFlaskApi}android`)
+        .then((latestVersion) => {
+          const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.');
+          const majorLatestInt = toInteger(majorLatest);
+          const minorLatestInt = toInteger(minorLatest);
+          const patchLatestInt = toInteger(patchLatest);
+          if (!((majorCurrentInt > majorLatestInt)
           || (majorCurrentInt === majorLatestInt && minorCurrentInt > minorLatestInt)
           || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
             && patchCurrentInt > patchLatestInt)
           || (majorCurrentInt === majorLatestInt && minorCurrentInt === minorLatestInt
             && patchCurrentInt === patchLatestInt)
-        )) {
-          axios.post(selectedENV.expoPushTokenUrl,
-            [
-              {
-                to: token,
-                sound: 'default',
-                body: I18n.t('pushNotifications.updateApp')
-              }
-            ]).then((response) => {
+          )) {
+            axios.post(selectedENV.expoPushTokenUrl,
+              [
+                {
+                  to: token,
+                  sound: 'default',
+                  body: I18n.t('pushNotifications.updateApp')
+                }
+              ]).then((response) => {
               console.log(response) //eslint-disable-line
-          }, (error) => {
+            }, (error) => {
               console.log(error) //eslint-disable-line
-          });
-        }
-      });
+            });
+          }
+        })
+        .catch((error) => console.log("push notification", error)); //eslint-disable-line
     } else if (Platform.OS === 'ios') {
       await axios.get(`${selectedENV.awsFlaskApi}ios`).then((latestVersion) => {
         const [majorLatest, minorLatest, patchLatest] = latestVersion.data.version.version_number.split('.');
@@ -105,10 +107,11 @@ const checkAppVersionAndSendPush = async (token) => {
             ]).then((response) => {
               console.log(response) //eslint-disable-line
           }, (error) => {
-              console.log(error) //eslint-disable-line
+              console.log("push notification", error) //eslint-disable-line
           });
         }
-      });
+      })
+        .catch((error) => console.log("push notification", error)); //eslint-disable-line
     }
   });
 };

@@ -21,7 +21,7 @@ import surveyingUserFailsafe from '../utils';
 import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
-import { addSelectTextInputs, vitalsBloodPressue } from './utils';
+import { addSelectTextInputs, cleanLoopSubmissions, vitalsBloodPressue } from './utils';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -75,6 +75,10 @@ const SupplementaryForm = ({
         if (selectedForm === 'vitals') {
           formObjectUpdated = vitalsBloodPressue(values, formObjectUpdated);
         }
+
+        // clean looped form questions
+        formObjectUpdated = cleanLoopSubmissions(values, formObjectUpdated);
+
         const postParams = {
           parseParentClassID: surveyee.objectId,
           parseParentClass: 'SurveyData',
