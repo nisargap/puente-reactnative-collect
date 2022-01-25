@@ -67,7 +67,7 @@ export default class AutoFill extends Component {
             onBlur={formikProps.handleBlur(formikKey)}
             mode="outlined"
             theme={stylesPaper}
-            style={styles.itemText}
+            style={stylesDefault.label}
           />
         )}
         {values && Platform.OS === 'ios' && (
@@ -88,7 +88,7 @@ export default class AutoFill extends Component {
                 formikProps.setFieldValue(formikKey, text);
               }}
               placeholder={placeholder}
-              placeholderTextColor={'black'}
+              placeholderTextColor="black"
               listStyle={styles.listContainer}
               keyExtractor={(item,) => item.key}
               onStartShouldSetResponderCapture={() => {
@@ -102,7 +102,7 @@ export default class AutoFill extends Component {
               }}
               renderItem={({ item }) => (
                 // you can change the view you want to show in suggestion from here
-                
+
                 <TouchableOpacity
                   style={styles.itemText}
                   key={`${item}`}
@@ -137,7 +137,7 @@ export default class AutoFill extends Component {
                 formikProps.setFieldValue(formikKey, text);
               }}
               placeholder={placeholder}
-              placeholderTextColor={'black'}
+              placeholderTextColor="black"
               listStyle={styles.listContainer}
               keyExtractor={(item,) => item.key}
               renderItem={({ item }) => (
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     height: 80,
-    borderBottomRightRadius:4,
+    borderBottomRightRadius: 4,
     borderBottomLeftRadius: 4
   }
 });

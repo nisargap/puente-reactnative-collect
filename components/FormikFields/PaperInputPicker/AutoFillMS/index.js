@@ -91,7 +91,7 @@ const AutoFillMS = (props) => {
               setQuery(text);
             }}
             placeholder={placeholder}
-            placeholderTextColor={'black'}
+            placeholderTextColor="black"
             listStyle={styles.listContainer}
             keyExtractor={(item,) => item.key}
             onStartShouldSetResponderCapture={() => {
@@ -133,7 +133,7 @@ const AutoFillMS = (props) => {
               setQuery(text);
             }}
             placeholder={placeholder}
-            placeholderTextColor={'black'}
+            placeholderTextColor="black"
             listStyle={styles.listContainer}
             keyExtractor={(item,) => item.key}
             renderItem={({ item }) => (
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     height: 80,
-    borderBottomRightRadius:4,
+    borderBottomRightRadius: 4,
     borderBottomLeftRadius: 4
   }
 });
