@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { Chip, TextInput } from 'react-native-paper';
+import uuid from 'react-native-uuid';
 
 import { getData } from '../../../../modules/async-storage';
 import I18n from '../../../../modules/i18n';
@@ -92,7 +93,7 @@ const AutoFillMS = (props) => {
             }}
             placeholder={placeholder}
             listStyle={styles.listContainer}
-            keyExtractor={(item,) => item.key}
+            keyExtractor={() => uuid.v4()}
             onStartShouldSetResponderCapture={() => {
               setScrollViewScroll(false);
               if (fieldz.length === 0
@@ -133,7 +134,7 @@ const AutoFillMS = (props) => {
             }}
             placeholder={placeholder}
             listStyle={styles.listContainer}
-            keyExtractor={(item,) => item.key}
+            keyExtractor={() => uuid.v4()}
             renderItem={({ item }) => (
               <TouchableOpacity
                 key={`${item}`}

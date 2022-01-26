@@ -1,57 +1,28 @@
 import Constants from 'expo-constants';
 
-import { retrievAddUserPushToken, retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
+import { retrieveCurrentUserAsyncFunction } from '../../services/parse/auth';
 import { getData, storeData } from '../async-storage';
 import {
   assetDataQuery, assetFormsQuery, cacheAutofillData, cacheResidentData, customFormsQuery
 } from './read';
 
-export default function populateCache(user, expoToken) {
-  cacheAutofillData(user.get('organization'))
+export default function populateCache(user) {
+  const enteredUsrOrg = user.organization;
+  cacheAutofillData(enteredUsrOrg)
     .then(async () => {
-      const currentUserAsync = await getData('currentUser');
       const currentOrgAsync = await getData('currentUser').then((currentUser) => currentUser.organization);
       // store information after sign up/sign in
       if (user) {
-        if (user !== currentUserAsync) {
-          await storeData(user, 'currentUser');
-        }
-        if (user.get('organization') !== currentOrgAsync) {
-          await storeData(user.get('organization'), 'organization');
-        }
-        if (user.get('expoPushToken') !== expoToken || user.get('expoPushToken') === undefined) {
-          // add push token to user object
-          const postParams = {
-            userId: user.id,
-            expoPushToken: expoToken
-          };
-          retrievAddUserPushToken(postParams).then(() => {
-          }, () => {
-            // error adding push token
-          });
+        if (enteredUsrOrg !== currentOrgAsync) {
+          await storeData(enteredUsrOrg, 'organization');
         }
       } else {
         // fail safe in case no user is passed in for some reason
         await retrieveCurrentUserAsyncFunction()
           .then(async (currentUser) => {
             if (currentUser !== null && currentUser !== undefined) {
-              if (currentUser !== currentUserAsync) {
-                await storeData(currentUser, 'currentUser');
-              }
               if (currentUser.organization !== currentOrgAsync) {
                 await storeData(currentUser.organization, 'organization');
-              }
-              if (currentUser.expoPushToken !== expoToken
-                 || currentUser.expoPushToken === undefined) {
-                // add push token to user object
-                const postParams = {
-                  userId: user.id,
-                  expoPushToken: expoToken
-                };
-                retrievAddUserPushToken(postParams).then(() => {
-                }, () => {
-                  // error adding push token
-                });
               }
             }
           });
@@ -68,12 +39,12 @@ export default function populateCache(user, expoToken) {
         offset: 0,
         limit,
         parseColumn: 'surveyingOrganization',
-        parseParam: user.get('organization'),
+        parseParam: enteredUsrOrg,
       };
       cacheResidentData(queryParams);
     })
     .then(async () => {
-      await customFormsQuery(user.get('organization'));
+      await customFormsQuery(enteredUsrOrg);
     })
     .then(async () => {
       // store current app version
@@ -86,13 +57,14 @@ export default function populateCache(user, expoToken) {
     })
     .then(() => {
       // Asset data/Asset forms
-      assetDataQuery(user.get('organization')).then(() => {
-        assetFormsQuery(user.get('organization')).then(() => {
+      assetDataQuery(enteredUsrOrg).then(() => {
+        assetFormsQuery(enteredUsrOrg).then(() => {
         }, () => {
           // error
         });
       }, () => {
         // error
       });
-    });
+    })
+    .catch((error)=> console.log(error)); //eslint-disable-line
 }

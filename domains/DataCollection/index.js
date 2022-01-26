@@ -1,6 +1,6 @@
 // import * as React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView, Platform,
@@ -22,7 +22,7 @@ import MapView from '../../components/MapView';
 import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
-import { retrieveSignOutFunction } from '../../services/parse/auth';
+import { UserContext } from '../../services/parse/auth/context';
 import SettingsView from '../Settings';
 import Assets from './Assets';
 import FormGallery from './FormGallery';
@@ -62,6 +62,10 @@ const DataCollection = ({ navigation }) => {
 
   const [surveyingOrganization, setSurveyingOrganization] = useState('');
   const [surveyingUser, setSurveyingUser] = useState();
+
+  const {
+    onLogout
+  } = useContext(UserContext);
 
   useFocusEffect(
     useCallback(() => {
@@ -114,7 +118,7 @@ const DataCollection = ({ navigation }) => {
     setView('Find Records');
   };
 
-  const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));
+  const logOut = () => onLogout().then(() => navigation.navigate('Sign In'));
 
   return (
     <View
