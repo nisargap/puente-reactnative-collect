@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Parse } from 'parse/react-native';
 
 import selectedENV from '../../../environment';
+import { getData } from '../../../modules/async-storage';
 
 function initialize() {
   const { parseAppId, parseJavascriptKey, parseServerUrl } = selectedENV;
@@ -22,17 +23,16 @@ function retrieveSignUpFunction(params) {
   });
 }
 
-function retrieveSignInFunction(username, password) {
-  return new Promise((resolve, reject) => {
-    // sign in with either phonenumber (username) or email handled with logIn
-    Parse.User.logIn(String(username), String(password)).then((user) => {
-      console.log(`User logged in successful with username: ${user.get('username')}`); // eslint-disable-line
-      resolve(user);
-    }, (error) => {
+async function retrieveSignInFunction(username, password) {
+  const pswdOffline = await getData('password');
+  return new Promise((resolve, reject) => Parse.User.logIn(String(username), String(password)).then((usr) => {
+    console.log(`User logged in successful with username: ${usr.get('username')}`); // eslint-disable-line
+    const user = { password: pswdOffline, ...usr };
+    resolve(user);
+  }, (error) => {
       console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
-      reject(error);
-    });
-  });
+    reject(error);
+  }));
 }
 
 async function retrieveSignOutFunction() {
@@ -69,18 +69,12 @@ function retrieveCurrentUserFunction() {
   return null;
 }
 
-function retrieveCurrentUserAsyncFunction() {
+async function retrieveCurrentUserAsyncFunction() {
+  const password = await getData('password');
   return Parse.User.currentAsync().then((u) => {
-    const user = {};
-    user.id = u.id;
-    user.username = u.get('username');
-    user.firstname = u.get('firstname');
-    user.lastname = u.get('lastname');
-    user.email = u.get('email');
-    user.organization = u.get('organization');
-    user.role = u.get('role');
+    const user = { ...u, password };
     return user;
-  });
+  }).catch(() => undefined);
 }
 
 function retrieveDeleteUserFunction(params) {
