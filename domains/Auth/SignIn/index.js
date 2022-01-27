@@ -56,7 +56,6 @@ const SignIn = ({ navigation }) => {
 
   useEffect(() => {
     if (user?.id && user.isOnline === true) {
-      console.log('user', user);
       handleSignIn(user);
     }
   }, [user]);
