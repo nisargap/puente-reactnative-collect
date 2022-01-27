@@ -25,9 +25,20 @@ function retrieveSignUpFunction(params) {
 
 async function retrieveSignInFunction(username, password) {
   const pswdOffline = await getData('password');
-  return new Promise((resolve, reject) => Parse.User.logIn(String(username), String(password)).then((usr) => {
-    console.log(`User logged in successful with username: ${usr.get('username')}`); // eslint-disable-line
-    const user = { password: pswdOffline, ...usr };
+  return new Promise((resolve, reject) => Parse.User.logIn(String(username), String(password)).then((u) => {
+    console.log(`User logged in successful with username: ${u.get('username')}`); // eslint-disable-line
+    const user = { 
+      ...u,
+      id: u.id,
+      name:  u.get('username'),
+      firstname: u.get('firstname') || '',
+      lastname: u.get('lastname') || '', 
+      email:  u.get('email'),
+      organization:  u.get('organization'),
+      role: u.get('role'),
+      createdAt: u.get('createdAt'),
+      password: pswdOffline 
+    };
     resolve(user);
   }, (error) => {
       console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
@@ -50,29 +61,23 @@ function retrieveForgotPasswordFunction(params) {
       reject(error);
     });
   });
-}
-
-/**
- * Deprecated
- */
-function retrieveCurrentUserFunction() {
-  const u = Parse.User.current();
-  if (u) {
-    const user = new Parse.User();
-    user.id = u.id;
-    user.name = u.get('username');
-    user.email = u.get('email');
-    user.organization = u.get('organization');
-    user.role = u.get('role');
-    return user;
-  }
-  return null;
-}
+}å
 
 async function retrieveCurrentUserAsyncFunction() {
   const password = await getData('password');
   return Parse.User.currentAsync().then((u) => {
-    const user = { ...u, password };
+    const user = { 
+      ...u,
+      id: u.id,
+      name:  u.get('username'),
+      firstname: u.get('firstname') || '',
+      lastname: u.get('lastname') || '', 
+      email:  u.get('email'),
+      organization:  u.get('organization'),
+      role: u.get('role'),
+      createdAt: u.get('createdAt'),
+      password 
+    };
     return user;
   }).catch(() => undefined);
 }
