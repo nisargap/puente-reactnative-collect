@@ -1,8 +1,9 @@
 import { Spinner } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Button, Headline, Searchbar } from 'react-native-paper';
 
+import { OfflineContext } from '../../context/offline.context';
 import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
@@ -16,6 +17,7 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const [loading, setLoading] = useState(false);
   const [online, setOnline] = useState(true);
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const { residentOfflineData } = useContext(OfflineContext);
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
@@ -27,19 +29,8 @@ const ResidentIdSearchbar = ({ surveyee, setSurveyee, surveyingOrganization }) =
   const fetchOfflineData = async () => {
     setOnline(false);
 
-    getData('residentData').then((residentData) => {
-      if (residentData) {
-        let offlineData = [];
-        getData('offlineIDForms').then((offlineResidentData) => {
-          if (offlineResidentData !== null) {
-            Object.entries(offlineResidentData).forEach(([key, value]) => { //eslint-disable-line
-              offlineData = offlineData.concat(value.localObject);
-            });
-          }
-          const allData = residentData.concat(offlineData);
-          setResidentsData(allData.slice() || []);
-        });
-      }
+    return residentOfflineData().then((residents) => {
+      setResidentsData(residents);
       setLoading(false);
     });
   };
