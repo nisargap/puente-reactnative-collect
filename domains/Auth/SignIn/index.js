@@ -2,6 +2,7 @@
 { "props": true, "ignorePropertyModificationsFor": ["formikProps"] }] */
 import { Formik } from 'formik';
 import React, {
+  useContext,
   useEffect,
   useState
 } from 'react';
@@ -24,15 +25,12 @@ import * as yup from 'yup';
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
-import registerForPushNotificationsAsync from '../../../components/PushNotification';
 import TermsModal from '../../../components/TermsModal';
-import { deleteData, getData, storeData } from '../../../modules/async-storage';
-import { populateCache } from '../../../modules/cached-resources';
+import { UserContext } from '../../../context/auth.context';
+import { deleteData, getData } from '../../../modules/async-storage';
 import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
-import { retrieveSignInFunction } from '../../../services/parse/auth';
-import CredentialsModal from './CredentialsModal';
 import ForgotPassword from './ForgotPassword';
 
 const validationSchema = yup.object().shape({
@@ -49,24 +47,18 @@ const validationSchema = yup.object().shape({
 
 const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [user, setUser] = useState(null);
   const [language, setLanguage] = useState('');
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-
   const [forgotPassword, setForgotPassword] = useState(false);
-
-  const load = false;
+  const {
+    user, onlineLogin, offlineLogin, isLoading, error
+  } = useContext(UserContext);
 
   useEffect(() => {
-    getData('currentUser').then((currentUser) => {
-      setUser(currentUser);
-      if (currentUser?.credentials?.store === 'Yes') {
-        setModalVisible(true);
-      }
-    });
-  }, [load]);
+    if (user?.id && user.isOnline === true) {
+      handleSignIn(user);
+    }
+  }, [user]);
 
   useEffect(() => {
     async function checkLanguage() {
@@ -82,7 +74,7 @@ const SignIn = ({ navigation }) => {
   const handleFailedAttempt = () => {
     Alert.alert(
       I18n.t('signIn.unableLogin'),
-      I18n.t('signIn.usernamePasswordIncorrect'), [
+      `${error}`, [
         { text: 'OK' }
       ],
       { cancelable: true }
@@ -97,37 +89,6 @@ const SignIn = ({ navigation }) => {
     if (callback) callback();
     Keyboard.dismiss();
     navigation.navigate('Root', values);
-  };
-
-  const handleSaveCredentials = (currentUser, values) => {
-    Alert.alert(
-      I18n.t('signIn.credentials'),
-      I18n.t('signIn.saveLoginCreds'),
-      [
-        {
-          text: I18n.t('global.yes'),
-          onPress: () => {
-            const usr = currentUser;
-            const credentials = values;
-            usr.set('credentials', {
-              ...credentials,
-              store: 'Yes'
-            });
-            storeData(usr, 'currentUser');
-            navigation.navigate('StorePincode');
-          }
-        },
-        {
-          text: I18n.t('global.no'),
-          style: 'cancel',
-          onPress: () => {
-            handleSignIn(values);
-          }
-        },
-      ],
-      { cancelable: false }
-      // clicking out side of alert will not cancel
-    );
   };
 
   const handleLanguage = (lang) => {
@@ -147,69 +108,19 @@ const SignIn = ({ navigation }) => {
     deleteData('currentUser');
   };
 
-  const storeUserInformation = async (currentUser, userCreds) => {
-    // store username and password
-    const usr = currentUser;
-    if (userCreds) {
-      usr.set('credentials', {
-        ...userCreds,
-        store: 'No'
-      });
-      storeData(usr, 'currentUser');
-    }
-    // send push to update app if necessary and retrieve push token
-    const expoToken = await registerForPushNotificationsAsync();
-    populateCache(usr, expoToken);
-  };
-
-  const signInAndStore = (connected, values, actions) => {
-    setLoading(true);
+  const signin = async (connected, enteredValues, actions) => {
     if (connected) {
-      // stores credentials for offline sign in, but does not offer passwordless entry
-      retrieveSignInFunction(values.username, values.password)
-        .then((currentUser) => {
-          // always sets crenetials.store == 'No'
-          storeUserInformation(currentUser, values);
-          getData('currentUser').then(async (userCreds) => {
-            // credentials stored do not match those entered through sign-in, overwrite
-            // always runs
-            if (userCreds === null || userCreds.credentials.store === 'No' || values.username !== userCreds.credentials.username
-            || values.password !== userCreds.credentials.password) {
-              // ask user to store credentials
-              setLoading(false);
-              handleSaveCredentials(currentUser, values);
-            } else {
-              // store
-              setLoading(false);
-              storeUserInformation(currentUser);
-              // go to root
-              await handleSignIn(values, actions.resetForm);
-            }
-          }, () => {
-            setLoading(false);
-            handleSaveCredentials(currentUser, values);
-          });
-          // setLoading(false);
-        }, (err) => {
-          setLoading(false);
-          handleFailedAttempt(err);
-        });
-    } else {
-      // offline
-      getData('currentUser').then(async (userCreds) => {
-        // username and password entered (or saved in creds) match the saved cred
-        if (values.username === userCreds.credentials.username
-          && values.password === userCreds.credentials.password) {
-          // need some pincode verification
-          await handleSignIn(values, actions.resetForm);
-          setLoading(false);
-        } else {
-          // incorrect usernmae/password offline
-          handleFailedAttempt();
-          setLoading(false);
+      return onlineLogin(enteredValues).then((status) => {
+        if (status) {
+          return handleSignIn(enteredValues, actions.resetForm)
+            .catch(() => handleFailedAttempt());
         }
+        return handleFailedAttempt();
       });
     }
+    const offlineStatus = offlineLogin();
+    if (!offlineStatus) return handleFailedAttempt();
+    return handleSignIn(enteredValues, actions.resetForm);
   };
 
   return (
@@ -226,12 +137,10 @@ const SignIn = ({ navigation }) => {
             <Formik
               initialValues={{ username: '', password: '' }}
               onSubmit={async (values, actions) => {
-                setLoading(true);
                 await checkOnlineStatus().then((connected) => {
-                  signInAndStore(connected, values, actions);
+                  signin(connected, values, actions);
                 });
                 setTimeout(() => {
-                  setLoading(false);
                 }, 3000);
               }}
               validationSchema={validationSchema}
@@ -264,7 +173,6 @@ const SignIn = ({ navigation }) => {
                       <View style={styles.checkbox}>
                         <Checkbox
                           disabled={false}
-                          // theme={theme}
                           color={theme.colors.primary}
                           status={checked ? 'checked' : 'unchecked'}
                           onPress={() => {
@@ -278,19 +186,11 @@ const SignIn = ({ navigation }) => {
                       {I18n.t('signIn.forgotPassword.label')}
                     </Button>
                   </View>
-                  {loading ? (
+                  {isLoading ? (
                     <ActivityIndicator />
                   ) : (
                     <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signIn.login')}</Button>
                   )}
-                  <CredentialsModal
-                    modalVisible={modalVisible}
-                    formikProps={formikProps}
-                    user={user}
-                    setModalVisible={setModalVisible}
-                    navigation={navigation}
-                  />
-
                 </View>
               )}
             </Formik>
