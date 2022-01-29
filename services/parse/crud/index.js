@@ -17,15 +17,14 @@ function residentIDQuery(params) {
   }
 
   return new Promise((resolve, reject) => {
-    const GameScore = Parse.Object.extend('SurveyData');
-    const query = new Parse.Query(GameScore);
+    const Model = Parse.Object.extend('SurveyData');
+    const query = new Parse.Query(Model);
 
     query.descending('createdAt');
 
     query.equalTo('surveyingOrganization', parseParam);
 
     query.find().then((records) => {
-      console.log('nested records', records);
       const deDuplicatedRecords = records.reduce((accumulator, current) => {
         if (checkIfAlreadyExist(accumulator, current)) {
           return accumulator;
@@ -34,7 +33,6 @@ function residentIDQuery(params) {
       }, []);
       resolve(JSON.parse(JSON.stringify(deDuplicatedRecords)));
     }, (error) => {
-      console.log('error', error);
       reject(error);
     });
   });

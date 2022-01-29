@@ -14,12 +14,12 @@ export const OfflineContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user?.id && user.isOnline === true) {
-      fetchOnlineResidentData();
+      residentOnlineData();
       populateCache(user);
     }
   }, [user]);
 
-  const fetchOnlineResidentData = async () => {
+  const residentOnlineData = async () => {
     setIsLoading(true);
     const queryParams = {
       skip: 0,
@@ -29,14 +29,14 @@ export const OfflineContextProvider = ({ children }) => {
       parseParam: user.organization,
     };
 
-    const records = residentQuery(queryParams);
+    const records = await residentQuery(queryParams);
     storeData(records, 'residentData');
     setResidents(records);
     setIsLoading(false);
     return records;
   };
 
-  const fetchOfflineResidentData = () => getData('residentData').then(async (data) => {
+  const residentOfflineData = () => getData('residentData').then(async (data) => {
     const residentData = data || [];
     let offlineData = [];
     const offlineResidentData = await getData('offlineIDForms');
@@ -55,8 +55,8 @@ export const OfflineContextProvider = ({ children }) => {
       value={{
         residents,
         isLoading,
-        residentOfflineData: fetchOfflineResidentData,
-        residentOnlineData: fetchOnlineResidentData,
+        residentOfflineData,
+        residentOnlineData
       }}
     >
       {children}
