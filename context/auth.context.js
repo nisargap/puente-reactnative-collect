@@ -1,13 +1,12 @@
 import React, { createContext, useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
 
-import { deleteData, getData, storeData } from '../../../modules/async-storage';
-import { populateCache } from '../../../modules/cached-resources';
+import { deleteData, getData, storeData } from '../modules/async-storage';
 import {
   retrieveCurrentUserAsyncFunction,
   retrieveSignInFunction,
   retrieveSignOutFunction,
-} from './index';
+} from '../services/parse/auth/index';
 
 export const UserContext = createContext();
 
@@ -48,12 +47,11 @@ export const UserContextProvider = ({ children }) => {
         setUser(usr);
         storeData(usr, 'currentUser');
         storeData(password, 'password');
-        populateCache(usr); // NEED TO DIG INTO THIS, DOES THIS MAKE THE APP SLOW?
         setIsLoading(false);
         return true;
       })
       .catch(async (e) => {
-        await setError(e.toString());
+        setError(e.toString());
         setIsLoading(false);
         return false;
       });

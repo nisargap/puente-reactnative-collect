@@ -6,10 +6,35 @@ function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
 }
 function residentIDQuery(params) {
+  const { parseParam } = params;
+  function checkIfAlreadyExist(accumulator, currentVal) {
+    return accumulator.some((item) => (item.get('fname') === currentVal.get('fname')
+      && item.get('lname') === currentVal.get('lname')
+      && item.get('sex') === currentVal.get('sex')
+      && item.get('marriageStatus') === currentVal.get('marriageStatus')
+      && item.get('educationLevel') === currentVal.get('educationLevel')
+    ));
+  }
+
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('basicQuery', params).then((result) => {
-      resolve(result);
+    const GameScore = Parse.Object.extend('SurveyData');
+    const query = new Parse.Query(GameScore);
+
+    query.descending('createdAt');
+
+    query.equalTo('surveyingOrganization', parseParam);
+
+    query.find().then((records) => {
+      console.log('nested records', records);
+      const deDuplicatedRecords = records.reduce((accumulator, current) => {
+        if (checkIfAlreadyExist(accumulator, current)) {
+          return accumulator;
+        }
+        return [...accumulator, current];
+      }, []);
+      resolve(JSON.parse(JSON.stringify(deDuplicatedRecords)));
     }, (error) => {
+      console.log('error', error);
       reject(error);
     });
   });
