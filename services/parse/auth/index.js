@@ -15,8 +15,20 @@ function initialize() {
 
 function retrieveSignUpFunction(params) {
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('signup', params).then((result) => {
-      resolve(result);
+    Parse.Cloud.run('signup', params).then((u) => {
+      const user = {
+        ...u,
+        id: u.id,
+        name: u.get('username'),
+        firstname: u.get('firstname') || '',
+        lastname: u.get('lastname') || '',
+        email: u.get('email'),
+        organization: u.get('organization'),
+        role: u.get('role'),
+        createdAt: `${u.get('createdAt')}`,
+        password: params.password
+      };
+      resolve(user);
     }, (error) => {
       reject(error);
     });
@@ -36,7 +48,7 @@ async function retrieveSignInFunction(usrn, pswd) {
       email: u.get('email'),
       organization: u.get('organization'),
       role: u.get('role'),
-      createdAt: u.get('createdAt'),
+      createdAt: `${u.get('createdAt')}`,
       password
     };
     resolve(user);
@@ -75,7 +87,7 @@ async function retrieveCurrentUserAsyncFunction() {
       email: u.get('email'),
       organization: u.get('organization'),
       role: u.get('role'),
-      createdAt: u.get('createdAt'),
+      createdAt: `${u.get('createdAt')}`,
       password
     };
     return user;

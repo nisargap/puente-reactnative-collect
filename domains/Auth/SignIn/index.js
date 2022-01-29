@@ -26,11 +26,11 @@ import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
 import FormInput from '../../../components/FormikFields/FormInput';
 import LanguagePicker from '../../../components/LanguagePicker';
 import TermsModal from '../../../components/TermsModal';
+import { UserContext } from '../../../context/auth.context';
 import { deleteData, getData } from '../../../modules/async-storage';
 import I18n from '../../../modules/i18n';
 import checkOnlineStatus from '../../../modules/offline';
 import { theme } from '../../../modules/theme';
-import { UserContext } from '../../../services/parse/auth/context';
 import ForgotPassword from './ForgotPassword';
 
 const validationSchema = yup.object().shape({
