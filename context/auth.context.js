@@ -6,6 +6,7 @@ import {
   retrieveCurrentUserAsyncFunction,
   retrieveSignInFunction,
   retrieveSignOutFunction,
+  retrieveSignUpFunction
 } from '../services/parse/auth/index';
 
 export const UserContext = createContext();
@@ -72,28 +73,23 @@ export const UserContextProvider = ({ children }) => {
 
   /**
    * NEED TO DO
-   * @param {*} email
-   * @param {*} password
-   * @param {*} repeatedPassword
-   * @returns
+   * @param {*} params
+   * @returns User Object
    */
 
-  //   const onRegister = (email, password, repeatedPassword) => {
-  //     setIsLoading(true);
-  //     if (password !== repeatedPassword) {
-  //       setError('Error: Passwords do not match');
-  //       return;
-  //     }
-  //     retrieveSignUpFunction(params)
-  //       .then((u) => {
-  //         setUser(u);
-  //         setIsLoading(false);
-  //       })
-  //       .catch((e) => {
-  //         setIsLoading(false);
-  //         setError(e.toString());
-  //       });
-  //   };
+  const register = async (params) => {
+    const { password } = params;
+    storeData(password, 'password');
+    setIsLoading(true);
+    try {
+      const u = await retrieveSignUpFunction(params);
+      setUser(u);
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+      setError(e.toString());
+    }
+  };
 
   const onLogout = async () => retrieveSignOutFunction()
     .then(() => {
@@ -112,7 +108,7 @@ export const UserContextProvider = ({ children }) => {
         error,
         onlineLogin,
         offlineLogin,
-        // onRegister,
+        register,
         onLogout,
       }}
     >
