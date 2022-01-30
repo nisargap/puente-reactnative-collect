@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [12.1.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.1...v12.1.2) (2022-01-30)
+### [12.1.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.2...v12.1.3) (2022-01-30)
+
+
+### Bug fixes
+
+* importing from wrong place :tired_face: ([19b8898](https://github.com/hopetambala/puente-reactnative-collect/commit/19b8898916aac9a0ef06b61cf7bb182fb4a6538d))
 
 ### [12.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.0...v12.1.1) (2022-01-29)
 
