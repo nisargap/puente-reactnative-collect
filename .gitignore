@@ -23,4 +23,4 @@ app.generated.json
 #
 reactenv/
 scripts/update-version/app.secrets.json
-environment.js
+# environment.js
