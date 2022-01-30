@@ -72,7 +72,6 @@ export const UserContextProvider = ({ children }) => {
   };
 
   /**
-   * NEED TO DO
    * @param {*} params
    * @returns User Object
    */
