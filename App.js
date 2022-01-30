@@ -8,11 +8,13 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import MainNavigation from './components/MainNavigation';
 import { UserContextProvider } from './context/auth.context';
 import { OfflineContextProvider } from './context/offline.context';
+import { ParseContextProvider } from './context/parse.context';
+
 import useCachedResources from './modules/cached-resources/useCachedResources';
 import { theme } from './modules/theme';
-import { initialize } from './services/parse/auth';
+// import { initialize } from './services/parse/auth';
 
-initialize();
+// initialize();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,13 +24,15 @@ export default function App() {
   }
   return (
     <NavigationContainer independent>
-      <PaperProvider theme={theme}>
-        <UserContextProvider>
-          <OfflineContextProvider>
-            <MainNavigation />
-          </OfflineContextProvider>
-        </UserContextProvider>
-      </PaperProvider>
+      <ParseContextProvider>
+        <PaperProvider theme={theme}>
+          <UserContextProvider>
+            <OfflineContextProvider>
+              <MainNavigation />
+            </OfflineContextProvider>
+          </UserContextProvider>
+        </PaperProvider>
+      </ParseContextProvider>
     </NavigationContainer>
 
   );

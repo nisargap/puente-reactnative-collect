@@ -54,11 +54,11 @@ const SignIn = ({ navigation }) => {
     user, onlineLogin, offlineLogin, isLoading, error
   } = useContext(UserContext);
 
-  useEffect(() => {
-    if (user?.id && user.isOnline === true) {
-      handleSignIn(user);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user?.id && user.isOnline === true) {
+  //     handleSignIn(user);
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     async function checkLanguage() {
