@@ -23,7 +23,7 @@ export default function App() {
     return null;
   }
   return (
-    <NavigationContainer independent>
+    <NavigationContainer>
       <ParseContextProvider>
         <PaperProvider theme={theme}>
           <UserContextProvider>
