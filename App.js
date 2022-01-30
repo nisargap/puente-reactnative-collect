@@ -10,9 +10,6 @@ import { UserContextProvider } from './context/auth.context';
 import { OfflineContextProvider } from './context/offline.context';
 import useCachedResources from './modules/cached-resources/useCachedResources';
 import { theme } from './modules/theme';
-import { initialize } from './services/parse/auth';
-
-// initialize();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -20,8 +17,6 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   }
-
-  useEffect(() => initialize());
 
   return (
     <NavigationContainer>

@@ -3,6 +3,7 @@ import { useEffect } from 'react/cjs/react.development';
 
 import { deleteData, getData, storeData } from '../modules/async-storage';
 import {
+  initialize,
   retrieveCurrentUserAsyncFunction,
   retrieveSignInFunction,
   retrieveSignOutFunction,
@@ -15,6 +16,8 @@ export const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+
+  useEffect(()=> initialize())
 
   useEffect(() => {
     setIsLoading(true);
