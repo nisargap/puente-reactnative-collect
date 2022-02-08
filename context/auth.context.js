@@ -1,5 +1,4 @@
-import React, { createContext, useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { createContext, useState,useEffect } from 'react';
 
 import { deleteData, getData, storeData } from '../modules/async-storage';
 import {
@@ -72,7 +71,6 @@ export const UserContextProvider = ({ children }) => {
   };
 
   /**
-   * NEED TO DO
    * @param {*} params
    * @returns User Object
    */

@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import { getData, storeData } from '../modules/async-storage';
 import { populateCache, residentQuery } from '../modules/cached-resources';

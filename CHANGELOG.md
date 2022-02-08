@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.2...v12.1.3) (2022-01-30)
+
+
+### Bug fixes
+
+* importing from wrong place :tired_face: ([19b8898](https://github.com/hopetambala/puente-reactnative-collect/commit/19b8898916aac9a0ef06b61cf7bb182fb4a6538d))
+
+### [12.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.0...v12.1.1) (2022-01-29)
+
+
+### New Features
+
+* add ability to store users credentials automatically to speed up entering into app ([a5e610e](https://github.com/hopetambala/puente-reactnative-collect/commit/a5e610e8ef947d0c235415e70b50a9b7694b1254))
+
+
+### Bug fixes
+
+* firstname and user properties being stored ([dc761b1](https://github.com/hopetambala/puente-reactnative-collect/commit/dc761b1436306262141645505e765b80b5285e4d))
+* offline data querying ([487de98](https://github.com/hopetambala/puente-reactnative-collect/commit/487de981b74fd4220851418f5818c0440fb98a3a))
+* offline data search ([ffa8cd9](https://github.com/hopetambala/puente-reactnative-collect/commit/ffa8cd965380e4b22820fa5ef5837a532af01ca8))
+
 ## [12.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.0.0...v12.1.0) (2022-01-19)
 
 
