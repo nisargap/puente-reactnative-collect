@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,
-    marginBottom: 10
+    marginBottom: 75
   },
   textInputContainer: {
     borderColor: theme.colors.primary,
