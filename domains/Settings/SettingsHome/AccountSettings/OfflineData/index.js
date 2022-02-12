@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import I18n from 'i18n-js';
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Keyboard,
   TouchableWithoutFeedback, View
@@ -10,6 +10,7 @@ import {
 import PaperButton from '../../../../../components/Button';
 import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
 import PopupSuccess from '../../../../../components/PopupSuccess';
+import { OfflineContext } from '../../../../../context/offline.context';
 import { deleteData, getData } from '../../../../../modules/async-storage';
 import { cacheResidentDataMulti } from '../../../../../modules/cached-resources';
 import { layout } from '../../../../../modules/theme';
@@ -19,10 +20,16 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
   const [inputs, setInputs] = useState({});
   const [cacheSuccess, setCacheSuccess] = useState(false);
   const [submittedForms, setSubmittedForms] = useState(0);
+  const { populateResidentDataCache, isLoading } = useContext(OfflineContext);
 
   useEffect(() => {
     setInputs(configArray);
   }, [configArray]);
+
+  const repopulateAllData = async () => populateResidentDataCache().then((records) => {
+    setSubmittedForms(records.length);
+    setCacheSuccess(true);
+  });
 
   return (
     <View>
@@ -39,6 +46,12 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
         >
           {(formikProps) => (
             <View style={layout.formContainer}>
+              <PaperButton
+                onPressEvent={repopulateAllData}
+                buttonText="Populate all ID Forms"
+                loading={!!isLoading}
+                style={{ backgroundColor: 'blue' }}
+              />
               {inputs.length && inputs.map((result) => (
                 <View key={result.formikKey}>
                   <PaperInputPicker
@@ -60,9 +73,7 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
                 style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' }}
               />
               <PaperButton
-                onPressEvent={() => {
-                  deleteData('residentData');
-                }}
+                onPressEvent={() => deleteData('residentData')}
                 buttonText="Clear Cached ID Forms"
                 icon="delete"
                 style={{ backgroundColor: 'red' }}

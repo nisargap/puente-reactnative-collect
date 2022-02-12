@@ -25,7 +25,7 @@ const FindResidents = ({
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
-      if (connected) fetchData(true, ''); 
+      if (connected) fetchData(true, '');
       if (!connected) fetchData(false, '');
     });
   }, [organization]);

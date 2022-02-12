@@ -5,7 +5,7 @@ import { layout, theme } from '../../modules/theme';
 
 export default function PaperButton({
   onPressEvent, buttonText,
-  mode, compact, icon, disabled,
+  mode, compact, icon, disabled, loading,
   style
 }) {
   return (
@@ -17,6 +17,7 @@ export default function PaperButton({
       style={[layout.button, style]}
       onPress={onPressEvent}
       compact={!!compact}
+      loading={!!loading}
     >
       {buttonText}
     </Button>
