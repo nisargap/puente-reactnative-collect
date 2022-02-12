@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.4...v12.1.5) (2022-02-12)
+
+### [12.1.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.3...v12.1.4) (2022-02-12)
+
+
+### Bug fixes
+
+* limit for number of forms submitted and autopopulate ([e34aefe](https://github.com/hopetambala/puente-reactnative-collect/commit/e34aefe1eddd5d8db4cc325fec95a3d56c6ee7b4))
+
 ### [12.1.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.2...v12.1.3) (2022-01-30)
 
 
