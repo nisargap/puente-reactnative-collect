@@ -1,6 +1,6 @@
 {
   "name": "puente-reactnative",
-  "version": "12.0.0",
+  "version": "12.1.5",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -15,7 +15,7 @@
     "testDebug": "jest -o --watch --coverage=false",
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "./node_modules/.bin/eslint '**/*.{js,jsx}' --fix",
-    "publish-prod": "eas build --platform all --profile=release",
+    "publish-prod": "eas build --platform all",
     "upload": "eas submit -p ios --latest && eas submit -p android --latest",
     "gh-prune": "git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done",
     "release-patch": "npx standard-version --release-as patch",
@@ -38,8 +38,8 @@
     "@expo/metro-config": "^0.1.64",
     "@expo/vector-icons": "^12.0.0",
     "@react-native-async-storage/async-storage": "~1.15.0",
-    "@react-native-masked-view/masked-view": "0.2.4",
     "@react-native-community/netinfo": "6.0.0",
+    "@react-native-masked-view/masked-view": "0.2.4",
     "@react-navigation/bottom-tabs": "5.11.11",
     "@react-navigation/native": "5.9.4",
     "@react-navigation/stack": "5.14.5",
@@ -71,7 +71,7 @@
     "react-native-emoji": "1.8.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-localize": "1.3.3",
-    "react-native-maps": "0.28.0",
+    "react-native-maps": "0.30.1",
     "react-native-pager-view": "5.0.12",
     "react-native-paper": "3.11.0",
     "react-native-reanimated": "~2.2.0",
@@ -79,6 +79,7 @@
     "react-native-screens": "~3.4.0",
     "react-native-svg": "12.1.1",
     "react-native-unimodules": "~0.14.5",
+    "react-native-uuid": "^2.0.1",
     "yup": "0.29.3"
   },
   "devDependencies": {

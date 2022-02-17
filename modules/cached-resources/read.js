@@ -1,54 +1,76 @@
+import _ from 'lodash';
+
 import retrievePuenteAutofillData from '../../services/aws';
-import { customMultiParamQueryService, customQueryService, residentIDQuery } from '../../services/parse/crud';
+import {
+  customMultiParamQueryService, customMultiValueArrayService, customQueryService, residentIDQuery
+} from '../../services/parse/crud';
 import getTasks from '../../services/tasky';
 import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
 
 async function residentQuery(queryParams) {
-  let records = await residentIDQuery(queryParams);
-  records = JSON.parse(JSON.stringify(records));
+  const records = await residentIDQuery(queryParams);
   return records;
 }
 
-async function cacheResidentData(queryParams) {
-  const records = await residentQuery(queryParams);
+async function cacheResidentDataMulti(queryParamsArray) {
+  let records = await customMultiValueArrayService(5000, 'SurveyData', 'communityname', queryParamsArray);
+  records = JSON.parse(JSON.stringify(records));
   if (records !== null && records !== undefined && records !== '') {
     storeData(records, 'residentData');
   }
 }
 
-async function cacheAutofillData(parameter) {
+async function cacheAutofillData(surveyingOrganization) {
   return new Promise((resolve, reject) => {
     checkOnlineStatus().then((connected) => {
       if (connected) {
-        retrievePuenteAutofillData('all').then((result) => {
+        retrievePuenteAutofillData('all').then(async (result) => {
           // cache organizations tied to all users
-          customQueryService(0, 500, 'User', 'adminVerified', true).then((users) => {
-            const orgsCapitalized = [];
-            const orgResults = [];
-            users.forEach((user) => {
-              const org = user.get('organization');
-              if (org !== null && org !== undefined && org !== '') {
-                const orgCapitalized = org.toUpperCase().trim() || '';
-                if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
-                  orgsCapitalized.push(orgCapitalized);
-                  orgResults.push(org);
+          customQueryService(0, 500, 'User', 'adminVerified', true).then(async (users) => {
+            const orgs = () => {
+              const orgsCapitalized = [];
+              const orgResults = [];
+              users.forEach((user) => {
+                const org = user.get('organization');
+                if (org !== null && org !== undefined && org !== '') {
+                  const orgCapitalized = org.toUpperCase().trim() || '';
+                  if (!orgsCapitalized.includes(orgCapitalized) && org !== '') {
+                    orgsCapitalized.push(orgCapitalized);
+                    orgResults.push(org);
+                  }
                 }
-              }
-            });
-            const autofillData = result;
-            autofillData.organization = orgResults;
+              });
+
+              return orgs;
+            };
+            /**
+             * @returns Unique list of communities entered by the users organization
+             */
+            const comms = async () => {
+              const records = await customQueryService(0, 10000, 'SurveyData', 'surveyingOrganization', surveyingOrganization);
+              const uniqueCommunities = _.uniq(_.map(JSON.parse(JSON.stringify(records)), 'communityname')).sort().filter(Boolean);
+              return uniqueCommunities;
+            };
+
+            const autofillData = result; // This result already has City, Communities stored
+
+            if (surveyingOrganization) autofillData.CommunitiesUserEntered = await comms();
+
+            autofillData.organization = orgs();
+
             storeData(autofillData, 'autofill_information');
-            resolve(autofillData[parameter]);
+
+            resolve(autofillData);
           }, () => {
             storeData(result, 'autofill_information');
-            resolve(result[parameter]);
+            resolve(result);
           });
         }, (error) => {
           reject(error);
         });
       } else {
-        resolve(getData('autofill_information')[parameter]);
+        resolve(getData('autofill_information'));
       }
     }, (error) => {
       reject(error);
@@ -167,7 +189,7 @@ export {
   assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
-  cacheResidentData,
+  cacheResidentDataMulti,
   customFormsQuery,
   getTasksAsync,
   residentQuery

@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -17,11 +17,9 @@ import * as yup from 'yup';
 import FormInput from '../../../components/FormikFields/FormInput';
 import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
 import TermsModal from '../../../components/TermsModal';
-import { populateCache } from '../../../modules/cached-resources';
+import { UserContext } from '../../../context/auth.context';
 import I18n from '../../../modules/i18n';
-// STYLING
 import { theme } from '../../../modules/theme';
-import { retrieveSignUpFunction } from '../../../services/parse/auth';
 
 const validationSchema = yup.object().shape({
   firstname: yup
@@ -61,6 +59,7 @@ export default function SignUp({ navigation }) {
   const [checked, setChecked] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const [scrollViewScroll, setScrollViewScroll] = React.useState();
+  const { register } = useContext(UserContext);
   const handleLogIn = () => {
     navigation.navigate('Sign In');
   };
@@ -91,11 +90,8 @@ export default function SignUp({ navigation }) {
                 } else if (values.password !== values.password2) {
                   alert(I18n.t('signUp.errorPassword')) // eslint-disable-line
                 } else {
-                  retrieveSignUpFunction(values)
-                    .then((user) => {
-                      populateCache(user);
-                      navigation.navigate('Root');
-                    }).catch((error) => {
+                  register(values)
+                    .then(() => navigation.navigate('Root')).catch((error) => {
                       // sign up failed alert user
                       console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
                       alert(I18n.t('signUp.usernameError')); // eslint-disable-line

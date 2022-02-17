@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.4...v12.1.5) (2022-02-12)
+
+### [12.1.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.3...v12.1.4) (2022-02-12)
+
+
+### Bug fixes
+
+* limit for number of forms submitted and autopopulate ([e34aefe](https://github.com/hopetambala/puente-reactnative-collect/commit/e34aefe1eddd5d8db4cc325fec95a3d56c6ee7b4))
+
+### [12.1.3](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.2...v12.1.3) (2022-01-30)
+
+
+### Bug fixes
+
+* importing from wrong place :tired_face: ([19b8898](https://github.com/hopetambala/puente-reactnative-collect/commit/19b8898916aac9a0ef06b61cf7bb182fb4a6538d))
+
+### [12.1.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.0...v12.1.1) (2022-01-29)
+
+
+### New Features
+
+* add ability to store users credentials automatically to speed up entering into app ([a5e610e](https://github.com/hopetambala/puente-reactnative-collect/commit/a5e610e8ef947d0c235415e70b50a9b7694b1254))
+
+
+### Bug fixes
+
+* firstname and user properties being stored ([dc761b1](https://github.com/hopetambala/puente-reactnative-collect/commit/dc761b1436306262141645505e765b80b5285e4d))
+* offline data querying ([487de98](https://github.com/hopetambala/puente-reactnative-collect/commit/487de981b74fd4220851418f5818c0440fb98a3a))
+* offline data search ([ffa8cd9](https://github.com/hopetambala/puente-reactnative-collect/commit/ffa8cd965380e4b22820fa5ef5837a532af01ca8))
+
+## [12.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.0.0...v12.1.0) (2022-01-19)
+
+
+### Bug fixes
+
+* autofill and offline query ([4cc430e](https://github.com/hopetambala/puente-reactnative-collect/commit/4cc430ec50527b889ff16a4e0ccc51afbcc07914))
+* textKeys for select/multiselet questions in loops ([0b88450](https://github.com/hopetambala/puente-reactnative-collect/commit/0b884500c5f1ecded62739da2ac2ab765235cc85))
+* upgrade to expo 42 ([d151bdb](https://github.com/hopetambala/puente-reactnative-collect/commit/d151bdbe90493e68a3dd42367770131c411b6c27))
+* workflow data ([a670db0](https://github.com/hopetambala/puente-reactnative-collect/commit/a670db00832d4a49addf693c89f09d0ef22d064d))
+
+
+### New Features
+
+* add custommultivalue service ([069a696](https://github.com/hopetambala/puente-reactnative-collect/commit/069a6961b51f068b499ba340e51a544782109050))
+* add signal strength to online status for android ([6dd56ab](https://github.com/hopetambala/puente-reactnative-collect/commit/6dd56abea7c484f15f468b58810e59ee75f038ff))
+* unique communities ([dfc4cb6](https://github.com/hopetambala/puente-reactnative-collect/commit/dfc4cb617c123f1e279f6b67b7d0f310eb20886f))
+
 ## [12.0.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v11.10.0...v12.0.0) (2021-12-13)
 
 

@@ -42,7 +42,7 @@ function retrievePuenteAutofillData(parameter) {
       return allData;
     })
     .catch((error) => {
-      console.log(error); // eslint-disable-line
+      console.log("autofill error",error); // eslint-disable-line
     });
 }
 

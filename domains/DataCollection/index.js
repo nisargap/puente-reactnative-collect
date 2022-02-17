@@ -1,6 +1,6 @@
 // import * as React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView, Platform,
@@ -19,10 +19,10 @@ import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
 import FindResidents from '../../components/FindResidents';
 import Header from '../../components/Header';
 import MapView from '../../components/MapView';
+import { UserContext } from '../../context/auth.context';
 import { getData } from '../../modules/async-storage';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';
-import { retrieveSignOutFunction } from '../../services/parse/auth';
 import SettingsView from '../Settings';
 import Assets from './Assets';
 import FormGallery from './FormGallery';
@@ -62,6 +62,10 @@ const DataCollection = ({ navigation }) => {
 
   const [surveyingOrganization, setSurveyingOrganization] = useState('');
   const [surveyingUser, setSurveyingUser] = useState();
+
+  const {
+    onLogout
+  } = useContext(UserContext);
 
   useFocusEffect(
     useCallback(() => {
@@ -114,7 +118,7 @@ const DataCollection = ({ navigation }) => {
     setView('Find Records');
   };
 
-  const logOut = () => retrieveSignOutFunction().then(() => navigation.navigate('Sign In'));
+  const logOut = () => onLogout().then(() => navigation.navigate('Sign In'));
 
   return (
     <View
@@ -141,6 +145,9 @@ const DataCollection = ({ navigation }) => {
               setView={setView}
               setSettings={setSettings}
               logOut={logOut}
+              surveyingOrganization={surveyingOrganization}
+              scrollViewScroll={scrollViewScroll}
+              setScrollViewScroll={setScrollViewScroll}
             />
           ) : (
             <View>
