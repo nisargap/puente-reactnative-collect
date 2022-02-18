@@ -20,6 +20,7 @@ import { layout, theme } from '../../../../modules/theme';
 import { isEmpty } from '../../../../modules/utils';
 import surveyingUserFailsafe from '../utils';
 import configArray from './config/config';
+import { retrievePuenteFormModifications } from "../../../../modules/cached-resources";
 
 const IdentificationForm = ({
   scrollViewScroll, setScrollViewScroll,
@@ -33,10 +34,44 @@ const IdentificationForm = ({
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
+  const [activeFields, setActiveFields] = useState({
+    "none_bi": true,
+    "fname": true,
+    "lname": true,
+    "nickname": true,
+    "dob": true,
+    "age": true,
+    "sex": true,
+    "telephoneNumber": true,
+    "marriageStatus": true,
+    "Occupation": true,
+    "Education Level": true,
+    "none_location": true,
+    "communityname": true,
+    "subcounty": true,
+    "city": true,
+    "Province": true,
+    "region": true,
+    "country": true,
+    "location": true,
+    "photoFile": true,
+    "none_household": true,
+    "geolocation_9b11": true
+  });
 
   useEffect(() => {
     setInputs(configArray);
   }, [setInputs, configArray]);
+
+  useEffect(() => {
+    retrievePuenteFormModifications(surveyingOrganization).then((forms) => {
+      forms.forEach((form) => {
+        if (form.name === "SurveyData") {
+          setActiveFields(form.activeFields);
+        }
+      })
+    })
+  }, [surveyingOrganization])
 
   return (
     <View>
@@ -107,14 +142,16 @@ const IdentificationForm = ({
             <View style={layout.formContainer}>
               {inputs.length && inputs.map((result) => (
                 <View key={result.formikKey}>
-                  <PaperInputPicker
-                    data={result}
-                    formikProps={formikProps}
-                    surveyingOrganization={surveyingOrganization}
-                    scrollViewScroll={scrollViewScroll}
-                    setScrollViewScroll={setScrollViewScroll}
-                    customForm={false}
-                  />
+                  {(activeFields[result.formikKey] === true) && (
+                    <PaperInputPicker
+                      data={result}
+                      formikProps={formikProps}
+                      surveyingOrganization={surveyingOrganization}
+                      scrollViewScroll={scrollViewScroll}
+                      setScrollViewScroll={setScrollViewScroll}
+                      customForm={false}
+                    />
+                  )}
                 </View>
               ))}
               <ErrorPicker
