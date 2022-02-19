@@ -6,7 +6,7 @@ function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
 }
 function residentIDQuery(params) {
-  const { parseParam } = params;
+  const { parseParam, limit } = params;
   function checkIfAlreadyExist(accumulator, currentVal) {
     return accumulator.some((item) => (item.get('fname') === currentVal.get('fname')
       && item.get('lname') === currentVal.get('lname')
@@ -23,6 +23,7 @@ function residentIDQuery(params) {
     query.descending('createdAt');
 
     query.equalTo('surveyingOrganization', parseParam);
+    query.limit(limit);
 
     query.find().then((records) => {
       const deDuplicatedRecords = records.reduce((accumulator, current) => {

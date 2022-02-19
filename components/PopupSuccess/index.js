@@ -33,7 +33,7 @@ const PopupSuccess = ({ success, setSuccess, submittedForms }) => {
         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
           {submittedForms}
           {' '}
-          Forms Successfully Submitted!
+          Records Successfully Stored!
         </Text>
       </Snackbar>
     </View>
