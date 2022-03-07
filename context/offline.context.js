@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {
+  createContext, useContext, useEffect, useState
+} from 'react';
 
 import { getData, storeData } from '../modules/async-storage';
 import { populateCache, residentQuery } from '../modules/cached-resources';
@@ -10,6 +12,11 @@ export const OfflineContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [residents, setResidents] = useState(null);
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const cache = async () => populateResidentDataCache();
+    if (user) cache();
+  }, [user]);
 
   const populateResidentDataCache = async () => residentOnlineData().then((records) => {
     populateCache(user);
