@@ -9,16 +9,8 @@ import { getData, storeData } from '../async-storage';
 import checkOnlineStatus from '../offline';
 
 async function residentQuery(queryParams) {
-  let records = await residentIDQuery(queryParams);
-  records = JSON.parse(JSON.stringify(records));
+  const records = await residentIDQuery(queryParams);
   return records;
-}
-
-async function cacheResidentData(queryParams) {
-  const records = await residentQuery(queryParams);
-  if (records !== null && records !== undefined && records !== '') {
-    storeData(records, 'residentData');
-  }
 }
 
 async function cacheResidentDataMulti(queryParamsArray) {
@@ -197,7 +189,6 @@ export {
   assetDataQuery,
   assetFormsQuery,
   cacheAutofillData,
-  cacheResidentData,
   cacheResidentDataMulti,
   customFormsQuery,
   getTasksAsync,
