@@ -190,19 +190,18 @@ function retrievePuenteFormModifications(surveyingOrganization) {
     checkOnlineStatus().then((online) => {
       if (online) {
         customQueryService(0, 10000, 'PuenteFormModifications', 'organizations', surveyingOrganization).then((async (forms) => {
-          console.log("Mod forms",forms)
-          await storeData(forms, 'puenteFormModifications')
-          resolve(JSON.parse(JSON.stringify(forms)))
-        }))
+          await storeData(forms, 'puenteFormModifications');
+          resolve(JSON.parse(JSON.stringify(forms)));
+        }));
       } else {
         getData('puenteFormModifications').then((forms) => {
           resolve(forms);
         }, (error) => {
           reject(error);
-        })
+        });
       }
-    })
-  })
+    });
+  });
 }
 
 export {
