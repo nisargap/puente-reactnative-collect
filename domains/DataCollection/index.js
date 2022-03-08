@@ -63,9 +63,7 @@ const DataCollection = ({ navigation }) => {
   const [surveyingOrganization, setSurveyingOrganization] = useState('');
   const [surveyingUser, setSurveyingUser] = useState();
 
-  const {
-    onLogout
-  } = useContext(UserContext);
+  const { onLogout } = useContext(UserContext);
 
   useFocusEffect(
     useCallback(() => {
