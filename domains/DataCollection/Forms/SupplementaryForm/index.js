@@ -22,6 +22,7 @@ import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';
 import { addSelectTextInputs, cleanLoopSubmissions, vitalsBloodPressue } from './utils';
+import { retrievePuenteFormModifications } from '../../../../modules/cached-resources';
 
 const SupplementaryForm = ({
   navigation, selectedForm, setSelectedForm, surveyee, surveyingUser, surveyingOrganization,
@@ -33,23 +34,50 @@ const SupplementaryForm = ({
   const [submitting, setSubmitting] = useState(false);
   const [loopsAdded, setLoopsAdded] = useState(0);
   const [submissionError, setSubmissionError] = useState(false);
+  const [activeFields, setActiveFields] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const toRoot = () => {
     navigation.navigate('Root');
     setSelectedForm('');
   };
 
+  const setActiveFieldsForSupForm = (formName) => {
+    retrievePuenteFormModifications(surveyingOrganization).then((forms) => {
+      let foundForm = false;
+      forms.forEach((form) => {
+        if (form.name === formName) {
+          setActiveFields(form.activeFields);
+          foundForm = true;
+          setLoading(false);
+        }
+      })
+      if (foundForm === false) {
+        const tempActiveFields = {}
+        config.fields.forEach((field) => {
+          console.log(field)
+          tempActiveFields[field.formikKey] = true;
+        })
+        setActiveFields(tempActiveFields)
+        setLoading(false);
+      }
+    })
+  }
+
   useEffect(() => {
     if (selectedForm === 'env') {
       setConfig(envConfig);
+      setActiveFieldsForSupForm("EnvironmentalHealth");
       setValidationSchema(yupValidationPicker(envConfig.fields));
     }
     if (selectedForm === 'med-eval') {
       setConfig(medConfig);
+      setActiveFieldsForSupForm("MedicalEvaluation")
       setValidationSchema(yupValidationPicker(medConfig.fields));
     }
     if (selectedForm === 'vitals') {
       setConfig(vitalsConfig);
+      setActiveFieldsForSupForm("Vitals"); 
     }
     if (selectedForm === 'custom') {
       setConfig(customForm);
@@ -57,6 +85,13 @@ const SupplementaryForm = ({
   }, [selectedForm, config]);
 
   return (
+    <View>
+      {loading === true ? (
+        <ActivityIndicator
+        size="large"
+        color={theme.colors.primary}
+        />
+      ) : (
     <Formik
       initialValues={{}}
       onSubmit={async (values) => {
@@ -132,6 +167,7 @@ const SupplementaryForm = ({
         <View style={layout.formContainer}>
           {config.fields && config.fields.map((result) => (
             <View key={result.formikKey}>
+              {(activeFields[result.formikKey] === true) && (
               <PaperInputPicker
                 data={result}
                 formikProps={formikProps}
@@ -140,6 +176,7 @@ const SupplementaryForm = ({
                 loopsAdded={loopsAdded}
                 setLoopsAdded={setLoopsAdded}
               />
+              )}
             </View>
           ))}
 
@@ -171,6 +208,8 @@ const SupplementaryForm = ({
         </View>
       )}
     </Formik>
+      )}
+      </View>
   );
 };
 

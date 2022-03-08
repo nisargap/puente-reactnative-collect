@@ -34,30 +34,8 @@ const IdentificationForm = ({
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
-  const [activeFields, setActiveFields] = useState({
-    "none_bi": true,
-    "fname": true,
-    "lname": true,
-    "nickname": true,
-    "dob": true,
-    "age": true,
-    "sex": true,
-    "telephoneNumber": true,
-    "marriageStatus": true,
-    "Occupation": true,
-    "Education Level": true,
-    "none_location": true,
-    "communityname": true,
-    "subcounty": true,
-    "city": true,
-    "Province": true,
-    "region": true,
-    "country": true,
-    "location": true,
-    "photoFile": true,
-    "none_household": true,
-    "geolocation_9b11": true
-  });
+  const [activeFields, setActiveFields] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setInputs(configArray);
@@ -65,17 +43,35 @@ const IdentificationForm = ({
 
   useEffect(() => {
     retrievePuenteFormModifications(surveyingOrganization).then((forms) => {
+      let foundForm = false;
       forms.forEach((form) => {
         if (form.name === "SurveyData") {
           setActiveFields(form.activeFields);
+          foundForm = true;
+          setLoading(false);
         }
       })
+      if (foundForm === false) {
+        const tempActiveFields = {}
+        inputs.forEach((input) => {
+          tempActiveFields[input.formikKey] = true
+        })
+        setActiveFields(tempActiveFields)
+        setLoading(false);
+      }
     })
   }, [surveyingOrganization])
 
+
   return (
     <View>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      {loading === true ? (
+        <ActivityIndicator
+        size="large"
+        color={theme.colors.primary}
+        />
+      ) : (
+<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Formik
           initialValues={{}}
           onSubmit={async (values,) => {
@@ -180,6 +176,7 @@ const IdentificationForm = ({
           )}
         </Formik>
       </TouchableWithoutFeedback>
+      )}
     </View>
   );
 };
