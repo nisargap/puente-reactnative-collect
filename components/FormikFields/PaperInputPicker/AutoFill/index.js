@@ -88,6 +88,7 @@ export default class AutoFill extends Component {
                 formikProps.setFieldValue(formikKey, text);
               }}
               placeholder={placeholder}
+              placeholderTextColor="black"
               listStyle={styles.listContainer}
               keyExtractor={(item,) => item.key}
               onStartShouldSetResponderCapture={() => {
@@ -101,7 +102,9 @@ export default class AutoFill extends Component {
               }}
               renderItem={({ item }) => (
                 // you can change the view you want to show in suggestion from here
+
                 <TouchableOpacity
+                  style={styles.itemText}
                   key={`${item}`}
                   onPress={() => {
                     this.setState({ query: item });
@@ -134,6 +137,7 @@ export default class AutoFill extends Component {
                 formikProps.setFieldValue(formikKey, text);
               }}
               placeholder={placeholder}
+              placeholderTextColor="black"
               listStyle={styles.listContainer}
               keyExtractor={(item,) => item.key}
               renderItem={({ item }) => (
@@ -164,20 +168,27 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,
-    marginBottom: 75,
+    marginBottom: 75
   },
   textInputContainer: {
     borderColor: theme.colors.primary,
     borderWidth: 1,
+    borderRadius: 4,
+    paddingBottom: 8,
+    paddingTop: 8,
+    paddingLeft: 10,
+    backgroundColor: '#FFFFFF'
   },
   itemText: {
     fontSize: 15,
-    paddingTop: 5,
-    paddingBottom: 5,
     margin: 2,
-    flex: 1
+    flex: 1,
+    padding: 5,
+    color: '#000000'
   },
   listContainer: {
     height: 80,
+    borderBottomRightRadius: 4,
+    borderBottomLeftRadius: 4
   }
 });
