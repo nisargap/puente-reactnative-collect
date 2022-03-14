@@ -185,25 +185,6 @@ function assetDataQuery(surveyingOrganization) {
   });
 }
 
-function retrievePuenteFormModifications(surveyingOrganization) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((online) => {
-      if (online) {
-        customQueryService(0, 10000, 'PuenteFormModifications', 'organizations', surveyingOrganization).then((async (forms) => {
-          await storeData(forms, 'puenteFormModifications');
-          resolve(JSON.parse(JSON.stringify(forms)));
-        }));
-      } else {
-        getData('puenteFormModifications').then((forms) => {
-          resolve(forms);
-        }, (error) => {
-          reject(error);
-        });
-      }
-    });
-  });
-}
-
 export {
   assetDataQuery,
   assetFormsQuery,
@@ -211,6 +192,5 @@ export {
   cacheResidentDataMulti,
   customFormsQuery,
   getTasksAsync,
-  residentQuery,
-  retrievePuenteFormModifications
+  residentQuery
 };
