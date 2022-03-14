@@ -14,7 +14,7 @@ import PaperInputPicker from '../../../../components/FormikFields/PaperInputPick
 import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
 import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
-import { postIdentificationForm } from '../../../../modules/cached-resources';
+import { postIdentificationForm, retrievePuenteFormModifications } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
 import { isEmpty } from '../../../../modules/utils';
@@ -33,116 +33,148 @@ const IdentificationForm = ({
   const [validationSchema, setValidationSchema] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
+  const [activeFields, setActiveFields] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setInputs(configArray);
   }, [setInputs, configArray]);
 
+  useEffect(() => {
+    retrievePuenteFormModifications(surveyingOrganization).then((forms) => {
+      let foundForm = false;
+      forms.forEach((form) => {
+        if (form.name === 'SurveyData') {
+          setActiveFields(form.activeFields);
+          foundForm = true;
+          setLoading(false);
+        }
+      });
+      if (foundForm === false) {
+        const tempActiveFields = {};
+        inputs.forEach((input) => {
+          tempActiveFields[input.formikKey] = true;
+        });
+        setActiveFields(tempActiveFields);
+        setLoading(false);
+      }
+    });
+  }, [surveyingOrganization]);
+
   return (
     <View>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Formik
-          initialValues={{}}
-          onSubmit={async (values,) => {
-            setSubmitting(true);
-            const { photoFile } = values;
+      {loading === true ? (
+        <ActivityIndicator
+          size="large"
+          color={theme.colors.primary}
+        />
+      ) : (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <Formik
+            initialValues={{}}
+            onSubmit={async (values,) => {
+              setSubmitting(true);
+              const { photoFile } = values;
 
-            const formObject = values;
-            const user = await getData('currentUser');
+              const formObject = values;
+              const user = await getData('currentUser');
 
-            formObject.surveyingOrganization = surveyingOrganization || user.organization;
-            formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-            formObject.appVersion = await getData('appVersion') || '';
-            formObject.phoneOS = Platform.OS || '';
+              formObject.surveyingOrganization = surveyingOrganization || user.organization;
+              formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
+              formObject.appVersion = await getData('appVersion') || '';
+              formObject.phoneOS = Platform.OS || '';
 
-            formObject.latitude = values.location?.latitude || 0;
-            formObject.longitude = values.location?.longitude || 0;
-            formObject.altitude = values.location?.altitude || 0;
+              formObject.latitude = values.location?.latitude || 0;
+              formObject.longitude = values.location?.longitude || 0;
+              formObject.altitude = values.location?.altitude || 0;
 
-            formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
+              formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            formObject.searchIndex = [
-              values.fname,
-              values.lname,
-              values.nickname,
-              values.communityname
-            ]
-              .filter((result) => result)
-              .map((result) => result.toLowerCase().trim());
+              formObject.searchIndex = [
+                values.fname,
+                values.lname,
+                values.nickname,
+                values.communityname
+              ]
+                .filter((result) => result)
+                .map((result) => result.toLowerCase().trim());
 
-            formObject.fullTextSearchIndex = formObject.searchIndex.join(' ');
+              formObject.fullTextSearchIndex = formObject.searchIndex.join(' ');
 
-            const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
-            valuesToPrune.forEach((value) => {
-              delete formObject[value];
-            });
+              const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
+              valuesToPrune.forEach((value) => {
+                delete formObject[value];
+              });
 
-            const submitAction = () => {
-              setTimeout(() => {
-                setSelectedForm('');
+              const submitAction = () => {
+                setTimeout(() => {
+                  setSelectedForm('');
+                  setSubmitting(false);
+                }, 1000);
+              };
+              const postParams = {
+                parseClass: 'SurveyData',
+                parseUser: user.objectId,
+                photoFile,
+                localObject: formObject
+              };
+              postIdentificationForm(postParams).then((surveyee) => {
+                setSurveyee(surveyee);
+                submitAction();
+              }, () => {
+                // perhaps an alert to let the user know there was an error
                 setSubmitting(false);
-              }, 1000);
-            };
-            const postParams = {
-              parseClass: 'SurveyData',
-              parseUser: user.objectId,
-              photoFile,
-              localObject: formObject
-            };
-            postIdentificationForm(postParams).then((surveyee) => {
-              setSurveyee(surveyee);
-              submitAction();
-            }, () => {
-              // perhaps an alert to let the user know there was an error
-              setSubmitting(false);
-              setSubmissionError(true);
-            });
-          }}
-          validationSchema={validationSchema}
+                setSubmissionError(true);
+              });
+            }}
+            validationSchema={validationSchema}
           // only validate on submit, errors persist after fixing
-          validateOnBlur={false}
-          validateOnChange={false}
-        >
-          {(formikProps) => (
-            <View style={layout.formContainer}>
-              {inputs.length && inputs.map((result) => (
-                <View key={result.formikKey}>
-                  <PaperInputPicker
-                    data={result}
-                    formikProps={formikProps}
-                    surveyingOrganization={surveyingOrganization}
-                    scrollViewScroll={scrollViewScroll}
-                    setScrollViewScroll={setScrollViewScroll}
-                    customForm={false}
+            validateOnBlur={false}
+            validateOnChange={false}
+          >
+            {(formikProps) => (
+              <View style={layout.formContainer}>
+                {inputs.length && inputs.map((result) => (
+                  <View key={result.formikKey}>
+                    {(activeFields[result.formikKey] === true) && (
+                    <PaperInputPicker
+                      data={result}
+                      formikProps={formikProps}
+                      surveyingOrganization={surveyingOrganization}
+                      scrollViewScroll={scrollViewScroll}
+                      setScrollViewScroll={setScrollViewScroll}
+                      customForm={false}
+                    />
+                    )}
+                  </View>
+                ))}
+                <ErrorPicker
+                  formikProps={formikProps}
+                  inputs={inputs}
+                />
+                {submitting ? (
+                  <ActivityIndicator
+                    size="large"
+                    color={theme.colors.primary}
                   />
-                </View>
-              ))}
-              <ErrorPicker
-                formikProps={formikProps}
-                inputs={inputs}
-              />
-              {submitting ? (
-                <ActivityIndicator
-                  size="large"
-                  color={theme.colors.primary}
+                ) : (
+                  <PaperButton
+                    onPressEvent={formikProps.handleSubmit}
+                    buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
+                    icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
+                    style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
+                  />
+                )}
+                <PopupError
+                  error={submissionError}
+                  setError={setSubmissionError}
+                  errorMessage="submissionError.error"
                 />
-              ) : (
-                <PaperButton
-                  onPressEvent={formikProps.handleSubmit}
-                  buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
-                  icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
-                  style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
-                />
-              )}
-              <PopupError
-                error={submissionError}
-                setError={setSubmissionError}
-                errorMessage="submissionError.error"
-              />
-            </View>
-          )}
-        </Formik>
-      </TouchableWithoutFeedback>
+              </View>
+            )}
+          </Formik>
+        </TouchableWithoutFeedback>
+      )}
     </View>
   );
 };
