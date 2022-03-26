@@ -30,8 +30,10 @@ const FormGallery = ({
 
   useEffect(() => {
     getData('customForms').then((forms) => {
-      setCustomForms(forms);
-      filterWorkflows(forms);
+      if (forms) {
+        setCustomForms(forms);
+        filterWorkflows(forms);
+      }
     });
   }, [customForms]);
 
@@ -54,12 +56,9 @@ const FormGallery = ({
         });
       }
     });
-    // console.log(tableDataByCategory)
-    // setPuenteData(tableDataByCategory.Puente);
     setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
     delete tableDataByCategory['No Workflow Assigned'];
     delete tableDataByCategory.Puente;
-    // setWorkflows(Object.keys(tableDataByCategory));
     setWorkflowData(tableDataByCategory);
   };
 
@@ -141,7 +140,7 @@ const FormGallery = ({
           />
         </View>
       </View>
-      {customForms.length > 0 && (
+      {customForms && (
         <FormsHorizontalView
           forms={customForms}
           navigateToCustomForm={navigateToCustomForm}
