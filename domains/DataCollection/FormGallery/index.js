@@ -30,7 +30,7 @@ const FormGallery = ({
 
   useEffect(() => {
     getData('customForms').then((forms) => {
-      if(forms){
+      if (forms) {
         setCustomForms(forms);
         filterWorkflows(forms);
       }
