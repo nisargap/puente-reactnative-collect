@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.6](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.5...v12.1.6) (2022-03-26)
+
+
+### Bug fixes
+
+* add borderRadius to Autofill and make text black ([8532701](https://github.com/hopetambala/puente-reactnative-collect/commit/85327017907f6f09a29b892ffe18cb5d476dc609))
+* autofill space ([6995b62](https://github.com/hopetambala/puente-reactnative-collect/commit/6995b62929c5bab692a3559e7035dd4787d83921))
+
+
+### New Features
+
+* add cache populating when user exists ([d149216](https://github.com/hopetambala/puente-reactnative-collect/commit/d1492166026b07658a5f2e870b6eea29a4613579))
+* initial setup to deactivate surveyData form ([2f7e7f8](https://github.com/hopetambala/puente-reactnative-collect/commit/2f7e7f8440cf1bc01aedc7827018f7d873493379))
+* **puente-forms:** add disabled inputs for sup forms ([cedad83](https://github.com/hopetambala/puente-reactnative-collect/commit/cedad83b5d7477063fd6b3513c18e491fd8c5b81))
+
 ### [12.1.5](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.4...v12.1.5) (2022-02-12)
 
 ### [12.1.4](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.3...v12.1.4) (2022-02-12)
