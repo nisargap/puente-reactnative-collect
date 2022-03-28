@@ -58,8 +58,16 @@ const IdentificationForm = ({
         setActiveFields(tempActiveFields);
         setLoading(false);
       }
+    }, () => {
+      // error retrieving form from server
+      const tempActiveFields = {};
+      inputs.forEach((input) => {
+        tempActiveFields[input.formikKey] = true;
+      });
+      setActiveFields(tempActiveFields);
+      setLoading(false);
     });
-  }, [surveyingOrganization]);
+  }, [surveyingOrganization, inputs, setActiveFields, setLoading]);
 
   return (
     <View>
@@ -122,7 +130,7 @@ const IdentificationForm = ({
                 setSurveyee(surveyee);
                 submitAction();
               }, () => {
-                // perhaps an alert to let the user know there was an error
+              // perhaps an alert to let the user know there was an error
                 setSubmitting(false);
                 setSubmissionError(true);
               });

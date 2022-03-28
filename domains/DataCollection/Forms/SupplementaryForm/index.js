@@ -59,6 +59,13 @@ const SupplementaryForm = ({
         setActiveFields(tempActiveFields);
         setLoading(false);
       }
+    }, () => {
+      const tempActiveFields = {};
+      config.fields.forEach((field) => {
+        tempActiveFields[field.formikKey] = true;
+      });
+      setActiveFields(tempActiveFields);
+      setLoading(false);
     });
   };
 
@@ -80,7 +87,7 @@ const SupplementaryForm = ({
     if (selectedForm === 'custom') {
       setConfig(customForm);
     }
-  }, [selectedForm, config]);
+  }, [selectedForm, config, setActiveFieldsForSupForm, setValidationSchema, setConfig]);
 
   return (
     <View>

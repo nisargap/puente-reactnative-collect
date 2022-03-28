@@ -200,6 +200,8 @@ function retrievePuenteFormModifications(surveyingOrganization) {
           reject(error);
         });
       }
+    }, (error) => {
+      reject(error);
     });
   });
 }
