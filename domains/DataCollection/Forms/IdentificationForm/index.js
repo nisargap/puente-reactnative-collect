@@ -58,8 +58,16 @@ const IdentificationForm = ({
         setActiveFields(tempActiveFields);
         setLoading(false);
       }
+    }, (error) => {
+      // error retrieving form from server
+      const tempActiveFields = {};
+      inputs.forEach((input) => {
+        tempActiveFields[input.formikKey] = true;
+      });
+      setActiveFields(tempActiveFields);
+      setLoading(false);
     });
-  }, [surveyingOrganization]);
+  }, [surveyingOrganization, inputs]);
 
   return (
     <View>

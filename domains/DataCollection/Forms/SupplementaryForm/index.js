@@ -59,6 +59,13 @@ const SupplementaryForm = ({
         setActiveFields(tempActiveFields);
         setLoading(false);
       }
+    }, () => {
+      const tempActiveFields = {};
+      config.fields.forEach((field) => {
+        tempActiveFields[field.formikKey] = true;
+      });
+      setActiveFields(tempActiveFields);
+      setLoading(false);
     });
   };
 
