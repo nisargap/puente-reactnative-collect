@@ -15,6 +15,7 @@ import {
   customFormsQuery,
   getTasksAsync,
   residentQuery,
+  retrievePuenteFormModifications,
 } from './read';
 
 export {
@@ -31,5 +32,6 @@ export {
   postIdentificationForm,
   postSupplementaryAssetForm,
   postSupplementaryForm,
-  residentQuery
+  residentQuery,
+  retrievePuenteFormModifications
 };

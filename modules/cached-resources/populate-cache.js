@@ -2,7 +2,8 @@ import Constants from 'expo-constants';
 
 import { getData, storeData } from '../async-storage';
 import {
-  assetDataQuery, assetFormsQuery, cacheAutofillData, customFormsQuery
+  assetDataQuery, assetFormsQuery, cacheAutofillData, customFormsQuery,
+  retrievePuenteFormModifications
 } from './read';
 
 const storeAppVersion = async () => {
@@ -21,6 +22,7 @@ const populateCache = async (user) => {
     cacheAutofillData(enteredUsrOrg),
     customFormsQuery(enteredUsrOrg),
     storeAppVersion(),
+    retrievePuenteFormModifications(),
     assetDataQuery(enteredUsrOrg).then(() => assetFormsQuery(enteredUsrOrg))
   ]);
 };
