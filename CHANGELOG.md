@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.2.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.2.0...v12.2.1) (2022-03-30)
+
+
+### Bug fixes
+
+* custom forms not loading in form gallery ([68f1991](https://github.com/hopetambala/puente-reactnative-collect/commit/68f19912d3b0740a1b0ee7bcac64f29930fdbd1c))
+
 ## [12.2.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.6...v12.2.0) (2022-03-28)
 
 ### [12.1.6](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.1.5...v12.1.6) (2022-03-26)
