@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.3.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.3.0...v12.3.1) (2022-04-03)
+
+
+### Bug fixes
+
+* Ability to login and logout offline ([ffd54d4](https://github.com/hopetambala/puente-reactnative-collect/commit/ffd54d40bf0cad8813fd0359bf244cc0524ff93a))
+
 ## [12.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.2.1...v12.3.0) (2022-04-03)
 
 
