@@ -454,6 +454,7 @@
     "volunteerSince": "Volunteer Since",
     "surveysCollected": "Surveys Collected",
     "submitOffline": "Submit Offline Forms",
+    "populateOffline": "Populate Resident's Cache",
     "settingsPage": "Settings Page",
     "failedAttempt": "Failed Attempt Submitting Offline Forms.",
     "tryAgain": "Please ensure that you are connected to the internet and try again.",
