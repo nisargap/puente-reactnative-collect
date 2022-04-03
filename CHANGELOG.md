@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.2.1...v12.3.0) (2022-04-03)
+
+
+### Bug fixes
+
+* Issue where the app wasn't able to be navigated due to blocked resources ([59ac648](https://github.com/hopetambala/puente-reactnative-collect/commit/59ac6489b6c4488e9b2fd9b6018049aa59df6719))
+
+
+### New Features
+
+* Add ability to populate the resident's cache from the header ([1c70680](https://github.com/hopetambala/puente-reactnative-collect/commit/1c70680ce6c06fc830381d72bc985fbd65cceaf9))
+
 ### [12.2.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.2.0...v12.2.1) (2022-03-30)
 
 
