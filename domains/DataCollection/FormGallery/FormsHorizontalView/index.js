@@ -24,7 +24,7 @@ const FormsHorizontalView = ({
     <ScrollView horizontal>
       {forms.map((form) => (
         <Card
-          key={() => uuid.v4() || form.objectId}
+          key={() => uuid.v4()}
           style={layout.cardSmallStyle}
           onPress={() => {
             navigateToCustomForm(form);
