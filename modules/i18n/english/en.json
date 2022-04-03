@@ -15,7 +15,8 @@
     "success": "Success!",
     "ok": "Ok",
     "emptyForm": "Empty Form",
-    "back": "Back"
+    "back": "Back",
+    "pleaseTryAgain": "Please, try again"
   },
   "signUp": {
     "firstName": "First Name",

@@ -15,7 +15,8 @@
     "success":"¡Éxito!",
     "ok": "OK",
     "emptyForm": "Forma vacía",
-    "back": "Regresa"
+    "back": "Regresa",
+    "pleaseTryAgain": "Inténtalo de nuevo"
   },
   "signUp": {
     "firstName": "Nombre de verdadero",

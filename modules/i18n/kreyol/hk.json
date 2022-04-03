@@ -15,7 +15,8 @@
     "success": "Siksè!",	
     "ok": "Ok",	
     "emptyForm": "Vide Fòm",
-    "back":"Tounen"
+    "back":"Tounen",
+    "pleaseTryAgain": "Tanpri eseye ankò"
   },
   "signUp": {
     "firstName": "Non",
