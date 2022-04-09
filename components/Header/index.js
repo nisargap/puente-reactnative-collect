@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { Spinner } from 'native-base';
+import React, { useContext, useState } from 'react';
 import { Platform, View } from 'react-native';
 import Emoji from 'react-native-emoji';
 import {
@@ -6,6 +7,7 @@ import {
   Headline, IconButton, Text,
 } from 'react-native-paper';
 
+import { OfflineContext } from '../../context/offline.context';
 import surveyingUserFailsafe from '../../domains/DataCollection/Forms/utils';
 import { deleteData, getData } from '../../modules/async-storage';
 import handleParseError from '../../modules/cached-resources/error-handling';
@@ -27,6 +29,7 @@ const Header = ({
   const [offlineFormCount, setOfflineFormCount] = useState(0);
   const [submission, setSubmission] = useState(null);
   const [showCounts, setShowCounts] = useState(false);
+  const { populateResidentDataCache, isLoading: isOfflineLoading } = useContext(OfflineContext);
 
   const volunteerLength = (object) => {
     const date = new Date(object.createdAt);
@@ -162,6 +165,12 @@ const Header = ({
     });
   };
 
+  const cacheOfflineData = async () => {
+    checkOnlineStatus().then(async (connected) => {
+      if (connected) await populateResidentDataCache();
+    });
+  };
+
   const navToSettings = () => {
     setDrawerOpen(false);
     setSettings(true);
@@ -208,6 +217,11 @@ const Header = ({
                   </Button>
                 ) : (
                   <Button disabled>{I18n.t('header.submitOffline')}</Button>
+                )}
+                {isOfflineLoading ? (
+                  <Spinner color="blue" />
+                ) : (
+                  <Button onPress={cacheOfflineData}>{I18n.t('header.populateOffline')}</Button>
                 )}
                 {submission === false && (
                   <View>

@@ -71,10 +71,12 @@ const SignIn = ({ navigation }) => {
     checkLanguage();
   }, []);
 
-  const handleFailedAttempt = () => {
+  const handleFailedAttempt = (err) => {
+    const translatedError = I18n.t(error) || err || error || I18n.t('global.pleaseTryAgain');
+
     Alert.alert(
       I18n.t('signIn.unableLogin'),
-      `${error}`, [
+      translatedError, [
         { text: 'OK' }
       ],
       { cancelable: true }
@@ -108,18 +110,20 @@ const SignIn = ({ navigation }) => {
     deleteData('currentUser');
   };
 
-  const signin = async (connected, enteredValues, actions) => {
-    if (connected) {
+  const signin = async (enteredValues, actions) => {
+    const connected = await checkOnlineStatus();
+
+    if (connected === true) {
       return onlineLogin(enteredValues).then((status) => {
         if (status) {
           return handleSignIn(enteredValues, actions.resetForm)
-            .catch(() => handleFailedAttempt());
+            .catch((err) => handleFailedAttempt(err));
         }
         return handleFailedAttempt();
       });
     }
-    const offlineStatus = offlineLogin();
-    if (!offlineStatus) return handleFailedAttempt();
+    const offlineStatus = offlineLogin(enteredValues);
+    if (offlineStatus === false) return handleFailedAttempt('Unable to login offline, please check your credentials');
     return handleSignIn(enteredValues, actions.resetForm);
   };
 
@@ -137,9 +141,7 @@ const SignIn = ({ navigation }) => {
             <Formik
               initialValues={{ username: '', password: '' }}
               onSubmit={async (values, actions) => {
-                await checkOnlineStatus().then((connected) => {
-                  signin(connected, values, actions);
-                });
+                await signin(values, actions);
                 setTimeout(() => {
                 }, 3000);
               }}
