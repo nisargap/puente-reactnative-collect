@@ -17,12 +17,7 @@ const Maps = ({ organization }) => {
       await getData('assetMapRegion').then((data) => {
         if (isSubscribed) {
           if (!data) {
-            setRegion({
-              latitude: 18.4861,
-              longitude: -69.9312,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            });
+            handleLocation();
           } else {
             setRegion(data);
           }

@@ -20,12 +20,7 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
       await getData('assetMapRegion').then((data) => {
         if (isSubscribed) {
           if (!data) {
-            setRegion({
-              latitude: 18.4861,
-              longitude: -69.9312,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            });
+            handleLocation();
           } else {
             setRegion(data);
           }
@@ -91,7 +86,9 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
                 coordinate={marker.location}
                 title={`${marker.name || ''}`}
                 // description={`Collector: ${marker.surveyingOr}`}
-                onPress={() => setSelectedMarker(marker)}
+                onPress={() => {setSelectedMarker(marker)
+                                console.log('hooho')
+                }}
               />
             )
           ))}
