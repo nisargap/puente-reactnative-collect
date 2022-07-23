@@ -82,7 +82,7 @@ export default function SignUp({ navigation }) {
           keyboardShouldPersistTaps="never"
           scrollEnabled={scrollViewScroll}
         >
-          <SafeAreaView style={{ marginTop: 50, marginBottom:150 }}>
+          <SafeAreaView style={{ marginTop: 50, marginBottom: 150 }}>
             <Formik
               initialValues={{
                 firstname: '', lastname: '', email: '', phonenumber: '', password: '', password2: '', organization: ''
