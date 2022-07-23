@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import {
   Platform, StatusBar, StyleSheet, View
@@ -13,7 +13,7 @@ import { theme } from '../../modules/theme';
 import BottomTabNavigator from './BottomTabNavigator.';
 import LinkingConfiguration from './LinkingConfiguration';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const { background } = theme.colors;
 
