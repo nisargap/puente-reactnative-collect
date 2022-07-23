@@ -34,23 +34,26 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
   }, []);
 
   const [region, setRegion] = useState();
+  const [delta, setDelta] = useState();
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState();
+
+  const mapView = React.createRef();
 
   const handleLocation = async () => {
     setLoading(true);
     await getLocation().then((location) => {
       const { latitude, longitude } = location.coords;
       setRegion({
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.0522,
+        longitudeDelta: 0.0321,
         latitude,
         longitude,
       });
       storeData({
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.0522,
+        longitudeDelta: 0.0321,
         latitude,
         longitude,
       }, 'assetMapRegion');
@@ -72,12 +75,34 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
     });
   };
 
+  onRegionChange = (reg) => {
+    const { latitudeDelta, longitudeDelta } = reg;
+    setDelta({ latitudeDelta, longitudeDelta });
+  };
+
+  const setView = (marker) => {
+    const { latitude, longitude } = marker;
+    const { latitudeDelta, longitudeDelta } = delta;
+
+    const reg = {
+      latitude,
+      longitude,
+      latitudeDelta,
+      longitudeDelta,
+    };
+
+    mapView.current.animateToRegion(reg, 1000);
+    setSelectedMarker(marker);
+  };
+
   return (
     <View>
       <View style={styles.container}>
         <MapView
           style={styles.mapStyle}
           region={region}
+          onRegionChange={onRegionChange}
+          ref={mapView}
         >
           {markers && markers.map((marker) => (
             marker.location && (
@@ -86,9 +111,7 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
                 coordinate={marker.location}
                 title={`${marker.name || ''}`}
                 // description={`Collector: ${marker.surveyingOr}`}
-                onPress={() => {setSelectedMarker(marker)
-                                console.log('hooho')
-                }}
+                onPress={() => setView(marker)}
               />
             )
           ))}
