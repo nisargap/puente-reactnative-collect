@@ -82,12 +82,12 @@ export const UserContextProvider = ({ children }) => {
    * @returns User Object
    */
 
-  const register = async (params) => {
+  const register = async (params, notificationType) => {
     const { password } = params;
     storeData(password, 'password');
     setIsLoading(true);
     try {
-      const u = await retrieveSignUpFunction(params);
+      const u = await retrieveSignUpFunction(params, notificationType);
       setUser(u);
       setError(null);
       setIsLoading(false);

@@ -3,6 +3,7 @@ import { Parse } from 'parse/react-native';
 
 import selectedENV from '../../../environment';
 import { getData } from '../../../modules/async-storage';
+import notificationTypeRestParams from './_signupHelper';
 
 function initialize() {
   const { parseAppId, parseJavascriptKey, parseServerUrl } = selectedENV;
@@ -15,7 +16,7 @@ function initialize() {
 
 function retrieveSignUpFunction(params) {
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('signup', params).then((u) => {
+    Parse.Cloud.run('signup', signupParams).then((u) => {
       const user = {
         ...u,
         id: u.id,

@@ -1,25 +1,49 @@
+import PropTypes from 'prop-types';
 import * as React from 'react';
-import { Button } from 'react-native-paper';
+import { Button as PaperButton } from 'react-native-paper';
 
 import { layout, theme } from '../../modules/theme';
 
-export default function PaperButton({
-  onPressEvent, buttonText,
-  mode, compact, icon, disabled, loading,
+const colorStyle = {
+  primary: theme.colors.primary,
+  accent: theme.colors.accent,
+  empty: theme.colors.placeholder,
+  black: theme.colors.black
+};
+
+const Button = ({
+  onPress, buttonText,
+  mode, compact, icon, disabled, loading, color,
   style
-}) {
-  return (
-    <Button
-      icon={icon || ''}
-      mode={mode || 'contained'}
-      disabled={!!disabled}
-      theme={theme}
-      style={[layout.button, style]}
-      onPress={onPressEvent}
-      compact={!!compact}
-      loading={!!loading}
-    >
-      {buttonText}
-    </Button>
-  );
-}
+}) => (
+  <PaperButton
+    icon={icon || ''}
+    mode={mode || 'contained'}
+    disabled={!!disabled}
+    theme={theme}
+    style={[layout.button, style]}
+    onPress={onPress}
+    compact={!!compact}
+    loading={!!loading}
+    color={colorStyle[color]}
+  >
+    {buttonText}
+  </PaperButton>
+);
+
+Button.defaultProps = {
+  color: 'primary',
+  icon: '',
+  disabled: false,
+  loading: false
+};
+
+Button.propTypes = {
+  color: PropTypes.oneOf(['primary', 'accent', 'empty', 'black']),
+  icon: PropTypes.string,
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  onPress: PropTypes.func.isRequired
+};
+
+export default Button;
