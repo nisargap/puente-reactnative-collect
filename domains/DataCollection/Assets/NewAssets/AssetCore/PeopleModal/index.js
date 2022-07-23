@@ -55,13 +55,13 @@ const PeopleModal = ({
             {people.length !== 1 && (
               <PaperButton
                 buttonText={I18n.t('peopleModal.remove')}
-                onPressEvent={() => handleRemoveClick(i)}
+                onPress={() => handleRemoveClick(i)}
               />
             )}
             {people.length - 1 === i && (
               <PaperButton
                 buttonText={I18n.t('peopleModal.add')}
-                onPressEvent={handleAddClick}
+                onPress={handleAddClick}
               />
             )}
           </View>

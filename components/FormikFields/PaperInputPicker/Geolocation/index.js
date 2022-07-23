@@ -48,14 +48,14 @@ const Geolocation = ({ errors, formikKey, setFieldValue }) => {
     <View key={formikKey}>
       {location === null && (
       <PaperButton
-        onPressEvent={handleLocation}
+        onPress={handleLocation}
         buttonText={I18n.t('paperButton.getLocation')}
       />
       )}
       {location !== null && (
       <View>
         <PaperButton
-          onPressEvent={handleLocation}
+          onPress={handleLocation}
           buttonText={I18n.t('paperButton.getLocationAgain')}
         />
         <View style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: 'row' }}>

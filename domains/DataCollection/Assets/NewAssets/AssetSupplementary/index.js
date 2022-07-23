@@ -134,7 +134,7 @@ const AssetSupplementary = ({
                   <PaperButton
                     disabled={!validForm()}
                     style={{ backgroundColor: validForm() ? 'green' : '#f75231' }}
-                    onPressEvent={() => formikProps.handleSubmit()}
+                    onPress={() => formikProps.handleSubmit()}
                     icon={validForm() ? 'plus' : 'alert-octagon'}
                     buttonText={validForm() ? I18n.t('global.submit') : I18n.t('assetForms.attachForm')}
                   />
@@ -142,7 +142,7 @@ const AssetSupplementary = ({
                 <PaperButton
                   mode="text"
                   buttonText={I18n.t('assetCore.tapCreateAsset')}
-                  onPressEvent={() => setPage('assetCore')}
+                  onPress={() => setPage('assetCore')}
                 />
               </View>
               <PopupError

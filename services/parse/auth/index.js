@@ -3,6 +3,7 @@ import { Parse } from 'parse/react-native';
 
 import selectedENV from '../../../environment';
 import { getData } from '../../../modules/async-storage';
+import notificationTypeRestParams from './_signupHelper';
 
 function initialize() {
   const { parseAppId, parseJavascriptKey, parseServerUrl } = selectedENV;
@@ -13,9 +14,13 @@ function initialize() {
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line
 }
 
-function retrieveSignUpFunction(params) {
+function retrieveSignUpFunction(params, type) {
+  const signupParams = params;
+  const restParamsData = notificationTypeRestParams(type, signupParams);
+  if (restParamsData) signupParams.restParams = restParamsData;
+
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('signup', params).then((u) => {
+    Parse.Cloud.run('signup', signupParams).then((u) => {
       const user = {
         ...u,
         id: u.id,
