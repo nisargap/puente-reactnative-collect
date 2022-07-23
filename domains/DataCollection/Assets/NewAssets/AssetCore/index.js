@@ -101,7 +101,7 @@ const AssetCore = ({
                 <ActivityIndicator />
               ) : (
                 <PaperButton
-                  onPressEvent={formikProps.handleSubmit}
+                  onPress={formikProps.handleSubmit}
                   buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('assetForms.createAsset')}
                   icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}
@@ -110,7 +110,7 @@ const AssetCore = ({
               <PaperButton
                 mode="text"
                 buttonText={I18n.t('assetCore.swipeAttachForm')}
-                onPressEvent={() => setPage('assetSupplementary')}
+                onPress={() => setPage('assetSupplementary')}
               />
               <PopupError
                 error={submissionError}

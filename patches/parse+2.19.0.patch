@@ -1,0 +1,13 @@
+diff --git a/node_modules/parse/lib/react-native/Parse.js b/node_modules/parse/lib/react-native/Parse.js
+index 18fe926..0893bdb 100644
+--- a/node_modules/parse/lib/react-native/Parse.js
++++ b/node_modules/parse/lib/react-native/Parse.js
+@@ -148,8 +148,6 @@ Parse.Schema = require('./ParseSchema').default;
+ Parse.Session = require('./ParseSession').default;
+ Parse.Storage = require('./Storage');
+ Parse.User = require('./ParseUser').default;
+-Parse.LiveQuery = require('./ParseLiveQuery').default;
+-Parse.LiveQueryClient = require('./LiveQueryClient').default;
+ 
+ Parse._request = function () {
+   for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {

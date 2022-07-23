@@ -15,7 +15,8 @@
     "success": "Siksè!",	
     "ok": "Ok",	
     "emptyForm": "Vide Fòm",
-    "back":"Tounen"
+    "back":"Tounen",
+    "pleaseTryAgain": "Tanpri eseye ankò"
   },
   "signUp": {
     "firstName": "Non",
@@ -453,6 +454,7 @@
     "volunteerSince": "Volontè depi",
     "surveysCollected": "Sondaj kolekte",
     "submitOffline": "Soumèt fòm san entènèt",
+    "populateOffline": "Sere done rezidan yo",
     "settingsPage": "Paj Anviwònman",
     "failedAttempt": "Echwe Tant pou soumèt fòm san entènèt.",
     "tryAgain": "Tanpri asire ke ou konekte ak entènèt la epi eseye ankò.",
