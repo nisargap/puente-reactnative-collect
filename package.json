@@ -21,6 +21,7 @@
     "release-patch": "npx standard-version --release-as patch",
     "release-minor": "npx standard-version --release-as minor",
     "release-major": "npx standard-version --release-as major",
+    "postinstall": "patch-package",
     "post-version": "node scripts/update-version/versionNumber.js"
   },
   "jest": {
