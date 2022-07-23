@@ -128,7 +128,7 @@ const IdentificationForm = ({
                 />
               ) : (
                 <PaperButton
-                  onPressEvent={formikProps.handleSubmit}
+                  onPress={formikProps.handleSubmit}
                   buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
                   icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                   style={{ backgroundColor: _.isEmpty(formikProps.values) ? 'red' : 'green' }}

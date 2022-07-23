@@ -47,7 +47,7 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
           {(formikProps) => (
             <View style={layout.formContainer}>
               <PaperButton
-                onPressEvent={repopulateAllData}
+                onPress={repopulateAllData}
                 buttonText="Populate all ID Forms"
                 loading={!!isLoading}
                 style={{ backgroundColor: 'blue' }}
@@ -66,14 +66,14 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
                 </View>
               ))}
               <PaperButton
-                onPressEvent={formikProps.handleSubmit}
+                onPress={formikProps.handleSubmit}
                 buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
                 disabled={!!_.isEmpty(formikProps.values)}
                 icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
                 style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' }}
               />
               <PaperButton
-                onPressEvent={() => deleteData('residentData')}
+                onPress={() => deleteData('residentData')}
                 buttonText="Clear Cached ID Forms"
                 icon="delete"
                 style={{ backgroundColor: 'red' }}
