@@ -14,7 +14,11 @@ function initialize() {
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line
 }
 
-function retrieveSignUpFunction(params) {
+function retrieveSignUpFunction(params, type) {
+  const signupParams = params;
+  const restParamsData = notificationTypeRestParams(type, signupParams);
+  if (restParamsData) signupParams.restParams = restParamsData;
+
   return new Promise((resolve, reject) => {
     Parse.Cloud.run('signup', signupParams).then((u) => {
       const user = {
