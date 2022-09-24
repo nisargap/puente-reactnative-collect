@@ -6,36 +6,35 @@ import {
 import checkOnlineStatus from '../../offline';
 import { generateRandomID } from '../../utils';
 
-function postIdentificationForm(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected) {
-        postObjectsToClass(postParams).then((surveyee) => {
-          const surveyeeSanitized = JSON.parse(JSON.stringify(surveyee));
-          resolve(surveyeeSanitized);
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineIDForms').then(async (idForms) => {
-          const id = `PatientID-${generateRandomID()}`;
-          const idParams = postParams;
-          idParams.localObject.objectId = id;
-          if (idForms !== null || idForms === []) {
-            const forms = idForms.concat(idParams);
-            await storeData(forms, 'offlineIDForms');
-            resolve(idParams.localObject);
-          } else {
-            const idData = [idParams];
-            // idData[id] = postParams;
-            await storeData(idData, 'offlineIDForms');
-            resolve(idParams.localObject);
-          }
-        });
-      }
-    });
+const postIdentificationForm = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
+  if (isConnected) {
+    postObjectsToClass(postParams).then((surveyee) => {
+      const surveyeeSanitized = JSON.parse(JSON.stringify(surveyee));
+      return surveyeeSanitized
+    }).
+    catch(()=>error);
+  }
+
+  return getData('offlineIDForms').then(async offlineIDForms => {
+    const offlineResidentIdForms = offlineIDForms
+    const idParams = postParams;
+    const { localObject } = idParams
+    
+    localObject.objectId = `PatientID-${generateRandomID()}`;
+
+    if (offlineResidentIdForms) {
+      const forms = offlineResidentIdForms.concat(idParams);
+      await storeData(forms, 'offlineIDForms');
+      return localObject;
+    } 
+
+    const idData = [idParams];
+    await storeData(idData, 'offlineIDForms');
+    return localObject;
+    
   });
-}
+};
 
 /** ***********************************************
  * Function to post asset id form offline offline

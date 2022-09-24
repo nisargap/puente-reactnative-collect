@@ -5,6 +5,7 @@ import { customMultiParamQueryService, customMultiValueArrayService, customQuery
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
 }
+
 function residentIDQuery(params) {
   const { parseParam, limit } = params;
   function checkIfAlreadyExist(accumulator, currentVal) {
