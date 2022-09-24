@@ -63,8 +63,10 @@ const HouseholdManager = (props) => {
         longitude: 0
       }
     };
-    postHouseholdWithRelation(postParams).then((id) => {
-      setFieldValue(formikKey, id);
+
+    postHouseholdWithRelation(postParams).then((household) => {
+      const { objectId } = household;
+      setFieldValue(formikKey, objectId);
     });
   };
 
@@ -77,8 +79,9 @@ const HouseholdManager = (props) => {
         longitude: 0
       }
     };
-    postHousehold(postParams).then((id) => {
-      setFieldValue(formikKey, id);
+    postHousehold(postParams).then((household) => {
+      const { objectId } = household;
+      setFieldValue(formikKey, objectId);
     });
     setHouseholdSet(true);
   };

@@ -9,30 +9,28 @@ import { generateRandomID } from '../../utils';
 const postIdentificationForm = async (postParams) => {
   const isConnected = await checkOnlineStatus();
   if (isConnected) {
-    postObjectsToClass(postParams).then((surveyee) => {
+    return postObjectsToClass(postParams).then((surveyee) => {
       const surveyeeSanitized = JSON.parse(JSON.stringify(surveyee));
-      return surveyeeSanitized
-    }).
-    catch(()=>error);
+      return surveyeeSanitized;
+    }).catch((error) => error);
   }
 
-  return getData('offlineIDForms').then(async offlineIDForms => {
-    const offlineResidentIdForms = offlineIDForms
+  return getData('offlineIDForms').then(async (offlineIDForms) => {
+    const offlineResidentIdForms = offlineIDForms;
     const idParams = postParams;
-    const { localObject } = idParams
-    
+    const { localObject } = idParams;
+
     localObject.objectId = `PatientID-${generateRandomID()}`;
 
     if (offlineResidentIdForms) {
       const forms = offlineResidentIdForms.concat(idParams);
       await storeData(forms, 'offlineIDForms');
       return localObject;
-    } 
+    }
 
     const idData = [idParams];
     await storeData(idData, 'offlineIDForms');
     return localObject;
-    
   });
 };
 
@@ -137,65 +135,61 @@ function postSupplementaryAssetForm(postParams) {
   });
 }
 
-function postHousehold(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected) {
-        postObjectsToClass(postParams).then((result) => {
-          resolve(result.id);
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineHouseholds').then(async (households) => {
-          const id = `Household-${generateRandomID()}`;
-          const householdParams = postParams;
-          householdParams.localObject.objectId = id;
-          if (households !== null || households === []) {
-            const forms = households.concat(householdParams);
-            await storeData(forms, 'offlineHouseholds');
-            resolve(id);
-          } else {
-            const householdData = [householdParams];
-            // idData[id] = postParams;
-            await storeData(householdData, 'offlineHouseholds');
-            resolve(id);
-          }
-        });
-      }
-    });
-  });
-}
+/**
+ * Function to post household form. Used for creating a new household
+ * @param {*} postParams
+ * @returns Househould object
+ */
+const postHousehold = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
 
-function postHouseholdWithRelation(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected) {
-        postObjectsToClassWithRelation(postParams).then((result) => {
-          resolve(result.id);
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineHouseholdsRelation').then(async (householdsRelation) => {
-          const id = `Household-${generateRandomID()}`;
-          const householdParams = postParams;
-          householdParams.localObject.objectId = id;
-          if (householdsRelation !== null || householdsRelation === []) {
-            const forms = householdsRelation.concat(householdParams);
-            await storeData(forms, 'offlineHouseholdsRelation');
-            resolve(id);
-          } else {
-            const householdData = [householdParams];
-            // idData[id] = postParams;
-            await storeData(householdData, 'offlineHouseholdsRelation');
-            resolve(id);
-          }
-        });
-      }
-    });
+  if (isConnected) {
+    return postObjectsToClass(postParams).then((result) => result.id).catch((error) => error);
+  }
+
+  return getData('offlineHouseholds').then(async (offlineHouseholds) => {
+    const households = offlineHouseholds;
+    const householdParams = postParams;
+
+    const { localObject } = householdParams;
+    localObject.objectId = `Household-${generateRandomID()}`;
+
+    if (households) {
+      const forms = households.concat(householdParams);
+      await storeData(forms, 'offlineHouseholds');
+      return localObject;
+    }
+
+    const householdData = [householdParams];
+    await storeData(householdData, 'offlineHouseholds');
+    return localObject;
   });
-}
+};
+
+const postHouseholdWithRelation = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
+
+  if (isConnected) {
+    return postObjectsToClassWithRelation(postParams).then((result) => result.id).catch((er) => er);
+  }
+
+  return getData('offlineHouseholdsRelation').then(async (householdsRelation) => {
+    const allOfflineHouseholdsWithRelationships = householdsRelation;
+    const householdParams = postParams;
+    const { localObject } = householdParams;
+    localObject.objectId = `Household-${generateRandomID()}`;
+
+    if (allOfflineHouseholdsWithRelationships) {
+      const forms = allOfflineHouseholdsWithRelationships.concat(householdParams);
+      await storeData(forms, 'offlineHouseholdsRelation');
+      return localObject;
+    }
+
+    const householdData = [householdParams];
+    await storeData(householdData, 'offlineHouseholdsRelation');
+    return localObject;
+  });
+};
 
 export {
   postAssetForm,
