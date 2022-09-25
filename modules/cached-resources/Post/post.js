@@ -17,6 +17,7 @@ const postIdentificationForm = async (postParams) => {
 
   return getData('offlineIDForms').then(async (offlineIDForms) => {
     const offlineResidentIdForms = offlineIDForms;
+
     const idParams = postParams;
     const { localObject } = idParams;
 
@@ -74,31 +75,24 @@ function postAssetForm(postParams) {
   });
 }
 
-function postSupplementaryForm(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected && !postParams.parseParentClassID.includes('PatientID-')) {
-        postObjectsToClassWithRelation(postParams).then(() => {
-          resolve('success');
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineSupForms').then(async (supForms) => {
-          if (supForms !== null) {
-            const forms = supForms.concat(postParams);
-            await storeData(forms, 'offlineSupForms');
-            resolve('success');
-          } else {
-            const supData = [postParams];
-            await storeData(supData, 'offlineSupForms');
-            resolve('success');
-          }
-        });
-      }
-    });
+const postSupplementaryForm = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
+
+  if (isConnected && !postParams.parseParentClassID.includes('PatientID-')) {
+    return postObjectsToClassWithRelation(postParams);
+  }
+
+  return getData('offlineSupForms').then(async (supForms) => {
+    if (supForms) {
+      const forms = supForms.concat(postParams);
+      await storeData(forms, 'offlineSupForms');
+      return postParams;
+    }
+    const supData = [postParams];
+    await storeData(supData, 'offlineSupForms');
+    return postParams;
   });
-}
+};
 
 /** ***********************************************
  * Function to post asset supplementary form offline
