@@ -19,7 +19,7 @@ const createOfflineUserMockData = async () => {
 const createResidentMockData = (numberOfRecords, userObjectId) => {
   const residentArray = [];
 
-  for (let i = 0; i < numberOfRecords; i++) {
+  for (let i = 0; i < numberOfRecords; i += 1) {
     const postParams = {
       parseClass: 'SurveyData',
       parseUser: userObjectId,
@@ -57,7 +57,7 @@ const createSupplementaryFormMockData = (numberOfRecords, surveyeeObjectedId, us
     surveyingOrganization: 'Michigan'
   };
 
-  for (let i = 0; i < numberOfRecords; i++) {
+  for (let i = 0; i < numberOfRecords; i += 1) {
     const postParams = {
       parseParentClassID: surveyeeObjectedId,
       parseParentClass: 'SurveyData',
