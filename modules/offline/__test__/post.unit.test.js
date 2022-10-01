@@ -2,8 +2,10 @@ import { postIdentificationForm, postSupplementaryForm } from '../../cached-reso
 import checkOnlineStatus from '..';
 import { postOfflineForms } from '../post';
 import { createOfflineUserMockData, createResidentMockData, createSupplementaryFormMockData } from './utils';
+import * as crudServices from '../../../services/parse/crud';
 
 jest.mock('..', () => jest.fn());
+crudServices.uploadOfflineForms = jest.fn().mockResolvedValue({});
 
 describe('Testing full feature of offline posting', () => {
   test('Testing number of postOfflineForms', async () => {
@@ -32,7 +34,7 @@ describe('Testing full feature of offline posting', () => {
 
     checkOnlineStatus.mockResolvedValue(true);
 
-    const offlineForms = await postOfflineForms();
+    const {offlineForms} = await postOfflineForms();
 
     expect(numberOfResidents + numberofSupplementaryFormsCollected).toEqual(offlineForms.surveyData.length + offlineForms.supForms.length)
 
