@@ -1,14 +1,13 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Parse } from 'parse/react-native';
 
+import client from '../client';
 import selectedENV from '../../../environment';
 import { getData } from '../../../modules/async-storage';
 import notificationTypeRestParams from './_signupHelper';
 
-function initialize() {
-  const { parseAppId, parseJavascriptKey, parseServerUrl } = selectedENV;
+const { parseAppId, parseJavascriptKey, parseServerUrl, TEST_MODE } = selectedENV;
+const Parse = client(TEST_MODE)
 
-  Parse.setAsyncStorage(AsyncStorage);
+function initialize() {
   Parse.initialize(parseAppId, parseJavascriptKey);
   Parse.serverURL = parseServerUrl;
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line

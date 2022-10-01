@@ -1,14 +1,18 @@
-import * as crudServices from '../../../services/parse/crud';
 import { postIdentificationForm, postSupplementaryForm } from '../../cached-resources';
 import checkOnlineStatus from '..';
 import { postOfflineForms } from '../post';
 import { createOfflineUserMockData, createResidentMockData, createSupplementaryFormMockData } from './utils';
+import { hooks } from '../../../test/hooks'
+
+hooks()
 
 jest.mock('..', () => jest.fn());
-crudServices.uploadOfflineForms = jest.fn().mockResolvedValue({});
 
+/**
+ * Test offline forms uploading with real connection to a Parse Cloud Code
+ */
 describe('Testing full feature of offline posting', () => {
-  test('Testing number of postOfflineForms', async () => {
+  test('Testing number of postOfflineForms stored', async () => {
     checkOnlineStatus.mockResolvedValue(false);
 
     const numberOfResidents = 3;
@@ -34,8 +38,7 @@ describe('Testing full feature of offline posting', () => {
 
     checkOnlineStatus.mockResolvedValue(true);
 
-    const { offlineForms } = await postOfflineForms();
-
-    expect(numberOfResidents + numberofSupplementaryFormsCollected).toEqual(offlineForms.surveyData.length + offlineForms.supForms.length);
+    const { uploadedForms } = await postOfflineForms();
+    console.log(uploadedForms);
   });
 });

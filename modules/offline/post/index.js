@@ -1,10 +1,10 @@
 import { Platform } from 'react-native';
 
 import surveyingUserFailsafe from '../../../domains/DataCollection/Forms/utils';
+import { uploadOfflineForms } from '../../../services/parse/crud';
 import { deleteData, getData } from '../../async-storage';
 import { isEmpty } from '../../utils';
 import checkOnlineStatus from '..';
-import { uploadOfflineForms } from '../../../services/parse/crud';
 
 const cleanupPostedOfflineForms = async () => {
   await deleteData('offlineIDForms');
@@ -47,12 +47,15 @@ const postOfflineForms = async () => {
   const isConnected = await checkOnlineStatus();
 
   if (isConnected) {
-    const uploadedForms = await uploadOfflineForms(offlineForms)
+    const uploadedForms = await uploadOfflineForms(offlineForms);
+    await cleanupPostedOfflineForms(); // think about retrying failed forms
     return {
       offlineForms,
-      uploadedForms 
-    }
+      uploadedForms
+    };
   }
+
+  return 'No Internet Access';
 };
 
-export { postOfflineForms }
+export { postOfflineForms };
