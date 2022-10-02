@@ -76,7 +76,7 @@ const createSupplementaryFormMockData = (
       parseParentClass: 'SurveyData',
       parseUser: userObjectId,
       parseClass: 'FormResults',
-      photoFile: faker.image.imageUrl(),
+      photoFile: faker.image.dataUri(),
       localObject,
     };
 
