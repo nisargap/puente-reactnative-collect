@@ -3,7 +3,7 @@ import client from '../client';
 import { customMultiParamQueryService, customMultiValueArrayService, customQueryService } from './custom-queries';
 
 const { TEST_MODE } = selectedENV;
-const Parse = client(TEST_MODE)
+const Parse = client(TEST_MODE);
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);

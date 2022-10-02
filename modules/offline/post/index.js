@@ -31,24 +31,25 @@ const postOfflineForms = async () => {
   const householdRelationsAsync = await getData('offlineHouseholdsRelation');
 
   const offlineForms = {
-    surveyData: idFormsAsync,
-    supForms: supplementaryFormsAsync,
+    residentForms: idFormsAsync,
+    residentSupplementaryForms: supplementaryFormsAsync,
     households: householdsAsync,
     householdRelations: householdRelationsAsync,
-    assetIdForms: assetIdFormsAsync,
-    assetSupForms: assetSupFormsAsync,
-    surveyingUser: surveyUser,
-    surveyingOrganization: organization,
-    parseUser: user.objectId,
-    appVersion,
-    phoneOS
+    assetForms: assetIdFormsAsync,
+    assetSupplementaryForms: assetSupFormsAsync,
+    metadata: {
+      surveyingUser: surveyUser,
+      surveyingOrganization: organization,
+      parseUser: user.objectId,
+      appVersion,
+      phoneOS
+    }
   };
 
   const isConnected = await checkOnlineStatus();
 
   if (isConnected) {
     const uploadedForms = await uploadOfflineForms(offlineForms);
-    await cleanupPostedOfflineForms(); // think about retrying failed forms
     return {
       offlineForms,
       uploadedForms
@@ -58,4 +59,4 @@ const postOfflineForms = async () => {
   return 'No Internet Access';
 };
 
-export { postOfflineForms };
+export { cleanupPostedOfflineForms, postOfflineForms };

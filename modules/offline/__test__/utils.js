@@ -39,7 +39,12 @@ const createResidentMockData = (numberOfRecords, userObjectId) => {
   return residentArray;
 };
 
-const createSupplementaryFormMockData = (numberOfRecords, surveyeeObjectedId, userObjectId) => {
+const createSupplementaryFormMockData = (
+  numberOfRecords,
+  surveyeeObjectedId,
+  userObjectId,
+  numberOfResponses = 5
+) => {
   const supplementaryFormArray = [];
 
   const customFormSpecifications = {
@@ -48,11 +53,19 @@ const createSupplementaryFormMockData = (numberOfRecords, surveyeeObjectedId, us
     description: faker.commerce.productDescription()
   };
 
+  const fakeTitles = ['waterSourceDrinking', 'waterSourceOther', 'problemsWater', 'receiveWater', 'timeToGetWater', 'getsWaterHousehold'];
+  const fakeAnswers = ['aqueduct', 'lessThan1', ['none'], ['adultMale'], 'moreThan30', 'no', '1,000', 'yes'];
+
+  const fields = Array(numberOfResponses).fill(0).map(() => ({
+    title: faker.helpers.arrayElement(fakeTitles),
+    answer: faker.helpers.arrayElement(fakeAnswers)
+  }));
+
   const localObject = {
     title: customFormSpecifications.name,
     description: customFormSpecifications.description,
     formSpecificationsId: customFormSpecifications.objectId,
-    fields: [],
+    fields,
     surveyingUser: 'JJ McCarthy',
     surveyingOrganization: 'Michigan'
   };
@@ -62,7 +75,7 @@ const createSupplementaryFormMockData = (numberOfRecords, surveyeeObjectedId, us
       parseParentClassID: surveyeeObjectedId,
       parseParentClass: 'SurveyData',
       parseUser: userObjectId,
-      parseClass: 'config.class',
+      parseClass: 'FormResults',
       photoFile: faker.image.imageUrl(),
       localObject,
     };
