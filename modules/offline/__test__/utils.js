@@ -16,7 +16,7 @@ const createOfflineUserMockData = async () => {
   return user;
 };
 
-const createResidentMockData = (numberOfRecords, userObjectId) => {
+const createResidentMockData = (numberOfRecords, userObjectId, householdId = '') => {
   const residentArray = [];
 
   for (let i = 0; i < numberOfRecords; i += 1) {
@@ -29,7 +29,8 @@ const createResidentMockData = (numberOfRecords, userObjectId) => {
         lname: faker.name.lastName(),
         nickname: faker.name.middleName(),
         dob: faker.date.birthdate(),
-        sex: faker.name.sex()
+        sex: faker.name.sex(),
+        householdId
       }
     };
 
@@ -86,4 +87,101 @@ const createSupplementaryFormMockData = (
   return supplementaryFormArray;
 };
 
-export { createOfflineUserMockData, createResidentMockData, createSupplementaryFormMockData };
+const createHouseholdMockData = (
+  numberOfRecords,
+) => {
+  const households = [];
+
+  const localObject = {
+    latitude: 0,
+    longitude: 0
+  };
+
+  for (let i = 0; i < numberOfRecords; i += 1) {
+    const postParams = {
+      parseClass: 'Household',
+      localObject,
+    };
+    households.push(postParams);
+  }
+
+  return households;
+};
+
+const createAssetMockData = (numberOfRecords, userObjectId) => {
+  const assetArray = [];
+
+  for (let i = 0; i < numberOfRecords; i += 1) {
+    const postParams = {
+      parseClass: 'Assets',
+      parseUser: userObjectId,
+      photoFile: faker.image.imageUrl(),
+      signature: 'Asset Signature',
+      localObject: {
+        name: faker.word.noun(),
+        location: faker.address.nearbyGPSCoordinate(),
+        communityname: faker.address.cityName(),
+        province: faker.address.state(),
+        country: faker.address.country(),
+      }
+    };
+
+    assetArray.push(postParams);
+  }
+
+  return assetArray;
+};
+
+const createAssetSupplementaryFormMockData = (
+  numberOfRecords,
+  assetObjectedId,
+  userObjectId,
+  numberOfResponses = 5
+) => {
+  const supplementaryAssetFormArray = [];
+
+  const customFormSpecifications = {
+    objectId: faker.database.mongodbObjectId(),
+    name: `Form ${faker.commerce.productName()}`,
+    description: faker.commerce.productDescription()
+  };
+
+  const fakeTitles = ['waterSourceDrinking', 'waterSourceOther', 'problemsWater', 'receiveWater', 'timeToGetWater', 'getsWaterHousehold'];
+  const fakeAnswers = ['aqueduct', 'lessThan1', ['none'], ['adultMale'], 'moreThan30', 'no', '1,000', 'yes'];
+
+  const fields = Array(numberOfResponses).fill(0).map(() => ({
+    title: faker.helpers.arrayElement(fakeTitles),
+    answer: faker.helpers.arrayElement(fakeAnswers)
+  }));
+
+  const localObject = {
+    title: customFormSpecifications.name,
+    description: customFormSpecifications.description,
+    formSpecificationsId: customFormSpecifications.objectId,
+    fields,
+    surveyingUser: 'JJ McCarthy',
+    surveyingOrganization: 'Michigan'
+  };
+
+  for (let i = 0; i < numberOfRecords; i += 1) {
+    const postParams = {
+      parseParentClassID: assetObjectedId,
+      parseParentClass: 'Assets',
+      parseUser: userObjectId,
+      parseClass: 'FormAssetResults',
+      photoFile: faker.image.dataUri(),
+      localObject,
+      typeOfForm: 'Asset',
+    };
+
+    supplementaryAssetFormArray.push(postParams);
+  }
+
+  return supplementaryAssetFormArray;
+};
+
+export {
+  createAssetMockData, createAssetSupplementaryFormMockData,
+  createHouseholdMockData, createOfflineUserMockData,
+  createResidentMockData, createSupplementaryFormMockData
+};

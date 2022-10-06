@@ -89,8 +89,15 @@ describe('test offline', () => {
 
     const postedOfflineHousehold = await postHousehold(postParams);
 
-    expect(postedOfflineHousehold).toHaveProperty('objectId');
-    expect(postedOfflineHousehold.objectId).toContain('Household');
+    expect(postedOfflineHousehold[0].localObject).toHaveProperty('objectId');
+    expect(postedOfflineHousehold[0].localObject.objectId).toContain('Household');
+    expect(postedOfflineHousehold).toHaveLength(1);
+
+    const postedHouseholds = await postHousehold(postParams);
+
+    expect(postedHouseholds[1].localObject).toHaveProperty('objectId');
+    expect(postedHouseholds[1].localObject.objectId).toContain('Household');
+    expect(postedHouseholds).toHaveLength(2);
   });
 
   test('Post Household with a relationship', async () => {

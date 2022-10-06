@@ -45,39 +45,33 @@ const postIdentificationForm = async (postParams) => {
  *
  *********************************************** */
 
-function postAssetForm(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected) {
-        postObjectsToClass(postParams).then((asset) => {
-          const assetSanitized = JSON.parse(JSON.stringify(asset));
-          resolve(assetSanitized);
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineAssetIDForms').then(async (assetIdForms) => {
-          const id = `AssetID-${generateRandomID()}`;
-          const assetIdParams = postParams;
-          assetIdParams.localObject.objectId = id;
-          if (assetIdForms !== null || assetIdForms === []) {
-            const forms = assetIdForms.concat(assetIdParams);
-            await storeData(forms, 'offlineAssetIDForms');
-            resolve(assetIdParams.localObject);
-          } else {
-            const idData = [assetIdParams];
-            await storeData(idData, 'offlineAssetIDForms');
-            resolve(assetIdParams.localObject);
-          }
-        });
-      }
-    });
+const postAssetForm = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
+  if (isConnected) {
+    return postObjectsToClass(postParams).then((asset) => {
+      const assetSanitized = JSON.parse(JSON.stringify(asset));
+      return assetSanitized;
+    }).catch((error) => error);
+  }
+  return getData('offlineAssetIDForms').then(async (offlineData) => {
+    const id = `AssetID-${generateRandomID()}`;
+    const assetIdParams = postParams;
+    const offlineAssetForms = offlineData;
+    assetIdParams.localObject.objectId = id;
+
+    if (offlineAssetForms) {
+      const forms = offlineAssetForms.concat(assetIdParams);
+      return storeData(forms, 'offlineAssetIDForms');
+    }
+
+    const idData = [assetIdParams];
+    const storedData = await storeData(idData, 'offlineAssetIDForms');
+    return storedData;
   });
-}
+};
 
 const postSupplementaryForm = async (postParams) => {
   const isConnected = await checkOnlineStatus();
-
   if (isConnected && !postParams.parseParentClassID.includes('PatientID-')) {
     return postObjectsToClassWithRelation(postParams);
   }
@@ -85,12 +79,10 @@ const postSupplementaryForm = async (postParams) => {
   return getData('offlineSupForms').then(async (supForms) => {
     if (supForms) {
       const forms = supForms.concat(postParams);
-      await storeData(forms, 'offlineSupForms');
-      return postParams;
+      return storeData(forms, 'offlineSupForms');
     }
     const supData = [postParams];
-    await storeData(supData, 'offlineSupForms');
-    return postParams;
+    return storeData(supData, 'offlineSupForms');
   });
 };
 
@@ -103,31 +95,21 @@ const postSupplementaryForm = async (postParams) => {
  * @param {Object} postParams Object normally configured for for Parse-Server Cloud Code
  *
  *********************************************** */
-function postSupplementaryAssetForm(postParams) {
-  return new Promise((resolve, reject) => {
-    checkOnlineStatus().then((connected) => {
-      if (connected && !postParams.parseParentClassID.includes('AssetID-')) {
-        postObjectsToClassWithRelation(postParams).then(() => {
-          resolve('success');
-        }, (error) => {
-          reject(error);
-        });
-      } else {
-        getData('offlineAssetSupForms').then(async (supForms) => {
-          if (supForms !== null) {
-            const forms = supForms.concat(postParams);
-            await storeData(forms, 'offlineAssetSupForms');
-            resolve('success');
-          } else {
-            const supData = [postParams];
-            await storeData(supData, 'offlineAssetSupForms');
-            resolve('success');
-          }
-        });
-      }
-    });
+const postSupplementaryAssetForm = async (postParams) => {
+  const isConnected = await checkOnlineStatus();
+
+  if (isConnected && !postParams.parseParentClassID.includes('AssetID-')) {
+    return postObjectsToClassWithRelation(postParams);
+  }
+  return getData('offlineAssetSupForms').then(async (supForms) => {
+    if (supForms) {
+      const forms = supForms.concat(postParams);
+      return storeData(forms, 'offlineAssetSupForms');
+    }
+    const supData = [postParams];
+    return storeData(supData, 'offlineAssetSupForms');
   });
-}
+};
 
 /**
  * Function to post household form. Used for creating a new household
@@ -151,12 +133,11 @@ const postHousehold = async (postParams) => {
     if (households) {
       const forms = households.concat(householdParams);
       await storeData(forms, 'offlineHouseholds');
-      return localObject;
+      return forms;
     }
-
     const householdData = [householdParams];
     await storeData(householdData, 'offlineHouseholds');
-    return localObject;
+    return householdData;
   });
 };
 

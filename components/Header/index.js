@@ -165,11 +165,9 @@ const Header = ({
     });
   };
 
-  const cacheOfflineData = async () => {
-    checkOnlineStatus().then(async (connected) => {
-      if (connected) await populateResidentDataCache();
-    });
-  };
+  const cacheOfflineData = async () => checkOnlineStatus().then(async (connected) => {
+    if (connected) await populateResidentDataCache();
+  });
 
   const navToSettings = () => {
     setDrawerOpen(false);
