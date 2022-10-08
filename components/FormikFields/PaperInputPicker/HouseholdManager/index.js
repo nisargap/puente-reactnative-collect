@@ -9,7 +9,6 @@ import {
 
 import {
   postHousehold,
-  postHouseholdWithRelation
 } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
@@ -64,7 +63,7 @@ const HouseholdManager = (props) => {
       }
     };
 
-    postHouseholdWithRelation(postParams).then((household) => {
+    postHousehold(postParams).then((household) => {
       const { objectId } = household;
       setFieldValue(formikKey, objectId);
     });

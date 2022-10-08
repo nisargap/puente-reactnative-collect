@@ -2,7 +2,7 @@ import uuid from 'react-native-uuid';
 
 import checkOnlineStatus from '../../../offline';
 import {
-  postHousehold, postHouseholdWithRelation, postIdentificationForm, postSupplementaryForm
+  postHousehold, postIdentificationForm, postSupplementaryForm
 } from '../post';
 
 jest.mock('../../../offline', () => jest.fn());
@@ -74,7 +74,7 @@ describe('test offline', () => {
 
     const postedSupplementaryForm = await postSupplementaryForm(postParams);
 
-    expect(postedSupplementaryForm.parseParentClassID).toContain('PatientID'); // signifies it is an offline form
+    expect(postedSupplementaryForm[0].parseParentClassID).toContain('PatientID'); // signifies it is an offline form
   });
 
   test('postHousehold', async () => {
@@ -114,9 +114,9 @@ describe('test offline', () => {
       }
     };
 
-    const postedHouseholdWithRelation = await postHouseholdWithRelation(postParams);
+    const postedHouseholdWithRelation = await postHousehold(postParams);
 
-    expect(postedHouseholdWithRelation).toHaveProperty('objectId');
-    expect(postedHouseholdWithRelation.objectId).toContain('Household');
+    expect(postedHouseholdWithRelation[0].localObject).toHaveProperty('objectId');
+    expect(postedHouseholdWithRelation[0].localObject.objectId).toContain('Household');
   });
 });

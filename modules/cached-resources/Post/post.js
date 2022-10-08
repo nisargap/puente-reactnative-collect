@@ -141,35 +141,9 @@ const postHousehold = async (postParams) => {
   });
 };
 
-const postHouseholdWithRelation = async (postParams) => {
-  const isConnected = await checkOnlineStatus();
-
-  if (isConnected) {
-    return postObjectsToClassWithRelation(postParams).then((result) => result.id).catch((er) => er);
-  }
-
-  return getData('offlineHouseholdsRelation').then(async (householdsRelation) => {
-    const allOfflineHouseholdsWithRelationships = householdsRelation;
-    const householdParams = postParams;
-    const { localObject } = householdParams;
-    localObject.objectId = `Household-${generateRandomID()}`;
-
-    if (allOfflineHouseholdsWithRelationships) {
-      const forms = allOfflineHouseholdsWithRelationships.concat(householdParams);
-      await storeData(forms, 'offlineHouseholdsRelation');
-      return localObject;
-    }
-
-    const householdData = [householdParams];
-    await storeData(householdData, 'offlineHouseholdsRelation');
-    return localObject;
-  });
-};
-
 export {
   postAssetForm,
   postHousehold,
-  postHouseholdWithRelation,
   postIdentificationForm,
   postSupplementaryAssetForm,
   postSupplementaryForm
