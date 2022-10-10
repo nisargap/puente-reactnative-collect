@@ -11,6 +11,7 @@ import PaperInputPicker from '../../../../../components/FormikFields/PaperInputP
 import PopupError from '../../../../../components/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
+import { storeAppVersion } from '../../../../../modules/cached-resources/populate-cache';
 import I18n from '../../../../../modules/i18n';
 import { theme } from '../../../../../modules/theme';
 import { isEmpty } from '../../../../../modules/utils';
@@ -45,7 +46,7 @@ const AssetSupplementary = ({
           const user = await getData('currentUser');
 
           const surveyingUserFailSafe = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-          const appVersion = await getData('appVersion') || '';
+          const appVersion = await storeAppVersion() || '';
 
           let formObjectUpdated = addSelectTextInputs(values, formObject);
           formObjectUpdated = cleanLoopSubmissions(values, formObjectUpdated);
