@@ -17,16 +17,15 @@ Here are some quick npm commands to get started:
 
 ## Async Storage Values
 
-| Name of Value               | Description of Data                                                                        |
-| --------------------------- | ------------------------------------------------------------------------------------------ |
-| `assetMapRegion`            | Region location numbers of asset map                                                       |
-| `organization`              | Name of the surveying users surveyingOrganization                                          |
-| `residentData`              | All `SurveyData` parse model data stored based on the users surveyingOrganization          |
-| `offlineIDForms`            | All `SurveyData` forms collected when user is offline                                      |
-| `offlineSupForms`           | All Supplementary/Custom forms collected when user is offline                              |
-| `offlineHouseholds`         | All `Household` parse model created when user is offline                                   |
-| `offlineHouseholdsRelation` | All `Household` parse model with relation to other households created when user is offline |
-| `pinnedForms`               | All local pinned form data that the user choses when the long press on a custom form       |
+| Name of Value       | Description of Data                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| `assetMapRegion`    | Region location numbers of asset map                                                 |
+| `organization`      | Name of the surveying users surveyingOrganization                                    |
+| `residentData`      | All `SurveyData` parse model data stored based on the users surveyingOrganization    |
+| `offlineIDForms`    | All `SurveyData` forms collected when user is offline                                |
+| `offlineSupForms`   | All Supplementary/Custom forms collected when user is offline                        |
+| `offlineHouseholds` | All `Household` parse model created when user is offline                             |
+| `pinnedForms`       | All local pinned form data that the user choses when the long press on a custom form |
 
 ## Select Values with Text Input
 

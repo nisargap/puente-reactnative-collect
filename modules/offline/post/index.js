@@ -12,7 +12,6 @@ const cleanupPostedOfflineForms = async () => {
   await deleteData('offlineAssetIDForms');
   await deleteData('offlineAssetSupForms');
   await deleteData('offlineHouseholds');
-  await deleteData('offlineHouseholdsRelation');
 };
 
 const postOfflineForms = async () => {
@@ -28,13 +27,11 @@ const postOfflineForms = async () => {
   const assetIdFormsAsync = await getData('offlineAssetIDForms');
   const assetSupFormsAsync = await getData('offlineAssetSupForms');
   const householdsAsync = await getData('offlineHouseholds');
-  const householdRelationsAsync = await getData('offlineHouseholdsRelation');
 
   const offlineForms = {
     residentForms: idFormsAsync,
     residentSupplementaryForms: supplementaryFormsAsync,
     households: householdsAsync,
-    householdRelations: householdRelationsAsync,
     assetForms: assetIdFormsAsync,
     assetSupplementaryForms: assetSupFormsAsync,
     metadata: {
@@ -49,10 +46,13 @@ const postOfflineForms = async () => {
   const isConnected = await checkOnlineStatus();
 
   if (isConnected) {
-    const uploadedForms = await uploadOfflineForms(offlineForms);
+    const uploadedForms = await uploadOfflineForms(offlineForms).catch(() => ({
+      status: 'Error'
+    }));
     return {
       offlineForms,
-      uploadedForms
+      uploadedForms,
+      status: 'Success'
     };
   }
 
