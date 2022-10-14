@@ -72,7 +72,7 @@ const postAssetForm = async (postParams) => {
 
 const postSupplementaryForm = async (postParams) => {
   const isConnected = await checkOnlineStatus();
-  if (isConnected && !postParams.parseParentClassID.includes('PatientID-')) {
+  if (isConnected && !postParams?.parseParentClassID?.includes('PatientID-')) {
     return postObjectsToClassWithRelation(postParams);
   }
 

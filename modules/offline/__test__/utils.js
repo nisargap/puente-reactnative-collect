@@ -28,7 +28,7 @@ const createResidentMockData = (numberOfRecords, userObjectId, householdId = '')
         fname: faker.name.firstName(),
         lname: faker.name.lastName(),
         nickname: faker.name.middleName(),
-        dob: faker.date.birthdate(),
+        dob: String(faker.date.birthdate()),
         sex: faker.name.sex(),
         householdId
       }
