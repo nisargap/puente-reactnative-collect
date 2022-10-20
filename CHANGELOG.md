@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.4.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.1...v12.4.2) (2022-10-20)
+
+
+### New Features
+
+* add ability to delete user (by connecting to puente-manage ([c52d36d](https://github.com/hopetambala/puente-reactnative-collect/commit/c52d36d82b08ba97733d8ea72cbc6c3977db5d38))
+
 ### [12.4.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.0...v12.4.1) (2022-10-14)
 
 
