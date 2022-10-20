@@ -43,7 +43,6 @@ const AccountSettings = ({
     >
       Back
     </Button>
-
   </View>
 );
 
