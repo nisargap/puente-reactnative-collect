@@ -1,21 +1,26 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Parse } from 'parse/react-native';
-
 import selectedENV from '../../../environment';
 import { getData } from '../../../modules/async-storage';
+import client from '../client';
+import notificationTypeRestParams from './_signupHelper';
+
+const {
+  parseAppId, parseJavascriptKey, parseServerUrl, TEST_MODE
+} = selectedENV;
+const Parse = client(TEST_MODE);
 
 function initialize() {
-  const { parseAppId, parseJavascriptKey, parseServerUrl } = selectedENV;
-
-  Parse.setAsyncStorage(AsyncStorage);
   Parse.initialize(parseAppId, parseJavascriptKey);
   Parse.serverURL = parseServerUrl;
   console.log(`Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`); // eslint-disable-line
 }
 
-function retrieveSignUpFunction(params) {
+function retrieveSignUpFunction(params, type) {
+  const signupParams = params;
+  const restParamsData = notificationTypeRestParams(type, signupParams);
+  if (restParamsData) signupParams.restParams = restParamsData;
+
   return new Promise((resolve, reject) => {
-    Parse.Cloud.run('signup', params).then((u) => {
+    Parse.Cloud.run('signup', signupParams).then((u) => {
       const user = {
         ...u,
         id: u.id,

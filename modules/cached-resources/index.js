@@ -2,7 +2,6 @@ import populateCache from './populate-cache';
 import {
   postAssetForm,
   postHousehold,
-  postHouseholdWithRelation,
   postIdentificationForm,
   postSupplementaryAssetForm,
   postSupplementaryForm,
@@ -27,7 +26,6 @@ export {
   populateCache,
   postAssetForm,
   postHousehold,
-  postHouseholdWithRelation,
   postIdentificationForm,
   postSupplementaryAssetForm,
   postSupplementaryForm,

@@ -495,7 +495,8 @@
     "offlineData": "Offline Data Query",
     "language": "Language",
     "back": "Back",
-    "logout": "Log out"
+    "logout": "Log out",
+    "deleteUser":"Delete user?"
   },
   "findRecordSettings": {
     "currentReccordsStored": "Current records stored",

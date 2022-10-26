@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
-  Button, Checkbox, Text
+  Checkbox, Text
 } from 'react-native-paper';
 import * as yup from 'yup';
 
+import Button from '../../../components/Button';
 import FormInput from '../../../components/FormikFields/FormInput';
 import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
 import TermsModal from '../../../components/TermsModal';
@@ -56,13 +57,12 @@ const validationSchema = yup.object().shape({
 
 // export default () => (
 export default function SignUp({ navigation }) {
-  const [checked, setChecked] = React.useState(false);
-  const [visible, setVisible] = React.useState(false);
-  const [scrollViewScroll, setScrollViewScroll] = React.useState();
+  const [checked, setChecked] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [scrollViewScroll, setScrollViewScroll] = useState();
+  const [notificationType, setNotificationType] = useState('email');
+
   const { register } = useContext(UserContext);
-  const handleLogIn = () => {
-    navigation.navigate('Sign In');
-  };
 
   return (
     <KeyboardAvoidingView
@@ -71,15 +71,18 @@ export default function SignUp({ navigation }) {
       style={{ backgroundColor: theme.colors.accent, flex: 1 }}
     >
       <View>
-        <Button icon="arrow-left" width={100} style={{ paddingTop: 40 }} onPress={handleLogIn}>
-          Back
-        </Button>
+        <Button
+          icon="arrow-left"
+          onPress={() => navigation.navigate('Sign In')}
+          buttonText="Back"
+          style={[styles.serviceButton, { marginTop: 60 }]}
+        />
         <ScrollView
           style={{ backgroundColor: theme.colors.accent }}
           keyboardShouldPersistTaps="never"
           scrollEnabled={scrollViewScroll}
         >
-          <SafeAreaView style={{ marginTop: 10 }}>
+          <SafeAreaView style={{ marginTop: 50, marginBottom: 150 }}>
             <Formik
               initialValues={{
                 firstname: '', lastname: '', email: '', phonenumber: '', password: '', password2: '', organization: ''
@@ -90,7 +93,7 @@ export default function SignUp({ navigation }) {
                 } else if (values.password !== values.password2) {
                   alert(I18n.t('signUp.errorPassword')) // eslint-disable-line
                 } else {
-                  register(values)
+                  register(values, notificationType)
                     .then(() => navigation.navigate('Root')).catch((error) => {
                       // sign up failed alert user
                       console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
@@ -145,6 +148,18 @@ export default function SignUp({ navigation }) {
                     placeholder="Password Here"
                     secureTextEntry
                   />
+                  <Button
+                    color={notificationType === 'email' ? 'primary' : 'empty'}
+                    onPress={() => setNotificationType('email')}
+                    buttonText="Send confirmation via email?"
+                    style={styles.serviceButton}
+                  />
+                  <Button
+                    color={notificationType === 'text' ? 'primary' : 'empty'}
+                    onPress={() => setNotificationType('text')}
+                    buttonText="Send confirmation via text?"
+                    style={styles.serviceButton}
+                  />
                   <Autofill
                     parameter="organization"
                     formikProps={formikProps}
@@ -154,7 +169,11 @@ export default function SignUp({ navigation }) {
                     scrollViewScroll={scrollViewScroll}
                     setScrollViewScroll={setScrollViewScroll}
                   />
-                  <Button mode="text" theme={theme} color="#3E81FD" style={styles.serviceButton} onPress={() => setVisible(true)}>{I18n.t('signUp.termsOfService.view')}</Button>
+                  <Button
+                    onPress={() => setVisible(true)}
+                    buttonText={I18n.t('signUp.termsOfService.view')}
+                    style={styles.serviceButton}
+                  />
                   <View style={styles.container}>
                     <Text style={styles.serviceText}>
                       {I18n.t('signUp.termsOfService.acknoledgement')}
@@ -173,7 +192,11 @@ export default function SignUp({ navigation }) {
                   {formikProps.isSubmitting ? (
                     <ActivityIndicator />
                   ) : (
-                    <Button mode="contained" theme={theme} style={styles.submitButton} onPress={formikProps.handleSubmit}>{I18n.t('signUp.submit')}</Button>
+                    <Button
+                      onPress={formikProps.handleSubmit}
+                      buttonText={I18n.t('signUp.submit')}
+                      style={styles.serviceButton}
+                    />
                   )}
 
                   <TermsModal visible={visible} setVisible={setVisible} />

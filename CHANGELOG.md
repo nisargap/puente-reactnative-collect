@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.4.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.1...v12.4.2) (2022-10-20)
+
+
+### New Features
+
+* add ability to delete user (by connecting to puente-manage ([c52d36d](https://github.com/hopetambala/puente-reactnative-collect/commit/c52d36d82b08ba97733d8ea72cbc6c3977db5d38))
+
+### [12.4.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.0...v12.4.1) (2022-10-14)
+
+
+### Bug fixes
+
+* supplementary forms online ([e3a44d7](https://github.com/hopetambala/puente-reactnative-collect/commit/e3a44d7970ba010cd6acca68d5f1d6a41281a2c7))
+
+## [12.4.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.3.1...v12.4.0) (2022-10-10)
+
+
+### Code Refactors
+
+* household offline ([a1819c1](https://github.com/hopetambala/puente-reactnative-collect/commit/a1819c1377d409391990815ca0f793f476e9d38f))
+
+
+### New Features
+
+* add email and text signup ([f409d67](https://github.com/hopetambala/puente-reactnative-collect/commit/f409d675ad85ca65f727ae3be6dfe5682666851d))
+* add integration tests for survey and supplementary forms! ([ed57ad9](https://github.com/hopetambala/puente-reactnative-collect/commit/ed57ad9f99d6f538032ef5dce4f97888682075ed))
+
+
+### Bug fixes
+
+* add assets! ([b620ef0](https://github.com/hopetambala/puente-reactnative-collect/commit/b620ef068dd340048afe3a20825fbde754b29f6c))
+* add Integration tests to do live database testing ([696dfeb](https://github.com/hopetambala/puente-reactnative-collect/commit/696dfeb95cdaca04d15d7ccac34d5b0ea8a17bb3))
+* app version in data ([46afbc7](https://github.com/hopetambala/puente-reactnative-collect/commit/46afbc71218bcb54ad0f019b267441d8446b2f7b))
+* deprecate posthouseholdRelation ([bd9cf54](https://github.com/hopetambala/puente-reactnative-collect/commit/bd9cf5448a9dfd53d748f1c703471ddd239bdb72))
+* home map ([69d210c](https://github.com/hopetambala/puente-reactnative-collect/commit/69d210c8e0f121a459814f999af7c3ffea170a23))
+* maps! ([3944120](https://github.com/hopetambala/puente-reactnative-collect/commit/3944120354744718e4034c4f62dc383a6daf543f))
+* maps! ([05ebbed](https://github.com/hopetambala/puente-reactnative-collect/commit/05ebbed67d9743f856ed04b353ef6198ca832188))
+* patch-react-native! ([c0796eb](https://github.com/hopetambala/puente-reactnative-collect/commit/c0796eb8a50992fd07f644129c59dfe5e5bca6cb))
+* patches for parse! ([355482e](https://github.com/hopetambala/puente-reactnative-collect/commit/355482ebb679a7c47e7e5cf6301ca4a0bb2d37cc))
+* set location on asset map upon load ([646e4b2](https://github.com/hopetambala/puente-reactnative-collect/commit/646e4b204b8357b7c84c8fced013cdffcf47a857))
+
 ### [12.3.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.3.0...v12.3.1) (2022-04-03)
 
 

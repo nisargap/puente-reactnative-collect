@@ -14,7 +14,11 @@
         "react/no-string-refs": "off",
         "react/no-access-state-in-setstate": "off",
         "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error"
+        "simple-import-sort/exports": "error",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/__test__/*.js" ]}]
+
+
+
     },
     "env": {
         "jest": true,

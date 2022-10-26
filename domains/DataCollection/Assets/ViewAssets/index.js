@@ -1,5 +1,5 @@
 import { Spinner } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import {
   Dimensions, StyleSheet, View
 } from 'react-native';
@@ -13,21 +13,27 @@ import { theme } from '../../../../modules/theme';
 import SelectedAsset from './SelectedAsset';
 
 const ViewAssets = ({ organization, switchAssetPage }) => {
+  const [region, setRegion] = useState();
+  const [delta, setDelta] = useState({
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  });
+  const [markers, setMarkers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedMarker, setSelectedMarker] = useState();
+
+  const mapView = createRef();
+
   useEffect(() => {
     let isSubscribed = true;
-
     async function fetchRegion() {
       await getData('assetMapRegion').then((data) => {
         if (isSubscribed) {
           if (!data) {
-            setRegion({
-              latitude: 18.4861,
-              longitude: -69.9312,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            });
+            handleLocation();
           } else {
             setRegion(data);
+            setDelta(data);
           }
         }
       });
@@ -38,27 +44,19 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
     return () => { isSubscribed = false; };
   }, []);
 
-  const [region, setRegion] = useState();
-  const [markers, setMarkers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedMarker, setSelectedMarker] = useState();
-
   const handleLocation = async () => {
     setLoading(true);
     await getLocation().then((location) => {
       const { latitude, longitude } = location.coords;
-      setRegion({
+      const regionObj = {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
         latitude,
         longitude,
-      });
-      storeData({
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-        latitude,
-        longitude,
-      }, 'assetMapRegion');
+      };
+      setRegion(regionObj);
+      setDelta(regionObj);
+      storeData(regionObj, 'assetMapRegion');
     }).catch((e) => {
       console.log(e) //eslint-disable-line
     });
@@ -67,14 +65,33 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
 
   const retrieveMarkers = () => {
     setLoading(true);
+    setDelta({
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421
+    });
     assetDataQuery(organization).then((records) => {
       const sanitizedRecords = JSON.parse(JSON.stringify(records));
       setMarkers(sanitizedRecords);
       setLoading(false);
     }).catch((e) => {
       setLoading(false);
-      console.log(e); //eslint-disable-line
+      console.log(e) //eslint-disable-line
     });
+  };
+
+  const setView = (marker) => {
+    const { latitude, longitude } = marker;
+    const { latitudeDelta, longitudeDelta } = delta;
+
+    const reg = {
+      latitude,
+      longitude,
+      latitudeDelta,
+      longitudeDelta,
+    };
+
+    mapView.current.animateToRegion(reg, 1000);
+    setSelectedMarker(marker);
   };
 
   return (
@@ -83,6 +100,7 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
         <MapView
           style={styles.mapStyle}
           region={region}
+          ref={mapView}
         >
           {markers && markers.map((marker) => (
             marker.location && (
@@ -91,7 +109,7 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
                 coordinate={marker.location}
                 title={`${marker.name || ''}`}
                 // description={`Collector: ${marker.surveyingOr}`}
-                onPress={() => setSelectedMarker(marker)}
+                onPress={() => setView(marker)}
               />
             )
           ))}

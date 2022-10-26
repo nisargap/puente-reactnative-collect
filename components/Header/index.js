@@ -1,6 +1,6 @@
 import { Spinner } from 'native-base';
 import React, { useContext, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import Emoji from 'react-native-emoji';
 import {
   Button,
@@ -8,13 +8,11 @@ import {
 } from 'react-native-paper';
 
 import { OfflineContext } from '../../context/offline.context';
-import surveyingUserFailsafe from '../../domains/DataCollection/Forms/utils';
-import { deleteData, getData } from '../../modules/async-storage';
+import { getData } from '../../modules/async-storage';
 import handleParseError from '../../modules/cached-resources/error-handling';
 import I18n from '../../modules/i18n';
 import checkOnlineStatus from '../../modules/offline';
-import { isEmpty } from '../../modules/utils';
-import { postOfflineForms } from '../../services/parse/crud';
+import { cleanupPostedOfflineForms, postOfflineForms } from '../../modules/offline/post';
 import FormCounts from './FormCounts';
 import styles from './index.styles';
 
@@ -28,6 +26,7 @@ const Header = ({
   const [offlineForms, setOfflineForms] = useState(false);
   const [offlineFormCount, setOfflineFormCount] = useState(0);
   const [submission, setSubmission] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showCounts, setShowCounts] = useState(false);
   const { populateResidentDataCache, isLoading: isOfflineLoading } = useContext(OfflineContext);
 
@@ -97,79 +96,38 @@ const Header = ({
     setDrawerOpen(!drawerOpen);
   };
 
-  const postOffline = async () => {
-    const user = await getData('currentUser');
+  const upload = async () => {
+    setIsSubmitting(true);
+    const offlineRecords = await postOfflineForms()
+      .catch((error) => handleParseError(error, postOfflineForms)
+        .then(async (records) => {
+          const { status } = records;
 
-    const surveyUser = await surveyingUserFailsafe(user, undefined, isEmpty);
-    const { organization } = user;
-    const appVersion = await getData('appVersion') || '';
-    const phoneOS = Platform.OS || '';
-
-    const idFormsAsync = await getData('offlineIDForms');
-    const supplementaryFormsAsync = await getData('offlineSupForms');
-    const assetIdFormsAsync = await getData('offlineAssetIDForms');
-    const assetSupFormsAsync = await getData('offlineAssetSupForms');
-    const householdsAsync = await getData('offlineHouseholds');
-    const householdRelationsAsync = await getData('offlineHouseholdsRelation');
-
-    const offlineParams = {
-      surveyData: idFormsAsync,
-      supForms: supplementaryFormsAsync,
-      households: householdsAsync,
-      householdRelations: householdRelationsAsync,
-      assetIdForms: assetIdFormsAsync,
-      assetSupForms: assetSupFormsAsync,
-      surveyingUser: surveyUser,
-      surveyingOrganization: organization,
-      parseUser: user.objectId,
-      appVersion,
-      phoneOS
-    };
-    checkOnlineStatus().then((connected) => {
-      if (connected) {
-        postOfflineForms(offlineParams).then(async (result) => {
-          if (result) {
-            await deleteData('offlineIDForms');
-            await deleteData('offlineSupForms');
-            await deleteData('offlineAssetIDForms');
-            await deleteData('offlineAssetSupForms');
-            await deleteData('offlineHouseholds');
-            await deleteData('offlineHouseholdsRelation');
-            setOfflineForms(false);
-            setSubmission(true);
-          } else {
+          if (status === 'Error') {
+            setIsSubmitting(false);
             setSubmission(false);
+            return;
           }
-        }).catch((error) => {
-          // handle session token error
-          handleParseError(error, postOfflineForms).then(async (result) => {
-            if (result) {
-              await deleteData('offlineIDForms');
-              await deleteData('offlineSupForms');
-              await deleteData('offlineAssetIDForms');
-              await deleteData('offlineAssetSupForms');
-              await deleteData('offlineHouseholds');
-              await deleteData('offlineHouseholdsRelation');
-              setOfflineForms(false);
-              setSubmission(true);
-            } else {
-              setSubmission(false);
-            }
-          }, () => {
-            setSubmission(false);
-          });
-        });
-      } else {
-        setSubmission(false);
-      }
-    });
+          setSubmission(true);
+          setIsSubmitting(false);
+          await cleanupPostedOfflineForms();
+        }));
+
+    const { status } = offlineRecords;
+    if (status === 'Error') {
+      setIsSubmitting(false);
+      setSubmission(false);
+      return;
+    }
+
+    setSubmission(true);
+    setIsSubmitting(false);
+    await cleanupPostedOfflineForms();
   };
 
-  const cacheOfflineData = async () => {
-    checkOnlineStatus().then(async (connected) => {
-      if (connected) await populateResidentDataCache();
-    });
-  };
+  const cacheOfflineData = async () => checkOnlineStatus().then(async (connected) => {
+    if (connected) await populateResidentDataCache();
+  });
 
   const navToSettings = () => {
     setDrawerOpen(false);
@@ -199,10 +157,10 @@ const Header = ({
           />
         </View>
       </View>
-      {drawerOpen === true
+      {drawerOpen
         && (
           <View>
-            {showCounts === false ? (
+            {!showCounts ? (
               <View>
                 <Headline style={styles.calculationText}>
                   {volunteerGreeting}
@@ -212,25 +170,26 @@ const Header = ({
                   <Text style={styles.calculationText}>{`${I18n.t('header.volunteerSince')}\n${volunteerDate}`}</Text>
                 </View>
                 {offlineForms ? (
-                  <Button onPress={postOffline}>
+                  <Button onPress={upload}>
                     {I18n.t('header.submitOffline')}
                   </Button>
                 ) : (
                   <Button disabled>{I18n.t('header.submitOffline')}</Button>
                 )}
+                {isSubmitting && (<Spinner color="blue" />)}
                 {isOfflineLoading ? (
                   <Spinner color="blue" />
                 ) : (
                   <Button onPress={cacheOfflineData}>{I18n.t('header.populateOffline')}</Button>
                 )}
-                {submission === false && (
+                {!submission && (
                   <View>
                     <Text style={styles.calculationText}>{I18n.t('header.failedAttempt')}</Text>
                     <Text style={{ alignSelf: 'center' }}>{I18n.t('header.tryAgain')}</Text>
                     <Button onPress={() => setSubmission(null)}>{I18n.t('header.ok')}</Button>
                   </View>
                 )}
-                {submission === true && (
+                {submission && (
                   <View>
                     <Text style={styles.calculationText}>{I18n.t('header.success')}</Text>
                     <Text style={{ alignSelf: 'center' }}>
