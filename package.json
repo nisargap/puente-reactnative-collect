@@ -41,12 +41,14 @@
     "@react-native-async-storage/async-storage": "~1.17.10",
     "@react-native-community/netinfo": "9.3.0",
     "@react-native-masked-view/masked-view": "0.2.7",
+    "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/bottom-tabs": "5.11.11",
     "@react-navigation/native": "5.9.4",
     "@react-navigation/stack": "5.14.5",
     "axios": "0.21.1",
     "deprecated-react-native-prop-types": "^2.3.0",
     "expo": "^46.0.0",
+    "expo-application": "~4.2.2",
     "expo-asset": "~8.6.1",
     "expo-camera": "~12.3.0",
     "expo-constants": "~13.2.4",
@@ -65,7 +67,7 @@
     "formik": "2.1.5",
     "i18n-js": "3.7.1",
     "lodash": "4.17.21",
-    "native-base": "2.13.8",
+    "native-base": "2.15.2",
     "parse": "2.19.0",
     "patch-package": "^6.4.7",
     "prop-types": "^15.8.1",
@@ -83,8 +85,7 @@
     "react-native-screens": "~3.15.0",
     "react-native-svg": "12.3.0",
     "react-native-uuid": "^2.0.1",
-    "yup": "0.29.3",
-    "expo-application": "~4.2.2"
+    "yup": "0.29.3"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
