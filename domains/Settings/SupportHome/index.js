@@ -1,5 +1,6 @@
+import * as Linking from 'expo-linking';
 import * as StoreReview from 'expo-store-review';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   TouchableOpacity,
   View
@@ -8,6 +9,8 @@ import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
+import { UserContext } from '../../../context/auth.context';
+import ENV from '../../../environment';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
 import styles from '../index.styles';
@@ -16,12 +19,19 @@ import SupportSettings from './SupportSettings';
 const SupportHome = ({
   logOut, settingsView, setSettingsView, setSettings
 }) => {
+  const { PUENTE_MANAGE_URL } = ENV;
+  const { user } = useContext(UserContext);
   const [supportView, setSupportView] = useState('');
 
   const rateApp = async () => {
     if (await StoreReview.isAvailableAsync()) {
       StoreReview.requestReview();
     }
+  };
+
+  const deleteUser = async () => {
+    const { id } = user;
+    return Linking.openURL(`${PUENTE_MANAGE_URL}/account/management?objectId=${id}`);
   };
   const inputs = [
     {
@@ -100,6 +110,7 @@ const SupportHome = ({
             {I18n.t('accountSettings.back')}
           </Button>
           <Button mode="contained" onPress={logOut} style={{ marginTop: 20, marginLeft: '5%', marginRight: '5%' }}>{I18n.t('accountSettings.logout')}</Button>
+          <Button color="red" onPress={deleteUser} style={{ marginTop: 20, marginLeft: '5%', marginRight: '5%' }}>{I18n.t('accountSettings.deleteUser')}</Button>
         </View>
       )}
       {supportView !== '' && (

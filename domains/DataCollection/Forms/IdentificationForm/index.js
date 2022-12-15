@@ -15,6 +15,7 @@ import yupValidationPicker from '../../../../components/FormikFields/YupValidati
 import PopupError from '../../../../components/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
+import { storeAppVersion } from '../../../../modules/cached-resources/populate-cache';
 import I18n from '../../../../modules/i18n';
 import { layout, theme } from '../../../../modules/theme';
 import { isEmpty } from '../../../../modules/utils';
@@ -52,7 +53,8 @@ const IdentificationForm = ({
 
             formObject.surveyingOrganization = surveyingOrganization || user.organization;
             formObject.surveyingUser = await surveyingUserFailsafe(user, surveyingUser, isEmpty);
-            formObject.appVersion = await getData('appVersion') || '';
+
+            formObject.appVersion = await storeAppVersion() || '';
             formObject.phoneOS = Platform.OS || '';
 
             formObject.latitude = values.location?.latitude || 0;

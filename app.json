@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "12.3.1",
+    "version": "12.4.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -23,7 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "12.3.1",
+      "buildNumber": "12.4.2",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately.",
         "NSCameraUsageDescription": "This app uses photos to identify residents more accurately.",
@@ -36,7 +36,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 420120301,
+      "versionCode": 460120402,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -67,6 +67,11 @@
         "wasm",
         "svg"
       ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "04cfb8a1-9de3-4228-91d4-d2f43aeaed27"
+      }
     }
   }
 }

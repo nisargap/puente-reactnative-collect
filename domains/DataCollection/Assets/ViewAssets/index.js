@@ -79,10 +79,6 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
     });
   };
 
-  const onRegionChange = (reg) => {
-    setDelta(reg);
-  };
-
   const setView = (marker) => {
     const { latitude, longitude } = marker;
     const { latitudeDelta, longitudeDelta } = delta;
@@ -104,7 +100,6 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
         <MapView
           style={styles.mapStyle}
           region={region}
-          onRegionChange={onRegionChange}
           ref={mapView}
         >
           {markers && markers.map((marker) => (

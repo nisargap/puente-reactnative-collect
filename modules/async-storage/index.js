@@ -4,11 +4,11 @@ const storeData = async (value, storageName) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(storageName, jsonValue);
-    return;
+    return value;
   } catch (e) {
     // saving error
     console.log(e); //eslint-disable-line
-
+    return e;
   }
 };
 
