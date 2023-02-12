@@ -8,11 +8,11 @@ import {
   TouchableWithoutFeedback, View
 } from 'react-native';
 
-import PaperButton from '../../../../components/Button';
-import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
-import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
-import PopupError from '../../../../components/PopupError';
+import PaperButton from '../../../../impacto-design-system/Button';
+import ErrorPicker from '../../../../impacto-design-system/FormikFields/ErrorPicker';
+import PaperInputPicker from '../../../../impacto-design-system/FormikFields/PaperInputPicker';
+import yupValidationPicker from '../../../../impacto-design-system/FormikFields/YupValidation';
+import PopupError from '../../../../impacto-design-system/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postIdentificationForm } from '../../../../modules/cached-resources';
 import { storeAppVersion } from '../../../../modules/cached-resources/populate-cache';

@@ -8,7 +8,7 @@ import {
   Text, Title
 } from 'react-native-paper';
 
-import TermsModal from '../../../components/TermsModal';
+import TermsModal from '../../../impacto-design-system/TermsModal';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';
 

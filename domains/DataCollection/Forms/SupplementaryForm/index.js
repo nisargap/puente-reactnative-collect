@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import ErrorPicker from '../../../../components/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
-import yupValidationPicker from '../../../../components/FormikFields/YupValidation';
-import PopupError from '../../../../components/PopupError';
+import ErrorPicker from '../../../../impacto-design-system/FormikFields/ErrorPicker';
+import PaperInputPicker from '../../../../impacto-design-system/FormikFields/PaperInputPicker';
+import yupValidationPicker from '../../../../impacto-design-system/FormikFields/YupValidation';
+import PopupError from '../../../../impacto-design-system/PopupError';
 import { getData } from '../../../../modules/async-storage';
 import { postSupplementaryForm } from '../../../../modules/cached-resources';
 import I18n from '../../../../modules/i18n';

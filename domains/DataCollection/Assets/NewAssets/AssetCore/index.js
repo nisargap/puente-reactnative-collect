@@ -10,10 +10,10 @@ import {
   Provider
 } from 'react-native-paper';
 
-import PaperButton from '../../../../../components/Button';
-import ErrorPicker from '../../../../../components/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import PopupError from '../../../../../components/PopupError';
+import PaperButton from '../../../../../impacto-design-system/Button';
+import ErrorPicker from '../../../../../impacto-design-system/FormikFields/ErrorPicker';
+import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
+import PopupError from '../../../../../impacto-design-system/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postAssetForm } from '../../../../../modules/cached-resources';
 import I18n from '../../../../../modules/i18n';

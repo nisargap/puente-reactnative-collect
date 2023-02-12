@@ -3,7 +3,7 @@ import {
   Text, View
 } from 'react-native';
 
-import Header from '../../components/Header';
+import Header from '../../impacto-design-system/Header';
 import { layout } from '../../modules/theme';
 
 export default function DataAnalysis() {

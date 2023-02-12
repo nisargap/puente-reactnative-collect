@@ -23,9 +23,9 @@ import {
 import * as yup from 'yup';
 
 import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
-import FormInput from '../../../components/FormikFields/FormInput';
-import LanguagePicker from '../../../components/LanguagePicker';
-import TermsModal from '../../../components/TermsModal';
+import FormInput from '../../../impacto-design-system/FormikFields/FormInput';
+import LanguagePicker from '../../../impacto-design-system/LanguagePicker';
+import TermsModal from '../../../impacto-design-system/TermsModal';
 import { UserContext } from '../../../context/auth.context';
 import { deleteData, getData } from '../../../modules/async-storage';
 import I18n from '../../../modules/i18n';

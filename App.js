@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 
-import MainNavigation from './components/MainNavigation';
+import MainNavigation from './impacto-design-system/MainNavigation';
 import { UserContextProvider } from './context/auth.context';
 import { OfflineContextProvider } from './context/offline.context';
 import useCachedResources from './modules/cached-resources/useCachedResources';

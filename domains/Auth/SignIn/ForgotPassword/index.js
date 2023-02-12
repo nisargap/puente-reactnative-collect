@@ -6,7 +6,7 @@ import {
   Text
 } from 'react-native-paper';
 
-import FormInput from '../../../../components/FormikFields/FormInput';
+import FormInput from '../../../../impacto-design-system/FormikFields/FormInput';
 import I18n from '../../../../modules/i18n';
 import { theme } from '../../../../modules/theme';
 import { retrieveForgotPasswordFunction } from '../../../../services/parse/auth';

@@ -8,7 +8,7 @@ import {
 } from 'react-native-paper';
 
 import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-import Header from '../../components/Header';
+import Header from '../../impacto-design-system/Header';
 import { getTasksAsync } from '../../modules/cached-resources';
 import I18n from '../../modules/i18n';
 import { layout } from '../../modules/theme';

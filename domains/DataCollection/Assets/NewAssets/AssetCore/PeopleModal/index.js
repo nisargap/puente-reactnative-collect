@@ -8,7 +8,7 @@ import {
   TextInput
 } from 'react-native-paper';
 
-import PaperButton from '../../../../../../components/Button';
+import PaperButton from '../../../../../../impacto-design-system/Button';
 import I18n from '../../../../../../modules/i18n';
 import { theme } from '../../../../../../modules/theme';
 

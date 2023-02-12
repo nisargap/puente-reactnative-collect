@@ -10,7 +10,7 @@ import {
 } from 'react-native-paper';
 
 import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
-import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
+import SmallCardsCarousel from '../../../impacto-design-system/Cards/SmallCardsCarousel';
 import { getData, storeData } from '../../../modules/async-storage';
 import { customFormsQuery } from '../../../modules/cached-resources';
 import I18n from '../../../modules/i18n';

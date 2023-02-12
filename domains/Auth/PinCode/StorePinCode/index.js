@@ -3,7 +3,7 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import FormInput from '../../../../components/FormikFields/FormInput';
+import FormInput from '../../../../impacto-design-system/FormikFields/FormInput';
 import { storeData } from '../../../../modules/async-storage';
 import I18n from '../../../../modules/i18n';
 

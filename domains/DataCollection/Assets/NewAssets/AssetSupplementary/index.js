@@ -5,10 +5,10 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import AssetSearchbar from '../../../../../components/AssetSearchBar/index';
-import PaperButton from '../../../../../components/Button';
-import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import PopupError from '../../../../../components/PopupError';
+import AssetSearchbar from '../../../../../impacto-design-system/AssetSearchBar/index';
+import PaperButton from '../../../../../impacto-design-system/Button';
+import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
+import PopupError from '../../../../../impacto-design-system/PopupError';
 import { getData } from '../../../../../modules/async-storage';
 import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
 import { storeAppVersion } from '../../../../../modules/cached-resources/populate-cache';

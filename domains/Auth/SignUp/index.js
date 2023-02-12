@@ -14,10 +14,10 @@ import {
 } from 'react-native-paper';
 import * as yup from 'yup';
 
-import Button from '../../../components/Button';
-import FormInput from '../../../components/FormikFields/FormInput';
-import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
-import TermsModal from '../../../components/TermsModal';
+import Button from '../../../impacto-design-system/Button';
+import FormInput from '../../../impacto-design-system/FormikFields/FormInput';
+import Autofill from '../../../impacto-design-system/FormikFields/PaperInputPicker/AutoFill';
+import TermsModal from '../../../impacto-design-system/TermsModal';
 import { UserContext } from '../../../context/auth.context';
 import I18n from '../../../modules/i18n';
 import { theme } from '../../../modules/theme';

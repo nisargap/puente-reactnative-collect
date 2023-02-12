@@ -5,7 +5,7 @@ import {
 import { Button, Card, Text } from 'react-native-paper';
 
 import PostSubmissionSVG from '../../../assets/graphics/static/Submission-Page-Icon.svg';
-import ResidentIdSearchbar from '../../../components/ResidentIdSearchbar';
+import ResidentIdSearchbar from '../../../impacto-design-system/ResidentIdSearchbar';
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
 import GdprCompliance from '../GdprCompliance';

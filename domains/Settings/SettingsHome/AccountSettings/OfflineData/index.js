@@ -7,9 +7,9 @@ import {
   TouchableWithoutFeedback, View
 } from 'react-native';
 
-import PaperButton from '../../../../../components/Button';
-import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import PopupSuccess from '../../../../../components/PopupSuccess';
+import PaperButton from '../../../../../impacto-design-system/Button';
+import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
+import PopupSuccess from '../../../../../impacto-design-system/PopupSuccess';
 import { OfflineContext } from '../../../../../context/offline.context';
 import { deleteData, getData } from '../../../../../modules/async-storage';
 import { cacheResidentDataMulti } from '../../../../../modules/cached-resources';
