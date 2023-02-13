@@ -1,4 +1,5 @@
 import ENV from '@app/environment';
+import { UserContext } from '@context/auth.context';
 import I18n from '@modules/i18n';
 import { theme } from '@modules/theme';
 import * as Linking from 'expo-linking';
@@ -12,7 +13,6 @@ import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
-import { UserContext } from '../../../context/auth.context';
 import styles from '../index.styles';
 import SupportSettings from './SupportSettings';
 

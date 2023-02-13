@@ -5,6 +5,7 @@
     "parser": "babel-eslint",
     "plugins": [
         "simple-import-sort",
+        "import",
         "module-resolver"
     ],
     "rules": {
