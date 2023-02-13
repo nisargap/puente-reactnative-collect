@@ -1,3 +1,6 @@
+import TermsModal from '@impacto-design-system/Extensions/TermsModal';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import React from 'react';
 import {
   StyleSheet,
@@ -7,10 +10,6 @@ import {
   Button, Checkbox,
   Text, Title
 } from 'react-native-paper';
-
-import TermsModal from '../../../impacto-design-system/TermsModal';
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
 
 const GdprCompliance = ({
   setConsent

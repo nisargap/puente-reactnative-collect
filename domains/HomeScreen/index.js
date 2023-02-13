@@ -1,3 +1,8 @@
+import ComingSoonSVG from '@app/assets/graphics/static/Adventurer.svg';
+import Header from '@impacto-design-system/Extensions/Header';
+import { getTasksAsync } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import { layout } from '@modules/theme';
 import React, { useState } from 'react';
 import {
   Text, View
@@ -6,12 +11,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {
   Button, Card, Paragraph, Title
 } from 'react-native-paper';
-
-import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-import Header from '../../impacto-design-system/Header';
-import { getTasksAsync } from '../../modules/cached-resources';
-import I18n from '../../modules/i18n';
-import { layout } from '../../modules/theme';
 
 const HomeScreen = () => {
   const [tasks, setTasks] = useState(null);

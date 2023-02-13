@@ -1,10 +1,10 @@
+import { assetFormsQuery } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import { layout, theme } from '@modules/theme';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { Card, IconButton, Text } from 'react-native-paper';
 
-import { assetFormsQuery } from '../../../../../../modules/cached-resources';
-import I18n from '../../../../../../modules/i18n';
-import { layout, theme } from '../../../../../../modules/theme';
 import styles from './index.style';
 
 const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {

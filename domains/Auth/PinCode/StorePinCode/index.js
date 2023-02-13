@@ -1,11 +1,10 @@
+import FormInput from '@impacto-design-system/Extensions/FormikFields/FormInput';
+import { storeData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
 import { Formik } from 'formik';
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-
-import FormInput from '../../../../impacto-design-system/FormikFields/FormInput';
-import { storeData } from '../../../../modules/async-storage';
-import I18n from '../../../../modules/i18n';
 
 const StorePinCode = ({ navigation }) => (
   <Formik

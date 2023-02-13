@@ -1,3 +1,5 @@
+import I18n from '@modules/i18n';
+import { layout } from '@modules/theme';
 import React from 'react';
 import {
   ScrollView,
@@ -8,8 +10,6 @@ import {
 } from 'react-native-paper';
 import uuid from 'react-native-uuid';
 
-import I18n from '../../../../modules/i18n';
-import { layout } from '../../../../modules/theme';
 import styles from '../index.styles';
 
 const FormsHorizontalView = ({

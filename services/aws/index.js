@@ -1,4 +1,4 @@
-import selectedENV from '../../environment';
+import selectedENV from '@app/environment';
 
 const axios = require('axios');
 

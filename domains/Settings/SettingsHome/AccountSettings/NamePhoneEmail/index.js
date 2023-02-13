@@ -1,3 +1,6 @@
+import { getData, storeData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import { Parse } from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import {
@@ -7,9 +10,6 @@ import {
   Button, Headline, IconButton, Text, TextInput
 } from 'react-native-paper';
 
-import { getData, storeData } from '../../../../../modules/async-storage';
-import I18n from '../../../../../modules/i18n';
-import { theme } from '../../../../../modules/theme';
 import styles from '../../../index.styles';
 
 const NamePhoneEmail = () => {

@@ -1,9 +1,8 @@
-import uuid from 'react-native-uuid';
-
-import checkOnlineStatus from '../../../offline';
 import {
   postHousehold, postIdentificationForm, postSupplementaryForm
-} from '../post';
+} from '@modules/cached-resources/Post/post';
+import checkOnlineStatus from '@modules/offline';
+import uuid from 'react-native-uuid';
 
 jest.mock('../../../offline', () => jest.fn());
 

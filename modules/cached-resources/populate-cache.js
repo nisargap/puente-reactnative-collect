@@ -1,6 +1,6 @@
+import { storeData } from '@modules/async-storage';
 import Constants from 'expo-constants';
 
-import { storeData } from '../async-storage';
 import {
   assetDataQuery, assetFormsQuery, cacheAutofillData, customFormsQuery
 } from './read';

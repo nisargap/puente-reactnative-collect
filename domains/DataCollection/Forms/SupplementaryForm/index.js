@@ -1,4 +1,14 @@
 // Make this render but switch between forms
+import surveyingUserFailsafe from '@app/domains/DataCollection/Forms/utils';
+import PopupError from '@impacto-design-system/Base/PopupError';
+import ErrorPicker from '@impacto-design-system/Extensions/FormikFields/ErrorPicker';
+import PaperInputPicker from '@impacto-design-system/Extensions/FormikFields/PaperInputPicker';
+import yupValidationPicker from '@impacto-design-system/Extensions/FormikFields/YupValidation';
+import { getData } from '@modules/async-storage';
+import { postSupplementaryForm } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import { layout, theme } from '@modules/theme';
+import { isEmpty } from '@modules/utils';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
@@ -8,16 +18,6 @@ import {
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import ErrorPicker from '../../../../impacto-design-system/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../impacto-design-system/FormikFields/PaperInputPicker';
-import yupValidationPicker from '../../../../impacto-design-system/FormikFields/YupValidation';
-import PopupError from '../../../../impacto-design-system/PopupError';
-import { getData } from '../../../../modules/async-storage';
-import { postSupplementaryForm } from '../../../../modules/cached-resources';
-import I18n from '../../../../modules/i18n';
-import { layout, theme } from '../../../../modules/theme';
-import { isEmpty } from '../../../../modules/utils';
-import surveyingUserFailsafe from '../utils';
 import envConfig from './configs/envhealth.config';
 import medConfig from './configs/medical-evaluation.config';
 import vitalsConfig from './configs/vitals.config';

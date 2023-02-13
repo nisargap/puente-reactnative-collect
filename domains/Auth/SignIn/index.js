@@ -1,5 +1,13 @@
 /* eslint no-param-reassign: ["error",
 { "props": true, "ignorePropertyModificationsFor": ["formikProps"] }] */
+import BlackLogo from '@app/assets/graphics/static/Logo-Black.svg';
+import FormInput from '@impacto-design-system/Extensions/FormikFields/FormInput';
+import LanguagePicker from '@impacto-design-system/Extensions/LanguagePicker';
+import TermsModal from '@impacto-design-system/Extensions/TermsModal';
+import { deleteData, getData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
+import checkOnlineStatus from '@modules/offline';
+import { theme } from '@modules/theme';
 import { Formik } from 'formik';
 import React, {
   useContext,
@@ -22,15 +30,7 @@ import {
 } from 'react-native-paper';
 import * as yup from 'yup';
 
-import BlackLogo from '../../../assets/graphics/static/Logo-Black.svg';
-import FormInput from '../../../impacto-design-system/FormikFields/FormInput';
-import LanguagePicker from '../../../impacto-design-system/LanguagePicker';
-import TermsModal from '../../../impacto-design-system/TermsModal';
 import { UserContext } from '../../../context/auth.context';
-import { deleteData, getData } from '../../../modules/async-storage';
-import I18n from '../../../modules/i18n';
-import checkOnlineStatus from '../../../modules/offline';
-import { theme } from '../../../modules/theme';
 import ForgotPassword from './ForgotPassword';
 
 const validationSchema = yup.object().shape({

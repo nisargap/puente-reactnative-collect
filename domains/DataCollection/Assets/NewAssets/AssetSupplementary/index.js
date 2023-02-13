@@ -1,3 +1,14 @@
+import SelectedAsset from '@app/domains/DataCollection/Assets/ViewAssets/SelectedAsset';
+import { addSelectTextInputs, cleanLoopSubmissions } from '@app/domains/DataCollection/Forms/SupplementaryForm/utils';
+import surveyingUserFailsafe from '@app/domains/DataCollection/Forms/utils';
+import { Button as PaperButton, PopupError } from '@impacto-design-system/Base';
+import { AssetSearchbar, PaperInputPicker } from '@impacto-design-system/Extensions';
+import { getData } from '@modules/async-storage';
+import { postSupplementaryAssetForm } from '@modules/cached-resources';
+import { storeAppVersion } from '@modules/cached-resources/populate-cache';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
+import { isEmpty } from '@modules/utils';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import {
@@ -5,19 +16,6 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import AssetSearchbar from '../../../../../impacto-design-system/AssetSearchBar/index';
-import PaperButton from '../../../../../impacto-design-system/Button';
-import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
-import PopupError from '../../../../../impacto-design-system/PopupError';
-import { getData } from '../../../../../modules/async-storage';
-import { postSupplementaryAssetForm } from '../../../../../modules/cached-resources';
-import { storeAppVersion } from '../../../../../modules/cached-resources/populate-cache';
-import I18n from '../../../../../modules/i18n';
-import { theme } from '../../../../../modules/theme';
-import { isEmpty } from '../../../../../modules/utils';
-import { addSelectTextInputs, cleanLoopSubmissions } from '../../../Forms/SupplementaryForm/utils';
-import surveyingUserFailsafe from '../../../Forms/utils';
-import SelectedAsset from '../../ViewAssets/SelectedAsset';
 import AssetFormSelect from './AssetFormSelect';
 import styles from './index.styles';
 

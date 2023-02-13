@@ -1,6 +1,5 @@
+import { theme } from '@modules/theme';
 import { StyleSheet } from 'react-native';
-
-import { theme } from '../../../../../../modules/theme';
 
 const styles = StyleSheet.create({
   cardContainer: {

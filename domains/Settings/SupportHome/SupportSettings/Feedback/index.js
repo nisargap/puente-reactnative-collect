@@ -1,3 +1,4 @@
+import I18n from '@modules/i18n';
 import * as MailComposer from 'expo-mail-composer';
 import React, { useState } from 'react';
 import {
@@ -7,7 +8,6 @@ import {
   Button, Headline, Text, TextInput
 } from 'react-native-paper';
 
-import I18n from '../../../../../modules/i18n';
 import styles from '../../../index.styles';
 
 const Feedback = () => {

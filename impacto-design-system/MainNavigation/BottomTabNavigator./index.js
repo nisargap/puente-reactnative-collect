@@ -1,11 +1,10 @@
+// import DataAnalysis from '../../../domains/DataAnalysis';
+// import HomeScreen from '../../../domains/HomeScreen';
+import DataCollection from '@app/domains/DataCollection';
+import { TabBarIcon } from '@impacto-design-system/Extensions';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import I18n from 'i18n-js';
 import * as React from 'react';
-
-// import DataAnalysis from '../../../domains/DataAnalysis';
-// import HomeScreen from '../../../domains/HomeScreen';
-import DataCollection from '../../../domains/DataCollection';
-import TabBarIcon from '../../TabBarIcon';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Data_Collection';

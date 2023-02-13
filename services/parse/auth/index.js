@@ -1,6 +1,7 @@
-import selectedENV from '../../../environment';
-import { getData } from '../../../modules/async-storage';
-import client from '../client';
+import selectedENV from '@app/environment';
+import client from '@app/services/parse/client';
+import { getData } from '@modules/async-storage';
+
 import notificationTypeRestParams from './_signupHelper';
 
 const {

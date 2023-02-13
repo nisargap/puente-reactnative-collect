@@ -1,3 +1,6 @@
+import ENV from '@app/environment';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import * as Linking from 'expo-linking';
 import * as StoreReview from 'expo-store-review';
 import React, { useContext, useState } from 'react';
@@ -10,9 +13,6 @@ import {
 } from 'react-native-paper';
 
 import { UserContext } from '../../../context/auth.context';
-import ENV from '../../../environment';
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
 import styles from '../index.styles';
 import SupportSettings from './SupportSettings';
 

@@ -1,4 +1,17 @@
 // import * as React from 'react';
+import SettingsView from '@app/domains/Settings';
+import ComingSoonSVG from '@assets/graphics/static/Adventurer.svg';
+import FindRecordSVG from '@assets/graphics/static/Find-Record-Icon.svg';
+import ResearchSVG from '@assets/graphics/static/Research.svg';
+import MedEvalSVG from '@assets/icons/Heart-Icon.svg';
+import EnvSVG from '@assets/icons/Home-icon.svg';
+import NewRecordSVG from '@assets/icons/New-Record-icon.svg';
+import { UserContext } from '@context/auth.context';
+import { FindResidents, Header } from '@impacto-design-system/Extensions';
+import MapView from '@impacto-design-system/MapView';
+import { getData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
+import { layout } from '@modules/theme';
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useContext, useState } from 'react';
 import {
@@ -10,20 +23,6 @@ import {
   Button, Card
 } from 'react-native-paper';
 
-import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-import FindRecordSVG from '../../assets/graphics/static/Find-Record-Icon.svg';
-import ResearchSVG from '../../assets/graphics/static/Research.svg';
-import MedEvalSVG from '../../assets/icons/Heart-Icon.svg';
-import EnvSVG from '../../assets/icons/Home-icon.svg';
-import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
-import FindResidents from '../../impacto-design-system/FindResidents';
-import Header from '../../impacto-design-system/Header';
-import MapView from '../../impacto-design-system/MapView';
-import { UserContext } from '../../context/auth.context';
-import { getData } from '../../modules/async-storage';
-import I18n from '../../modules/i18n';
-import { layout } from '../../modules/theme';
-import SettingsView from '../Settings';
 import Assets from './Assets';
 import FormGallery from './FormGallery';
 import Forms from './Forms';

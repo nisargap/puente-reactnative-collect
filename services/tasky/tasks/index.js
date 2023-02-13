@@ -1,6 +1,5 @@
+import selectedENV from '@app/environment';
 import axios from 'axios';
-
-import selectedENV from '../../../environment';
 
 function getTasks() {
   const { taskyUrlApi } = selectedENV;

@@ -1,9 +1,9 @@
+import surveyingUserFailsafe from '@app/domains/DataCollection/Forms/utils';
+import { uploadOfflineForms } from '@app/services/parse/crud';
+import { deleteData, getData } from '@modules/async-storage';
+import { isEmpty } from '@modules/utils';
 import { Platform } from 'react-native';
 
-import surveyingUserFailsafe from '../../../domains/DataCollection/Forms/utils';
-import { uploadOfflineForms } from '../../../services/parse/crud';
-import { deleteData, getData } from '../../async-storage';
-import { isEmpty } from '../../utils';
 import checkOnlineStatus from '..';
 
 const cleanupPostedOfflineForms = async () => {

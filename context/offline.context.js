@@ -1,9 +1,9 @@
+import { getData, storeData } from '@modules/async-storage';
+import { populateCache, residentQuery } from '@modules/cached-resources';
 import React, {
   createContext, useContext, useState
 } from 'react';
 
-import { getData, storeData } from '../modules/async-storage';
-import { populateCache, residentQuery } from '../modules/cached-resources';
 import { UserContext } from './auth.context';
 
 export const OfflineContext = createContext();

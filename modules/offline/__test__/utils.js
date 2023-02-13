@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker';
-
-import { storeData } from '../../async-storage';
+import { storeData } from '@modules/async-storage';
 
 const createOfflineUserMockData = async () => {
   const user = {

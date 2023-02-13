@@ -1,3 +1,11 @@
+import { cleanLoopSubmissions } from '@app/domains/DataCollection/Forms/SupplementaryForm/utils';
+import surveyingUserFailsafe from '@app/domains/DataCollection/Forms/utils';
+import { Button as PaperButton, PopupError } from '@impacto-design-system/Base';
+import { ErrorPicker, PaperInputPicker } from '@impacto-design-system/Extensions';
+import { getData } from '@modules/async-storage';
+import { postAssetForm } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import { isEmpty } from '@modules/utils';
 import { Formik } from 'formik';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -10,16 +18,6 @@ import {
   Provider
 } from 'react-native-paper';
 
-import PaperButton from '../../../../../impacto-design-system/Button';
-import ErrorPicker from '../../../../../impacto-design-system/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
-import PopupError from '../../../../../impacto-design-system/PopupError';
-import { getData } from '../../../../../modules/async-storage';
-import { postAssetForm } from '../../../../../modules/cached-resources';
-import I18n from '../../../../../modules/i18n';
-import { isEmpty } from '../../../../../modules/utils';
-import { cleanLoopSubmissions } from '../../../Forms/SupplementaryForm/utils';
-import surveyingUserFailsafe from '../../../Forms/utils';
 import configArray from './config/config';
 import styles from './index.styles';
 

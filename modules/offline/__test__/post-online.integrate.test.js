@@ -1,10 +1,11 @@
-import hooks from '../../../test/hooks';
+import hooks from '@app/test/hooks';
 import {
   // postAssetForm, postHousehold,
   // postSupplementaryAssetForm,
   postIdentificationForm,
   postSupplementaryForm
-} from '../../cached-resources';
+} from '@modules/cached-resources';
+
 import checkOnlineStatus from '..';
 import {
   // createAssetMockData,

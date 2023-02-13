@@ -1,5 +1,6 @@
-import selectedENV from '../../../environment';
-import client from '../client';
+import selectedENV from '@app/environment';
+import client from '@app/services/parse/client';
+
 import { customMultiParamQueryService, customMultiValueArrayService, customQueryService } from './custom-queries';
 
 const { TEST_MODE } = selectedENV;

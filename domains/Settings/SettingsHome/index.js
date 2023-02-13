@@ -1,3 +1,5 @@
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import React, { useState } from 'react';
 import {
   View
@@ -6,8 +8,6 @@ import {
   Button, Headline, IconButton, Text
 } from 'react-native-paper';
 
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
 import styles from '../index.styles';
 import AccountSettings from './AccountSettings';
 

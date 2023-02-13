@@ -1,3 +1,12 @@
+import surveyingUserFailsafe from '@app/domains/DataCollection/Forms/utils';
+import { Button as PaperButton, PopupError } from '@impacto-design-system/Base';
+import { ErrorPicker, PaperInputPicker, YupValidationPicker as yupValidationPicker } from '@impacto-design-system/Extensions';
+import { getData } from '@modules/async-storage';
+import { postIdentificationForm } from '@modules/cached-resources';
+import { storeAppVersion } from '@modules/cached-resources/populate-cache';
+import I18n from '@modules/i18n';
+import { layout, theme } from '@modules/theme';
+import { isEmpty } from '@modules/utils';
 import { Formik } from 'formik';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -8,18 +17,6 @@ import {
   TouchableWithoutFeedback, View
 } from 'react-native';
 
-import PaperButton from '../../../../impacto-design-system/Button';
-import ErrorPicker from '../../../../impacto-design-system/FormikFields/ErrorPicker';
-import PaperInputPicker from '../../../../impacto-design-system/FormikFields/PaperInputPicker';
-import yupValidationPicker from '../../../../impacto-design-system/FormikFields/YupValidation';
-import PopupError from '../../../../impacto-design-system/PopupError';
-import { getData } from '../../../../modules/async-storage';
-import { postIdentificationForm } from '../../../../modules/cached-resources';
-import { storeAppVersion } from '../../../../modules/cached-resources/populate-cache';
-import I18n from '../../../../modules/i18n';
-import { layout, theme } from '../../../../modules/theme';
-import { isEmpty } from '../../../../modules/utils';
-import surveyingUserFailsafe from '../utils';
 import configArray from './config/config';
 
 const IdentificationForm = ({

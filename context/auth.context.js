@@ -1,13 +1,12 @@
-import React, { createContext, useEffect, useState } from 'react';
-
-import { getData, storeData } from '../modules/async-storage';
-import checkOnlineStatus from '../modules/offline';
 import {
   retrieveCurrentUserAsyncFunction,
   retrieveSignInFunction,
   retrieveSignOutFunction,
   retrieveSignUpFunction
-} from '../services/parse/auth/index';
+} from '@app/services/parse/auth/index';
+import { getData, storeData } from '@modules/async-storage';
+import checkOnlineStatus from '@modules/offline';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const UserContext = createContext();
 

@@ -1,3 +1,7 @@
+import { getData, storeData } from '@modules/async-storage';
+import { assetDataQuery } from '@modules/cached-resources/read';
+import getLocation from '@modules/geolocation';
+import { theme } from '@modules/theme';
 import { Spinner } from 'native-base';
 import React, { createRef, useEffect, useState } from 'react';
 import {
@@ -6,10 +10,6 @@ import {
 import MapView, { Marker } from 'react-native-maps';
 import { IconButton } from 'react-native-paper';
 
-import { getData, storeData } from '../../../../modules/async-storage';
-import { assetDataQuery } from '../../../../modules/cached-resources/read';
-import getLocation from '../../../../modules/geolocation';
-import { theme } from '../../../../modules/theme';
 import SelectedAsset from './SelectedAsset';
 
 const ViewAssets = ({ organization, switchAssetPage }) => {

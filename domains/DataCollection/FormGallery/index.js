@@ -1,3 +1,9 @@
+import ComingSoonSVG from '@app/assets/graphics/static/Adventurer.svg';
+import SmallCardsCarousel from '@impacto-design-system/Cards/SmallCardsCarousel';
+import { getData, storeData } from '@modules/async-storage';
+import { customFormsQuery } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import { layout, theme } from '@modules/theme';
 import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
@@ -9,12 +15,6 @@ import {
   Paragraph, Text, Title
 } from 'react-native-paper';
 
-import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
-import SmallCardsCarousel from '../../../impacto-design-system/Cards/SmallCardsCarousel';
-import { getData, storeData } from '../../../modules/async-storage';
-import { customFormsQuery } from '../../../modules/cached-resources';
-import I18n from '../../../modules/i18n';
-import { layout, theme } from '../../../modules/theme';
 import FormsHorizontalView from './FormsHorizontalView';
 import styles from './index.styles';
 

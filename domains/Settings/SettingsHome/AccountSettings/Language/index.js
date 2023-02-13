@@ -1,3 +1,5 @@
+import { getData, storeData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
 import React, { useEffect, useState } from 'react';
 import {
   View
@@ -6,8 +8,6 @@ import {
   Button, Headline
 } from 'react-native-paper';
 
-import { getData, storeData } from '../../../../../modules/async-storage';
-import I18n from '../../../../../modules/i18n';
 import styles from '../../../index.styles';
 
 const Language = () => {

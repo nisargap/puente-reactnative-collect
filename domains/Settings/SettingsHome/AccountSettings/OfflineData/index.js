@@ -1,3 +1,9 @@
+import { OfflineContext } from '@context/offline.context';
+import { Button as PaperButton, PopupSuccess } from '@impacto-design-system/Base';
+import { PaperInputPicker } from '@impacto-design-system/Extensions';
+import { deleteData, getData } from '@modules/async-storage';
+import { cacheResidentDataMulti } from '@modules/cached-resources';
+import { layout } from '@modules/theme';
 import { Formik } from 'formik';
 import I18n from 'i18n-js';
 import _ from 'lodash';
@@ -7,13 +13,6 @@ import {
   TouchableWithoutFeedback, View
 } from 'react-native';
 
-import PaperButton from '../../../../../impacto-design-system/Button';
-import PaperInputPicker from '../../../../../impacto-design-system/FormikFields/PaperInputPicker';
-import PopupSuccess from '../../../../../impacto-design-system/PopupSuccess';
-import { OfflineContext } from '../../../../../context/offline.context';
-import { deleteData, getData } from '../../../../../modules/async-storage';
-import { cacheResidentDataMulti } from '../../../../../modules/cached-resources';
-import { layout } from '../../../../../modules/theme';
 import configArray from './config/config';
 
 const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScroll }) => {

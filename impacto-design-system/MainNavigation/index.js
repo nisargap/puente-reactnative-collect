@@ -1,3 +1,8 @@
+import GetPinCode from '@app/domains/Auth/PinCode/GetPinCode';
+import StorePinCode from '@app/domains/Auth/PinCode/StorePinCode';
+import SignIn from '@app/domains/Auth/SignIn';
+import SignUp from '@app/domains/Auth/SignUp';
+import { theme } from '@modules/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
@@ -5,11 +10,6 @@ import {
   Platform, StatusBar, StyleSheet, View
 } from 'react-native';
 
-import GetPinCode from '../../domains/Auth/PinCode/GetPinCode';
-import StorePinCode from '../../domains/Auth/PinCode/StorePinCode';
-import SignIn from '../../domains/Auth/SignIn';
-import SignUp from '../../domains/Auth/SignUp';
-import { theme } from '../../modules/theme';
 import BottomTabNavigator from './BottomTabNavigator.';
 import LinkingConfiguration from './LinkingConfiguration';
 

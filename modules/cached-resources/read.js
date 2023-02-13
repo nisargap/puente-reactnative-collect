@@ -1,12 +1,11 @@
-import _ from 'lodash';
-
-import retrievePuenteAutofillData from '../../services/aws';
+import retrievePuenteAutofillData from '@app/services/aws';
 import {
   customMultiParamQueryService, customMultiValueArrayService, customQueryService, residentIDQuery
-} from '../../services/parse/crud';
-import getTasks from '../../services/tasky';
-import { getData, storeData } from '../async-storage';
-import checkOnlineStatus from '../offline';
+} from '@app/services/parse/crud';
+import getTasks from '@app/services/tasky';
+import { getData, storeData } from '@modules/async-storage';
+import checkOnlineStatus from '@modules/offline';
+import _ from 'lodash';
 
 async function residentQuery(queryParams) {
   const records = await residentIDQuery(queryParams);

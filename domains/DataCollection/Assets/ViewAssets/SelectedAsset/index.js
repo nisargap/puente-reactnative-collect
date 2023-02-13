@@ -1,3 +1,5 @@
+import I18n from '@modules/i18n';
+import { layout } from '@modules/theme';
 import React from 'react';
 import {
   View
@@ -6,9 +8,6 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import {
   Text, Title
 } from 'react-native-paper';
-
-import I18n from '../../../../../modules/i18n';
-import { layout } from '../../../../../modules/theme';
 
 const SelectedAsset = ({ selectedMarker, switchAssetPage }) => (
   <TouchableWithoutFeedback

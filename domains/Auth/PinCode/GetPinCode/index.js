@@ -1,14 +1,13 @@
+import { retrieveSignInFunction } from '@app/services/parse/auth';
+import FormInput from '@impacto-design-system/Extensions/FormikFields/FormInput';
+import { deleteData, getData } from '@modules/async-storage';
+import { populateCache } from '@modules/cached-resources';
+import I18n from '@modules/i18n';
+import checkOnlineStatus from '@modules/offline';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-
-import FormInput from '../../../../impacto-design-system/FormikFields/FormInput';
-import { deleteData, getData } from '../../../../modules/async-storage';
-import { populateCache } from '../../../../modules/cached-resources';
-import I18n from '../../../../modules/i18n';
-import checkOnlineStatus from '../../../../modules/offline';
-import { retrieveSignInFunction } from '../../../../services/parse/auth';
 
 const GetPinCode = ({ navigation }) => {
   const [failedAttempts, setFailedAttempts] = useState(1);

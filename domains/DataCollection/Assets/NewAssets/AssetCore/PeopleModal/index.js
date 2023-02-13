@@ -1,3 +1,6 @@
+import { Button as PaperButton } from '@impacto-design-system/Base';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import React from 'react';
 import {
   KeyboardAvoidingView,
@@ -7,10 +10,6 @@ import {
   Appbar,
   TextInput
 } from 'react-native-paper';
-
-import PaperButton from '../../../../../../impacto-design-system/Button';
-import I18n from '../../../../../../modules/i18n';
-import { theme } from '../../../../../../modules/theme';
 
 const PeopleModal = ({
   people,

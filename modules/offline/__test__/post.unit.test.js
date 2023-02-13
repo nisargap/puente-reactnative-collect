@@ -1,7 +1,8 @@
-import * as crudServices from '../../../services/parse/crud';
-import { postIdentificationForm, postSupplementaryForm } from '../../cached-resources';
+import * as crudServices from '@app/services/parse/crud';
+import { postIdentificationForm, postSupplementaryForm } from '@modules/cached-resources';
+import { postOfflineForms } from '@modules/offline/post';
+
 import checkOnlineStatus from '..';
-import { postOfflineForms } from '../post';
 import { createOfflineUserMockData, createResidentMockData, createSupplementaryFormMockData } from './utils';
 
 jest.mock('..', () => jest.fn());

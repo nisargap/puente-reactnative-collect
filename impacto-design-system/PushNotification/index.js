@@ -1,11 +1,10 @@
+import selectedENV from '@app/environment';
+import { getData } from '@modules/async-storage';
+import I18n from '@modules/i18n';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import { toInteger } from 'lodash';
 import { Platform } from 'react-native';
-
-import selectedENV from '../../environment';
-import { getData } from '../../modules/async-storage';
-import I18n from '../../modules/i18n';
 
 const axios = require('axios');
 

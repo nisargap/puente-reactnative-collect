@@ -1,6 +1,6 @@
-import { deleteData, getAllData, getData } from '../../../../../modules/async-storage';
-import checkOnlineStatus from '../../../../../modules/offline';
-import { postObjectsToClass } from '../../../../../services/parse/crud';
+import { postObjectsToClass } from '@app/services/parse/crud';
+import { deleteData, getAllData, getData } from '@modules/async-storage';
+import checkOnlineStatus from '@modules/offline';
 
 // similar to componentDidMount and componenetWillUnmount
 // runs every 10 seconds in the background to get all Async Data

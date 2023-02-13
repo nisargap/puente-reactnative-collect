@@ -1,7 +1,6 @@
+import { retrieveSignInFunction } from '@app/services/parse/auth';
+import { getData } from '@modules/async-storage';
 import { Parse } from 'parse/react-native';
-
-import { retrieveSignInFunction } from '../../services/parse/auth';
-import { getData } from '../async-storage';
 
 export default async function handleParseError(err, functionToCall, params) {
   return new Promise((resolve, reject) => {

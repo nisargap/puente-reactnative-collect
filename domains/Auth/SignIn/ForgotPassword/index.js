@@ -1,3 +1,7 @@
+import { retrieveForgotPasswordFunction } from '@app/services/parse/auth';
+import FormInput from '@impacto-design-system/Extensions/FormikFields/FormInput';
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -5,11 +9,6 @@ import {
   Button,
   Text
 } from 'react-native-paper';
-
-import FormInput from '../../../../impacto-design-system/FormikFields/FormInput';
-import I18n from '../../../../modules/i18n';
-import { theme } from '../../../../modules/theme';
-import { retrieveForgotPasswordFunction } from '../../../../services/parse/auth';
 
 export default function ForgotPassword({ navigation, setForgotPassword }) {
   const handleSignUp = () => {

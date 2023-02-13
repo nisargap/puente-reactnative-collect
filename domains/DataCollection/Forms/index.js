@@ -1,14 +1,14 @@
+import PostSubmissionSVG from '@app/assets/graphics/static/Submission-Page-Icon.svg';
+import GdprCompliance from '@app/domains/DataCollection/GdprCompliance';
+import ResidentIdSearchbar from '@impacto-design-system/Extensions/ResidentIdSearchbar';
+import I18n from '@modules/i18n';
+import { layout, theme } from '@modules/theme';
 import React, { useState } from 'react';
 import {
   Keyboard, ScrollView, TouchableWithoutFeedback, View
 } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 
-import PostSubmissionSVG from '../../../assets/graphics/static/Submission-Page-Icon.svg';
-import ResidentIdSearchbar from '../../../impacto-design-system/ResidentIdSearchbar';
-import I18n from '../../../modules/i18n';
-import { layout, theme } from '../../../modules/theme';
-import GdprCompliance from '../GdprCompliance';
 import IdentificationForm from './IdentificationForm';
 import styles from './index.styles';
 import SupplementaryForm from './SupplementaryForm';

@@ -1,10 +1,10 @@
-import { postObjectsToClass, postObjectsToClassWithRelation } from '../../../services/parse/crud';
+import { postObjectsToClass, postObjectsToClassWithRelation } from '@app/services/parse/crud';
 import {
   getData,
   storeData
-} from '../../async-storage';
-import checkOnlineStatus from '../../offline';
-import { generateRandomID } from '../../utils';
+} from '@modules/async-storage';
+import checkOnlineStatus from '@modules/offline';
+import { generateRandomID } from '@modules/utils';
 
 const postIdentificationForm = async (postParams) => {
   const isConnected = await checkOnlineStatus();

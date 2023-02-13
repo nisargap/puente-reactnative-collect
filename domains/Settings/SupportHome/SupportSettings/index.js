@@ -1,3 +1,4 @@
+import I18n from '@modules/i18n';
 import React from 'react';
 import {
   View
@@ -6,7 +7,6 @@ import {
   Button
 } from 'react-native-paper';
 
-import I18n from '../../../../modules/i18n';
 import styles from '../../index.styles';
 import Feedback from './Feedback';
 

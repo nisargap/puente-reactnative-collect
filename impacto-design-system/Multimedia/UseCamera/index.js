@@ -1,3 +1,5 @@
+// STYLING
+import { theme } from '@modules/theme';
 import { Camera } from 'expo-camera';
 import I18n from 'i18n-js';
 import React, { useEffect, useRef, useState } from 'react';
@@ -8,9 +10,6 @@ import {
   Button,
   Modal, Portal, Text
 } from 'react-native-paper';
-
-// STYLING
-import { theme } from '../../../modules/theme';
 
 export default function UseCamera(
   {

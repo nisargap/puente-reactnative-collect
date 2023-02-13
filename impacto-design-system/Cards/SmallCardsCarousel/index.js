@@ -1,3 +1,5 @@
+import I18n from '@modules/i18n';
+import { theme } from '@modules/theme';
 import React from 'react';
 import {
   ScrollView,
@@ -6,9 +8,6 @@ import {
 import {
   Card, Text
 } from 'react-native-paper';
-
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
 
 /**
  * Carousel of Forms that are used for Form Navigation

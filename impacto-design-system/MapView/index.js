@@ -1,13 +1,12 @@
+import { residentIDQuery } from '@app/services/parse/crud';
+import { getData, storeData } from '@modules/async-storage';
+import getLocation from '@modules/geolocation';
+import { theme } from '@modules/theme';
 import { Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { IconButton } from 'react-native-paper';
-
-import { getData, storeData } from '../../modules/async-storage';
-import getLocation from '../../modules/geolocation';
-import { theme } from '../../modules/theme';
-import { residentIDQuery } from '../../services/parse/crud';
 
 const Maps = ({ organization }) => {
   useEffect(() => {
