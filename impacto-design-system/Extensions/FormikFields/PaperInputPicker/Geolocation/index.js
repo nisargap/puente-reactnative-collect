@@ -1,20 +1,19 @@
-import { Button as PaperButton, PopupError } from '@impacto-design-system/Base';
-import getLocation from '@modules/geolocation';
-import I18n from '@modules/i18n';
-import { theme } from '@modules/theme';
-import { fulfillWithTimeLimit } from '@modules/utils';
-import { Spinner } from 'native-base';
-import React, { useState } from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import {
-  Headline,
-} from 'react-native-paper';
+import { Button as PaperButton, PopupError } from "@impacto-design-system/Base";
+import getLocation from "@modules/geolocation";
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import { fulfillWithTimeLimit } from "@modules/utils";
+import { Spinner } from "native-base";
+import React, { useState } from "react";
+import { Text, View } from "react-native";
+import { Headline } from "react-native-paper";
 
 const Geolocation = ({ errors, formikKey, setFieldValue }) => {
-  const [location, setLocation] = useState({ latitude: 0, longitude: 0, altitude: 0 });
+  const [location, setLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+    altitude: 0,
+  });
   const [locationLoading, setLocationLoading] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
 
@@ -29,15 +28,19 @@ const Geolocation = ({ errors, formikKey, setFieldValue }) => {
       }
     });
 
-    const currentLocation = await fulfillWithTimeLimit(20000, locationPromise, null);
+    const currentLocation = await fulfillWithTimeLimit(
+      20000,
+      locationPromise,
+      null
+    );
 
     if (!currentLocation) {
-      setFieldValue('location', { latitude: 0, longitude: 0, altitude: 0 });
+      setFieldValue("location", { latitude: 0, longitude: 0, altitude: 0 });
       setLocationLoading(false);
       setSubmissionError(true);
     } else {
       const { latitude, longitude, altitude } = currentLocation.coords;
-      setFieldValue('location', { latitude, longitude, altitude });
+      setFieldValue("location", { latitude, longitude, altitude });
       setLocation({ latitude, longitude, altitude });
       setLocationLoading(false);
     }
@@ -45,35 +48,39 @@ const Geolocation = ({ errors, formikKey, setFieldValue }) => {
   return (
     <View key={formikKey}>
       {location === null && (
-      <PaperButton
-        onPress={handleLocation}
-        buttonText={I18n.t('paperButton.getLocation')}
-      />
-      )}
-      {location !== null && (
-      <View>
         <PaperButton
           onPress={handleLocation}
-          buttonText={I18n.t('paperButton.getLocationAgain')}
+          buttonText={I18n.t("paperButton.getLocation")}
         />
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: 'row' }}>
-          {
-            locationLoading === true
-            && <Spinner color={theme.colors.primary} />
-          }
-          {locationLoading === false
-            && (
+      )}
+      {location !== null && (
+        <View>
+          <PaperButton
+            onPress={handleLocation}
+            buttonText={I18n.t("paperButton.getLocationAgain")}
+          />
+          <View
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              flexDirection: "row",
+            }}
+          >
+            {locationLoading === true && (
+              <Spinner color={theme.colors.primary} />
+            )}
+            {locationLoading === false && (
               <View>
                 <Headline>
-                  {`(${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)})`}
+                  {`(${location.latitude.toFixed(
+                    2
+                  )}, ${location.longitude.toFixed(2)})`}
                 </Headline>
               </View>
             )}
+          </View>
+          <Text style={{ color: "red" }}>{errors[formikKey]}</Text>
         </View>
-        <Text style={{ color: 'red' }}>
-          {errors[formikKey]}
-        </Text>
-      </View>
       )}
       <PopupError
         error={submissionError}

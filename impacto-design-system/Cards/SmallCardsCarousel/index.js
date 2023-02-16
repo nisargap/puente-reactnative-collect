@@ -1,13 +1,8 @@
-import I18n from '@modules/i18n';
-import { theme } from '@modules/theme';
-import React from 'react';
-import {
-  ScrollView,
-  StyleSheet, View
-} from 'react-native';
-import {
-  Card, Text
-} from 'react-native-paper';
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { Card, Text } from "react-native-paper";
 
 /**
  * Carousel of Forms that are used for Form Navigation
@@ -28,7 +23,12 @@ import {
  */
 
 const SmallCardsCarousel = ({
-  puenteForms, navigateToNewRecord, setView, surveyee, setUser, pinForm
+  puenteForms,
+  navigateToNewRecord,
+  setView,
+  surveyee,
+  setUser,
+  pinForm,
 }) => (
   <ScrollView horizontal>
     {puenteForms.map((form) => (
@@ -37,7 +37,7 @@ const SmallCardsCarousel = ({
         style={styles.cardSmallStyle}
         onPress={() => {
           if (setUser) {
-            setView('Forms');
+            setView("Forms");
             navigateToNewRecord(form.tag, surveyee);
           } else {
             navigateToNewRecord(form.tag);
@@ -48,12 +48,9 @@ const SmallCardsCarousel = ({
         <View style={styles.cardContainer}>
           <form.image height={40} style={styles.svg} />
           <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              {I18n.t(form.name)}
-            </Text>
+            <Text style={styles.text}>{I18n.t(form.name)}</Text>
           </View>
         </View>
-
       </Card>
     ))}
   </ScrollView>
@@ -67,24 +64,24 @@ const styles = StyleSheet.create({
     marginVertical: 7,
   },
   svg: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   cardContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 14,
     marginVertical: 14,
   },
   textContainer: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   text: {
     flexShrink: 1,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.primary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 7,
-  }
+  },
 });
 
 export default SmallCardsCarousel;

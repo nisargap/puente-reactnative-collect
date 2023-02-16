@@ -1,10 +1,7 @@
-import I18n from '@modules/i18n';
-import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import { Snackbar } from 'react-native-paper';
+import I18n from "@modules/i18n";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 /**
     Display Errors for ID, Supplementary and custom forms i.e.
@@ -29,7 +26,7 @@ const ErrorPicker = ({ formikProps, inputs }) => {
       inputs.forEach((input) => {
         if (key === input.formikKey) {
           label = label.concat([I18n.t(input.label)]);
-        } else if (input.fieldType === 'multiInputRowNum') {
+        } else if (input.fieldType === "multiInputRowNum") {
           input.options.forEach((option) => {
             if (key === option.value) {
               label = label.concat(I18n.t(option.label));
@@ -38,7 +35,7 @@ const ErrorPicker = ({ formikProps, inputs }) => {
         }
       });
     });
-    setFormErrors(label.join(', '));
+    setFormErrors(label.join(", "));
   };
 
   useEffect(() => {
@@ -59,13 +56,13 @@ const ErrorPicker = ({ formikProps, inputs }) => {
         onDismiss={dismissSnackBar}
         duration={8500}
         style={{
-          backgroundColor: 'red',
-          fontSize: 130
+          backgroundColor: "red",
+          fontSize: 130,
         }}
       >
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
-          {I18n.t('errorPicker.invalidFields')}
-          {'\n\n'}
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+          {I18n.t("errorPicker.invalidFields")}
+          {"\n\n"}
           {formErrors}
         </Text>
       </Snackbar>

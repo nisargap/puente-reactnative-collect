@@ -1,3 +1,3 @@
-import getTasks from './tasks';
+import getTasks from "./tasks";
 
 export default getTasks;

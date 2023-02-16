@@ -1,16 +1,16 @@
-import { getData } from '@modules/async-storage';
-import { assetDataQuery } from '@modules/cached-resources/index';
-import I18n from '@modules/i18n';
-import checkOnlineStatus from '@modules/offline';
-import { Spinner } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { Button, Headline, Searchbar } from 'react-native-paper';
+import { getData } from "@modules/async-storage";
+import { assetDataQuery } from "@modules/cached-resources/index";
+import I18n from "@modules/i18n";
+import checkOnlineStatus from "@modules/offline";
+import { Spinner } from "native-base";
+import React, { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import { Button, Headline, Searchbar } from "react-native-paper";
 
-import styles from './index.styles';
+import styles from "./index.styles";
 
 const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [assetData, setAssetData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [online, setOnline] = useState(true);
@@ -18,8 +18,8 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
 
   useEffect(() => {
     checkOnlineStatus().then(async (connected) => {
-      if (connected) fetchData(true, '');
-      if (!connected) fetchData(false, '');
+      if (connected) fetchData(true, "");
+      if (!connected) fetchData(false, "");
     });
   }, [surveyingOrganization]);
 
@@ -27,12 +27,13 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   const fetchOfflineData = async () => {
     setOnline(false);
 
-    await getData('assetData').then(() => {
+    await getData("assetData").then(() => {
       if (assetData) {
         let offlineData = [];
-        getData('offlineAssetIDForms').then((offlineAssetData) => {
+        getData("offlineAssetIDForms").then((offlineAssetData) => {
           if (offlineAssetData !== null) {
-            Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
+            Object.entries(offlineAssetData).forEach(([key, value]) => {
+              //eslint-disable-line
               offlineData = offlineData.concat(value.localObject);
             });
           }
@@ -50,9 +51,10 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
     assetDataQuery(surveyingOrganization).then((records) => {
       let offlineData = [];
 
-      getData('offlineAssetIDForms').then((offlineAssetData) => {
+      getData("offlineAssetIDForms").then((offlineAssetData) => {
         if (offlineAssetData !== null) {
-          Object.entries(offlineAssetData).forEach(([key, value]) => { //eslint-disable-line
+          Object.entries(offlineAssetData).forEach(([key, value]) => {
+            //eslint-disable-line
             offlineData = offlineData.concat(value.localObject);
           });
         }
@@ -71,47 +73,52 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
   };
 
   // probably not needed, this is all specific to the id form
-  const filterOfflineList = () => assetData.filter(
-    (listItem) => {
+  const filterOfflineList = () =>
+    assetData.filter((listItem) => {
       // const listItemJSON = listItem.toJSON();
-      const name = listItem.name || ' ';
+      const name = listItem.name || " ";
       return name.toLowerCase().includes(query.toLowerCase());
-    }
-  );
+    });
 
   const onChangeSearch = (input) => {
     setLoading(true);
 
-    if (input === '') setLoading(false);
+    if (input === "") setLoading(false);
 
     clearTimeout(searchTimeout);
 
     setQuery(input);
 
-    setSearchTimeout(setTimeout(() => {
-      fetchData(online, input);
-    }, 1000));
+    setSearchTimeout(
+      setTimeout(() => {
+        fetchData(online, input);
+      }, 1000)
+    );
   };
 
   const onSelectAsset = (listItem) => {
     setSelectedAsset(listItem);
-    setQuery('');
+    setQuery("");
   };
 
   const renderItem = ({ item }) => (
     <View>
-      <Button onPress={() => onSelectAsset(item)} contentStyle={{ marginRight: 5 }}>
+      <Button
+        onPress={() => onSelectAsset(item)}
+        contentStyle={{ marginRight: 5 }}
+      >
         <Text style={{ marginRight: 10 }}>{item.name}</Text>
 
-        <View style={{
-          backgroundColor: '#f8380e',
-          width: 1,
-          height: 10,
-          paddingLeft: 10,
-          marginTop: 'auto',
-          marginBottom: 'auto',
-          borderRadius: 20
-        }}
+        <View
+          style={{
+            backgroundColor: "#f8380e",
+            width: 1,
+            height: 10,
+            paddingLeft: 10,
+            marginTop: "auto",
+            marginBottom: "auto",
+            borderRadius: 20,
+          }}
         />
       </Button>
     </View>
@@ -119,17 +126,21 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
 
   return (
     <View>
-      <Headline style={styles.header}>{I18n.t('assetSearchbar.searchIndividual')}</Headline>
+      <Headline style={styles.header}>
+        {I18n.t("assetSearchbar.searchIndividual")}
+      </Headline>
       <Searchbar
-        placeholder={I18n.t('assetSearchbar.placeholder')}
+        placeholder={I18n.t("assetSearchbar.placeholder")}
         onChangeText={onChangeSearch}
         value={query}
       />
-      {!online
-        && <Button onPress={() => fetchData(false, '')}>{I18n.t('global.refresh')}</Button>}
-      {loading
-        && <Spinner color="blue" />}
-      {query !== '' && (
+      {!online && (
+        <Button onPress={() => fetchData(false, "")}>
+          {I18n.t("global.refresh")}
+        </Button>
+      )}
+      {loading && <Spinner color="blue" />}
+      {query !== "" && (
         <FlatList
           data={filterOfflineList(assetData)}
           renderItem={renderItem}

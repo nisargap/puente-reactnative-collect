@@ -1,22 +1,25 @@
-import I18n from '@modules/i18n';
-import { theme } from '@modules/theme';
-import React, { useEffect, useState } from 'react';
-import {
-  Image,
-  StyleSheet, View
-} from 'react-native';
-import {
-  Button,
-  Text
-} from 'react-native-paper';
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import React, { useEffect, useState } from "react";
+import { Image, StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-paper";
 
-import Demographics from './Demographics';
-import Forms from './Forms';
-import Household from './Housheold';
+import Demographics from "./Demographics";
+import Forms from "./Forms";
+import Household from "./Housheold";
 
 const ResidentPage = ({
-  fname, lname, nickname, city, picture, selectPerson, setSelectPerson,
-  puenteForms, navigateToNewRecord, setSurveyee, setView
+  fname,
+  lname,
+  nickname,
+  city,
+  picture,
+  selectPerson,
+  setSelectPerson,
+  puenteForms,
+  navigateToNewRecord,
+  setSurveyee,
+  setView,
 }) => {
   const [pictureUrl, setPictureUrl] = useState();
   const [demographics, setDemographics] = useState(true);
@@ -50,16 +53,15 @@ const ResidentPage = ({
   return (
     <View>
       <Button icon="arrow-left" width={100} onPress={() => setSelectPerson()}>
-        {I18n.t('dataCollection.back')}
+        {I18n.t("dataCollection.back")}
       </Button>
       <View style={styles.picNameContainer}>
-        <Image
-          style={styles.profPic}
-          source={pictureUrl}
-        />
+        <Image style={styles.profPic} source={pictureUrl} />
         <View style={{ margin: 7 }}>
           <View style={styles.nameContainer}>
-            <Text style={[styles.name, { fontWeight: 'bold' }]}>{`${fname} ${lname}`}</Text>
+            <Text
+              style={[styles.name, { fontWeight: "bold" }]}
+            >{`${fname} ${lname}`}</Text>
           </View>
           <Text style={styles.name}>{`"${nickname}"`}</Text>
 
@@ -71,52 +73,54 @@ const ResidentPage = ({
           </Button> */}
         </View>
       </View>
-      <View
-        style={styles.horizontalLine}
-      />
+      <View style={styles.horizontalLine} />
       <View style={styles.navigationButtonsContainer}>
-        <Button style={styles.navigationButton} labelStyle={styles.navigationButtonText} onPress={() => showDemographics()}>{I18n.t('findResident.residentPage.household.demographics')}</Button>
-        <Button style={styles.navigationButton} labelStyle={styles.navigationButtonText} onPress={() => showForms(true)}>{I18n.t('findResident.residentPage.household.forms')}</Button>
+        <Button
+          style={styles.navigationButton}
+          labelStyle={styles.navigationButtonText}
+          onPress={() => showDemographics()}
+        >
+          {I18n.t("findResident.residentPage.household.demographics")}
+        </Button>
+        <Button
+          style={styles.navigationButton}
+          labelStyle={styles.navigationButtonText}
+          onPress={() => showForms(true)}
+        >
+          {I18n.t("findResident.residentPage.household.forms")}
+        </Button>
         <Button
           style={styles.navigationButton}
           labelStyle={styles.navigationButtonText}
           onPress={() => showHousehold(true)}
         >
-          {I18n.t('findResident.residentPage.household.household')}
+          {I18n.t("findResident.residentPage.household.household")}
         </Button>
       </View>
-      <View
-        style={styles.horizontalLine}
-      />
-      {
-        demographics && (
-          <Demographics
-            dob={selectPerson.dob}
-            city={city}
-            community={selectPerson.communityname}
-            province={selectPerson.province}
-            license={selectPerson.license}
-            selectPerson={selectPerson}
-          />
-        )
-      }
-      {
-        forms && (
-          <Forms
-            puenteForms={puenteForms}
-            navigateToNewRecord={navigateToNewRecord}
-            surveyee={selectPerson}
-            setSurveyee={setSurveyee}
-            setView={setView}
-          />
-        )
-      }
-      {
-        household && (
-          <Household />
-        )
-      }
-      <Button onPress={() => setSelectPerson()}>{I18n.t('findResident.residentPage.household.goBack')}</Button>
+      <View style={styles.horizontalLine} />
+      {demographics && (
+        <Demographics
+          dob={selectPerson.dob}
+          city={city}
+          community={selectPerson.communityname}
+          province={selectPerson.province}
+          license={selectPerson.license}
+          selectPerson={selectPerson}
+        />
+      )}
+      {forms && (
+        <Forms
+          puenteForms={puenteForms}
+          navigateToNewRecord={navigateToNewRecord}
+          surveyee={selectPerson}
+          setSurveyee={setSurveyee}
+          setView={setView}
+        />
+      )}
+      {household && <Household />}
+      <Button onPress={() => setSelectPerson()}>
+        {I18n.t("findResident.residentPage.household.goBack")}
+      </Button>
     </View>
   );
 };
@@ -127,41 +131,41 @@ const styles = StyleSheet.create({
     height: 100,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#D0D0D0'
+    borderColor: "#D0D0D0",
   },
   picNameContainer: {
-    flexDirection: 'row',
-    margin: 14
+    flexDirection: "row",
+    margin: 14,
   },
   nameContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   name: {
-    color: '#696969',
+    color: "#696969",
     flexShrink: 1,
     marginVertical: 7,
   },
   button: {
     width: 120,
-    marginLeft: -5
+    marginLeft: -5,
   },
   buttonContent: {
-    marginLeft: 0
+    marginLeft: 0,
   },
   horizontalLine: {
     borderBottomColor: theme.colors.primary,
     borderBottomWidth: 1,
   },
   navigationButtonsContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    alignItems: "flex-start",
   },
   navigationButton: {
     flex: 1,
   },
   navigationButtonText: {
-    fontWeight: 'bold'
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default ResidentPage;

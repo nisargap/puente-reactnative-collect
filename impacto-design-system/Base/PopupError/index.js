@@ -1,10 +1,7 @@
-import I18n from '@modules/i18n';
-import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
-import { Snackbar } from 'react-native-paper';
+import I18n from "@modules/i18n";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 const PopupError = ({ error, setError, errorMessage }) => {
   useEffect(() => {
@@ -25,11 +22,11 @@ const PopupError = ({ error, setError, errorMessage }) => {
         onDismiss={dismissSnackBar}
         duration={6000}
         style={{
-          backgroundColor: 'red',
-          fontSize: 130
+          backgroundColor: "red",
+          fontSize: 130,
         }}
       >
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>
           {I18n.t(errorMessage)}
         </Text>
       </Snackbar>

@@ -1,31 +1,31 @@
 /* global __DEV__ */
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 
 const ENV = {
   dev: {
-    parseAppId: 'exampleAppId',
-    parseJavascriptKey: 'exampleJavascriptKey',
-    parseServerUrl: 'https://parseapi.back4app.com/',
-    parseMasterKey: 'exampleMasterKey',
-    taskyUrlApi: '',
-    AWS_LAMBDA_URL: ''
+    parseAppId: "exampleAppId",
+    parseJavascriptKey: "exampleJavascriptKey",
+    parseServerUrl: "https://parseapi.back4app.com/",
+    parseMasterKey: "exampleMasterKey",
+    taskyUrlApi: "",
+    AWS_LAMBDA_URL: "",
   },
   staging: {
-    parseAppId: 'exampleAppId',
-    parseJavascriptKey: 'exampleJavascriptKey',
-    parseServerUrl: 'https://parseapi.back4app.com/',
-    parseMasterKey: 'exampleMasterKey',
-    taskyUrlApi: '',
-    AWS_LAMBDA_URL: ''
+    parseAppId: "exampleAppId",
+    parseJavascriptKey: "exampleJavascriptKey",
+    parseServerUrl: "https://parseapi.back4app.com/",
+    parseMasterKey: "exampleMasterKey",
+    taskyUrlApi: "",
+    AWS_LAMBDA_URL: "",
   },
   prod: {
-    parseAppId: 'exampleAppId',
-    parseJavascriptKey: 'exampleJavascriptKey',
-    parseServerUrl: 'https://parseapi.back4app.com/',
-    parseMasterKey: 'exampleMasterKey',
-    taskyUrlApi: '',
-    AWS_LAMBDA_URL: ''
-  }
+    parseAppId: "exampleAppId",
+    parseJavascriptKey: "exampleJavascriptKey",
+    parseServerUrl: "https://parseapi.back4app.com/",
+    parseMasterKey: "exampleMasterKey",
+    taskyUrlApi: "",
+    AWS_LAMBDA_URL: "",
+  },
 };
 
 const getEnvVars = (env = Constants.manifest.releaseChannel) => {
@@ -34,9 +34,11 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
   // __DEV__ is true when run locally, but false when published.
   if (__DEV__) {
     return ENV.dev;
-  } if (env === 'staging') {
+  }
+  if (env === "staging") {
     return ENV.staging;
-  } if (env === 'prod') {
+  }
+  if (env === "prod") {
     return ENV.prod;
   }
 

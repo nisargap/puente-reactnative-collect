@@ -1,9 +1,7 @@
-import selectedENV from '@app/environment';
-import client from '@app/services/parse/client';
+import selectedENV from "@app/environment";
+import client from "@app/services/parse/client";
 
-const {
-  TEST_MODE
-} = selectedENV;
+const { TEST_MODE } = selectedENV;
 const Parse = client(TEST_MODE);
 
 function handleParseError(err, callback) {

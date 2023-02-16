@@ -1,15 +1,22 @@
-import * as crudServices from '@app/services/parse/crud';
-import { postIdentificationForm, postSupplementaryForm } from '@modules/cached-resources';
-import { postOfflineForms } from '@modules/offline/post';
+import * as crudServices from "@app/services/parse/crud";
+import {
+  postIdentificationForm,
+  postSupplementaryForm,
+} from "@modules/cached-resources";
+import { postOfflineForms } from "@modules/offline/post";
 
-import checkOnlineStatus from '..';
-import { createOfflineUserMockData, createResidentMockData, createSupplementaryFormMockData } from './utils';
+import checkOnlineStatus from "..";
+import {
+  createOfflineUserMockData,
+  createResidentMockData,
+  createSupplementaryFormMockData,
+} from "./utils";
 
-jest.mock('..', () => jest.fn());
+jest.mock("..", () => jest.fn());
 crudServices.uploadOfflineForms = jest.fn().mockResolvedValue({});
 
-describe('Testing full feature of offline posting', () => {
-  test('Testing number of postOfflineForms', async () => {
+describe("Testing full feature of offline posting", () => {
+  test("Testing number of postOfflineForms", async () => {
     checkOnlineStatus.mockResolvedValue(false);
 
     const numberOfResidents = 3;
@@ -46,7 +53,9 @@ describe('Testing full feature of offline posting', () => {
 
     const { offlineForms } = await postOfflineForms();
 
-    expect(numberOfResidents + numberofSupplementaryFormsCollected)
-      .toEqual(offlineForms.residentForms.length + offlineForms.residentSupplementaryForms.length);
+    expect(numberOfResidents + numberofSupplementaryFormsCollected).toEqual(
+      offlineForms.residentForms.length +
+        offlineForms.residentSupplementaryForms.length
+    );
   });
 });

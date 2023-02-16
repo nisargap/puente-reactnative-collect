@@ -1,19 +1,19 @@
-import { residentIDQuery } from '@app/services/parse/crud';
-import { getData, storeData } from '@modules/async-storage';
-import getLocation from '@modules/geolocation';
-import { theme } from '@modules/theme';
-import { Spinner } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import { IconButton } from 'react-native-paper';
+import { residentIDQuery } from "@app/services/parse/crud";
+import { getData, storeData } from "@modules/async-storage";
+import getLocation from "@modules/geolocation";
+import { theme } from "@modules/theme";
+import { Spinner } from "native-base";
+import React, { useEffect, useState } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import { IconButton } from "react-native-paper";
 
 const Maps = ({ organization }) => {
   useEffect(() => {
     let isSubscribed = true;
 
     async function fetchRegion() {
-      await getData('homeMapRegion').then((data) => {
+      await getData("homeMapRegion").then((data) => {
         if (isSubscribed) {
           if (!data) {
             handleLocation();
@@ -26,7 +26,9 @@ const Maps = ({ organization }) => {
 
     fetchRegion();
 
-    return () => { isSubscribed = false; };
+    return () => {
+      isSubscribed = false;
+    };
   }, []);
 
   const [region, setRegion] = useState();
@@ -35,23 +37,28 @@ const Maps = ({ organization }) => {
 
   const handleLocation = async () => {
     setLoading(true);
-    await getLocation().then((location) => {
-      const { latitude, longitude } = location.coords;
-      setRegion({
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-        latitude,
-        longitude,
+    await getLocation()
+      .then((location) => {
+        const { latitude, longitude } = location.coords;
+        setRegion({
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+          latitude,
+          longitude,
+        });
+        storeData(
+          {
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+            latitude,
+            longitude,
+          },
+          "homeMapRegion"
+        );
+      })
+      .catch((e) => {
+        console.log(e); //eslint-disable-line
       });
-      storeData({
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-        latitude,
-        longitude,
-      }, 'homeMapRegion');
-    }).catch((e) => {
-      console.log(e) //eslint-disable-line
-    });
     setLoading(false);
   };
 
@@ -61,17 +68,19 @@ const Maps = ({ organization }) => {
       skip: 0,
       offset: 0,
       limit: 10000,
-      parseColumn: 'surveyingOrganization',
+      parseColumn: "surveyingOrganization",
       parseParam: organization,
     };
-    residentIDQuery(queryParams).then((records) => {
-      const sanitizedRecords = JSON.parse(JSON.stringify(records));
-      setMarkers(sanitizedRecords);
-      setLoading(false);
-    }).catch((e) => {
-      setLoading(false);
-      console.log(e); //eslint-disable-line
-    });
+    residentIDQuery(queryParams)
+      .then((records) => {
+        const sanitizedRecords = JSON.parse(JSON.stringify(records));
+        setMarkers(sanitizedRecords);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        console.log(e); //eslint-disable-line
+      });
   };
 
   // const retriveAsyncMarkers = () => {
@@ -103,23 +112,23 @@ const Maps = ({ organization }) => {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.mapStyle}
-        region={region}
-      >
-        {markers && markers.map((marker) => (
-          marker.location && (
-            <Marker
-              key={marker.objectId}
-              coordinate={marker.location}
-              title={`${marker.fname || ''} ${marker.lname || ''}`}
-              description={`Collector: ${marker.surveyingUser}`}
-            />
-          )
-        ))}
+      <MapView style={styles.mapStyle} region={region}>
+        {markers &&
+          markers.map(
+            (marker) =>
+              marker.location && (
+                <Marker
+                  key={marker.objectId}
+                  coordinate={marker.location}
+                  title={`${marker.fname || ""} ${marker.lname || ""}`}
+                  description={`Collector: ${marker.surveyingUser}`}
+                />
+              )
+          )}
       </MapView>
-      {loading
-        && <Spinner style={styles.loading} color={theme.colors.primary} />}
+      {loading && (
+        <Spinner style={styles.loading} color={theme.colors.primary} />
+      )}
       <View style={styles.buttonStyle}>
         <IconButton
           icon="crosshairs-gps"
@@ -141,26 +150,26 @@ const Maps = ({ organization }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   mapStyle: {
-    width: Dimensions.get('window').width * 0.95,
-    height: Dimensions.get('window').height / 2,
+    width: Dimensions.get("window").width * 0.95,
+    height: Dimensions.get("window").height / 2,
     marginTop: 10,
-    borderRadius: 10
+    borderRadius: 10,
   },
   buttonStyle: {
-    position: 'absolute', // use absolute position to show button on top of the map
-    bottom: '0%',
-    alignSelf: 'flex-end', // for align to right,
+    position: "absolute", // use absolute position to show button on top of the map
+    bottom: "0%",
+    alignSelf: "flex-end", // for align to right,
     right: 10,
   },
   loading: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-  }
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+  },
 });
 
 export default Maps;

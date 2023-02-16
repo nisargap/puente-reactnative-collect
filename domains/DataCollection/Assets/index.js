@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import React, { useState } from "react";
+import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
-import NewAssets from './NewAssets';
-import ViewAssets from './ViewAssets';
+import NewAssets from "./NewAssets";
+import ViewAssets from "./ViewAssets";
 
 const Assets = ({
-  selectedAsset, setSelectedAsset, surveyingOrganization, scrollViewScroll, setScrollViewScroll
+  selectedAsset,
+  setSelectedAsset,
+  surveyingOrganization,
+  scrollViewScroll,
+  setScrollViewScroll,
 }) => {
-  const [page, setPage] = useState('assetCore');
+  const [page, setPage] = useState("assetCore");
 
   const switchAssetPage = (pageIndex, asset) => {
     setPage(pageIndex);
@@ -17,21 +21,21 @@ const Assets = ({
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
         {selectedAsset && (
-        <NewAssets
-          setSelectedAsset={setSelectedAsset}
-          selectedAsset={selectedAsset}
-          surveyingOrganization={surveyingOrganization}
-          assetPageIndex={page}
-          scrollViewScroll={scrollViewScroll}
-          setScrollViewScroll={setScrollViewScroll}
-          setPage={setPage}
-        />
+          <NewAssets
+            setSelectedAsset={setSelectedAsset}
+            selectedAsset={selectedAsset}
+            surveyingOrganization={surveyingOrganization}
+            assetPageIndex={page}
+            scrollViewScroll={scrollViewScroll}
+            setScrollViewScroll={setScrollViewScroll}
+            setPage={setPage}
+          />
         )}
         {selectedAsset === null && (
-        <ViewAssets
-          organization={surveyingOrganization}
-          switchAssetPage={switchAssetPage}
-        />
+          <ViewAssets
+            organization={surveyingOrganization}
+            switchAssetPage={switchAssetPage}
+          />
         )}
       </View>
     </TouchableWithoutFeedback>

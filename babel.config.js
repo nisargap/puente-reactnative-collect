@@ -1,26 +1,26 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"],
     plugins: [
-      'react-native-reanimated/plugin', 
+      "react-native-reanimated/plugin",
       [
-        'module-resolver',
+        "module-resolver",
         {
-          root: ['./'],
+          root: ["./"],
           alias: {
-            '@impacto-design-system': './impacto-design-system',
-            '@modules': './modules',
-            '@assets': './assets',
-            '@context': './context',
-            "@app": "."
+            "@impacto-design-system": "./impacto-design-system",
+            "@modules": "./modules",
+            "@assets": "./assets",
+            "@context": "./context",
+            "@app": ".",
           },
         },
       ],
-],
+    ],
     env: {
       production: {
-        plugins: ['react-native-paper/babel'],
+        plugins: ["react-native-paper/babel"],
       },
     },
   };

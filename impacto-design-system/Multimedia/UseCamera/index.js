@@ -1,21 +1,24 @@
 // STYLING
-import { theme } from '@modules/theme';
-import { Camera } from 'expo-camera';
-import I18n from 'i18n-js';
-import React, { useEffect, useRef, useState } from 'react';
+import { theme } from "@modules/theme";
+import { Camera } from "expo-camera";
+import I18n from "i18n-js";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Dimensions, Image, StyleSheet, TouchableOpacity, View
-} from 'react-native';
-import {
-  Button,
-  Modal, Portal, Text
-} from 'react-native-paper';
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Button, Modal, Portal, Text } from "react-native-paper";
 
-export default function UseCamera(
-  {
-    cameraVisible, setCameraVisible, formikProps, formikKey, setImage
-  }
-) {
+export default function UseCamera({
+  cameraVisible,
+  setCameraVisible,
+  formikProps,
+  formikKey,
+  setImage,
+}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [cameraImage, setCameraImage] = useState(null);
@@ -24,7 +27,7 @@ export default function UseCamera(
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     })();
   }, []);
 
@@ -33,12 +36,15 @@ export default function UseCamera(
       const photo = await camera.takePictureAsync({
         base64: true,
         aspect: [4, 3],
-        quality: 1
+        quality: 1,
       });
 
       setCameraImage(photo.uri);
       setImage(photo.uri);
-      formikProps.setFieldValue(formikKey, `data:image/jpg;base64,${photo.base64}`);
+      formikProps.setFieldValue(
+        formikKey,
+        `data:image/jpg;base64,${photo.base64}`
+      );
     }
   };
 
@@ -53,7 +59,7 @@ export default function UseCamera(
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>{I18n.t('camera.noAccess')}</Text>;
+    return <Text>{I18n.t("camera.noAccess")}</Text>;
   }
   return (
     <Portal theme={theme}>
@@ -63,11 +69,14 @@ export default function UseCamera(
         contentContainerStyle={styles.modal}
         dismissable={false}
       >
-        <View style={{ width: 'auto', height: 500, padding: 10 }}>
+        <View style={{ width: "auto", height: 500, padding: 10 }}>
           {cameraImage ? (
             <>
-              <Image source={{ uri: cameraImage }} style={{ width: 'auto', height: 400 }} />
-              <Button onPress={resetPicture}>{I18n.t('camera.retake')}</Button>
+              <Image
+                source={{ uri: cameraImage }}
+                style={{ width: "auto", height: 400 }}
+              />
+              <Button onPress={resetPicture}>{I18n.t("camera.retake")}</Button>
             </>
           ) : (
             <>
@@ -81,9 +90,7 @@ export default function UseCamera(
                 zoom={zoom}
                 base64
               >
-                <View
-                  style={styles.cameraButtonContainer}
-                >
+                <View style={styles.cameraButtonContainer}>
                   <TouchableOpacity
                     style={styles.flipContainer}
                     onPress={() => {
@@ -94,28 +101,22 @@ export default function UseCamera(
                       );
                     }}
                   >
-                    <Text style={styles.cameraButtonText}>{I18n.t('camera.flip')}</Text>
+                    <Text style={styles.cameraButtonText}>
+                      {I18n.t("camera.flip")}
+                    </Text>
                   </TouchableOpacity>
                   <View style={styles.cameraButtonContainer}>
                     <View style={styles.zoomContainer}>
                       <TouchableOpacity
                         onPress={() => {
-                          setZoom(
-                            zoom === 0.4
-                              ? zoom
-                              : zoom + 0.1
-                          );
+                          setZoom(zoom === 0.4 ? zoom : zoom + 0.1);
                         }}
                       >
                         <Text style={styles.cameraButtonText}> + </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => {
-                          setZoom(
-                            zoom === 0
-                              ? zoom
-                              : zoom - 0.1
-                          );
+                          setZoom(zoom === 0 ? zoom : zoom - 0.1);
                         }}
                       >
                         <Text style={styles.cameraButtonText}> - </Text>
@@ -124,11 +125,19 @@ export default function UseCamera(
                   </View>
                 </View>
               </Camera>
-              <Button onPress={takePicture}>{I18n.t('camera.takePicture')}</Button>
+              <Button onPress={takePicture}>
+                {I18n.t("camera.takePicture")}
+              </Button>
             </>
           )}
         </View>
-        <Button mode="contained" style={styles.button} onPress={() => setCameraVisible(false)}>{I18n.t('camera.done')}</Button>
+        <Button
+          mode="contained"
+          style={styles.button}
+          onPress={() => setCameraVisible(false)}
+        >
+          {I18n.t("camera.done")}
+        </Button>
       </Modal>
     </Portal>
   );
@@ -136,33 +145,33 @@ export default function UseCamera(
 
 const styles = StyleSheet.create({
   modal: {
-    backgroundColor: 'white',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
+    backgroundColor: "white",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
   button: {
-    marginTop: 30
+    marginTop: 30,
   },
   cameraButtonContainer: {
     flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
+    backgroundColor: "transparent",
+    flexDirection: "row",
   },
   flipContainer: {
     flex: 0.2,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
+    alignSelf: "flex-end",
+    alignItems: "center",
   },
   zoomContainer: {
     flex: 1,
-    alignSelf: 'flex-end',
-    alignItems: 'flex-end',
-    alignContent: 'flex-end'
+    alignSelf: "flex-end",
+    alignItems: "flex-end",
+    alignContent: "flex-end",
   },
   cameraButtonText: {
     fontSize: 24,
     marginBottom: 10,
-    color: 'white',
-    marginRight: 10
-  }
+    color: "white",
+    marginRight: 10,
+  },
 });

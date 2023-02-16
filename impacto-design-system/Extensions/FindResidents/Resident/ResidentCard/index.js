@@ -1,20 +1,13 @@
-import I18n from '@modules/i18n';
-import { layout } from '@modules/theme';
-import React, { useEffect, useState } from 'react';
-import {
-  Image, View
-} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import {
-  Text, Title
-} from 'react-native-paper';
+import I18n from "@modules/i18n";
+import { layout } from "@modules/theme";
+import React, { useEffect, useState } from "react";
+import { Image, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, Title } from "react-native-paper";
 
-const ResidentCard = ({
-  resident, onSelectPerson
-}) => {
-  const {
-    fname, lname, nickname, city, picture, communityname, objectId
-  } = resident;
+const ResidentCard = ({ resident, onSelectPerson }) => {
+  const { fname, lname, nickname, city, picture, communityname, objectId } =
+    resident;
   const [pictureUrl, setPictureUrl] = useState();
   useEffect(() => {
     const pic = picture;
@@ -33,22 +26,23 @@ const ResidentCard = ({
       >
         <View style={layout.resCardNameContainer}>
           <Title style={layout.resCardName}>{`${fname} ${lname}`}</Title>
-          {objectId.includes('PatientID-') && (
+          {objectId.includes("PatientID-") && (
             <View style={layout.resCardRedCircle} />
           )}
         </View>
         <Text style={layout.resCardNickname}>{`"${nickname}"`}</Text>
-        <Image
-          style={layout.resCardProfPic}
-          source={pictureUrl}
-        />
+        <Image style={layout.resCardProfPic} source={pictureUrl} />
         <View style={layout.resCardCityLicenseContainer}>
           <View style={layout.resCardCityContainer}>
-            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.city')}</Text>
+            <Text style={layout.resCardFont}>
+              {I18n.t("findResident.residentCard.city")}
+            </Text>
             <Text style={layout.resCardFont}>{city}</Text>
           </View>
           <View style={layout.resCardLicenseContainer}>
-            <Text style={layout.resCardFont}>{I18n.t('findResident.residentCard.community')}</Text>
+            <Text style={layout.resCardFont}>
+              {I18n.t("findResident.residentCard.community")}
+            </Text>
             <Text style={layout.resCardLicense}>{communityname}</Text>
           </View>
         </View>

@@ -1,16 +1,16 @@
-import AssetSearchbar from './AssetSearchBar';
-import FindResidents from './FindResidents';
+import AssetSearchbar from "./AssetSearchBar";
+import FindResidents from "./FindResidents";
 import FormikFields, {
   ErrorPicker,
   FormInput,
   PaperInputPicker,
-  YupValidationPicker
-} from './FormikFields';
-import Header from './Header';
-import LanguagePicker from './LanguagePicker';
-import ResidentIdSearchbar from './ResidentIdSearchbar';
-import TabBarIcon from './TabBarIcon';
-import TermsModal from './TermsModal';
+  YupValidationPicker,
+} from "./FormikFields";
+import Header from "./Header";
+import LanguagePicker from "./LanguagePicker";
+import ResidentIdSearchbar from "./ResidentIdSearchbar";
+import TabBarIcon from "./TabBarIcon";
+import TermsModal from "./TermsModal";
 
 export {
   AssetSearchbar,
@@ -24,5 +24,5 @@ export {
   ResidentIdSearchbar,
   TabBarIcon,
   TermsModal,
-  YupValidationPicker
+  YupValidationPicker,
 };

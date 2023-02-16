@@ -1,21 +1,20 @@
-import I18n from '@modules/i18n';
-import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
-import {
-  View
-} from 'react-native';
-import {
-  Button
-} from 'react-native-paper';
+import I18n from "@modules/i18n";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import { Button } from "react-native-paper";
 
 const Looper = ({
-  data, config, additionalQuestions,
-  translatedLabel, setAdditionalQuestions,
-  loopsAdded, setLoopsAdded, sameForm
+  data,
+  config,
+  additionalQuestions,
+  translatedLabel,
+  setAdditionalQuestions,
+  loopsAdded,
+  setLoopsAdded,
+  sameForm,
 }) => {
-  const {
-    formikKey, numberQuestionsToRepeat
-  } = data;
+  const { formikKey, numberQuestionsToRepeat } = data;
 
   const [individualLoopsAdded, setIndividualLoopsAdded] = useState(0);
   const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
@@ -83,8 +82,10 @@ const Looper = ({
     let updatedOptions = [];
     options.forEach((option) => {
       const updatedOption = _.cloneDeep(option);
-      const textKeys = updatedOption.textKey.split('__');
-      updatedOption.textKey = sameForm ? `__${textKeys[1]}__sameForm${individualLoopsAdded}__${textKeys[2]}` : `__${textKeys[1]}__loop${individualLoopsAdded}__${textKeys[2]}`;
+      const textKeys = updatedOption.textKey.split("__");
+      updatedOption.textKey = sameForm
+        ? `__${textKeys[1]}__sameForm${individualLoopsAdded}__${textKeys[2]}`
+        : `__${textKeys[1]}__loop${individualLoopsAdded}__${textKeys[2]}`;
       updatedOptions = updatedOptions.concat(updatedOption);
     });
     return updatedOptions;
@@ -95,21 +96,25 @@ const Looper = ({
       setLoopsAdded(loopsAdded - 1);
     }
     setIndividualLoopsAdded(individualLoopsAdded - 1);
-    setAdditionalQuestions(additionalQuestions.slice(0,
-      additionalQuestions.length - numberQuestionsToRepeat));
+    setAdditionalQuestions(
+      additionalQuestions.slice(
+        0,
+        additionalQuestions.length - numberQuestionsToRepeat
+      )
+    );
   };
 
   return (
     <View>
       <Button onPress={() => addLoop()}>
-        {I18n.t('paperButton.addAdditional')}
+        {I18n.t("paperButton.addAdditional")}
         {translatedLabel}
       </Button>
       {individualLoopsAdded !== 0 && (
-      <Button onPress={() => removeLoop()}>
-        {I18n.t('paperButton.removePrevious')}
-        {translatedLabel}
-      </Button>
+        <Button onPress={() => removeLoop()}>
+          {I18n.t("paperButton.removePrevious")}
+          {translatedLabel}
+        </Button>
       )}
     </View>
   );

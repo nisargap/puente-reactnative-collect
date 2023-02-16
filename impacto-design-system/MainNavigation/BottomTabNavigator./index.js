@@ -1,19 +1,17 @@
 // import DataAnalysis from '../../../domains/DataAnalysis';
 // import HomeScreen from '../../../domains/HomeScreen';
-import DataCollection from '@app/domains/DataCollection';
-import { TabBarIcon } from '@impacto-design-system/Extensions';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import I18n from 'i18n-js';
-import * as React from 'react';
+import DataCollection from "@app/domains/DataCollection";
+import { TabBarIcon } from "@impacto-design-system/Extensions";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import I18n from "i18n-js";
+import * as React from "react";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Data_Collection';
+const INITIAL_ROUTE_NAME = "Data_Collection";
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator
-      initialRouteName={INITIAL_ROUTE_NAME}
-    >
+    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       {/* <BottomTab.Screen
         name="Home"
         component={HomeScreen}
@@ -26,8 +24,10 @@ export default function BottomTabNavigator() {
         name="Data_Collection"
         component={DataCollection}
         options={{
-          title: I18n.t('bottomTab.dataCollection'),
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-folder" />,
+          title: I18n.t("bottomTab.dataCollection"),
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-folder" />
+          ),
         }}
       />
       {/* <BottomTab.Screen
@@ -39,6 +39,5 @@ export default function BottomTabNavigator() {
         }}
       /> */}
     </BottomTab.Navigator>
-
   );
 }

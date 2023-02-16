@@ -1,30 +1,30 @@
-import hooks from '@app/test/hooks';
+import hooks from "@app/test/hooks";
 import {
   // postAssetForm, postHousehold,
   // postSupplementaryAssetForm,
   postIdentificationForm,
-  postSupplementaryForm
-} from '@modules/cached-resources';
+  postSupplementaryForm,
+} from "@modules/cached-resources";
 
-import checkOnlineStatus from '..';
+import checkOnlineStatus from "..";
 import {
   // createAssetMockData,
   // createAssetSupplementaryFormMockData,
   // createHouseholdMockData,
   createOfflineUserMockData,
   createResidentMockData,
-  createSupplementaryFormMockData
-} from './utils';
+  createSupplementaryFormMockData,
+} from "./utils";
 
 hooks();
 
-jest.mock('..', () => jest.fn());
+jest.mock("..", () => jest.fn());
 
 /**
  * Test offline forms uploading with real connection to a Parse Cloud Code
  */
-describe('Testing full feature of online posting', () => {
-  test('Testing Resident and Supplmentary Forms', async () => {
+describe("Testing full feature of online posting", () => {
+  test("Testing Resident and Supplmentary Forms", async () => {
     checkOnlineStatus.mockResolvedValue(true);
 
     const numberOfResidents = 3;
