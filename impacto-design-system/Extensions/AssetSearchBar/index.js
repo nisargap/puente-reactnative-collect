@@ -32,7 +32,7 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
         let offlineData = [];
         getData("offlineAssetIDForms").then((offlineAssetData) => {
           if (offlineAssetData !== null) {
-            Object.entries(offlineAssetData).forEach(([key, value]) => {
+            Object.entries(offlineAssetData).forEach(([, value]) => {
               //eslint-disable-line
               offlineData = offlineData.concat(value.localObject);
             });
@@ -53,7 +53,7 @@ const AssetSearchbar = ({ setSelectedAsset, surveyingOrganization }) => {
 
       getData("offlineAssetIDForms").then((offlineAssetData) => {
         if (offlineAssetData !== null) {
-          Object.entries(offlineAssetData).forEach(([key, value]) => {
+          Object.entries(offlineAssetData).forEach(([, value]) => {
             //eslint-disable-line
             offlineData = offlineData.concat(value.localObject);
           });

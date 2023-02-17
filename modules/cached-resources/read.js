@@ -144,8 +144,8 @@ function customFormsQuery(surveyingOrganization) {
     }
     return getData("customForms").then(
       (forms) => forms,
-      (error) => console.log(error)
-    ); // eslint-disable-line
+      (error) => console.log(error) // eslint-disable-line
+    );
   });
 }
 

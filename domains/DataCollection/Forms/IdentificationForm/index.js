@@ -1,9 +1,6 @@
 import surveyingUserFailsafe from "@app/domains/DataCollection/Forms/utils";
-import {
-  Button as PaperButton,
-  PopupError,
-  Toast,
-} from "@impacto-design-system/Base";
+import { AlertContext } from "@context/alert.context";
+import { Button as PaperButton, PopupError } from "@impacto-design-system/Base";
 import {
   ErrorPicker,
   PaperInputPicker,
@@ -17,7 +14,7 @@ import { layout, theme } from "@modules/theme";
 import { isEmpty } from "@modules/utils";
 import { Formik } from "formik";
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Keyboard,
@@ -31,22 +28,19 @@ import configArray from "./config/config";
 const IdentificationForm = ({
   scrollViewScroll,
   setScrollViewScroll,
-  setSelectedForm,
-  setSurveyee,
-  surveyingUser,
   surveyingOrganization,
+  validationSchema,
+  setValidationSchema,
+  inputs,
+  setInputs,
+  submitting,
+  submissionError,
+  setSubmissionError,
+  onSubmit,
 }) => {
   useEffect(() => {
     setValidationSchema(yupValidationPicker(configArray));
   }, []);
-
-  const [inputs, setInputs] = useState({});
-  const [validationSchema, setValidationSchema] = useState();
-  const [submitting, setSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState(false);
-
-  const [visible, setVisible] = useState(true);
-  const onDismissSnackBar = () => setVisible(!visible);
 
   useEffect(() => {
     setInputs(configArray);
@@ -58,9 +52,9 @@ const IdentificationForm = ({
         <Formik
           initialValues={{}}
           validationSchema={validationSchema}
-          // only validate on submit, errors persist after fixing
           validateOnBlur={false}
           validateOnChange={false}
+          onSubmit={onSubmit}
         >
           {(formikProps) => (
             <View style={layout.formContainer}>
@@ -78,7 +72,6 @@ const IdentificationForm = ({
                   </View>
                 ))}
               <ErrorPicker formikProps={formikProps} inputs={inputs} />
-              <Toast visible="Hi" />
               {submitting ? (
                 <ActivityIndicator size="large" color={theme.colors.primary} />
               ) : (
@@ -120,6 +113,12 @@ const IdentificationFormWrapper = ({
   surveyingUser,
   surveyingOrganization,
 }) => {
+  const { alert } = useContext(AlertContext);
+  const [inputs, setInputs] = useState({});
+  const [validationSchema, setValidationSchema] = useState();
+  const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
+
   const onSubmit = async (values) => {
     setSubmitting(true);
     const { photoFile } = values;
@@ -168,23 +167,24 @@ const IdentificationFormWrapper = ({
         setSubmitting(false);
       }, 1000);
     };
+
     const postParams = {
       parseClass: "SurveyData",
       parseUser: user.objectId,
       photoFile,
       localObject: formObject,
     };
-    postIdentificationForm(postParams).then(
-      (surveyee) => {
-        setSurveyee(surveyee);
-        submitAction();
-      },
-      () => {
-        // perhaps an alert to let the user know there was an error
-        setSubmitting(false);
-        setSubmissionError(true);
-      }
-    );
+
+    try {
+      const surveyee = await postIdentificationForm(postParams);
+      const { fname, lname } = surveyee;
+      alert(`${fname} ${lname}'s ${I18n.t("forms.successfullySubmitted")}`);
+      submitAction();
+    } catch (e) {
+      setSubmitting(false);
+      setSubmissionError(true);
+      alert(`${I18n.t("submissionError.error")}`);
+    }
   };
 
   return (
@@ -192,6 +192,16 @@ const IdentificationFormWrapper = ({
       scrollViewScroll={scrollViewScroll}
       setScrollViewScroll={setScrollViewScroll}
       onSubmit={onSubmit}
+      inputs={inputs}
+      setInputs={setInputs}
+      validationSchema={validationSchema}
+      setValidationSchema={setValidationSchema}
+      submitting={submitting}
+      setSubmitting={setSubmitting}
+      submissionError={submissionError}
+      setSubmissionError={setSubmissionError}
+      setSelectedForm={setSelectedForm}
+      setSurveyee={setSurveyee}
     />
   );
 };

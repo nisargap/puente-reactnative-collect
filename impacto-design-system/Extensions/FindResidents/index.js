@@ -53,7 +53,7 @@ const FindResidents = ({
 
     await getData("offlineIDForms").then((offlineResidentData) => {
       if (offlineResidentData !== null) {
-        Object.entries(offlineResidentData).forEach(([key, value]) => {
+        Object.entries(offlineResidentData).forEach(([, value]) => {
           //eslint-disable-line
           offlineData = offlineData.concat(value.localObject);
         });

@@ -1,6 +1,7 @@
 /* eslint-disable-file */
 import "react-native-gesture-handler";
 
+import { AlertContextProvider } from "@context/alert.context";
 import { UserContextProvider } from "@context/auth.context";
 import { OfflineContextProvider } from "@context/offline.context";
 import MainNavigation from "@impacto-design-system/MainNavigation";
@@ -23,11 +24,13 @@ export default function App() {
   return (
     <NavigationContainer independent>
       <PaperProvider theme={theme}>
-        <UserContextProvider>
-          <OfflineContextProvider>
-            <MainNavigation />
-          </OfflineContextProvider>
-        </UserContextProvider>
+        <AlertContextProvider>
+          <UserContextProvider>
+            <OfflineContextProvider>
+              <MainNavigation />
+            </OfflineContextProvider>
+          </UserContextProvider>
+        </AlertContextProvider>
       </PaperProvider>
     </NavigationContainer>
   );

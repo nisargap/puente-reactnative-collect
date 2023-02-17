@@ -11,9 +11,10 @@ const Parse = client(TEST_MODE);
 function initialize() {
   Parse.initialize(parseAppId, parseJavascriptKey);
   Parse.serverURL = parseServerUrl;
+  // eslint-disable-next-line
   console.log(
     `Initialize Parse with App ID:${parseAppId}, Javascript Key: ${parseJavascriptKey}`
-  ); // eslint-disable-line
+  );
 }
 
 function retrieveSignUpFunction(params, type) {
@@ -47,32 +48,29 @@ function retrieveSignUpFunction(params, type) {
 
 async function retrieveSignInFunction(usrn, pswd) {
   const password = await getData("password");
-  return new Promise((resolve, reject) =>
-    Parse.User.logIn(String(usrn), String(pswd)).then(
-      (u) => {
-        console.log(
-          `User logged in successful with username: ${u.get("username")}`
-        ); // eslint-disable-line
-        const user = {
-          ...u,
-          id: u.id,
-          name: u.get("username"),
-          firstname: u.get("firstname") || "",
-          lastname: u.get("lastname") || "",
-          email: u.get("email"),
-          organization: u.get("organization"),
-          role: u.get("role"),
-          createdAt: `${u.get("createdAt")}`,
-          password,
-        };
-        resolve(user);
-      },
-      (error) => {
-        console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
-        reject(error);
-      }
-    )
-  );
+  try {
+    const u = await Parse.User.logIn(String(usrn), String(pswd));
+    // eslint-disable-next-line
+    console.log(
+      `User logged in successful with username: ${u.get("username")}`
+    );
+    const loggedInUser = {
+      ...u,
+      id: u.id,
+      name: u.get("username"),
+      firstname: u.get("firstname") || "",
+      lastname: u.get("lastname") || "",
+      email: u.get("email"),
+      organization: u.get("organization"),
+      role: u.get("role"),
+      createdAt: `${u.get("createdAt")}`,
+      password,
+    };
+    return loggedInUser;
+  } catch (error) {
+    console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
+    throw new Error(error);
+  }
 }
 
 async function retrieveSignOutFunction() {

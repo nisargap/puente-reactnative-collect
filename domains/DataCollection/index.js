@@ -6,7 +6,9 @@ import ResearchSVG from "@assets/graphics/static/Research.svg";
 import MedEvalSVG from "@assets/icons/Heart-Icon.svg";
 import EnvSVG from "@assets/icons/Home-icon.svg";
 import NewRecordSVG from "@assets/icons/New-Record-icon.svg";
+import { AlertContext } from "@context/alert.context";
 import { UserContext } from "@context/auth.context";
+import { Toast } from "@impacto-design-system/Base";
 import { FindResidents, Header } from "@impacto-design-system/Extensions";
 import MapView from "@impacto-design-system/MapView";
 import { getData } from "@modules/async-storage";
@@ -76,6 +78,7 @@ const DataCollection = ({ navigation }) => {
   const [surveyingUser, setSurveyingUser] = useState();
 
   const { onLogout } = useContext(UserContext);
+  const { visible, message, dismiss } = useContext(AlertContext);
 
   useFocusEffect(
     useCallback(() => {
@@ -322,6 +325,12 @@ const DataCollection = ({ navigation }) => {
             </View>
           )}
         </ScrollView>
+        <Toast
+          text={message}
+          visible={visible}
+          onClick={dismiss}
+          onClickLabel="Dismiss"
+        />
       </KeyboardAvoidingView>
     </View>
   );

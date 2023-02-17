@@ -104,8 +104,9 @@ const NamePhoneEmail = () => {
       currentUser.username,
       currentUser.password
     );
+
+    // eslint-disable-next-line
     for (const key in postParams) {
-      //eslint-disable-line
       user.set(String(key), postParams[key]);
     }
 

@@ -37,29 +37,30 @@ const Maps = ({ organization }) => {
 
   const handleLocation = async () => {
     setLoading(true);
-    await getLocation()
-      .then((location) => {
-        const { latitude, longitude } = location.coords;
-        setRegion({
+    try {
+      const location = await getLocation();
+      if (!location) return;
+      const { latitude, longitude } = location.coords;
+      setRegion({
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        latitude,
+        longitude,
+      });
+      storeData(
+        {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
           latitude,
           longitude,
-        });
-        storeData(
-          {
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-            latitude,
-            longitude,
-          },
-          "homeMapRegion"
-        );
-      })
-      .catch((e) => {
-        console.log(e); //eslint-disable-line
-      });
-    setLoading(false);
+        },
+        "homeMapRegion"
+      );
+      setLoading(false);
+    } catch (err) {
+      console.log("MapView", err); //eslint-disable-line
+      setLoading(false);
+    }
   };
 
   const retrieveMarkers = () => {

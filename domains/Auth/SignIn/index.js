@@ -41,14 +41,8 @@ const SignIn = ({ navigation }) => {
   const [language, setLanguage] = useState("");
   const [visible, setVisible] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
-  const { user, onlineLogin, offlineLogin, isLoading, error } =
+  const { onlineLogin, offlineLogin, isLoading, error } =
     useContext(UserContext);
-
-  useEffect(() => {
-    if (user?.id && user.isOnline === true) {
-      handleSignIn(user);
-    }
-  }, [user]);
 
   useEffect(() => {
     async function checkLanguage() {

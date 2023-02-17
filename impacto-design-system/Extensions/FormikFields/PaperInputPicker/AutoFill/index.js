@@ -15,7 +15,6 @@ import { TextInput } from "react-native-paper";
 
 import { stylesDefault, stylesPaper } from "../index.style";
 
-// LogBox.ignoreWarnings(['VirtualizedLists should never be nested']);
 LogBox.ignoreAllLogs(true);
 
 export default class AutoFill extends Component {
@@ -30,12 +29,17 @@ export default class AutoFill extends Component {
 
   async componentDidMount() {
     const { parameter } = this.props;
-    const data = await getData("autofill_information");
-    const result = data[parameter];
-    this.setState({
-      fields: result.sort(),
-      values: result.length > 0,
-    });
+    try {
+      const data = await getData("autofill_information");
+      if (!data) return;
+      const result = data[parameter];
+      this.setState({
+        fields: result.sort(),
+        values: result.length > 0,
+      });
+    } catch (error) {
+      console.error("Autofill Error", error); //eslint-disable-line
+    }
   }
 
   findField(query) {
