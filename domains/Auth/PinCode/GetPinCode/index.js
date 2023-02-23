@@ -1,53 +1,56 @@
-import { Formik } from 'formik';
-import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Button, Text } from 'react-native-paper';
-
-import FormInput from '../../../../components/FormikFields/FormInput';
-import { deleteData, getData } from '../../../../modules/async-storage';
-import { populateCache } from '../../../../modules/cached-resources';
-import I18n from '../../../../modules/i18n';
-import checkOnlineStatus from '../../../../modules/offline';
-import { retrieveSignInFunction } from '../../../../services/parse/auth';
+import { retrieveSignInFunction } from "@app/services/parse/auth";
+import FormInput from "@impacto-design-system/Extensions/FormikFields/FormInput";
+import { deleteData, getData } from "@modules/async-storage";
+import { populateCache } from "@modules/cached-resources";
+import I18n from "@modules/i18n";
+import checkOnlineStatus from "@modules/offline";
+import { Formik } from "formik";
+import React, { useState } from "react";
+import { ActivityIndicator } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 const GetPinCode = ({ navigation }) => {
   const [failedAttempts, setFailedAttempts] = useState(1);
 
   return (
     <Formik
-      initialValues={{ pincode: '' }}
+      initialValues={{ pincode: "" }}
       onSubmit={(values, actions) => {
-        getData('pincode').then((pincode) => {
+        getData("pincode").then((pincode) => {
           if (values.pincode === pincode) {
             // IF ONLINE, otherwise just log in
             checkOnlineStatus().then((connected) => {
               if (connected) {
-                getData('currentUser')
-                  .then((asyncUser) => {
-                    retrieveSignInFunction(asyncUser.username, asyncUser.credentials.password)
-                      .then((signedInUser) => {
-                        populateCache(signedInUser);
-                      });
-                    navigation.navigate('Root');
-                  }, () => {
+                getData("currentUser").then(
+                  (asyncUser) => {
+                    retrieveSignInFunction(
+                      asyncUser.username,
+                      asyncUser.credentials.password
+                    ).then((signedInUser) => {
+                      populateCache(signedInUser);
+                    });
+                    navigation.navigate("Root");
+                  },
+                  () => {
                     // error with stored currentUser
-                  });
+                  }
+                );
               } else {
-                navigation.navigate('Root');
+                navigation.navigate("Root");
               }
             });
           } else {
             setFailedAttempts(failedAttempts + 1);
             // go back to sign in on 3rd attempt
             if (failedAttempts >= 3) {
-              deleteData('currentUser');
-              deleteData('pincode');
-              deleteData('organization');
-              navigation.navigate('Sign In');
+              deleteData("currentUser");
+              deleteData("pincode");
+              deleteData("organization");
+              navigation.navigate("Sign In");
             } else if (failedAttempts === 2) {
-              alert(I18n.t('pinCode.getPincode.incorrect1')); // eslint-disable-line
+              alert(I18n.t("pinCode.getPincode.incorrect1")); // eslint-disable-line
             } else {
-              alert(I18n.t('pinCode.getPincode.incorrect2'));// eslint-disable-line
+              alert(I18n.t("pinCode.getPincode.incorrect2")); // eslint-disable-line
             }
           }
         });
@@ -60,7 +63,7 @@ const GetPinCode = ({ navigation }) => {
       {(formikProps) => (
         <>
           <FormInput
-            label={I18n.t('pinCode.getPinCode.enterPinCode')}
+            label={I18n.t("pinCode.getPinCode.enterPinCode")}
             formikProps={formikProps}
             formikKey="pincode"
             placeholder="123456"
@@ -70,7 +73,7 @@ const GetPinCode = ({ navigation }) => {
             <ActivityIndicator />
           ) : (
             <Button onPress={formikProps.handleSubmit}>
-              <Text>{I18n.t('global.submit')}</Text>
+              <Text>{I18n.t("global.submit")}</Text>
             </Button>
           )}
         </>

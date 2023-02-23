@@ -1,58 +1,44 @@
-import { Formik } from 'formik';
-import React, { useContext, useState } from 'react';
+import { Button } from "@impacto-design-system/Base";
+import FormInput from "@impacto-design-system/Extensions/FormikFields/FormInput";
+import Autofill from "@impacto-design-system/Extensions/FormikFields/PaperInputPicker/AutoFill";
+import TermsModal from "@impacto-design-system/Extensions/TermsModal";
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import { Formik } from "formik";
+import React, { useContext, useState } from "react";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   StyleSheet,
-  View
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import {
-  Checkbox, Text
-} from 'react-native-paper';
-import * as yup from 'yup';
+  View,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { Checkbox, Text } from "react-native-paper";
+import * as yup from "yup";
 
-import Button from '../../../components/Button';
-import FormInput from '../../../components/FormikFields/FormInput';
-import Autofill from '../../../components/FormikFields/PaperInputPicker/AutoFill';
-import TermsModal from '../../../components/TermsModal';
-import { UserContext } from '../../../context/auth.context';
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
+import { UserContext } from "../../../context/auth.context";
 
 const validationSchema = yup.object().shape({
-  firstname: yup
-    .string()
-    .label('First Name')
-    .required(),
-  lastname: yup
-    .string()
-    .label('Last Name')
-    .required(),
-  email: yup
-    .string()
-    .label('Email')
-    .email(),
+  firstname: yup.string().label("First Name").required(),
+  lastname: yup.string().label("Last Name").required(),
+  email: yup.string().label("Email").email(),
   phonenumber: yup
     .string()
-    .label('Phone Number')
-    .min(10, 'Seems a bit short..'),
-  organization: yup
-    .string()
-    .label('Organization')
-    .required(),
+    .label("Phone Number")
+    .min(10, "Seems a bit short.."),
+  organization: yup.string().label("Organization").required(),
   password: yup
     .string()
-    .label('Password')
+    .label("Password")
     .required()
-    .min(4, 'Seems a bit short...'),
+    .min(4, "Seems a bit short..."),
   password2: yup
     .string()
-    .label('Password')
+    .label("Password")
     .required()
-    .min(4, 'Seems a bit short...')
+    .min(4, "Seems a bit short..."),
 });
 
 // export default () => (
@@ -60,20 +46,20 @@ export default function SignUp({ navigation }) {
   const [checked, setChecked] = useState(false);
   const [visible, setVisible] = useState(false);
   const [scrollViewScroll, setScrollViewScroll] = useState();
-  const [notificationType, setNotificationType] = useState('email');
+  const [notificationType, setNotificationType] = useState("email");
 
   const { register } = useContext(UserContext);
 
   return (
     <KeyboardAvoidingView
       enabled
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ backgroundColor: theme.colors.accent, flex: 1 }}
     >
       <View>
         <Button
           icon="arrow-left"
-          onPress={() => navigation.navigate('Sign In')}
+          onPress={() => navigation.navigate("Sign In")}
           buttonText="Back"
           style={[styles.serviceButton, { marginTop: 60 }]}
         />
@@ -85,19 +71,26 @@ export default function SignUp({ navigation }) {
           <SafeAreaView style={{ marginTop: 50, marginBottom: 150 }}>
             <Formik
               initialValues={{
-                firstname: '', lastname: '', email: '', phonenumber: '', password: '', password2: '', organization: ''
+                firstname: "",
+                lastname: "",
+                email: "",
+                phonenumber: "",
+                password: "",
+                password2: "",
+                organization: "",
               }}
               onSubmit={(values, actions) => {
                 if (!checked) {
-                  alert(I18n.t('signUp.errorTerms')); // eslint-disable-line
+                  alert(I18n.t("signUp.errorTerms")); // eslint-disable-line
                 } else if (values.password !== values.password2) {
-                  alert(I18n.t('signUp.errorPassword')) // eslint-disable-line
+                  alert(I18n.t("signUp.errorPassword")); // eslint-disable-line
                 } else {
                   register(values, notificationType)
-                    .then(() => navigation.navigate('Root')).catch((error) => {
+                    .then(() => navigation.navigate("Root"))
+                    .catch((error) => {
                       // sign up failed alert user
                       console.log(`Error: ${error.code} ${error.message}`); // eslint-disable-line
-                      alert(I18n.t('signUp.usernameError')); // eslint-disable-line
+                      alert(I18n.t("signUp.usernameError")); // eslint-disable-line
                     });
                 }
                 setTimeout(() => {
@@ -109,54 +102,54 @@ export default function SignUp({ navigation }) {
               {(formikProps) => (
                 <>
                   <FormInput
-                    label={I18n.t('signUp.firstName')}
+                    label={I18n.t("signUp.firstName")}
                     formikProps={formikProps}
                     formikKey="firstname"
                     placeholder="John"
                     autoFocus
                   />
                   <FormInput
-                    label={I18n.t('signUp.lastName')}
+                    label={I18n.t("signUp.lastName")}
                     formikProps={formikProps}
                     formikKey="lastname"
                     placeholder="Doe"
                   />
                   <FormInput
-                    label={I18n.t('signUp.email')}
+                    label={I18n.t("signUp.email")}
                     formikProps={formikProps}
                     formikKey="email"
                     placeholder="johndoe@example.com"
                   />
                   <FormInput
-                    label={I18n.t('signUp.phoneNumber')}
+                    label={I18n.t("signUp.phoneNumber")}
                     formikProps={formikProps}
                     formikKey="phonenumber"
                     placeholder="123-456-7890"
                     keyboardType="numeric"
                   />
                   <FormInput
-                    label={I18n.t('signUp.password')}
+                    label={I18n.t("signUp.password")}
                     formikProps={formikProps}
                     formikKey="password"
                     placeholder="Password Here"
                     secureTextEntry
                   />
                   <FormInput
-                    label={I18n.t('signUp.password2')}
+                    label={I18n.t("signUp.password2")}
                     formikProps={formikProps}
                     formikKey="password2"
                     placeholder="Password Here"
                     secureTextEntry
                   />
                   <Button
-                    color={notificationType === 'email' ? 'primary' : 'empty'}
-                    onPress={() => setNotificationType('email')}
+                    color={notificationType === "email" ? "primary" : "empty"}
+                    onPress={() => setNotificationType("email")}
                     buttonText="Send confirmation via email?"
                     style={styles.serviceButton}
                   />
                   <Button
-                    color={notificationType === 'text' ? 'primary' : 'empty'}
-                    onPress={() => setNotificationType('text')}
+                    color={notificationType === "text" ? "primary" : "empty"}
+                    onPress={() => setNotificationType("text")}
                     buttonText="Send confirmation via text?"
                     style={styles.serviceButton}
                   />
@@ -165,24 +158,24 @@ export default function SignUp({ navigation }) {
                     formikProps={formikProps}
                     formikKey="organization"
                     label="signUp.organization"
-                    translatedLabel={I18n.t('signUp.organization')}
+                    translatedLabel={I18n.t("signUp.organization")}
                     scrollViewScroll={scrollViewScroll}
                     setScrollViewScroll={setScrollViewScroll}
                   />
                   <Button
                     onPress={() => setVisible(true)}
-                    buttonText={I18n.t('signUp.termsOfService.view')}
+                    buttonText={I18n.t("signUp.termsOfService.view")}
                     style={styles.serviceButton}
                   />
                   <View style={styles.container}>
                     <Text style={styles.serviceText}>
-                      {I18n.t('signUp.termsOfService.acknoledgement')}
+                      {I18n.t("signUp.termsOfService.acknoledgement")}
                     </Text>
                     <View style={styles.checkbox}>
                       <Checkbox
                         disabled={false}
                         color={theme.colors.primary}
-                        status={checked ? 'checked' : 'unchecked'}
+                        status={checked ? "checked" : "unchecked"}
                         onPress={() => {
                           setChecked(!checked);
                         }}
@@ -194,7 +187,7 @@ export default function SignUp({ navigation }) {
                   ) : (
                     <Button
                       onPress={formikProps.handleSubmit}
-                      buttonText={I18n.t('signUp.submit')}
+                      buttonText={I18n.t("signUp.submit")}
                       style={styles.serviceButton}
                     />
                   )}
@@ -215,17 +208,17 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 5,
     marginLeft: 20,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginLeft: 90,
     marginRight: 90,
-    marginBottom: 5
+    marginBottom: 5,
   },
   serviceText: {
     flex: 5,
-    fontSize: 10
+    fontSize: 10,
   },
   submitButton: {
     marginLeft: 20,
@@ -239,15 +232,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   footerContainer: {
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    flexDirection: "row",
+    marginLeft: "auto",
+    marginRight: "auto",
     backgroundColor: theme.colors.accent,
-    marginBottom: 35
+    marginBottom: 35,
   },
   loginText: {
     fontSize: 15,
-    marginTop: 'auto',
-    marginBottom: 'auto'
+    marginTop: "auto",
+    marginBottom: "auto",
   },
 });

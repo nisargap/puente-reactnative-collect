@@ -1,22 +1,25 @@
-import { Formik } from 'formik';
-import I18n from 'i18n-js';
-import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import { OfflineContext } from "@context/offline.context";
 import {
-  Keyboard,
-  TouchableWithoutFeedback, View
-} from 'react-native';
+  Button as PaperButton,
+  PopupSuccess,
+} from "@impacto-design-system/Base";
+import { PaperInputPicker } from "@impacto-design-system/Extensions";
+import { deleteData, getData } from "@modules/async-storage";
+import { cacheResidentDataMulti } from "@modules/cached-resources";
+import { layout } from "@modules/theme";
+import { Formik } from "formik";
+import I18n from "i18n-js";
+import _ from "lodash";
+import React, { useContext, useEffect, useState } from "react";
+import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
-import PaperButton from '../../../../../components/Button';
-import PaperInputPicker from '../../../../../components/FormikFields/PaperInputPicker';
-import PopupSuccess from '../../../../../components/PopupSuccess';
-import { OfflineContext } from '../../../../../context/offline.context';
-import { deleteData, getData } from '../../../../../modules/async-storage';
-import { cacheResidentDataMulti } from '../../../../../modules/cached-resources';
-import { layout } from '../../../../../modules/theme';
-import configArray from './config/config';
+import configArray from "./config/config";
 
-const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScroll }) => {
+const OfflineData = ({
+  surveyingOrganization,
+  scrollViewScroll,
+  setScrollViewScroll,
+}) => {
   const [inputs, setInputs] = useState({});
   const [cacheSuccess, setCacheSuccess] = useState(false);
   const [submittedForms, setSubmittedForms] = useState(0);
@@ -26,10 +29,11 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
     setInputs(configArray);
   }, [configArray]);
 
-  const repopulateAllData = async () => populateResidentDataCache().then((records) => {
-    setSubmittedForms(records.length);
-    setCacheSuccess(true);
-  });
+  const repopulateAllData = async () =>
+    populateResidentDataCache().then((records) => {
+      setSubmittedForms(records.length);
+      setCacheSuccess(true);
+    });
 
   return (
     <View>
@@ -38,7 +42,7 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
           initialValues={{}}
           onSubmit={async (values) => {
             await cacheResidentDataMulti(values.communityname);
-            await getData('residentData').then((forms) => {
+            await getData("residentData").then((forms) => {
               setSubmittedForms(Object.keys(forms).length);
               setCacheSuccess(true);
             });
@@ -50,33 +54,41 @@ const OfflineData = ({ surveyingOrganization, scrollViewScroll, setScrollViewScr
                 onPress={repopulateAllData}
                 buttonText="Populate all ID Forms"
                 loading={!!isLoading}
-                style={{ backgroundColor: 'blue' }}
+                style={{ backgroundColor: "blue" }}
               />
-              {inputs.length && inputs.map((result) => (
-                <View key={result.formikKey}>
-                  <PaperInputPicker
-                    data={result}
-                    formikProps={formikProps}
-                    surveyingOrganization={surveyingOrganization}
-                    scrollViewScroll={scrollViewScroll}
-                    setScrollViewScroll={setScrollViewScroll}
-                    customForm={false}
-                  />
-
-                </View>
-              ))}
+              {inputs.length &&
+                inputs.map((result) => (
+                  <View key={result.formikKey}>
+                    <PaperInputPicker
+                      data={result}
+                      formikProps={formikProps}
+                      surveyingOrganization={surveyingOrganization}
+                      scrollViewScroll={scrollViewScroll}
+                      setScrollViewScroll={setScrollViewScroll}
+                      customForm={false}
+                    />
+                  </View>
+                ))}
               <PaperButton
                 onPress={formikProps.handleSubmit}
-                buttonText={_.isEmpty(formikProps.values) ? I18n.t('global.emptyForm') : I18n.t('global.submit')}
+                buttonText={
+                  _.isEmpty(formikProps.values)
+                    ? I18n.t("global.emptyForm")
+                    : I18n.t("global.submit")
+                }
                 disabled={!!_.isEmpty(formikProps.values)}
-                icon={_.isEmpty(formikProps.values) ? 'alert-octagon' : 'plus'}
-                style={{ backgroundColor: _.isEmpty(formikProps.values) ? '#FFDDDD' : 'green' }}
+                icon={_.isEmpty(formikProps.values) ? "alert-octagon" : "plus"}
+                style={{
+                  backgroundColor: _.isEmpty(formikProps.values)
+                    ? "#FFDDDD"
+                    : "green",
+                }}
               />
               <PaperButton
-                onPress={() => deleteData('residentData')}
+                onPress={() => deleteData("residentData")}
                 buttonText="Clear Cached ID Forms"
                 icon="delete"
-                style={{ backgroundColor: 'red' }}
+                style={{ backgroundColor: "red" }}
               />
               <PopupSuccess
                 success={cacheSuccess}

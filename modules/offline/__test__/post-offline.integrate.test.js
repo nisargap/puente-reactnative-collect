@@ -1,28 +1,32 @@
-import hooks from '../../../test/hooks';
+import hooks from "@app/test/hooks";
 import {
-  postAssetForm, postHousehold, postIdentificationForm,
-  postSupplementaryAssetForm, postSupplementaryForm
-} from '../../cached-resources';
-import checkOnlineStatus from '..';
-import { postOfflineForms } from '../post';
+  postAssetForm,
+  postHousehold,
+  postIdentificationForm,
+  postSupplementaryAssetForm,
+  postSupplementaryForm,
+} from "@modules/cached-resources";
+import { postOfflineForms } from "@modules/offline/post";
+
+import checkOnlineStatus from "..";
 import {
   createAssetMockData,
   createAssetSupplementaryFormMockData,
   createHouseholdMockData,
   createOfflineUserMockData,
   createResidentMockData,
-  createSupplementaryFormMockData
-} from './utils';
+  createSupplementaryFormMockData,
+} from "./utils";
 
 hooks();
 
-jest.mock('..', () => jest.fn());
+jest.mock("..", () => jest.fn());
 
 /**
  * Test offline forms uploading with real connection to a Parse Cloud Code
  */
-describe('Testing full feature of offline posting', () => {
-  test('Testing Resident and Supplmentary Forms stored', async () => {
+describe("Testing full feature of offline posting", () => {
+  test("Testing Resident and Supplmentary Forms stored", async () => {
     checkOnlineStatus.mockResolvedValue(false);
 
     const numberOfResidents = 3;
@@ -58,13 +62,15 @@ describe('Testing full feature of offline posting', () => {
     checkOnlineStatus.mockResolvedValue(true);
 
     const { uploadedForms, offlineForms } = await postOfflineForms();
-    expect(uploadedForms.residentForms.length)
-      .toEqual(offlineForms.residentForms.length);
-    expect(uploadedForms.residentSupplementaryForms.length)
-      .toEqual(offlineForms.residentSupplementaryForms.length);
+    expect(uploadedForms.residentForms.length).toEqual(
+      offlineForms.residentForms.length
+    );
+    expect(uploadedForms.residentSupplementaryForms.length).toEqual(
+      offlineForms.residentSupplementaryForms.length
+    );
   });
 
-  test('Testing Resident Forms and Household Forms stored', async () => {
+  test("Testing Resident Forms and Household Forms stored", async () => {
     checkOnlineStatus.mockResolvedValue(false);
 
     const numberOfHouseholds = 2;
@@ -100,11 +106,15 @@ describe('Testing full feature of offline posting', () => {
     checkOnlineStatus.mockResolvedValue(true);
 
     const { uploadedForms, offlineForms } = await postOfflineForms();
-    expect(uploadedForms.residentForms.length).toEqual(offlineForms.residentForms.length);
-    expect(uploadedForms.households.length).toEqual(offlineForms.households.length);
+    expect(uploadedForms.residentForms.length).toEqual(
+      offlineForms.residentForms.length
+    );
+    expect(uploadedForms.households.length).toEqual(
+      offlineForms.households.length
+    );
   });
 
-  test('Testing Asset and Asset Supplementary Forms stored', async () => {
+  test("Testing Asset and Asset Supplementary Forms stored", async () => {
     checkOnlineStatus.mockResolvedValue(false);
 
     const numberOfAssets = 3;
@@ -150,9 +160,11 @@ describe('Testing full feature of offline posting', () => {
     checkOnlineStatus.mockResolvedValue(true);
 
     const { uploadedForms, offlineForms } = await postOfflineForms();
-    expect(uploadedForms.assetForms.length)
-      .toEqual(offlineForms.assetForms.length);
-    expect(uploadedForms.assetSupplementaryForms.length)
-      .toEqual(offlineForms.assetSupplementaryForms.length);
+    expect(uploadedForms.assetForms.length).toEqual(
+      offlineForms.assetForms.length
+    );
+    expect(uploadedForms.assetSupplementaryForms.length).toEqual(
+      offlineForms.assetSupplementaryForms.length
+    );
   });
 });

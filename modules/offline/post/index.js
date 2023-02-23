@@ -1,32 +1,32 @@
-import { Platform } from 'react-native';
+import surveyingUserFailsafe from "@app/domains/DataCollection/Forms/utils";
+import { uploadOfflineForms } from "@app/services/parse/crud";
+import { deleteData, getData } from "@modules/async-storage";
+import { isEmpty } from "@modules/utils";
+import { Platform } from "react-native";
 
-import surveyingUserFailsafe from '../../../domains/DataCollection/Forms/utils';
-import { uploadOfflineForms } from '../../../services/parse/crud';
-import { deleteData, getData } from '../../async-storage';
-import { isEmpty } from '../../utils';
-import checkOnlineStatus from '..';
+import checkOnlineStatus from "..";
 
 const cleanupPostedOfflineForms = async () => {
-  await deleteData('offlineIDForms');
-  await deleteData('offlineSupForms');
-  await deleteData('offlineAssetIDForms');
-  await deleteData('offlineAssetSupForms');
-  await deleteData('offlineHouseholds');
+  await deleteData("offlineIDForms");
+  await deleteData("offlineSupForms");
+  await deleteData("offlineAssetIDForms");
+  await deleteData("offlineAssetSupForms");
+  await deleteData("offlineHouseholds");
 };
 
 const postOfflineForms = async () => {
-  const user = await getData('currentUser');
+  const user = await getData("currentUser");
 
   const surveyUser = await surveyingUserFailsafe(user, undefined, isEmpty);
   const { organization } = user;
-  const appVersion = await getData('appVersion') || '';
-  const phoneOS = Platform.OS || '';
+  const appVersion = (await getData("appVersion")) || "";
+  const phoneOS = Platform.OS || "";
 
-  const idFormsAsync = await getData('offlineIDForms');
-  const supplementaryFormsAsync = await getData('offlineSupForms');
-  const assetIdFormsAsync = await getData('offlineAssetIDForms');
-  const assetSupFormsAsync = await getData('offlineAssetSupForms');
-  const householdsAsync = await getData('offlineHouseholds');
+  const idFormsAsync = await getData("offlineIDForms");
+  const supplementaryFormsAsync = await getData("offlineSupForms");
+  const assetIdFormsAsync = await getData("offlineAssetIDForms");
+  const assetSupFormsAsync = await getData("offlineAssetSupForms");
+  const householdsAsync = await getData("offlineHouseholds");
 
   const offlineForms = {
     residentForms: idFormsAsync,
@@ -39,24 +39,24 @@ const postOfflineForms = async () => {
       surveyingOrganization: organization,
       parseUser: user.objectId,
       appVersion,
-      phoneOS
-    }
+      phoneOS,
+    },
   };
 
   const isConnected = await checkOnlineStatus();
 
   if (isConnected) {
     const uploadedForms = await uploadOfflineForms(offlineForms).catch(() => ({
-      status: 'Error'
+      status: "Error",
     }));
     return {
       offlineForms,
       uploadedForms,
-      status: 'Success'
+      status: "Success",
     };
   }
 
-  return 'No Internet Access';
+  return "No Internet Access";
 };
 
 export { cleanupPostedOfflineForms, postOfflineForms };

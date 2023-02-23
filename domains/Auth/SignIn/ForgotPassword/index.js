@@ -1,19 +1,15 @@
-import { Formik } from 'formik';
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import {
-  Button,
-  Text
-} from 'react-native-paper';
-
-import FormInput from '../../../../components/FormikFields/FormInput';
-import I18n from '../../../../modules/i18n';
-import { theme } from '../../../../modules/theme';
-import { retrieveForgotPasswordFunction } from '../../../../services/parse/auth';
+import { retrieveForgotPasswordFunction } from "@app/services/parse/auth";
+import FormInput from "@impacto-design-system/Extensions/FormikFields/FormInput";
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import { Formik } from "formik";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 export default function ForgotPassword({ navigation, setForgotPassword }) {
   const handleSignUp = () => {
-    navigation.navigate('Sign Up');
+    navigation.navigate("Sign Up");
   };
 
   const handleSignIn = () => {
@@ -32,15 +28,18 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
         {!emailError && !emailSuccess && (
           <View>
             <Formik
-              initialValues={{ email: '' }}
+              initialValues={{ email: "" }}
               onSubmit={(values, actions) => {
-                retrieveForgotPasswordFunction(values).then((res) => {
-                  setEmailSuccess(true);
-                  console.log(res); //eslint-disable-line
-                }, (error) => {
-                  setEmailError(true);
-                  console.log(error); //eslint-disable-line
-                });
+                retrieveForgotPasswordFunction(values).then(
+                  (res) => {
+                    setEmailSuccess(true);
+                    console.log(res); //eslint-disable-line
+                  },
+                  (error) => {
+                    setEmailError(true);
+                    console.log(error); //eslint-disable-line
+                  }
+                );
                 setTimeout(() => {
                   actions.setSubmitting(false);
                 }, 1000);
@@ -49,48 +48,90 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
               {(formikProps) => (
                 <View>
                   <View>
-                    <Text style={{ marginHorizontal: 15, fontSize: 20, fontWeight: 'bold' }}>{I18n.t('signIn.forgotPassword.enterEmail')}</Text>
+                    <Text
+                      style={{
+                        marginHorizontal: 15,
+                        fontSize: 20,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {I18n.t("signIn.forgotPassword.enterEmail")}
+                    </Text>
                     <FormInput
-                      label={I18n.t('signUp.email')}
+                      label={I18n.t("signUp.email")}
                       formikProps={formikProps}
                       formikKey="email"
-                      placeholder={I18n.t('signUp.email')}
+                      placeholder={I18n.t("signUp.email")}
                     />
                   </View>
-                  <Button mode="contained" theme={theme} onPress={formikProps.handleSubmit}>{I18n.t('signIn.forgotPassword.sendLink')}</Button>
+                  <Button
+                    mode="contained"
+                    theme={theme}
+                    onPress={formikProps.handleSubmit}
+                  >
+                    {I18n.t("signIn.forgotPassword.sendLink")}
+                  </Button>
                 </View>
-
               )}
             </Formik>
           </View>
         )}
         {emailSuccess && (
           <View>
-            <Text style={{ marginHorizontal: 15, fontSize: 18, fontWeight: 'bold' }}>
-              {I18n.t('signIn.forgotPassword.resetSuccess')}
+            <Text
+              style={{ marginHorizontal: 15, fontSize: 18, fontWeight: "bold" }}
+            >
+              {I18n.t("signIn.forgotPassword.resetSuccess")}
             </Text>
-            <Button mode="text" theme={theme} onPress={handleSignIn}>Back to Sign in</Button>
+            <Button mode="text" theme={theme} onPress={handleSignIn}>
+              Back to Sign in
+            </Button>
           </View>
         )}
         {emailError && (
           <View>
-            <Text style={{ marginHorizontal: 15, fontSize: 18, fontWeight: 'bold' }}>
-              {I18n.t('signIn.forgotPassword.resetError')}
+            <Text
+              style={{ marginHorizontal: 15, fontSize: 18, fontWeight: "bold" }}
+            >
+              {I18n.t("signIn.forgotPassword.resetError")}
             </Text>
-            <Button style={{ marginTop: 10 }} mode="contained" onPress={() => setEmailError(false)}>Try Again</Button>
+            <Button
+              style={{ marginTop: 10 }}
+              mode="contained"
+              onPress={() => setEmailError(false)}
+            >
+              Try Again
+            </Button>
           </View>
         )}
       </View>
       <View style={styles.footer}>
         <View style={styles.termsContainer}>
-          <Text style={styles.accountText}>{I18n.t('signIn.forgotPassword.noAccount')}</Text>
-          <Button mode="text" theme={theme} color="#3E81FD" onPress={handleSignUp} labelStyle={{ marginLeft: 5 }}>
-            {I18n.t('signIn.forgotPassword.signUp')}
+          <Text style={styles.accountText}>
+            {I18n.t("signIn.forgotPassword.noAccount")}
+          </Text>
+          <Button
+            mode="text"
+            theme={theme}
+            color="#3E81FD"
+            onPress={handleSignUp}
+            labelStyle={{ marginLeft: 5 }}
+          >
+            {I18n.t("signIn.forgotPassword.signUp")}
           </Button>
         </View>
         <View style={styles.termsContainer}>
-          <Text style={styles.puenteText}>{I18n.t('signIn.forgotPassword.rememberPass')}</Text>
-          <Button mode="text" theme={theme} onPress={handleSignIn} labelStyle={{ marginLeft: 5 }}>{I18n.t('signIn.forgotPassword.signIn')}</Button>
+          <Text style={styles.puenteText}>
+            {I18n.t("signIn.forgotPassword.rememberPass")}
+          </Text>
+          <Button
+            mode="text"
+            theme={theme}
+            onPress={handleSignIn}
+            labelStyle={{ marginLeft: 5 }}
+          >
+            {I18n.t("signIn.forgotPassword.signIn")}
+          </Button>
         </View>
       </View>
     </View>
@@ -99,29 +140,27 @@ export default function ForgotPassword({ navigation, setForgotPassword }) {
 
 const styles = StyleSheet.create({
   footer: {
-    flex: 1
+    flex: 1,
   },
   termsContainer: {
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    flexDirection: "row",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   puenteText: {
     fontSize: 15,
-    marginTop: 'auto',
-    marginBottom: 'auto'
-
+    marginTop: "auto",
+    marginBottom: "auto",
   },
   accountText: {
     fontSize: 18,
-    marginTop: 'auto',
-    marginBottom: 'auto'
+    marginTop: "auto",
+    marginBottom: "auto",
   },
   logoContainer: {
     marginTop: 20,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 40
-  }
-
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 40,
+  },
 });

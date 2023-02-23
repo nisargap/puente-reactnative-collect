@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import {
-  View
-} from 'react-native';
+import React, { useState } from "react";
+import { View } from "react-native";
 
-import SettingsHome from './SettingsHome';
-import SupportHome from './SupportHome';
+import SettingsHome from "./SettingsHome";
+import SupportHome from "./SupportHome";
 
 const SettingsView = ({
-  logOut, setSettings, surveyingOrganization, scrollViewScroll, setScrollViewScroll
+  logOut,
+  setSettings,
+  surveyingOrganization,
+  scrollViewScroll,
+  setScrollViewScroll,
 }) => {
-  const [settingsView, setSettingsView] = useState('Settings');
+  const [settingsView, setSettingsView] = useState("Settings");
   return (
     <View>
-      <View style={{ paddingTop: '7%' }}>
-        {settingsView === 'Settings' && (
+      <View style={{ paddingTop: "7%" }}>
+        {settingsView === "Settings" && (
           <SettingsHome
             logOut={logOut}
             settingsView={settingsView}
@@ -24,7 +26,7 @@ const SettingsView = ({
             setScrollViewScroll={setScrollViewScroll}
           />
         )}
-        {settingsView === 'Support' && (
+        {settingsView === "Support" && (
           <SupportHome
             settingsView={settingsView}
             setSettingsView={setSettingsView}

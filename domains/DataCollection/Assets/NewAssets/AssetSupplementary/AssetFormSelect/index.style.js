@@ -1,36 +1,35 @@
-import { StyleSheet } from 'react-native';
-
-import { theme } from '../../../../../../modules/theme';
+import { theme } from "@modules/theme";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   cardContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
   },
   textContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   text: {
     flexShrink: 1,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.primary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 7,
   },
   header: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   componentContainer: {
     borderRadius: 10,
-    backgroundColor: '#ccc',
-    shadowColor: '#000',
+    backgroundColor: "#ccc",
+    shadowColor: "#000",
     // shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 5
-  }
+    elevation: 5,
+  },
 });
 
 export default styles;

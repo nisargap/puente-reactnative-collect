@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, View } from 'react-native';
-import { Card, IconButton, Text } from 'react-native-paper';
+import { assetFormsQuery } from "@modules/cached-resources";
+import I18n from "@modules/i18n";
+import { layout, theme } from "@modules/theme";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, ScrollView, View } from "react-native";
+import { Card, IconButton, Text } from "react-native-paper";
 
-import { assetFormsQuery } from '../../../../../../modules/cached-resources';
-import I18n from '../../../../../../modules/i18n';
-import { layout, theme } from '../../../../../../modules/theme';
-import styles from './index.style';
+import styles from "./index.style";
 
 const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
   const [assetForms, setAssetForms] = useState([]);
@@ -32,8 +32,10 @@ const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
 
   return (
     <View>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.header}>{I18n.t('assetFormSelect.supAssetForms')}</Text>
+      <View style={{ flexDirection: "row" }}>
+        <Text style={styles.header}>
+          {I18n.t("assetFormSelect.supAssetForms")}
+        </Text>
         <IconButton
           style={{ bottom: 7 }}
           color={theme.colors.primary}
@@ -42,24 +44,22 @@ const AssetFormSelect = ({ setSelectedForm, surveyingOrganization }) => {
           onPress={refreshAssetForms}
         />
       </View>
-      {loading
-        && <ActivityIndicator />}
+      {loading && <ActivityIndicator />}
       <ScrollView horizontal style={styles.componentContainer}>
-        {assetForms && assetForms.map((form) => (
-          <Card
-            key={form.objectId}
-            style={layout.cardSmallStyle}
-            onPress={() => selectForm(form)}
-          >
-            <View style={styles.cardContainer}>
-              <View style={styles.textContainer}>
-                <Text style={styles.text}>
-                  {form.name}
-                </Text>
+        {assetForms &&
+          assetForms.map((form) => (
+            <Card
+              key={form.objectId}
+              style={layout.cardSmallStyle}
+              onPress={() => selectForm(form)}
+            >
+              <View style={styles.cardContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>{form.name}</Text>
+                </View>
               </View>
-            </View>
-          </Card>
-        ))}
+            </Card>
+          ))}
       </ScrollView>
     </View>
   );

@@ -1,15 +1,13 @@
-import axios from 'axios';
-
-import selectedENV from '../../../environment';
+import selectedENV from "@app/environment";
+import axios from "axios";
 
 function getTasks() {
   const { taskyUrlApi } = selectedENV;
 
-  return axios.get(`${taskyUrlApi}/tasks`)
-    .then(async (response) => {
-      const data = await response.data.tasks;
-      return data;
-    });
+  return axios.get(`${taskyUrlApi}/tasks`).then(async (response) => {
+    const data = await response.data.tasks;
+    return data;
+  });
   // .catch((error) => {
   //   console.log(error);
   // });
