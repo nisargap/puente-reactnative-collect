@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths" : {
+        "@impacto-design-system/*": ["impacto-design-system/*"],
+        "@modules/*":["modules/*"],
+        "@assets/*": ["assets/*"],
+        "@context/*": ["context/*"],
+        "@app": ["./"],
+
+    }
+  }
+}

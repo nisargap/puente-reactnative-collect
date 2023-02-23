@@ -1,10 +1,17 @@
 {
     "extends": [
-        "airbnb"
+        "airbnb",
+        "prettier"
     ],
     "parser": "babel-eslint",
     "plugins": [
-        "simple-import-sort"
+        "simple-import-sort",
+        "import",
+        "module-resolver",
+        "react",
+        "react-native",
+        "prettier"
+
     ],
     "rules": {
         "no-use-before-define": "off",
@@ -15,10 +22,13 @@
         "react/no-access-state-in-setstate": "off",
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/__test__/*.js" ]}]
-
-
-
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/__test__/*.js" ]}],
+        "module-resolver/use-alias": 2
+    },
+     "settings": {
+        "import/resolver": {
+        "babel-module": {}
+        }
     },
     "env": {
         "jest": true,

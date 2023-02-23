@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import {
-  Text, View
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import {
-  Button, Card, Paragraph, Title
-} from 'react-native-paper';
-
-import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-import Header from '../../components/Header';
-import { getTasksAsync } from '../../modules/cached-resources';
-import I18n from '../../modules/i18n';
-import { layout } from '../../modules/theme';
+import ComingSoonSVG from "@app/assets/graphics/static/Adventurer.svg";
+import Header from "@impacto-design-system/Extensions/Header";
+import { getTasksAsync } from "@modules/cached-resources";
+import I18n from "@modules/i18n";
+import { layout } from "@modules/theme";
+import React, { useState } from "react";
+import { Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { Button, Card, Paragraph, Title } from "react-native-paper";
 
 const HomeScreen = () => {
   const [tasks, setTasks] = useState(null);
@@ -28,16 +23,16 @@ const HomeScreen = () => {
       <Header />
       <ScrollView>
         <View style={layout.screenRow}>
-          <Title>{I18n.t('home.myTasks')}</Title>
+          <Title>{I18n.t("home.myTasks")}</Title>
           <Card>
             <Card.Content>
               <ComingSoonSVG width={200} height={200} />
-              <Paragraph>{I18n.t('home.comingSoon')}</Paragraph>
+              <Paragraph>{I18n.t("home.comingSoon")}</Paragraph>
               <Button onPress={showTasks} mode="contained">
-                <Text>{I18n.t('home.tasks')}</Text>
+                <Text>{I18n.t("home.tasks")}</Text>
               </Button>
-              {tasks != null
-                && tasks.map((task) => (
+              {tasks != null &&
+                tasks.map((task) => (
                   <View key={task.task_id}>
                     <Text>{task.name}</Text>
                   </View>

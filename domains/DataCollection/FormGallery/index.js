@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import ComingSoonSVG from "@app/assets/graphics/static/Adventurer.svg";
+import SmallCardsCarousel from "@impacto-design-system/Cards/SmallCardsCarousel";
+import { getData, storeData } from "@modules/async-storage";
+import { customFormsQuery } from "@modules/cached-resources";
+import I18n from "@modules/i18n";
+import { layout, theme } from "@modules/theme";
+import React, { useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
 import {
-  ScrollView,
-  View
-} from 'react-native';
-import {
-  Button, Card,
+  Button,
+  Card,
   IconButton,
-  Paragraph, Text, Title
-} from 'react-native-paper';
+  Paragraph,
+  Text,
+  Title,
+} from "react-native-paper";
 
-import ComingSoonSVG from '../../../assets/graphics/static/Adventurer.svg';
-import SmallCardsCarousel from '../../../components/Cards/SmallCardsCarousel';
-import { getData, storeData } from '../../../modules/async-storage';
-import { customFormsQuery } from '../../../modules/cached-resources';
-import I18n from '../../../modules/i18n';
-import { layout, theme } from '../../../modules/theme';
-import FormsHorizontalView from './FormsHorizontalView';
-import styles from './index.styles';
+import FormsHorizontalView from "./FormsHorizontalView";
+import styles from "./index.styles";
 
 const FormGallery = ({
-  navigateToNewRecord, navigateToCustomForm,
+  navigateToNewRecord,
+  navigateToCustomForm,
   puenteForms,
-  pinnedForms, setPinnedForms,
-  setLoading, surveyingOrganization
+  pinnedForms,
+  setPinnedForms,
+  setLoading,
+  surveyingOrganization,
 }) => {
   const [customForms, setCustomForms] = useState([]);
   const [workflowData, setWorkflowData] = useState({});
   const [noWorkflowData, setNoWorkflowData] = useState([]);
 
   useEffect(() => {
-    getData('customForms').then((forms) => {
+    getData("customForms").then((forms) => {
       setCustomForms(forms || []);
       filterWorkflows(forms || []);
     });
@@ -39,23 +42,27 @@ const FormGallery = ({
     const tableDataByCategory = {};
     forms.forEach((record) => {
       if (!Array.isArray(record.workflows) || record.workflows.length < 1) {
-        if ('No Workflow Assigned' in tableDataByCategory) {
-          tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
+        if ("No Workflow Assigned" in tableDataByCategory) {
+          tableDataByCategory["No Workflow Assigned"] = tableDataByCategory[
+            "No Workflow Assigned"
+          ].concat([record]);
         } else {
-          tableDataByCategory['No Workflow Assigned'] = [record];
+          tableDataByCategory["No Workflow Assigned"] = [record];
         }
       } else if (Array.isArray(record.workflows)) {
         record.workflows.forEach((workflow) => {
           if (workflow in tableDataByCategory) {
-            tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+            tableDataByCategory[workflow] = tableDataByCategory[
+              workflow
+            ].concat([record]);
           } else {
             tableDataByCategory[workflow] = [record];
           }
         });
       }
     });
-    setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
-    delete tableDataByCategory['No Workflow Assigned'];
+    setNoWorkflowData(tableDataByCategory["No Workflow Assigned"]);
+    delete tableDataByCategory["No Workflow Assigned"];
     delete tableDataByCategory.Puente;
     setWorkflowData(tableDataByCategory);
   };
@@ -70,19 +77,21 @@ const FormGallery = ({
 
   const pinForm = async (form) => {
     setPinnedForms([...pinnedForms, form]);
-    storeData(pinnedForms, 'pinnedForms');
+    storeData(pinnedForms, "pinnedForms");
   };
 
   const removePinnedForm = async (form) => {
-    const filteredPinnedForms = pinnedForms.filter((pinnedForm) => pinnedForm !== form);
+    const filteredPinnedForms = pinnedForms.filter(
+      (pinnedForm) => pinnedForm !== form
+    );
     setPinnedForms(filteredPinnedForms);
-    storeData(filteredPinnedForms, 'pinnedForms');
+    storeData(filteredPinnedForms, "pinnedForms");
   };
 
   return (
     <View>
       <View key="pinnedForms" style={layout.screenRow}>
-        <Text style={styles.header}>{I18n.t('formsGallery.pinnedForms')}</Text>
+        <Text style={styles.header}>{I18n.t("formsGallery.pinnedForms")}</Text>
         <ScrollView horizontal>
           {pinnedForms?.map((form) => (
             <Card
@@ -94,14 +103,13 @@ const FormGallery = ({
               }}
               onLongPress={() => removePinnedForm(form)}
             >
-
               <View style={styles.cardContainer}>
                 {form.image !== undefined && (
                   <form.image height={40} style={styles.svg} />
                 )}
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>
-                    { form.customForm === false ? I18n.t(form.name) : form.name}
+                    {form.customForm === false ? I18n.t(form.name) : form.name}
                   </Text>
                 </View>
               </View>
@@ -110,14 +118,14 @@ const FormGallery = ({
           {pinnedForms?.length < 1 && (
             <View style={layout.screenRow}>
               <Card>
-                <Card.Title title={I18n.t('formsGallery.noPinnedForms')} />
+                <Card.Title title={I18n.t("formsGallery.noPinnedForms")} />
               </Card>
             </View>
           )}
         </ScrollView>
       </View>
       <View key="puenteForms" style={layout.screenRow}>
-        <Text style={styles.header}>{I18n.t('formsGallery.puenteForms')}</Text>
+        <Text style={styles.header}>{I18n.t("formsGallery.puenteForms")}</Text>
         <SmallCardsCarousel
           puenteForms={puenteForms}
           navigateToNewRecord={navigateToNewRecord}
@@ -127,8 +135,10 @@ const FormGallery = ({
       </View>
       {/* ALL custom forms */}
       <View key="customForms" style={{ marginHorizontal: 20 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.header}>{I18n.t('formsGallery.customForms')}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.header}>
+            {I18n.t("formsGallery.customForms")}
+          </Text>
           <IconButton
             style={{ bottom: 7 }}
             color={theme.colors.primary}
@@ -147,8 +157,8 @@ const FormGallery = ({
       )}
       {/* Workflows */}
       <View key="workflows" style={{ marginHorizontal: 20 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.header}>{I18n.t('formsGallery.workflows')}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.header}>{I18n.t("formsGallery.workflows")}</Text>
           <IconButton
             style={{ bottom: 7 }}
             color={theme.colors.primary}
@@ -159,34 +169,35 @@ const FormGallery = ({
         </View>
       </View>
       {/* custom forms with workflows */}
-      {Object.keys(workflowData).length > 0 && Object.keys(workflowData).map((key) => (
-        <FormsHorizontalView
-          forms={workflowData[key]}
-          header={key}
-          navigateToCustomForm={navigateToCustomForm}
-          pinForm={pinForm}
-        />
-      ))}
+      {Object.keys(workflowData).length > 0 &&
+        Object.keys(workflowData).map((key) => (
+          <FormsHorizontalView
+            forms={workflowData[key]}
+            header={key}
+            navigateToCustomForm={navigateToCustomForm}
+            pinForm={pinForm}
+          />
+        ))}
       {/* custom forms with no workflow assigned */}
       {noWorkflowData && noWorkflowData.length > 0 && (
         <FormsHorizontalView
           forms={noWorkflowData}
-          header={I18n.t('formsGallery.noWorflowAssigned')}
+          header={I18n.t("formsGallery.noWorflowAssigned")}
           navigateToCustomForm={navigateToCustomForm}
           pinForm={pinForm}
         />
       )}
       <View style={layout.screenRow}>
-        <Text style={styles.header}>{I18n.t('formsGallery.marketPlace')}</Text>
+        <Text style={styles.header}>{I18n.t("formsGallery.marketPlace")}</Text>
       </View>
       <View key="marketplace" style={layout.screenRow}>
         <Card>
           <Card.Content>
             <ComingSoonSVG width={200} height={200} />
-            <Title>{I18n.t('formsGallery.ourMarketPlace')}</Title>
-            <Paragraph>{I18n.t('formsGallery.discoverForms')}</Paragraph>
+            <Title>{I18n.t("formsGallery.ourMarketPlace")}</Title>
+            <Paragraph>{I18n.t("formsGallery.discoverForms")}</Paragraph>
             <Button>
-              <Text>{I18n.t('formsGallery.exploreForms')}</Text>
+              <Text>{I18n.t("formsGallery.exploreForms")}</Text>
             </Button>
           </Card.Content>
         </Card>

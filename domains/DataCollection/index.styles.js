@@ -1,65 +1,62 @@
-import {
-  StyleSheet
-} from 'react-native';
-
-import { theme } from '../../modules/theme';
+import { theme } from "@modules/theme";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   map: {
     marginVertical: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   screenFlexRowWrap: {
     marginHorizontal: 10,
     marginBottom: 20,
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignItems: "flex-start",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   cardInfoContainer: {
-    flexDirection: 'column',
-    flex: 1
+    flexDirection: "column",
+    flex: 1,
   },
   cardSmallStyle: {
     height: 150,
     marginHorizontal: 7,
     marginVertical: 7,
-    flex: 1
+    flex: 1,
   },
   horizontalLine: {
     borderBottomColor: theme.colors.primary,
     borderBottomWidth: 1,
-    marginVertical: 10
+    marginVertical: 10,
   },
   userInfoContainer: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   mySurveysContainer: {
-    width: '20%',
-    marginRight: 'auto',
-    marginLeft: 20
+    width: "20%",
+    marginRight: "auto",
+    marginLeft: 20,
   },
   totalSurveysContainer: {
-    width: '22%',
-    marginLeft: 'auto',
-    marginRight: 20
+    width: "22%",
+    marginLeft: "auto",
+    marginRight: 20,
   },
 
   cardContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   svg: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "auto",
   },
   text: {
     flexShrink: 1,
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.colors.primary,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 20,
-  }
+  },
 });
 
 export default styles;

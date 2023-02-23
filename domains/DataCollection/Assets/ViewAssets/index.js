@@ -1,22 +1,20 @@
-import { Spinner } from 'native-base';
-import React, { createRef, useEffect, useState } from 'react';
-import {
-  Dimensions, StyleSheet, View
-} from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import { IconButton } from 'react-native-paper';
+import { getData, storeData } from "@modules/async-storage";
+import { assetDataQuery } from "@modules/cached-resources/read";
+import getLocation from "@modules/geolocation";
+import { theme } from "@modules/theme";
+import { Spinner } from "native-base";
+import React, { createRef, useEffect, useState } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import { IconButton } from "react-native-paper";
 
-import { getData, storeData } from '../../../../modules/async-storage';
-import { assetDataQuery } from '../../../../modules/cached-resources/read';
-import getLocation from '../../../../modules/geolocation';
-import { theme } from '../../../../modules/theme';
-import SelectedAsset from './SelectedAsset';
+import SelectedAsset from "./SelectedAsset";
 
 const ViewAssets = ({ organization, switchAssetPage }) => {
   const [region, setRegion] = useState();
   const [delta, setDelta] = useState({
     latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
+    longitudeDelta: 0.0421,
   });
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +25,7 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
   useEffect(() => {
     let isSubscribed = true;
     async function fetchRegion() {
-      await getData('assetMapRegion').then((data) => {
+      await getData("assetMapRegion").then((data) => {
         if (isSubscribed) {
           if (!data) {
             handleLocation();
@@ -41,25 +39,29 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
 
     fetchRegion();
 
-    return () => { isSubscribed = false; };
+    return () => {
+      isSubscribed = false;
+    };
   }, []);
 
   const handleLocation = async () => {
     setLoading(true);
-    await getLocation().then((location) => {
-      const { latitude, longitude } = location.coords;
-      const regionObj = {
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-        latitude,
-        longitude,
-      };
-      setRegion(regionObj);
-      setDelta(regionObj);
-      storeData(regionObj, 'assetMapRegion');
-    }).catch((e) => {
-      console.log(e) //eslint-disable-line
-    });
+    await getLocation()
+      .then((location) => {
+        const { latitude, longitude } = location.coords;
+        const regionObj = {
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+          latitude,
+          longitude,
+        };
+        setRegion(regionObj);
+        setDelta(regionObj);
+        storeData(regionObj, "assetMapRegion");
+      })
+      .catch((e) => {
+        console.log(e); //eslint-disable-line
+      });
     setLoading(false);
   };
 
@@ -67,16 +69,18 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
     setLoading(true);
     setDelta({
       latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421
+      longitudeDelta: 0.0421,
     });
-    assetDataQuery(organization).then((records) => {
-      const sanitizedRecords = JSON.parse(JSON.stringify(records));
-      setMarkers(sanitizedRecords);
-      setLoading(false);
-    }).catch((e) => {
-      setLoading(false);
-      console.log(e) //eslint-disable-line
-    });
+    assetDataQuery(organization)
+      .then((records) => {
+        const sanitizedRecords = JSON.parse(JSON.stringify(records));
+        setMarkers(sanitizedRecords);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        console.log(e); //eslint-disable-line
+      });
   };
 
   const setView = (marker) => {
@@ -97,23 +101,20 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
   return (
     <View>
       <View style={styles.container}>
-        <MapView
-          style={styles.mapStyle}
-          region={region}
-          ref={mapView}
-        >
-          {markers && markers.map((marker) => (
-            marker.location && (
-              <Marker
-                key={marker.objectId}
-                coordinate={marker.location}
-                title={`${marker.name || ''}`}
-                // description={`Collector: ${marker.surveyingOr}`}
-                onPress={() => setView(marker)}
-              />
-            )
-          ))}
-
+        <MapView style={styles.mapStyle} region={region} ref={mapView}>
+          {markers &&
+            markers.map(
+              (marker) =>
+                marker.location && (
+                  <Marker
+                    key={marker.objectId}
+                    coordinate={marker.location}
+                    title={`${marker.name || ""}`}
+                    // description={`Collector: ${marker.surveyingOr}`}
+                    onPress={() => setView(marker)}
+                  />
+                )
+            )}
         </MapView>
         <View style={styles.buttonStyle}>
           <IconButton
@@ -129,19 +130,18 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
             style={{ backgroundColor: theme.colors.background, opacity: 0.8 }}
           />
         </View>
-        {loading
-          && <Spinner style={styles.loading} color={theme.colors.primary} />}
-
+        {loading && (
+          <Spinner style={styles.loading} color={theme.colors.primary} />
+        )}
       </View>
       <View style={styles.container}>
-        {selectedMarker
-          && (
-            <SelectedAsset
-              selectedMarker={selectedMarker}
-              style={{ position: 'absolute' }}
-              switchAssetPage={switchAssetPage}
-            />
-          )}
+        {selectedMarker && (
+          <SelectedAsset
+            selectedMarker={selectedMarker}
+            style={{ position: "absolute" }}
+            switchAssetPage={switchAssetPage}
+          />
+        )}
       </View>
     </View>
   );
@@ -150,25 +150,25 @@ const ViewAssets = ({ organization, switchAssetPage }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   mapStyle: {
-    width: Dimensions.get('window').width * 0.95,
-    height: Dimensions.get('window').height * 0.60,
+    width: Dimensions.get("window").width * 0.95,
+    height: Dimensions.get("window").height * 0.6,
     marginTop: 10,
-    borderRadius: 10
+    borderRadius: 10,
   },
   buttonStyle: {
-    position: 'absolute', // use absolute position to show button on top of the map
-    bottom: '0%',
-    right: '0%',
+    position: "absolute", // use absolute position to show button on top of the map
+    bottom: "0%",
+    right: "0%",
   },
   loading: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-  }
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+  },
 });
 
 export default ViewAssets;

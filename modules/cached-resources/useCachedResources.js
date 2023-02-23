@@ -1,5 +1,5 @@
-import * as SplashScreen from 'expo-splash-screen';
-import React, { useEffect } from 'react';
+import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect } from "react";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);

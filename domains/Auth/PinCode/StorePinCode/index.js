@@ -1,18 +1,17 @@
-import { Formik } from 'formik';
-import React from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Button, Text } from 'react-native-paper';
-
-import FormInput from '../../../../components/FormikFields/FormInput';
-import { storeData } from '../../../../modules/async-storage';
-import I18n from '../../../../modules/i18n';
+import FormInput from "@impacto-design-system/Extensions/FormikFields/FormInput";
+import { storeData } from "@modules/async-storage";
+import I18n from "@modules/i18n";
+import { Formik } from "formik";
+import React from "react";
+import { ActivityIndicator } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 const StorePinCode = ({ navigation }) => (
   <Formik
-    initialValues={{ pincode: '' }}
+    initialValues={{ pincode: "" }}
     onSubmit={(values, actions) => {
-      storeData(values.pincode, 'pincode').then(() => {
-        navigation.navigate('Root');
+      storeData(values.pincode, "pincode").then(() => {
+        navigation.navigate("Root");
       });
 
       setTimeout(() => {
@@ -23,7 +22,7 @@ const StorePinCode = ({ navigation }) => (
     {(formikProps) => (
       <>
         <FormInput
-          label={I18n.t('pinCode.storePinCode.enterPinCode')}
+          label={I18n.t("pinCode.storePinCode.enterPinCode")}
           formikProps={formikProps}
           formikKey="pincode"
           placeholder="123456"
@@ -33,7 +32,7 @@ const StorePinCode = ({ navigation }) => (
           <ActivityIndicator />
         ) : (
           <Button onPress={formikProps.handleSubmit}>
-            <Text>{I18n.t('global.submit')}</Text>
+            <Text>{I18n.t("global.submit")}</Text>
           </Button>
         )}
       </>

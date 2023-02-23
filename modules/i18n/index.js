@@ -1,14 +1,14 @@
-import * as Localization from 'expo-localization';
-import I18n from 'i18n-js';
+import * as Localization from "expo-localization";
+import I18n from "i18n-js";
 
-import english from './english/en.json';
-import haitian from './kreyol/hk.json';
-import spanish from './spanish/es.json';
+import english from "./english/en.json";
+import haitian from "./kreyol/hk.json";
+import spanish from "./spanish/es.json";
 
 I18n.translations = {
   en: english,
   es: spanish,
-  hk: haitian
+  hk: haitian,
 };
 
 I18n.locale = Localization.locale;

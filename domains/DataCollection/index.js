@@ -1,47 +1,61 @@
 // import * as React from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useContext, useState } from 'react';
+import SettingsView from "@app/domains/Settings";
+import ComingSoonSVG from "@assets/graphics/static/Adventurer.svg";
+import FindRecordSVG from "@assets/graphics/static/Find-Record-Icon.svg";
+import ResearchSVG from "@assets/graphics/static/Research.svg";
+import MedEvalSVG from "@assets/icons/Heart-Icon.svg";
+import EnvSVG from "@assets/icons/Home-icon.svg";
+import NewRecordSVG from "@assets/icons/New-Record-icon.svg";
+import { AlertContext } from "@context/alert.context";
+import { UserContext } from "@context/auth.context";
+import { Toast } from "@impacto-design-system/Base";
+import { FindResidents, Header } from "@impacto-design-system/Extensions";
+import MapView from "@impacto-design-system/MapView";
+import { getData } from "@modules/async-storage";
+import I18n from "@modules/i18n";
+import { layout } from "@modules/theme";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useContext, useState } from "react";
 import {
   ActivityIndicator,
-  KeyboardAvoidingView, Platform,
-  ScrollView, Text, View
-} from 'react-native';
-import {
-  Button, Card
-} from 'react-native-paper';
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
+import { Button, Card } from "react-native-paper";
 
-import ComingSoonSVG from '../../assets/graphics/static/Adventurer.svg';
-import FindRecordSVG from '../../assets/graphics/static/Find-Record-Icon.svg';
-import ResearchSVG from '../../assets/graphics/static/Research.svg';
-import MedEvalSVG from '../../assets/icons/Heart-Icon.svg';
-import EnvSVG from '../../assets/icons/Home-icon.svg';
-import NewRecordSVG from '../../assets/icons/New-Record-icon.svg';
-import FindResidents from '../../components/FindResidents';
-import Header from '../../components/Header';
-import MapView from '../../components/MapView';
-import { UserContext } from '../../context/auth.context';
-import { getData } from '../../modules/async-storage';
-import I18n from '../../modules/i18n';
-import { layout } from '../../modules/theme';
-import SettingsView from '../Settings';
-import Assets from './Assets';
-import FormGallery from './FormGallery';
-import Forms from './Forms';
-import styles from './index.styles';
+import Assets from "./Assets";
+import FormGallery from "./FormGallery";
+import Forms from "./Forms";
+import styles from "./index.styles";
 
 const puenteForms = [
   {
-    tag: 'id', name: 'puenteForms.ResidentID', customForm: false, image: NewRecordSVG
+    tag: "id",
+    name: "puenteForms.ResidentID",
+    customForm: false,
+    image: NewRecordSVG,
   },
   {
-    tag: 'env', name: 'puenteForms.EnvironmentalHealth', customForm: false, image: EnvSVG
+    tag: "env",
+    name: "puenteForms.EnvironmentalHealth",
+    customForm: false,
+    image: EnvSVG,
   },
   {
-    tag: 'med-eval', name: 'puenteForms.MedicalEvaluation', customForm: false, image: MedEvalSVG
+    tag: "med-eval",
+    name: "puenteForms.MedicalEvaluation",
+    customForm: false,
+    image: MedEvalSVG,
   },
   {
-    tag: 'vitals', name: 'puenteForms.Vitals', customForm: false, image: NewRecordSVG
-  }
+    tag: "vitals",
+    name: "puenteForms.Vitals",
+    customForm: false,
+    image: NewRecordSVG,
+  },
 ];
 
 const DataCollection = ({ navigation }) => {
@@ -49,9 +63,9 @@ const DataCollection = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState(false);
 
-  const [view, setView] = useState('Root');
+  const [view, setView] = useState("Root");
 
-  const [selectedForm, setSelectedForm] = useState('id');
+  const [selectedForm, setSelectedForm] = useState("id");
   const [selectedAsset, setSelectedAsset] = useState(null);
 
   const [customForm, setCustomForm] = useState();
@@ -60,19 +74,20 @@ const DataCollection = ({ navigation }) => {
   const [selectPerson, setSelectPerson] = useState();
   const [surveyee, setSurveyee] = useState({});
 
-  const [surveyingOrganization, setSurveyingOrganization] = useState('');
+  const [surveyingOrganization, setSurveyingOrganization] = useState("");
   const [surveyingUser, setSurveyingUser] = useState();
 
   const { onLogout } = useContext(UserContext);
+  const { visible, message, dismiss } = useContext(AlertContext);
 
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
-        getData('currentUser').then((user) => {
-          setSurveyingUser(`${user.firstname || ''} ${user.lastname || ''}`);
+        getData("currentUser").then((user) => {
+          setSurveyingUser(`${user.firstname || ""} ${user.lastname || ""}`);
           setSurveyingOrganization(user.organization || surveyingOrganization);
         });
-        getData('pinnedForms').then((forms) => {
+        getData("pinnedForms").then((forms) => {
           if (forms) setPinnedForms(forms);
         });
       };
@@ -82,41 +97,41 @@ const DataCollection = ({ navigation }) => {
   );
 
   const navigateToRoot = async () => {
-    setView('Root');
+    setView("Root");
   };
 
   const navigateToNewRecord = async (formTag, surveyeePerson) => {
-    setView('Forms');
+    setView("Forms");
     setSurveyee(surveyeePerson || surveyee);
-    setSelectedForm(formTag || 'id');
+    setSelectedForm(formTag || "id");
   };
 
   const navigateToGallery = async () => {
-    setView('Gallery');
+    setView("Gallery");
   };
 
   const navigateToNewAssets = async () => {
-    setView('Assets');
+    setView("Assets");
     setSelectedAsset({});
   };
 
   const navigateToViewAllAssets = async () => {
-    setView('Assets');
+    setView("Assets");
     setSelectedAsset(null);
   };
 
   const navigateToCustomForm = async (form, surveyeePerson) => {
-    setView('Forms');
+    setView("Forms");
     setSurveyee(surveyeePerson || surveyee);
-    setSelectedForm('custom');
-    setCustomForm(form || '');
+    setSelectedForm("custom");
+    setCustomForm(form || "");
   };
 
   const navigateToFindRecords = async () => {
-    setView('Find Records');
+    setView("Find Records");
   };
 
-  const logOut = () => onLogout().then(() => navigation.navigate('Sign In'));
+  const logOut = () => onLogout().then(() => navigation.navigate("Sign In"));
 
   return (
     <View
@@ -125,19 +140,17 @@ const DataCollection = ({ navigation }) => {
         setScrollViewScroll(true);
       }}
     >
-      <Header
-        view={view}
-        setView={setView}
-        setSettings={setSettings}
-      />
+      <Header view={view} setView={setView} setSettings={setSettings} />
       <KeyboardAvoidingView
         enabled
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        {loading === true
-        && <ActivityIndicator />}
-        <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={scrollViewScroll}>
+        {loading === true && <ActivityIndicator />}
+        <ScrollView
+          keyboardShouldPersistTaps="never"
+          scrollEnabled={scrollViewScroll}
+        >
           {settings === true ? (
             <SettingsView
               setView={setView}
@@ -149,41 +162,78 @@ const DataCollection = ({ navigation }) => {
             />
           ) : (
             <View>
-              { view === 'Root' && (
+              {view === "Root" && (
                 <View>
                   <MapView organization={surveyingOrganization} />
                   <View style={styles.screenFlexRowWrap}>
                     <View style={styles.cardContainer}>
-                      <Card style={styles.cardSmallStyle} onPress={() => navigateToNewRecord()}>
+                      <Card
+                        style={styles.cardSmallStyle}
+                        onPress={() => navigateToNewRecord()}
+                      >
                         <NewRecordSVG height={70} style={styles.svg} />
-                        <Text style={styles.text}>{I18n.t('dataCollection.newRecord')}</Text>
+                        <Text style={styles.text}>
+                          {I18n.t("dataCollection.newRecord")}
+                        </Text>
                       </Card>
-                      <Card style={styles.cardSmallStyle} onPress={navigateToFindRecords}>
+                      <Card
+                        style={styles.cardSmallStyle}
+                        onPress={navigateToFindRecords}
+                      >
                         <FindRecordSVG height={65} style={styles.svg} />
-                        <Text style={styles.text}>{I18n.t('dataCollection.findRecord')}</Text>
+                        <Text style={styles.text}>
+                          {I18n.t("dataCollection.findRecord")}
+                        </Text>
                       </Card>
                     </View>
-                    <Card style={styles.cardSmallStyle} onPress={navigateToGallery}>
+                    <Card
+                      style={styles.cardSmallStyle}
+                      onPress={navigateToGallery}
+                    >
                       <ComingSoonSVG height={65} style={styles.svg} />
-                      <Text style={styles.text}>{I18n.t('dataCollection.viewAll')}</Text>
+                      <Text style={styles.text}>
+                        {I18n.t("dataCollection.viewAll")}
+                      </Text>
                     </Card>
                     <View style={styles.cardContainer}>
-                      <Card style={styles.cardSmallStyle} onPress={navigateToNewAssets}>
-                        <ResearchSVG height={70} width={70} style={styles.svg} />
-                        <Text style={styles.text}>{I18n.t('dataCollection.newAsset')}</Text>
+                      <Card
+                        style={styles.cardSmallStyle}
+                        onPress={navigateToNewAssets}
+                      >
+                        <ResearchSVG
+                          height={70}
+                          width={70}
+                          style={styles.svg}
+                        />
+                        <Text style={styles.text}>
+                          {I18n.t("dataCollection.newAsset")}
+                        </Text>
                       </Card>
-                      <Card style={styles.cardSmallStyle} onPress={navigateToViewAllAssets}>
-                        <ResearchSVG height={70} width={70} style={styles.svg} />
-                        <Text style={styles.text}>{I18n.t('dataCollection.viewAssets')}</Text>
+                      <Card
+                        style={styles.cardSmallStyle}
+                        onPress={navigateToViewAllAssets}
+                      >
+                        <ResearchSVG
+                          height={70}
+                          width={70}
+                          style={styles.svg}
+                        />
+                        <Text style={styles.text}>
+                          {I18n.t("dataCollection.viewAssets")}
+                        </Text>
                       </Card>
                     </View>
                   </View>
                 </View>
               )}
-              {view === 'Forms' && (
+              {view === "Forms" && (
                 <View>
-                  <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                    <Text>{I18n.t('dataCollection.back')}</Text>
+                  <Button
+                    icon="arrow-left"
+                    width={100}
+                    onPress={navigateToRoot}
+                  >
+                    <Text>{I18n.t("dataCollection.back")}</Text>
                   </Button>
                   <Forms
                     style={layout.line}
@@ -206,10 +256,14 @@ const DataCollection = ({ navigation }) => {
                   />
                 </View>
               )}
-              {view === 'Assets' && (
+              {view === "Assets" && (
                 <View>
-                  <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                    <Text>{I18n.t('dataCollection.back')}</Text>
+                  <Button
+                    icon="arrow-left"
+                    width={100}
+                    onPress={navigateToRoot}
+                  >
+                    <Text>{I18n.t("dataCollection.back")}</Text>
                   </Button>
                   <Assets
                     surveyingOrganization={surveyingOrganization}
@@ -223,10 +277,14 @@ const DataCollection = ({ navigation }) => {
                   />
                 </View>
               )}
-              {view === 'Gallery' && (
+              {view === "Gallery" && (
                 <View>
-                  <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                    <Text>{I18n.t('dataCollection.back')}</Text>
+                  <Button
+                    icon="arrow-left"
+                    width={100}
+                    onPress={navigateToRoot}
+                  >
+                    <Text>{I18n.t("dataCollection.back")}</Text>
                   </Button>
                   <FormGallery
                     navigation={navigation}
@@ -240,30 +298,39 @@ const DataCollection = ({ navigation }) => {
                   />
                 </View>
               )}
-              {view === 'Find Records'
-                && (
-                  <View>
-                    {!selectPerson && (
-                      <Button icon="arrow-left" width={100} onPress={navigateToRoot}>
-                        <Text>{I18n.t('dataCollection.back')}</Text>
-                      </Button>
-                    )}
-                    <FindResidents
-                      selectPerson={selectPerson}
-                      setSelectPerson={setSelectPerson}
-                      organization={surveyingOrganization}
-                      puenteForms={puenteForms}
-                      navigateToNewRecord={navigateToNewRecord}
-                      surveyee={surveyee}
-                      setSurveyee={setSurveyee}
-                      navigateToRoot={navigateToRoot}
-                      setView={setView}
-                    />
-                  </View>
-                )}
+              {view === "Find Records" && (
+                <View>
+                  {!selectPerson && (
+                    <Button
+                      icon="arrow-left"
+                      width={100}
+                      onPress={navigateToRoot}
+                    >
+                      <Text>{I18n.t("dataCollection.back")}</Text>
+                    </Button>
+                  )}
+                  <FindResidents
+                    selectPerson={selectPerson}
+                    setSelectPerson={setSelectPerson}
+                    organization={surveyingOrganization}
+                    puenteForms={puenteForms}
+                    navigateToNewRecord={navigateToNewRecord}
+                    surveyee={surveyee}
+                    setSurveyee={setSurveyee}
+                    navigateToRoot={navigateToRoot}
+                    setView={setView}
+                  />
+                </View>
+              )}
             </View>
           )}
         </ScrollView>
+        <Toast
+          text={message}
+          visible={visible}
+          onClick={dismiss}
+          onClickLabel="Dismiss"
+        />
       </KeyboardAvoidingView>
     </View>
   );

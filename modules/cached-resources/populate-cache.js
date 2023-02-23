@@ -1,13 +1,16 @@
-import Constants from 'expo-constants';
+import { storeData } from "@modules/async-storage";
+import Constants from "expo-constants";
 
-import { storeData } from '../async-storage';
 import {
-  assetDataQuery, assetFormsQuery, cacheAutofillData, customFormsQuery
-} from './read';
+  assetDataQuery,
+  assetFormsQuery,
+  cacheAutofillData,
+  customFormsQuery,
+} from "./read";
 
 export const storeAppVersion = async () => {
   const appVersion = Constants.manifest.version;
-  return storeData(appVersion, 'appVersion');
+  return storeData(appVersion, "appVersion");
 };
 
 const populateCache = async (user) => {
@@ -17,7 +20,7 @@ const populateCache = async (user) => {
     cacheAutofillData(enteredUsrOrg),
     customFormsQuery(enteredUsrOrg),
     storeAppVersion(),
-    assetDataQuery(enteredUsrOrg).then(() => assetFormsQuery(enteredUsrOrg))
+    assetDataQuery(enteredUsrOrg).then(() => assetFormsQuery(enteredUsrOrg)),
   ]);
 };
 

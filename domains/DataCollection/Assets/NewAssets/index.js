@@ -1,15 +1,21 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import AssetCore from './AssetCore';
-import AssetSupplementary from './AssetSupplementary';
+import AssetCore from "./AssetCore";
+import AssetSupplementary from "./AssetSupplementary";
 
 const NewAsset = ({
-  selectedAsset, setSelectedAsset, surveyingOrganization, assetPageIndex,
-  surveyingUser, scrollViewScroll, setScrollViewScroll, setPage
+  selectedAsset,
+  setSelectedAsset,
+  surveyingOrganization,
+  assetPageIndex,
+  surveyingUser,
+  scrollViewScroll,
+  setScrollViewScroll,
+  setPage,
 }) => (
   <View>
-    {assetPageIndex === 'assetCore' && (
+    {assetPageIndex === "assetCore" && (
       <View style={styles.page}>
         <AssetCore
           setSelectedAsset={setSelectedAsset}
@@ -22,7 +28,7 @@ const NewAsset = ({
         />
       </View>
     )}
-    {assetPageIndex === 'assetSupplementary' && (
+    {assetPageIndex === "assetSupplementary" && (
       <View style={styles.page}>
         <AssetSupplementary
           setSelectedAsset={setSelectedAsset}
@@ -38,8 +44,8 @@ const NewAsset = ({
 
 const styles = StyleSheet.create({
   page: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

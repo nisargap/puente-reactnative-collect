@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storeData = async (value, storageName) => {
   try {
@@ -41,7 +41,4 @@ const getAllData = async () => {
   }
 };
 
-export {
-  deleteData, getAllData,
-  getData, storeData
-};
+export { deleteData, getAllData, getData, storeData };

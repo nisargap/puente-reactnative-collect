@@ -1,64 +1,58 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View
-} from 'react-native';
-import {
-  Button, Checkbox,
-  Text, Title
-} from 'react-native-paper';
+import TermsModal from "@impacto-design-system/Extensions/TermsModal";
+import I18n from "@modules/i18n";
+import { theme } from "@modules/theme";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Checkbox, Text, Title } from "react-native-paper";
 
-import TermsModal from '../../../components/TermsModal';
-import I18n from '../../../modules/i18n';
-import { theme } from '../../../modules/theme';
-
-const GdprCompliance = ({
-  setConsent
-}) => {
+const GdprCompliance = ({ setConsent }) => {
   const [visible, setVisible] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
   const continueToForm = () => {
     if (checked) {
       setConsent(true);
     } else {
-      alert(I18n.t('gdpr.mustConsent')); // eslint-disable-line
+      alert(I18n.t("gdpr.mustConsent")); // eslint-disable-line
     }
   };
   return (
     <View>
-      <Title style={{ marginLeft: 15 }}>{I18n.t('gdpr.consentForm')}</Title>
+      <Title style={{ marginLeft: 15 }}>{I18n.t("gdpr.consentForm")}</Title>
       <View style={styles.container}>
-        <Text style={{ flex: 2, padding: 10 }}>
-          {I18n.t('gdpr.policy')}
-        </Text>
+        <Text style={{ flex: 2, padding: 10 }}>{I18n.t("gdpr.policy")}</Text>
         <Button
           style={styles.policyButton}
           mode="outlined"
           onPress={() => setVisible(true)}
         >
-          {I18n.t('gdpr.viewFullPolicy')}
+          {I18n.t("gdpr.viewFullPolicy")}
         </Button>
       </View>
-      <TermsModal
-        visible={visible}
-        setVisible={setVisible}
-      />
+      <TermsModal visible={visible} setVisible={setVisible} />
       <View style={styles.checkboxContainer}>
         <View style={styles.checkbox}>
           <Checkbox
             disabled={false}
             // theme={theme}
             color={theme.colors.primary}
-            status={checked ? 'checked' : 'unchecked'}
+            status={checked ? "checked" : "unchecked"}
             onPress={() => {
               setChecked(!checked);
             }}
           />
         </View>
-        <Text style={styles.checkboxText}>{I18n.t('gdpr.communityMemAgrees')}</Text>
+        <Text style={styles.checkboxText}>
+          {I18n.t("gdpr.communityMemAgrees")}
+        </Text>
       </View>
 
-      <Button style={{ margin: 15 }} mode="contained" onPress={() => continueToForm()}>{I18n.t('gdpr.continueToForm')}</Button>
+      <Button
+        style={{ margin: 15 }}
+        mode="contained"
+        onPress={() => continueToForm()}
+      >
+        {I18n.t("gdpr.continueToForm")}
+      </Button>
     </View>
   );
 };
@@ -72,10 +66,10 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 15,
     flex: 3,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    borderColor: theme.colors.primary
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch",
+    borderColor: theme.colors.primary,
   },
   policyButton: {
     flex: 1,
@@ -91,12 +85,10 @@ const styles = StyleSheet.create({
     width: 40,
   },
   checkboxContainer: {
-    flexDirection: 'row',
-
+    flexDirection: "row",
   },
   checkboxText: {
     marginLeft: 15,
-    marginTop: 10
-  }
-
+    marginTop: 10,
+  },
 });
